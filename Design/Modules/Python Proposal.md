@@ -17,6 +17,11 @@
   </tr>
 </table>
 
+<br/>
+
+
+### When considering the project setup, the kind of python project must be decided upon:
+
 | **Aspect**                | **Python Script**                                                                                                       | **Python Project (FastAPI, etc.)**                                                                                                     |
 |---------------------------|-------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | **Quickness to Implement**| Quicker to implement with minimal setup. Ideal for rapid prototyping and small-scale tasks.                              | More initial setup required. Slower to implement due to the configure a full project structure.                      |
