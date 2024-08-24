@@ -11,6 +11,10 @@
 > manager while comparing. Offering suggestions and presets along the way in order to save the user time. Alongside this service will be a digitized prep list and planning
 > visualization for pre-open and pre-rush.
 
+### My Overarching Goal
+>
+> To produce an effective and widereaching admin system for the entire restaurant that optimizes prep, restocking inventory, and managing the roles of it employees. If I can create a lightweight, dynamic restaurant management app that is reliable and requires very little to zero oversight, both parties should be happy with the result.
+
 
 # High Level Overview
 <img width="100%" alt="Layer Breakdown" src="https://github.com/user-attachments/assets/c6cb3439-39c6-47fe-9e61-9a21efb64832">
