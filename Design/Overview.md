@@ -29,7 +29,8 @@
 
 <!-- Controllers -->
 <div align="center">
-    <img width="935" alt="Screenshot 2024-08-16 at 6 52 10 PM" src="https://github.com/user-attachments/assets/acb6ea81-a1d6-431d-8b2c-96831a1c8d2d">
+    <img width="100%" alt="Screenshot 2024-08-24 at 1 20 05 PM" src="https://github.com/user-attachments/assets/0a36ee53-2fcb-494c-9819-af3ffb5321ff">
+
 </div>
 
 <!-- Arrow down to next layer -->
