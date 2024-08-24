@@ -1,5 +1,7 @@
 # Python Proposal
 
+Upon furhter research, I found there is a lack of dependability that comes with web scraping using node. If I am able to abstract the web scraping responsibility out to python in one of the following methods it may improve the reliability of my program and assist me in my goal of creating a lightweight, self sustaining system.
+
 <b> Responsibility: </b> gather the updated excel information each interaval of my choosing. (Likely either daily or hourly) <br>       then, once all necessary data is gathered and placed in proper data structures, this 'data-processer' will behave in the following ways:
 
 <table>
