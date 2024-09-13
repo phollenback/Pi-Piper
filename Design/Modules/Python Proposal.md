@@ -42,6 +42,9 @@ Upon furhter research, I found there is a lack of dependability that comes with 
   <li>
     <b>lxml</b> - HTML and XML parser.
   </li>
+  <li>
+    <b>TensorFlow</b> - Used for building and training machine learning models
+  </li>
 </ol>
 
 ## Scrapy vs. Beautiful Soup
