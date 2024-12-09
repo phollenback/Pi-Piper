@@ -1,5 +1,5 @@
 export const restaurantQueries = {
     getRestaurants: `
-    SELECT * FROM public.restaurants;
+    SELECT * FROM Restaurants;
     `
 }
