@@ -1,21 +1,82 @@
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
+import * as ManagerDal from './manager.dal'
 
-export const readManager = (req: Request , res: Response) => {
+export const readManager = async (req: Request , res: Response) => {
     console.log('[manager.controller][readManager][CON] ');
 
+    try {
+        let restaurantId = Number(req.params.restaurantId);
+
+        const response = await ManagerDal.getManagers(restaurantId);
+ 
+         res.status(200).json(
+             response
+         );
+     } catch (error) {
+         console.error('[restaurants.controller[readRestaurants][Error] ', error);
+         res.status(500).json({
+             message: 'There was an error when fetching restaurants'
+         })
+     }
+
 }
 
-export const createManager = (req: Request , res: Response) => {
+export const createManager = async (req: Request , res: Response) => {
     console.log('[manager.controller][createManager][CON] ');
 
+    try {
+        let managerData = req.body;
+
+        const response = await ManagerDal.createManager(managerData);
+ 
+         res.status(200).json(
+             response
+         );
+     } catch (error) {
+         console.error('[restaurants.controller[readRestaurants][Error] ', error);
+         res.status(500).json({
+             message: 'There was an error when fetching restaurants'
+         })
+     }
+
 }
 
-export const updateManager = (req: Request , res: Response) => {
+export const updateManager = async (req: Request , res: Response) => {
     console.log('[manager.controller][updateManager][CON] ');
 
+    try {
+        let managerId = Number(req.params.managerId);
+        let managerData = req.body;
+
+        const response = await ManagerDal.updateManager(managerId, managerData);
+ 
+         res.status(200).json(
+             response
+         );
+     } catch (error) {
+         console.error('[restaurants.controller[readRestaurants][Error] ', error);
+         res.status(500).json({
+             message: 'There was an error when fetching restaurants'
+         })
+     }
+
 }
 
-export const deleteManager = (req: Request , res: Response) => {
+export const deleteManager = async (req: Request , res: Response) => {
     console.log('[manager.controller][deleteManager][CON] ');
 
+    try {
+        let managerId = Number(req.params.managerId);
+
+        const response = await ManagerDal.deleteManager(managerId);
+ 
+         res.status(200).json(
+             response
+         );
+     } catch (error) {
+         console.error('[restaurants.controller[readRestaurants][Error] ', error);
+         res.status(500).json({
+             message: 'There was an error when fetching restaurants'
+         })
+     }
 }

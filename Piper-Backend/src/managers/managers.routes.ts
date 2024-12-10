@@ -4,19 +4,19 @@ import * as AdminController from './managers.controller'
 const router = Router();
 
 router 
-    .route('/api/manager/:restaurantId')
+    .route('/manager/:restaurantId')
     .get(AdminController.readManager)
 
 router 
-    .route('/api/manager')
+    .route('/manager')
     .post(AdminController.createManager)
 
 router 
-    .route('/api/manager/:managerId')
+    .route('/manager/:managerId')
     .put(AdminController.updateManager)
 
 router 
-    .route('/api/manager/:managerId')
+    .route('/manager/:managerId')
     .delete(AdminController.deleteManager)
 
 

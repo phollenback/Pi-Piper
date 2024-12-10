@@ -3,6 +3,7 @@ export type Manager = {
     manager_name: string,
     email : string,
     phone_number: string,
+    role: string,
     restaurant_id: number,
     status: string
 }
