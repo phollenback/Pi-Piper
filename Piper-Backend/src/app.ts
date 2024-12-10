@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { initializePgConnector } from './services/pg.connector';
 // ROUTES **************
 import restaurantRouter from './restaurants/restaurant.routes';
+import prepItemRouter from './prepitems/prepitems.routes'
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ app.get('/', (req, res) => {
     res.send('<h1>Welcome to the Pi-Piper API</h1>');
 })
 
-app.use('/', [restaurantRouter]);
+app.use('/', [restaurantRouter, prepItemRouter]);
 
 
 app.listen(port, () => {
