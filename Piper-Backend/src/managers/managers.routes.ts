@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Router } from 'express';
 import * as AdminController from './managers.controller'
 
 const router = Router();

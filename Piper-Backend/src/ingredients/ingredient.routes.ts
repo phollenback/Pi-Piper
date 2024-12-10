@@ -5,19 +5,19 @@ import * as IngredientController from './ingredient.controller'
 const router = Router();
 
 router 
-    .route('/api/ingredient/:restaurantId')
+    .route('/ingredient/:restaurantId')
     .get(IngredientController.readIngredients)
 
 router 
-    .route('/api/ingredient/:restaurantId')
+    .route('/ingredient/:restaurantId')
     .post(IngredientController.createIngredient)
 
 router 
-    .route('/api/ingredient/:restaurantId')
+    .route('/ingredient')
     .put(IngredientController.updateIngredient)
 
 router 
-    .route('/api/ingredient/:restaurantId/:ingredientId')
-    .get(IngredientController.deleteIngredient)
+    .route('/ingredient/:restaurantId/:ingredientId')
+    .delete(IngredientController.deleteIngredient)
 
 export default router;
