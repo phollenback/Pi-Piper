@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import * as ManagerDal from './manager.dal'
+import * as ManagerDal from './manager.dal';
+const { validationResult} =  require('express-validator');
 
 export const readManager = async (req: Request , res: Response) => {
     console.log('[manager.controller][readManager][CON] ');
@@ -24,8 +25,15 @@ export const readManager = async (req: Request , res: Response) => {
 export const createManager = async (req: Request , res: Response) => {
     console.log('[manager.controller][createManager][CON] ');
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log('[manager.controller][createManager][ERROR] ');
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
         let managerData = req.body;
+
 
         const response = await ManagerDal.createManager(managerData);
  
@@ -43,6 +51,12 @@ export const createManager = async (req: Request , res: Response) => {
 
 export const updateManager = async (req: Request , res: Response) => {
     console.log('[manager.controller][updateManager][CON] ');
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log('[manager.controller][updateManager][ERROR] ');
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
         let managerId = Number(req.params.managerId);

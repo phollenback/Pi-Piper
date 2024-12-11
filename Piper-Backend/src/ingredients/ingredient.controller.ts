@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as IngredientDal from './ingredient.dal';
+const { validationResult } = require('express-validator');
 
 export const readIngredients = async (req: Request , res: Response) => {
     console.log('[ingredient.controller][readIngredient][CON] ');
@@ -24,6 +25,12 @@ export const readIngredients = async (req: Request , res: Response) => {
 export const createIngredient = async (req: Request , res: Response) => {
     console.log('[ingredient.controller][createIngredient][CON] ');
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log('[ingredient.controller][createIngredient][ERROR] ');
+        return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
         let restaurantId = Number(req.params.restaurantId);
         let ingredientData = req.body;
@@ -43,6 +50,12 @@ export const createIngredient = async (req: Request , res: Response) => {
 
 export const updateIngredient = async (req: Request , res: Response) => {
     console.log('[ingredient.controller][updateIngredient][CON] ');
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log('[ingredient.controller][updateIngredient][ERROR] ');
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
         let ingredientData = req.body;

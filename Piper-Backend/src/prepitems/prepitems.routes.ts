@@ -1,22 +1,35 @@
-import { Router } from 'express'
-import * as PrepItemController from './prepitem.controller'
+import { Router } from 'express';
+import * as PrepItemController from './prepitem.controller';
+import { PrepItemSchema } from './prepitem.model';
+import asyncHandler from '../util/asyncHandler';
+const { checkSchema } = require('express-validator');
 
 const router = Router();
 
-router 
-    .route('/prep-items/:restaurantId')
-    .get(PrepItemController.readPrepItems)
+router
+    .get(
+        '/prep-items/:restaurantId',
+        asyncHandler(PrepItemController.readPrepItems)
+    );
 
-router 
-    .route('/prep-items/:restaurantId')
-    .post(PrepItemController.createPrepItem)
+router
+    .post(
+        '/prep-items/:restaurantId',
+        checkSchema(PrepItemSchema),
+        asyncHandler(PrepItemController.createPrepItem)
+    );
 
-router 
-    .route('/prep-items/:prepItemId')
-    .put(PrepItemController.updatePrepItem)
+router
+    .put(
+        '/prep-items/:prepItemId',
+        checkSchema(PrepItemSchema),
+        asyncHandler(PrepItemController.updatePrepItem)
+    );
 
-router 
-    .route('/prep-items/:restaurantId/:prepItemId')
-    .delete(PrepItemController.deletePrepItem)
+router
+    .delete(
+        '/prep-items/:restaurantId/:prepItemId',
+        asyncHandler(PrepItemController.deletePrepItem)
+    );
 
 export default router;

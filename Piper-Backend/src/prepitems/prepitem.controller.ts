@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import * as PrepItemDal from './prepitem.dal'
+import * as PrepItemDal from './prepitem.dal';
+const { validationResult } = require('express-validator');
 
 export const readPrepItems = async (req: Request , res: Response) => {
     console.log('[prepitems.controller][readPrepItems][CON] ');
@@ -22,6 +23,11 @@ export const readPrepItems = async (req: Request , res: Response) => {
 export const createPrepItem = async (req: Request , res: Response) => {
     console.log('[prepitem.controller][createPrepItem][CON] ');
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log('[prepitem.controller][createPrepItem][ERROR]');
+        return res.status(400).json({ errors: errors.array() });
+    }
     try {
         let restaurantId = Number(req.params.restaurantId);
         let itemData = req.body;
@@ -42,6 +48,12 @@ export const createPrepItem = async (req: Request , res: Response) => {
 
 export const updatePrepItem = async (req: Request , res: Response) => {
     console.log('[prepitem.controller][updatePrepItem][CON] ');
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log('[manager.controller][updatePrepItem][ERROR] ');
+        return res.status(400).json({ errors: errors.array() });
+    }
 
     try {
         let prepItemId = Number(req.params.prepItemId);

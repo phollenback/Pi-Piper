@@ -1,23 +1,35 @@
-import { Router } from 'express'
-import * as IngredientController from './ingredient.controller'
-
+import { Router } from 'express';
+import * as IngredientController from './ingredient.controller';
+import { IngredientSchema } from './ingredient.model';
+import asyncHandler from '../util/asyncHandler';
+const { checkSchema } = require('express-validator');
 
 const router = Router();
 
-router 
-    .route('/ingredient/:restaurantId')
-    .get(IngredientController.readIngredients)
+router
+    .get(
+        '/ingredient/:restaurantId',
+        asyncHandler(IngredientController.readIngredients)
+    );
 
-router 
-    .route('/ingredient/:restaurantId')
-    .post(IngredientController.createIngredient)
+router
+    .post(
+        '/ingredient/:restaurantId',
+        checkSchema(IngredientSchema),
+        asyncHandler(IngredientController.createIngredient)
+    );
 
-router 
-    .route('/ingredient')
-    .put(IngredientController.updateIngredient)
+router
+    .put(
+        '/ingredient',
+        checkSchema(IngredientSchema),
+        asyncHandler(IngredientController.updateIngredient)
+    );
 
-router 
-    .route('/ingredient/:restaurantId/:ingredientId')
-    .delete(IngredientController.deleteIngredient)
+router
+    .delete(
+        '/ingredient/:restaurantId/:ingredientId',
+        asyncHandler(IngredientController.deleteIngredient)
+    );
 
 export default router;

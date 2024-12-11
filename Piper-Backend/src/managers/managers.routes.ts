@@ -1,24 +1,35 @@
 import { Router } from 'express';
-import * as AdminController from './managers.controller'
+import * as AdminController from './managers.controller';
+const { checkSchema } = require('express-validator');
+import { ManagerSchema } from './manager.model';
+import asyncHandler from '../util/asyncHandler'; 
 
 const router = Router();
 
-router 
-    .route('/manager/:restaurantId')
-    .get(AdminController.readManager)
+router
+    .get(
+        '/manager/:restaurantId',
+        asyncHandler(AdminController.readManager) 
+    );
 
-router 
-    .route('/manager')
-    .post(AdminController.createManager)
+router
+    .post(
+        '/manager',
+        checkSchema(ManagerSchema),
+        asyncHandler(AdminController.createManager) 
+    );
 
-router 
-    .route('/manager/:managerId')
-    .put(AdminController.updateManager)
+router
+    .put(
+        '/manager/:managerId',
+        checkSchema(ManagerSchema), 
+        asyncHandler(AdminController.updateManager) 
+    );
 
-router 
-    .route('/manager/:managerId')
-    .delete(AdminController.deleteManager)
-
-
+router
+    .delete(
+        '/manager/:managerId',
+        asyncHandler(AdminController.deleteManager)
+    );
 
 export default router;
