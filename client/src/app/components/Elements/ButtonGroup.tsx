@@ -1,0 +1,67 @@
+// components/Elements/ButtonGroup.tsx
+import React from 'react';
+import Button from '../Elements/Button'; 
+
+interface Item {
+    id: number;
+    name: string;
+    description: string;
+}
+
+interface ButtonGroupProps {
+    items: Item[]; // Array of items with full category data
+    buttonWidth: string; // Button width (CSS size e.g., '200px')
+    buttonHeight: string; // Button height (CSS size e.g., '60px')
+    onButtonClick: (item: string) => void; // Click handler for buttons
+    selectedButton?: string | null | undefined; // Optionally pass the selected button's value
+    getButtonColor: (name: string) => string; // Adjusted to accept 'name' only
+}
+
+const ButtonGroup: React.FC<ButtonGroupProps> = ({
+    items,
+    buttonWidth,
+    buttonHeight,
+    onButtonClick,
+    selectedButton,
+    getButtonColor,
+}) => {
+    return (
+        <div
+            style={{
+                display: 'flex',
+                gap: '15px', // Add more space between buttons
+                flexWrap: 'wrap', // Wrap buttons if necessary
+                justifyContent: 'space-evenly', // Evenly distribute buttons horizontally
+                width: '100%', // Ensure it takes up the full width
+            }}
+        >
+            {items.map((item) => (
+                <div
+                    key={item.id}
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flex: '1 1 auto', // Allow buttons to stretch evenly across the width
+                    }}
+                >
+                    <Button
+                        label={item.name}
+                        onClick={() => onButtonClick(item.name)}
+                        size="medium" // You can modify the size logic here
+                        style={{
+                            width: buttonWidth, // Adjust width
+                            height: buttonHeight, // Adjust height
+                            backgroundColor:
+                                selectedButton === item.name
+                                    ? '#4CAF50' // Highlight selected button with green
+                                    : getButtonColor(item.name), // Pass only name to getButtonColor
+                            cursor: 'pointer',
+                        }}
+                    />
+                </div>
+            ))}
+        </div>
+    );
+};
+
+export default ButtonGroup;
