@@ -1,0 +1,48 @@
+import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import dotenv from 'dotenv';
+import { initializePgConnector } from './services/pg.connector';
+
+// ROUTES **************
+import restaurantRouter from './restaurants/restaurant.routes';
+import prepItemRouter from './prepitems/prepitems.routes';
+import managerRoutes from './managers/managers.routes';
+import ingredientRoutes from './ingredients/ingredient.routes';
+import categoryRoutes from './categories/category.routes';
+
+dotenv.config();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+
+// Database Initialization
+initializePgConnector();
+
+// Routes
+app.get('/', (req: Request, res: Response) => {
+  res.send('<h1>Welcome to the Pi-Piper API</h1>');
+});
+
+app.use('/restaurants', restaurantRouter);
+app.use('/prepitems', prepItemRouter);
+app.use('/managers', managerRoutes);
+app.use('/ingredients', ingredientRoutes);
+app.use('/categories', categoryRoutes);
+
+// Error Handling Middleware
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error(err.stack);
+  res.status(500).send({ error: 'Something went wrong!' });
+});
+
+// Start Server
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
