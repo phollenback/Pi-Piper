@@ -1,0 +1,6 @@
+{
+  "/prep-dash/page": "app/prep-dash/page.js",
+  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/prep-dash/recipebook/page": "app/prep-dash/recipebook/page.js"
+}

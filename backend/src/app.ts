@@ -44,5 +44,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 // Start Server
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Pi Piper app listening at http://localhost:${port}`);
 });
