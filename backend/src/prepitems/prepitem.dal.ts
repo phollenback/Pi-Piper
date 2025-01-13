@@ -1,28 +1,65 @@
-import  { PrepItem }  from "./prepitem.model";
+import { PrepItem } from "./prepitem.model";
 import { execute } from '../services/pg.connector';
 import { prepQueries } from './prepitems.queries';
+import { logger } from '../middleware/winston.middleware';
 
-
-export const getPrepItems = async (prepItemId : number)  => {
-    console.log('[restaurant.dao][getPrepItems][DAL] ');
-    console.log('fetching prep items for restaurant: ', prepItemId);
-    return execute<PrepItem[]>(prepQueries.getPrepItems, [prepItemId]);
+export const getPrepItems = async (restaurantId: number) => {
+    logger.info('[prepitem.dao][getPrepItems][START]', { restaurantId });
+    try {
+        const prepItems = await execute<PrepItem[]>(prepQueries.getPrepItems, [restaurantId]);
+        logger.info('[prepitem.dao][getPrepItems][SUCCESS]', { prepItems });
+        return prepItems;
+    } catch (error) {
+        logger.error('[prepitem.dao][getPrepItems][ERROR]', { error });
+        throw error;
+    }
 };
 
-export const createPrepItem = async (restaurantId : number, itemData: PrepItem)  => {
-    console.log('[restaurant.dao][createPrepItem][DAL] ');
-    console.log(`Creating new prep item : ${itemData.prep_item_name} for restaurant ${restaurantId}`);
-    return execute<PrepItem[]>(prepQueries.createPrepItem, [itemData.prep_item_name, itemData.description, itemData.item_category, itemData.kitchen_department_id, restaurantId]);
+export const createPrepItem = async (restaurantId: number, itemData: PrepItem) => {
+    logger.info('[prepitem.dao][createPrepItem][START]', { restaurantId, itemData });
+    try {
+        const prepItems = await execute<PrepItem[]>(prepQueries.createPrepItem, [
+            itemData.prep_item_name,
+            itemData.description,
+            itemData.item_category,
+            itemData.kitchen_department_id,
+            restaurantId
+        ]);
+        logger.info('[prepitem.dao][createPrepItem][SUCCESS]', { prepItems });
+        return prepItems;
+    } catch (error) {
+        logger.error('[prepitem.dao][createPrepItem][ERROR]', { error });
+        throw error;
+    }
 };
 
-export const updatePrepItem = async (prepItemId : number, itemData: PrepItem)  => {
-    console.log('[restaurant.dao][updatePrepItem][DAL] ');
-    console.log(`Updating new prep item : ${itemData.prep_item_name} for item ${prepItemId}`);
-    return execute<PrepItem[]>(prepQueries.updatePrepItem, [itemData.prep_item_name, itemData.description, itemData.item_category, itemData.kitchen_department_id, itemData.restaurant_id, prepItemId]);
+export const updatePrepItem = async (prepItemId: number, itemData: PrepItem) => {
+    logger.info('[prepitem.dao][updatePrepItem][START]', { prepItemId, itemData });
+    try {
+        const prepItems = await execute<PrepItem[]>(prepQueries.updatePrepItem, [
+            itemData.prep_item_name,
+            itemData.description,
+            itemData.item_category,
+            itemData.kitchen_department_id,
+            itemData.restaurant_id,
+            prepItemId
+        ]);
+        logger.info('[prepitem.dao][updatePrepItem][SUCCESS]', { prepItems });
+        return prepItems;
+    } catch (error) {
+        logger.error('[prepitem.dao][updatePrepItem][ERROR]', { error });
+        throw error;
+    }
 };
 
-export const deletePrepItem = async (prepItemId : number, restaurantId: number)  => {
-    console.log('[prepitem.dao][delete][DAL] ');
-    console.log(`Deleting prep item : ${prepItemId} from restaurant : ${restaurantId}`);
-    return execute<PrepItem[]>(prepQueries.deletePrepItem, [prepItemId, restaurantId]);
+export const deletePrepItem = async (prepItemId: number, restaurantId: number) => {
+    logger.info('[prepitem.dao][deletePrepItem][START]', { prepItemId, restaurantId });
+    try {
+        const prepItems = await execute<PrepItem[]>(prepQueries.deletePrepItem, [prepItemId, restaurantId]);
+        logger.info('[prepitem.dao][deletePrepItem][SUCCESS]', { prepItems });
+        return prepItems;
+    } catch (error) {
+        logger.error('[prepitem.dao][deletePrepItem][ERROR]', { error });
+        throw error;
+    }
 };

@@ -1,31 +1,65 @@
-import  {Ingredient}  from "./ingredient.model";
-import { execute } from '../services/pg.connector'
-import { ingredientQueries } from './ingredient.queries'
-
+import { Ingredient } from "./ingredient.model";
+import { execute } from '../services/pg.connector';
+import { ingredientQueries } from './ingredient.queries';
+import { logger } from '../middleware/winston.middleware';
 
 export const getIngredients = async (restaurantId: number) => {
-    console.log('[ingredient.dao][getIngredients][DAL] ');
-    console.log('fetching Ingredients for restaurant : ', restaurantId);
-    return execute<Ingredient[]>(ingredientQueries.getIngredients, [restaurantId]);
-
+    logger.info('[ingredient.dao][getIngredients][START]', { restaurantId });
+    try {
+        const ingredients = await execute<Ingredient[]>(ingredientQueries.getIngredients, [restaurantId]);
+        logger.info('[ingredient.dao][getIngredients][SUCCESS]', { ingredients });
+        return ingredients;
+    } catch (error) {
+        logger.error('[ingredient.dao][getIngredients][ERROR]', { error });
+        throw error;
+    }
 };
 
 export const createIngredient = async (restaurantId: number, ingredientData: Ingredient) => {
-    console.log('[ingredient.dao][createIngredients][DAL] ');
-    console.log(`Create Ingredient : ${ingredientData.ingredient_name} For Restaurant : ${restaurantId}`);
-    return execute<Ingredient[]>(ingredientQueries.createIngredient, [ingredientData.ingredient_name, ingredientData.unit_of_measure, ingredientData.cost_per_unit, ingredientData.ingredient_category, restaurantId]);
-
+    logger.info('[ingredient.dao][createIngredient][START]', { restaurantId, ingredientData });
+    try {
+        const ingredients = await execute<Ingredient[]>(ingredientQueries.createIngredient, [
+            ingredientData.ingredient_name,
+            ingredientData.unit_of_measure,
+            ingredientData.cost_per_unit,
+            ingredientData.ingredient_category,
+            restaurantId
+        ]);
+        logger.info('[ingredient.dao][createIngredient][SUCCESS]', { ingredients });
+        return ingredients;
+    } catch (error) {
+        logger.error('[ingredient.dao][createIngredient][ERROR]', { error });
+        throw error;
+    }
 };
 
 export const updateIngredient = async (ingredientData: Ingredient) => {
-    console.log('[ingredient.dao][updateIngredients][DAL] ');
-    console.log(`Update Ingredient : ${ingredientData.ingredient_name} For Restaurant : ${ingredientData.restaurant_id}`);
-    return execute<Ingredient[]>(ingredientQueries.updateIngredient, [ingredientData.ingredient_name, ingredientData.unit_of_measure, ingredientData.cost_per_unit, ingredientData.ingredient_category, ingredientData.restaurant_id, ingredientData.ingredient_id]);
+    logger.info('[ingredient.dao][updateIngredient][START]', { ingredientData });
+    try {
+        const ingredients = await execute<Ingredient[]>(ingredientQueries.updateIngredient, [
+            ingredientData.ingredient_name,
+            ingredientData.unit_of_measure,
+            ingredientData.cost_per_unit,
+            ingredientData.ingredient_category,
+            ingredientData.restaurant_id,
+            ingredientData.ingredient_id
+        ]);
+        logger.info('[ingredient.dao][updateIngredient][SUCCESS]', { ingredients });
+        return ingredients;
+    } catch (error) {
+        logger.error('[ingredient.dao][updateIngredient][ERROR]', { error });
+        throw error;
+    }
 };
 
 export const deleteIngredient = async (ingredientId: number, restaurantId: number) => {
-    console.log('[ingredient.dao][deleteIngredients][DAL] ');
-    console.log(`Delete Ingredient # : ${ingredientId} For Restaurant # : ${restaurantId}`);
-    return execute<Ingredient[]>(ingredientQueries.deleteIngredient, [ingredientId, restaurantId]);
-
+    logger.info('[ingredient.dao][deleteIngredient][START]', { ingredientId, restaurantId });
+    try {
+        const ingredients = await execute<Ingredient[]>(ingredientQueries.deleteIngredient, [ingredientId, restaurantId]);
+        logger.info('[ingredient.dao][deleteIngredient][SUCCESS]', { ingredients });
+        return ingredients;
+    } catch (error) {
+        logger.error('[ingredient.dao][deleteIngredient][ERROR]', { error });
+        throw error;
+    }
 };

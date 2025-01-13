@@ -2,34 +2,25 @@ import { Router } from 'express';
 import * as PrepItemController from './prepitem.controller';
 import { PrepItemSchema } from './prepitem.model';
 import asyncHandler from '../util/asyncHandler';
+import { requestLogger, responseTimeLogger } from '../middleware/winston.middleware';
 const { checkSchema } = require('express-validator');
 
 const router = Router();
 
+router.use(responseTimeLogger);
+router.use(requestLogger);
+
 router
     .get(
-        '/prep-items/:restaurantId',
+        '/:restaurantId',
         asyncHandler(PrepItemController.readPrepItems)
     );
 
 router
     .post(
-        '/prep-items/:restaurantId',
+        '/:restaurantId',
         checkSchema(PrepItemSchema),
         asyncHandler(PrepItemController.createPrepItem)
-    );
-
-router
-    .put(
-        '/prep-items/:prepItemId',
-        checkSchema(PrepItemSchema),
-        asyncHandler(PrepItemController.updatePrepItem)
-    );
-
-router
-    .delete(
-        '/prep-items/:restaurantId/:prepItemId',
-        asyncHandler(PrepItemController.deletePrepItem)
     );
 
 export default router;

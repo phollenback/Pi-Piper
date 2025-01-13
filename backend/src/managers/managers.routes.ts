@@ -1,35 +1,39 @@
 import { Router } from 'express';
-import * as AdminController from './managers.controller';
+import * as ManagerController from './managers.controller';
 const { checkSchema } = require('express-validator');
 import { ManagerSchema } from './manager.model';
 import asyncHandler from '../util/asyncHandler'; 
+import { requestLogger, responseTimeLogger } from '../middleware/winston.middleware';
 
 const router = Router();
 
+router.use(responseTimeLogger);
+router.use(requestLogger);
+
 router
     .get(
-        '/manager/:restaurantId',
-        asyncHandler(AdminController.readManager) 
+        '/:restaurantId',
+        asyncHandler(ManagerController.readManager) 
     );
 
 router
     .post(
         '/manager',
         checkSchema(ManagerSchema),
-        asyncHandler(AdminController.createManager) 
+        asyncHandler(ManagerController.createManager) 
     );
 
 router
     .put(
-        '/manager/:managerId',
+        '/:managerId',
         checkSchema(ManagerSchema), 
-        asyncHandler(AdminController.updateManager) 
+        asyncHandler(ManagerController.updateManager) 
     );
 
 router
     .delete(
-        '/manager/:managerId',
-        asyncHandler(AdminController.deleteManager)
+        '/:managerId',
+        asyncHandler(ManagerController.deleteManager)
     );
 
 export default router;

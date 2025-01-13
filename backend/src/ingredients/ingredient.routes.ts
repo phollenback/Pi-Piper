@@ -2,19 +2,23 @@ import { Router } from 'express';
 import * as IngredientController from './ingredient.controller';
 import { IngredientSchema } from './ingredient.model';
 import asyncHandler from '../util/asyncHandler';
+import { requestLogger, responseTimeLogger } from '../middleware/winston.middleware';
 const { checkSchema } = require('express-validator');
 
 const router = Router();
 
+router.use(responseTimeLogger);
+router.use(requestLogger);
+
 router
     .get(
-        '/ingredient/:restaurantId',
+        '/:restaurantId',
         asyncHandler(IngredientController.readIngredients)
     );
 
 router
     .post(
-        '/ingredient/:restaurantId',
+        '/:restaurantId',
         checkSchema(IngredientSchema),
         asyncHandler(IngredientController.createIngredient)
     );
@@ -28,7 +32,7 @@ router
 
 router
     .delete(
-        '/ingredient/:restaurantId/:ingredientId',
+        '/:restaurantId/:ingredientId',
         asyncHandler(IngredientController.deleteIngredient)
     );
 
