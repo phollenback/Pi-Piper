@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ButtonGroup from "../components/Elements/ButtonGroup";
 import Button from "../components/Elements/Button";
@@ -27,7 +27,7 @@ interface Category {
 
 // Fetch function for categories
 const fetchCategories = async (): Promise<Category[]> => {
-    const response = await axios.get<Category[]>("http://localhost:3000/categories/categories");
+    const response = await axios.get<Category[]>("http://localhost:3000/categories");
     return response.data;
 };
 
@@ -43,16 +43,14 @@ const fetchDailyPrepItems = (): DailyPrepItem[] => {
 
 export default function PrepContainer() {
     const dispatch = useDispatch();
+    const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
     const { data: prepItems = [], isLoading: isPrepLoading, isError: isPrepError } = useQuery<DailyPrepItem[]>({
         queryKey: ["prepItems"],
         queryFn: fetchDailyPrepItems,
     });
-    const { data: categories = [], isLoading, isError, refetch } = useQuery<Category[]>({
-        queryKey: ["categories"],
-        queryFn: fetchCategories,
-    });
+    
 
     const getButtonColor = (name: string) => {
         switch (name) {
@@ -82,15 +80,16 @@ export default function PrepContainer() {
     const handleResetClick = () => {
         setSelectedCategory(null); // Reset selected category
         dispatch(setPrepSearchTerm("")); // Clear the search term
-        refetch(); // Refetch data to refresh the UI
     };
 
-    if (isLoading) {
-        return <p>Loading...</p>;
-    }
-    if (isError) {
-        return <p>ERROR: Cannot fetch data</p>;
-    }
+    useEffect(() => {
+        const fetchAndSetCategories = async () => {
+            const categories = await fetchCategories();
+            setCategories(categories);
+        };
+        fetchAndSetCategories();
+    }, []);
+
 
     return (
         <div className="pt-4">

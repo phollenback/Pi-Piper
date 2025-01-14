@@ -8,7 +8,6 @@ router.use(responseTimeLogger);
 router.use(requestLogger);
 
 router
-    .route('/categories')
-    .get(readCategories);
+    .get('/', readCategories);
 
 export default router;

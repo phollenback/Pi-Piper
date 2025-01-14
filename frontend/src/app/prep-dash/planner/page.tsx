@@ -45,7 +45,7 @@ export default function PlanPage() {
   const [prepItems, setPrepItems] = useState<DailyPrepItem[]>([]);
   const [dailyPrepItems, setDailyPrepItems] = useState<DailyPrepItem[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isBreakdown, setIsBreakdown] = useState(false);
+  const [isBreakdown, setIsBreakdown] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
 
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ export default function PlanPage() {
   const { data: categories = [], isLoading, isError, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:3000/categories/categories");
+      const response = await fetch("http://localhost:3000/categories");
       if (!response.ok) {
         throw new Error("Failed to fetch categories");
       }
@@ -171,6 +171,9 @@ export default function PlanPage() {
         </div>
 
         {isBreakdown ? (
+          <PrepListing list={dailyPrepItems} handleCardClick={handleCardClick} />) 
+          :
+        ( 
           <div>
             <PrepListBreakdown 
               list={dailyPrepItems} 
@@ -191,8 +194,6 @@ export default function PlanPage() {
             </div> 
             {errorMessage ? <ErrorMessage message={errorMessage}/> : <></>}
           </div>
-        ) : (
-          <PrepListing list={dailyPrepItems} handleCardClick={handleCardClick} />
         )}
       </div>
     </div>
