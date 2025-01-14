@@ -33,7 +33,7 @@ export default function RecipeBookContainer() {
   const { data: categories = [], isLoading, isError, error, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:3000/categories/categories");
+      const response = await fetch("http://localhost:3000/categories");
       if (!response.ok) {
         throw new Error("Failed to fetch categories");
       }

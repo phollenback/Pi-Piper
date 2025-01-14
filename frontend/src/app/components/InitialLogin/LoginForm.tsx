@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -8,21 +7,11 @@ const LoginForm: React.FC = () => {
   const [staySignedIn, setStaySignedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit =  (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    const result = await signIn("credentials", {
-      email,
-      password,
-      staySignedIn,
-      redirect: true,
-      callbackUrl: "/prep-dash",
-    });
-
-    if (!result || result.error) {
-      setError("Invalid email or password. Please try again.");
-    }
+    console.log('submitted!');
   };
 
   return (
