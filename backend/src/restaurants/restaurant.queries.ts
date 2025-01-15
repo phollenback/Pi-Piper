@@ -1,5 +1,5 @@
 export const restaurantQueries = {
     getRestaurants: `
-    SELECT * FROM Restaurants;
+    SELECT * FROM dim_restaurant;
     `
 }

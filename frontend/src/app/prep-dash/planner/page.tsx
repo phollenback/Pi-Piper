@@ -11,6 +11,7 @@ import PrepListBreakdown from "../../components/PrepDash/PrepPlan/PrepListBreakd
 import { getDailyList } from "@/app/util/data";
 import Button from "@/app/components/Elements/Button";
 import ErrorMessage from "@/app/components/Elements/ErrorMessage";
+import NumberSelect from "@/app/components/Elements/ui/NumberSelect";
 
 // TYPES ***************
 import PrepListItem from "@/app/types/models/PrepListItem";
@@ -35,6 +36,9 @@ export default function PlanPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isBreakdown, setIsBreakdown] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
+  const [step, setStep] = useState(0.5);
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+  const [verifierName, setVerifierName] = useState("");
 
   const dispatch = useDispatch();
 
@@ -57,11 +61,11 @@ export default function PlanPage() {
   }, []);
 
   const handleCompleteClick = () => {
-    if (isVerified) {
+    if (isVerified && verifierName) {
       //postPrepList(PrepListItems);
       alert("List Created!");
     } else {
-      setErrorMessage("Please Verify the list in the breakdown before submitting.");
+      setErrorMessage("Please enter the verifier's name and verify the list before submitting.");
     }
   };
 
@@ -73,18 +77,24 @@ export default function PlanPage() {
     setIsVerified(!isVerified);
   };
 
-  // Dynamic handler for item movement
+  const handleQuantityChange = (id: number, quantity: number) => {
+    setQuantities((prev) => ({ ...prev, [id]: quantity }));
+  };
+
+  // D ynamic handler for item movement
   const handleCardClick = (item: PrepListItem) => {
+    const updatedItem = { ...item, quantity: quantities[item.prep_list_id] || item.quantity };
+
     if (prepItems.some((prepItem) => prepItem.prep_list_id === item.prep_list_id)) {
       // Move item from prepItems to PrepListItems
       setPrepItems((prev) => prev.filter((prepItem) => prepItem.prep_list_id !== item.prep_list_id));
-      setPrepListItems((prev) => [...prev, item]);
+      setPrepListItems((prev) => [...prev, updatedItem]);
     } else if (PrepListItems.some((dailyItem) => dailyItem.prep_list_id === item.prep_list_id)) {
       // Move item from PrepListItems back to prepItems
       setPrepListItems((prev) =>
         prev.filter((dailyItem) => dailyItem.prep_list_id !== item.prep_list_id)
       );
-      setPrepItems((prev) => [...prev, item]);
+      setPrepItems((prev) => [...prev, updatedItem]);
     }
   };
 
@@ -123,13 +133,25 @@ export default function PlanPage() {
           >
             Reset
           </button>
+          <NumberSelect
+            label="Step"
+            min={0.1}
+            max={10}
+            step={0.1}
+            value={step}
+            onChange={(value) => setStep(value)}
+          />
         </div>
+
+        <hr className="my-4 border-black" />
 
         {/* Pass filtered prep items to AllPrepList */}
         <AllPrepList
           prepList={prepItems}
           category={selectedCategory}
           onAddToDailyPrep={handleCardClick}
+          step={step} // Pass the step value
+          onQuantityChange={handleQuantityChange} // Pass the quantity change handler
         />
       </div>
 
@@ -158,6 +180,8 @@ export default function PlanPage() {
             <PrepListBreakdown
               list={PrepListItems}
               onClick={handleVerifyClick}
+              setVerifier={setVerifierName}
+              setVerified={setIsVerified}
               categories={categories}
             />
           </div>

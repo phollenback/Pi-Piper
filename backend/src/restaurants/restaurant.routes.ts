@@ -9,7 +9,7 @@ router.use(responseTimeLogger);
 router.use(requestLogger);
 
 router
-    .route('/:restaurantId')
+    .route('/')
     .get(asyncHandler(readRestaurants));
 
 export default router;

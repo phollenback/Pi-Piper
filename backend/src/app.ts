@@ -32,8 +32,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('<h1 style="text-align:>Welcome to the Pi-Piper API</h1>');
 });
 
-app.use(['/restaurants','/prepitems','/managers', '/ingredient', '/categories'], [restaurantRouter, prepItemRouter, managerRoutes, ingredientRoutes, categoryRoutes]);
-
+app.use('/restaurants', restaurantRouter);
+app.use('/prepitems', prepItemRouter);
+app.use('/managers', managerRoutes);
+app.use('/ingredients', ingredientRoutes);
+app.use('/categories', categoryRoutes);
 
 // Error Logging Middleware
 app.use(errorLogger); // Use error logger middleware

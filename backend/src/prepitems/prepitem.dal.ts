@@ -1,4 +1,4 @@
-import { PrepItem } from "./prepitem.model";
+import PrepListItem, { PrepItem } from "./prepitem.model";
 import { execute } from '../services/pg.connector';
 import { prepQueries } from './prepitems.queries';
 import { logger } from '../middleware/winston.middleware';
@@ -27,20 +27,70 @@ export const getDailyPrepItems = async (restaurantId: number) => {
     }
 };
 
-export const createPrepItem = async (restaurantId: number, itemData: PrepItem) => {
-    logger.info('[prepitem.dao][createPrepItem][START]', { restaurantId, itemData });
+export const createPrepItem = async (restaurantId: number, items: PrepItem[]) => {
+    logger.info('[prepitem.dao][createPrepItems][START]', { restaurantId, items });
     try {
-        const prepItems = await execute<PrepItem[]>(prepQueries.createPrepItem, [
-            itemData.prep_item_name,
-            itemData.description,
-            itemData.item_category,
-            itemData.kitchen_department_id,
-            restaurantId
-        ]);
-        logger.info('[prepitem.dao][createPrepItem][SUCCESS]', { prepItems });
+        const promises = items.map((item) =>
+            execute<PrepItem[]>(prepQueries.createDailyPrepItems, [
+                item.prep_item_name,
+                item.description,
+                item.item_category,
+                item.kitchen_department_id,
+                restaurantId
+            ])
+        );
+        const results = await Promise.all(promises); // Executes all insertions concurrently
+        logger.info('[prepitem.dao][createPrepItems][SUCCESS]', { results });
+        return results.flat(); // Flatten results into a single array
+    } catch (error) {
+        logger.error('[prepitem.dao][createPrepItems][ERROR]', { error });
+        throw error;
+    }
+};
+
+export const createDailyPrepItems = async (restaurantId: number, items: PrepListItem[]) => {
+    console.log('[prepitem.dao][createDailyPrepItems][START]', { restaurantId });
+
+    try {
+        const prepItems = [];
+
+        for (let item of items) {
+            console.log('[prepitem.dao][createDailyPrepItems][ITEM]', { item });
+
+            // Get the prep_item_id for the given name and restaurant
+            const prepItemIds = await execute<any[]>(prepQueries.getPrepItemId, [item.name, restaurantId]);
+            console.log('[prepitem.dao][createDailyPrepItems][PREP_ITEM_IDS]', { prepItemIds });
+
+            if (!prepItemIds || prepItemIds.length === 0) {
+                console.error('[prepitem.dao][createDailyPrepItems][PREP_ITEM_NOT_FOUND]', {
+                    itemName: item.name,
+                    restaurantId,
+                });
+                throw new Error(`PrepItem "${item.name}" not found for restaurant ${restaurantId}`);
+            }
+
+            const prepItemId = Number(prepItemIds[0].prep_item_id); // Extract and convert the prep_item_id to a number
+            console.log('[prepitem.dao][createDailyPrepItems][PREP_ITEM_ID]', { prepItemId });
+
+            // Insert into fact_daily_prep_list
+            const result = await execute(prepQueries.createDailyPrepItems, [
+                item.prep_list_id,
+                restaurantId,
+                prepItemId, // Ensure this is passed correctly
+                item.quantity,
+                item.unit,
+                item.status,
+                item.date, // Use the date from the item
+            ]);
+            console.log('[prepitem.dao][createDailyPrepItems][INSERT_RESULT]', { result });
+
+            prepItems.push(result);
+        }
+
+        console.log('[prepitem.dao][createDailyPrepItems][SUCCESS]', { prepItems });
         return prepItems;
     } catch (error) {
-        logger.error('[prepitem.dao][createPrepItem][ERROR]', { error });
+        console.error('[prepitem.dao][createDailyPrepItems][ERROR]', { error });
         throw error;
     }
 };
@@ -72,6 +122,20 @@ export const deletePrepItem = async (prepItemId: number, restaurantId: number) =
         return prepItems;
     } catch (error) {
         logger.error('[prepitem.dao][deletePrepItem][ERROR]', { error });
+        throw error;
+    }
+};
+
+
+export const getPrepItemId = async (itemName: string, restaurantId: number) => {
+    logger.info('[prepitem.dao][getPrepItemId][START]', { itemName, restaurantId });
+    try {
+        const prepItemId = await execute<number>(prepQueries.getPrepItemId, [itemName, restaurantId]);
+        const prepItems = await execute<PrepItem[]>(prepQueries.getDailyPrepItems, [restaurantId]);
+        logger.info('[prepitem.dao][createDailyPrepItems][SUCCESS]', { prepItems });
+        return prepItems;
+    } catch (error) {
+        logger.error('[prepitem.dao][createDailyPrepItems][ERROR]', { error });
         throw error;
     }
 };

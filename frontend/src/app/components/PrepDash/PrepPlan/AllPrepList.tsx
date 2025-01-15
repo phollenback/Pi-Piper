@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import PotentialPrepItem from "./PotentialPrepItem";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/lib/store";
-import PrepListItem from "@/app/util/data";
-
+import PrepListItem from "@/app/types/models/PrepListItem";
 
 interface AppPrepProps {
   prepList: PrepListItem[];
   category: number | null;
   onAddToDailyPrep: (item: PrepListItem) => void;
+  step: number; // Add step prop
+  onQuantityChange: (id: number, quantity: number) => void; // Add quantity change handler prop
 }
 
-const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyPrep }) => {
+const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyPrep, step, onQuantityChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+
   // Get the search term from Redux (updated dynamically by other components)
   const prepSearchTerm = useSelector((state: RootState) => state.search.prepSearchTerm);
 
@@ -33,15 +35,22 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
     console.log(searchTerm);
   }, [prepSearchTerm]);
 
+  const handleQuantityChange = (id: number, quantity: number) => {
+    setQuantities((prev) => ({ ...prev, [id]: quantity }));
+    onQuantityChange(id, quantity); // Call the passed quantity change handler
+  };
+
   return (
     <div className="flex flex-wrap">
       <div className="w-50">
         {filteredPrepList.map((item) => (
-        <PotentialPrepItem
-          key={item.prep_list_id}
-          prepItem={item}
-          onAdd={() => onAddToDailyPrep(item)}
-        />
+          <PotentialPrepItem
+            key={item.prep_list_id}
+            prepItem={{ ...item, quantity: quantities[item.prep_list_id] || item.quantity }}
+            onAdd={() => onAddToDailyPrep(item)}
+            onQuantityChange={handleQuantityChange}
+            step={step} // Pass the step value
+          />
         ))}
       </div>
     </div>

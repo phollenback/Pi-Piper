@@ -60,3 +60,32 @@ export const createPrepItem = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const createDailyPrepItems = async (req: Request, res: Response) => {
+    console.log('[prepitem.controller][createDailyPrepItems][START]');
+
+    // Validation check
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.error('[prepitem.controller][createDailyPrepItems][VALIDATION_ERROR]', { errors: errors.array() });
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const restaurantId = Number(req.params.restaurantId);
+        console.log('[prepitem.controller][createDailyPrepItems][RESTAURANT_ID]', { restaurantId });
+
+        const items = Array.isArray(req.body) ? req.body : [req.body]; // Ensure we have an array
+        console.log('[prepitem.controller][createDailyPrepItems][ITEMS]', { items });
+
+        const response = await PrepItemDal.createDailyPrepItems(restaurantId, items); // Call the DAO function for arrays
+        console.log('[prepitem.controller][createDailyPrepItems][RESPONSE]', { response });
+
+        res.status(201).json(response);
+    } catch (error) {
+        console.error('[prepitem.controller][createDailyPrepItems][ERROR]', { error });
+        res.status(500).json({
+            message: 'There was an error when creating the prep items',
+        });
+    }
+};

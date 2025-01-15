@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import * as PrepItemController from './prepitem.controller';
-import { PrepItemSchema } from './prepitem.model';
+import { PrepItemSchema, PrepListItemSchema } from './prepitem.model';
 import asyncHandler from '../util/asyncHandler';
 import { requestLogger, responseTimeLogger } from '../middleware/winston.middleware';
 const { checkSchema } = require('express-validator');
@@ -18,9 +18,15 @@ router
 
 router
     .get(
-        '/daily',
+        '/daily/:restaurantId',
         asyncHandler(PrepItemController.readDailyPrepItems)
     );
+
+router
+    .post(
+        '/daily/:restaurantId',
+        asyncHandler(PrepItemController.createDailyPrepItems)
+    )
 
 router
     .post(
