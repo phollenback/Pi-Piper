@@ -1,20 +1,21 @@
 import React from 'react';
 import Button from '../../Elements/Button';
+import PrepListItem from '@/app/types/models/PrepListItem';
 
-interface DailyPrepItem {
-    prep_list_id: number;
-    name: string;
-    description: string;
-    quantity: number;
-    unit: string;
-    category: number;
-    status: string;
-}
+// interface DailyPrepItem {
+//     prep_list_id: number;
+//     name: string;
+//     description: string;
+//     quantity: number;
+//     unit: string;
+//     category: number;
+//     status: string;
+// }
 
 
 interface ItemCardProps {
-    item: DailyPrepItem;
-    handleCardClick: (item: DailyPrepItem) => void;
+    item: PrepListItem;
+    handleCardClick: (item: PrepListItem) => void;
 }
 
 const PrepItemCard: React.FC<ItemCardProps> = ({ item, handleCardClick }) => {

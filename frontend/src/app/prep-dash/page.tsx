@@ -1,29 +1,18 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ButtonGroup from "../components/Elements/ButtonGroup";
 import Button from "../components/Elements/Button";
 import Kanban from "../components/PrepDash/DailyPrep/Kanban";
-import { fetchPrepItemCards } from "../util/data";
-import axios from "axios";
+import { getDailyList } from '../util/data';
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 
-interface DailyPrepItem {
-    prep_list_id: number;
-    name: string;
-    description: string;
-    quantity: number;
-    unit: string;
-    category: number;
-    status: string;
-}
 
-interface Category {
-    id: number;
-    name: string;
-    description: string;
-}
+// TYPES ***************
+import Category from "../types/models/Category";
+import PrepListItem from "../util/data";
+
 
 // Fetch function for categories
 const fetchCategories = async (): Promise<Category[]> => {
@@ -32,26 +21,28 @@ const fetchCategories = async (): Promise<Category[]> => {
 };
 
 // Adjust fetch function to ensure it always returns an array
-const fetchDailyPrepItems = (): DailyPrepItem[] => {
-    const items = fetchPrepItemCards();
-    if (items) {
-        return items;
-    } else {
-        return []; // Ensure it always returns an array
-    }
-};
+// const fetchDailyPrepItems = (): DailyPrepItem[] => {
+//     const items = fetchPrepItemCards();
+//     if (items) {
+//         return items;
+//     } else {
+//         return []; // Ensure it always returns an array
+//     }
+// };
 
 export default function PrepContainer() {
     const dispatch = useDispatch();
-    const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
-    const { data: prepItems = [], isLoading: isPrepLoading, isError: isPrepError } = useQuery<DailyPrepItem[]>({
+    const { data: prepItems = [], isLoading: isPrepLoading, isError: isPrepError } = useQuery<PrepListItem[]>({
         queryKey: ["prepItems"],
-        queryFn: fetchDailyPrepItems,
+        queryFn: getDailyList,
     });
-    
-
+    const { data: categories = []} = useQuery<Category[]>({
+        queryKey: ["categories"],
+        queryFn: fetchCategories,
+    });
+ 
     const getButtonColor = (name: string) => {
         switch (name) {
             case "Slicer":
@@ -81,15 +72,6 @@ export default function PrepContainer() {
         setSelectedCategory(null); // Reset selected category
         dispatch(setPrepSearchTerm("")); // Clear the search term
     };
-
-    useEffect(() => {
-        const fetchAndSetCategories = async () => {
-            const categories = await fetchCategories();
-            setCategories(categories);
-        };
-        fetchAndSetCategories();
-    }, []);
-
 
     return (
         <div className="pt-4">
@@ -125,7 +107,12 @@ export default function PrepContainer() {
             :
             <div className="mt-4">
                 <Kanban
-                    prepItems={prepItems} // Pass updated prep items
+                    prepItems={prepItems.map(item => ({
+                        ...item,
+                        note: "", // Add default or fetched note
+                        restaurant_id: 0, // Add default or fetched restaurant_id
+                        date: new Date().toISOString() // Add default or fetched date
+                    }))} // Pass updated prep items
                     category={selectedCategory?.id} // Filter by selected category
                 />
             </div>

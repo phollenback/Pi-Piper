@@ -1,41 +1,21 @@
 "use client"
 import { useEffect, useState } from 'react';
 import PrepListing from './PrepListing';
-
-// interface DailyPrepItem {
-//     id: number;
-//     name: string;
-//     description: string;
-//     quantity: number;
-//     unit: string;
-//     status: string; // Status can be 'todo' or 'complete'
-//     category: number;
-//     kitchenDepartmentId: number;
-//     restaurantId: number;
-// }
-interface DailyPrepItem {
-    prep_list_id: number;
-    name: string;
-    description: string;
-    quantity: number;
-    unit: string;
-    category: number;
-    status: string;
-}
+import PrepListItem from '../../../types/models/PrepListItem';
 
 
 interface KanbanProps {
-    prepItems: DailyPrepItem[];
+    prepItems: PrepListItem[];
     category: number | null | undefined;
 }
 
 const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
-    const [todoItems, setTodoItems] = useState<DailyPrepItem[]>(prepItems); 
-    const [completeItems, setCompleteItems] = useState<DailyPrepItem[]>(prepItems.filter(item => item.status === 'complete'));
+    const [todoItems, setTodoItems] = useState<PrepListItem[]>(prepItems); 
+    const [completeItems, setCompleteItems] = useState<PrepListItem[]>(prepItems.filter(item => item.status === 'complete'));
 
-    const splitItems = (items: DailyPrepItem[], category: number | null | undefined) => {
-        const todos: DailyPrepItem[] = [];
-        const completed: DailyPrepItem[] = [];
+    const splitItems = (items: PrepListItem[], category: number | null | undefined) => {
+        const todos: PrepListItem[] = [];
+        const completed: PrepListItem[] = [];
 
         items.forEach(item => {
             if (category === null || category === undefined || item.category === category || item.category == 6) {
@@ -51,7 +31,7 @@ const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
         setCompleteItems(completed);
     };
 
-    const handleCardClick = (prepItem: DailyPrepItem) => {
+    const handleCardClick = (prepItem: PrepListItem) => {
         const updatedItem = { ...prepItem, status: prepItem.status === 'complete' ? 'todo' : 'complete' };
         
         // Update the item status in the prepItems array

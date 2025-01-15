@@ -2,21 +2,13 @@ import React, { useEffect, useState } from "react";
 import PotentialPrepItem from "./PotentialPrepItem";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/lib/store";
+import PrepListItem from "@/app/util/data";
 
-interface DailyPrepItem {
-  prep_list_id: number;
-  name: string;
-  description: string;
-  quantity: number;
-  unit: string;
-  category: number;
-  status: string;
-}
 
 interface AppPrepProps {
-  prepList: DailyPrepItem[];
+  prepList: PrepListItem[];
   category: number | null;
-  onAddToDailyPrep: (item: DailyPrepItem) => void;
+  onAddToDailyPrep: (item: PrepListItem) => void;
 }
 
 const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyPrep }) => {
@@ -42,14 +34,16 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
   }, [prepSearchTerm]);
 
   return (
-    <div>
-      {filteredPrepList.map((item) => (
+    <div className="flex flex-wrap">
+      <div className="w-50">
+        {filteredPrepList.map((item) => (
         <PotentialPrepItem
           key={item.prep_list_id}
           prepItem={item}
           onAdd={() => onAddToDailyPrep(item)}
         />
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

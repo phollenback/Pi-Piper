@@ -15,6 +15,18 @@ export const getPrepItems = async (restaurantId: number) => {
     }
 };
 
+export const getDailyPrepItems = async (restaurantId: number) => {
+    logger.info('[prepitem.dao][getDailyPrepItems][START]', { restaurantId });
+    try {
+        const prepItems = await execute<PrepItem[]>(prepQueries.getDailyPrepItems, [restaurantId]);
+        logger.info('[prepitem.dao][getDailyPrepItems][SUCCESS]', { prepItems });
+        return prepItems;
+    } catch (error) {
+        logger.error('[prepitem.dao][getDailyPrepItems][ERROR]', { error });
+        throw error;
+    }
+};
+
 export const createPrepItem = async (restaurantId: number, itemData: PrepItem) => {
     logger.info('[prepitem.dao][createPrepItem][START]', { restaurantId, itemData });
     try {

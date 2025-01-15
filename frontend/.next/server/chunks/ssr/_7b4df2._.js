@@ -257,42 +257,8 @@ __turbopack_esm__({
     "fetchDailyPrepItems": (()=>fetchDailyPrepItems),
     "fetchPrepItemCards": (()=>fetchPrepItemCards),
     "fetchRecipes": (()=>fetchRecipes),
-    "getCategories": (()=>getCategories)
+    "getDailyList": (()=>getDailyList)
 });
-const getCategories = ()=>{
-    return [
-        {
-            id: 1,
-            name: "Slicer",
-            description: "Used for slicing meats and cheeses."
-        },
-        {
-            id: 2,
-            name: "Pantry",
-            description: "Handles pantry-related items like greens and grains."
-        },
-        {
-            id: 3,
-            name: "Oven",
-            description: "For baking and roasting various items."
-        },
-        {
-            id: 4,
-            name: "Grill",
-            description: "Used for grilling meats, vegetables, and bread."
-        },
-        {
-            id: 5,
-            name: "Cold Prep",
-            description: "For cold preparation tasks like cheese and salads."
-        },
-        {
-            id: 6,
-            name: "All",
-            description: "Unfilter."
-        }
-    ];
-};
 const fetchDailyPrepItems = ()=>{
     return [
         {
@@ -775,6 +741,250 @@ const fetchRecipes = ()=>{
             ],
             category: 1,
             procedure: "1. Boil eggs and let them cool. \n" + "2. Peel and chop eggs, then mix with mayo, mustard, and chopped celery. \n" + "3. Spread mixture onto slices of bread to make sandwiches. \n" + "4. Serve immediately."
+        }
+    ];
+};
+const getDailyList = ()=>{
+    return [
+        {
+            prep_list_id: 1,
+            name: "Slice Prosciutto",
+            description: "Thinly slice the prosciutto for charcuterie boards.",
+            note: "...",
+            quantity: 3.00,
+            unit: "pkg",
+            status: "todo",
+            category: 1,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 2,
+            name: "Slice Coppa",
+            description: "...",
+            note: "...",
+            quantity: 2.00,
+            unit: "pkg",
+            status: "in-progress",
+            category: 1,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 3,
+            name: "Slice Sopressata",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "pkg",
+            status: "todo",
+            category: 2,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 4,
+            name: "Slice Ham",
+            description: "...",
+            note: "...",
+            quantity: 4.00,
+            unit: "6th pan",
+            status: "complete",
+            category: 2,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 5,
+            name: "Slice Provolone",
+            description: "...",
+            note: "...",
+            quantity: 1.00,
+            unit: "6th pan",
+            status: "todo",
+            category: 2,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 6,
+            name: "Set Pulled Pork",
+            description: "...",
+            note: "...",
+            quantity: 5.00,
+            unit: "lbs",
+            status: "in-progress",
+            category: 3,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 7,
+            name: "Cook Pulled Pork",
+            description: "...",
+            note: "...",
+            quantity: 7.00,
+            unit: "lbs",
+            status: "complete",
+            category: 3,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 8,
+            name: "Cook Meatballs",
+            description: "...",
+            note: "...",
+            quantity: 4.50,
+            unit: "lbs",
+            status: "todo",
+            category: 3,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 9,
+            name: "Italian Sausage Mix",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "lbs",
+            status: "todo",
+            category: 4,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 10,
+            name: "Marinate Lemongrass Pork",
+            description: "...",
+            note: "...",
+            quantity: 6.00,
+            unit: "lbs",
+            status: "in-progress",
+            category: 4,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 11,
+            name: "Grill Lemongrass Pork",
+            description: "...",
+            note: "...",
+            quantity: 2.50,
+            unit: "lbs",
+            status: "complete",
+            category: 4,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 12,
+            name: "Back Bacon Brine",
+            description: "...",
+            note: "...",
+            quantity: 8.00,
+            unit: "liters",
+            status: "todo",
+            category: 5,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 13,
+            name: "Cure Pork Loins",
+            description: "...",
+            note: "...",
+            quantity: 5.50,
+            unit: "lbs",
+            status: "in-progress",
+            category: 5,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 14,
+            name: "Dry Pork Loins",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "lbs",
+            status: "todo",
+            category: 5,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 15,
+            name: "Smoke Pork Loins",
+            description: "...",
+            note: "...",
+            quantity: 4.75,
+            unit: "lbs",
+            status: "complete",
+            category: 6,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 16,
+            name: "Bacon Strips",
+            description: "...",
+            note: "...",
+            quantity: 12.00,
+            unit: "lbs",
+            status: "todo",
+            category: 6,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 17,
+            name: "Dice & Crisp Bacon",
+            description: "...",
+            note: "...",
+            quantity: 1.50,
+            unit: "lbs",
+            status: "in-progress",
+            category: 6,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 18,
+            name: "Marinate Chicken",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "lbs",
+            status: "todo",
+            category: 6,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 19,
+            name: "Smoke Chicken",
+            description: "...",
+            note: "...",
+            quantity: 4.00,
+            unit: "lbs",
+            status: "in-progress",
+            category: 6,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 20,
+            name: "Drain Fresh Moz",
+            description: "...",
+            note: "...",
+            quantity: 2.00,
+            unit: "lbs",
+            status: "complete",
+            category: 6,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
         }
     ];
 };

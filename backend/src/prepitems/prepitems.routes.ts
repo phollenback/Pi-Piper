@@ -17,6 +17,12 @@ router
     );
 
 router
+    .get(
+        '/daily',
+        asyncHandler(PrepItemController.readDailyPrepItems)
+    );
+
+router
     .post(
         '/:restaurantId',
         checkSchema(PrepItemSchema),

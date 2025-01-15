@@ -2,32 +2,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/lib/store"; // Import RootState from store.ts
 import PrepItemCard from "./PrepItemCard";
-
-// interface DailyPrepItem {
-//   id: number;
-//   name: string;
-//   description: string;
-//   quantity: number;
-//   unit: string;
-//   status: string;
-//   category: number;
-//   kitchenDepartmentId: number;
-//   restaurantId: number;
-// }
-interface DailyPrepItem {
-  prep_list_id: number;
-  name: string;
-  description: string;
-  quantity: number;
-  unit: string;
-  category: number;
-  status: string;
-}
-
+import PrepListItem from "../../../types/models/PrepListItem"
 
 interface PrepListingProps {
-    list: DailyPrepItem[];
-    handleCardClick: (item: DailyPrepItem) => void;  // Accept DailyPrepItem as argument
+    list: PrepListItem[];
+    handleCardClick: (item: PrepListItem) => void;  // Accept PrepListItem as argument
   }
 
 const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {

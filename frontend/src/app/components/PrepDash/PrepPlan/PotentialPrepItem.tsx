@@ -20,9 +20,9 @@ interface PotentialPrepItemProps {
 const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd }) => {
   return (
     <div className="w-full p-4 border rounded-md bg-white shadow-sm flex items-center justify-between mb-2">
-      <div>
+      <div className="flex-1">
         <h3 className="text-md font-semibold">{prepItem.name}</h3>
-        <p className="text-sm text-gray-500">{prepItem.description}</p>
+        <p className="text-sm text-gray-500 line-clamp-2">{prepItem.description}</p>
       </div>
       <div className="flex items-center space-x-2">
         <NumberSelect
@@ -33,13 +33,13 @@ const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd }
           label="Qty"
         />
         <Button
-            label="ADD"
-            onClick={onAdd}
-            size="large"
-            style={{
-                backgroundColor: "green",
-                color: "white"
-            }}
+          label="ADD"
+          onClick={onAdd}
+          size="large"
+          style={{
+            backgroundColor: "green",
+            color: "white"
+          }}
         />
       </div>
     </div>

@@ -7,6 +7,16 @@ export type PrepItem = {
     restaurant_id: number
 }
 
+export interface PrepListItem {
+    list_item_id: number;  
+    name: string;         
+    description: string;
+    item_category: string; 
+    quantity: number;     
+    unit: string;          
+    status: 'complete' | 'todo' | 'in-progress'; 
+}
+
 const { Schema } = require('express-validator');
 
 export const PrepItemSchema : typeof Schema = {

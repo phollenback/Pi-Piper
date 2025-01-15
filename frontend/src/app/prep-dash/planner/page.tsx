@@ -7,26 +7,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import PrepListing from "@/app/components/PrepDash/DailyPrep/PrepListing";
-import PrepListBreakdown from "../../components/PrepDash/PrepPlan/PrepListBreakdown"
-import { fetchPrepItemCards } from "@/app/util/data";
+import PrepListBreakdown from "../../components/PrepDash/PrepPlan/PrepListBreakdown";
+import { getDailyList } from "@/app/util/data";
 import Button from "@/app/components/Elements/Button";
 import ErrorMessage from "@/app/components/Elements/ErrorMessage";
 
-interface Category {
-  id: number;
-  name: string;
-  description: string;
-}
-
-interface DailyPrepItem {
-  prep_list_id: number;
-  name: string;
-  description: string;
-  quantity: number;
-  unit: string;
-  category: number;
-  status: string;
-}
+// TYPES ***************
+import PrepListItem from "@/app/types/models/PrepListItem";
+import Category from "@/app/types/models/Category";
 
 // Helper function to get tomorrow's date
 const getTomorrowDate = () => {
@@ -42,8 +30,8 @@ const getTomorrowDate = () => {
 
 export default function PlanPage() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const [prepItems, setPrepItems] = useState<DailyPrepItem[]>([]);
-  const [dailyPrepItems, setDailyPrepItems] = useState<DailyPrepItem[]>([]);
+  const [prepItems, setPrepItems] = useState<PrepListItem[]>([]);
+  const [PrepListItems, setPrepListItems] = useState<PrepListItem[]>([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [isBreakdown, setIsBreakdown] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
@@ -51,7 +39,7 @@ export default function PlanPage() {
   const dispatch = useDispatch();
 
   // Fetch categories
-  const { data: categories = [], isLoading, isError, refetch } = useQuery({
+  const { data: categories = [], isError, refetch } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const response = await fetch("http://localhost:3000/categories");
@@ -64,17 +52,17 @@ export default function PlanPage() {
 
   useEffect(() => {
     // Fetch all prep items
-    setPrepItems(fetchPrepItemCards());
+    setPrepItems(getDailyList());
     setIsVerified(false);
   }, []);
 
   const handleCompleteClick = () => {
-    if(isVerified) {
-      alert("List Created!")
+    if (isVerified) {
+      //postPrepList(PrepListItems);
+      alert("List Created!");
     } else {
-      setErrorMessage("Please Verify the list before submitting.")
+      setErrorMessage("Please Verify the list in the breakdown before submitting.");
     }
-    
   };
 
   const handleBreakdownClick = () => {
@@ -83,17 +71,17 @@ export default function PlanPage() {
 
   const handleVerifyClick = () => {
     setIsVerified(!isVerified);
-  }
-  
+  };
+
   // Dynamic handler for item movement
-  const handleCardClick = (item: DailyPrepItem) => {
+  const handleCardClick = (item: PrepListItem) => {
     if (prepItems.some((prepItem) => prepItem.prep_list_id === item.prep_list_id)) {
-      // Move item from prepItems to dailyPrepItems
+      // Move item from prepItems to PrepListItems
       setPrepItems((prev) => prev.filter((prepItem) => prepItem.prep_list_id !== item.prep_list_id));
-      setDailyPrepItems((prev) => [...prev, item]);
-    } else if (dailyPrepItems.some((dailyItem) => dailyItem.prep_list_id === item.prep_list_id)) {
-      // Move item from dailyPrepItems back to prepItems
-      setDailyPrepItems((prev) =>
+      setPrepListItems((prev) => [...prev, item]);
+    } else if (PrepListItems.some((dailyItem) => dailyItem.prep_list_id === item.prep_list_id)) {
+      // Move item from PrepListItems back to prepItems
+      setPrepListItems((prev) =>
         prev.filter((dailyItem) => dailyItem.prep_list_id !== item.prep_list_id)
       );
       setPrepItems((prev) => [...prev, item]);
@@ -113,16 +101,9 @@ export default function PlanPage() {
     setSelectedCategory(null);
   };
 
-  // Handle loading and error states
-  if (isLoading) {
-    return <p>Loading plan...</p>;
-  }
-
   if (isError) {
     return <p>Error loading plan...</p>;
   }
-
-  
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -169,32 +150,28 @@ export default function PlanPage() {
             }}
           />
         </div>
-
+        {errorMessage && <ErrorMessage message={errorMessage} />}
         {isBreakdown ? (
-          <PrepListing list={dailyPrepItems} handleCardClick={handleCardClick} />) 
-          :
-        ( 
+          <PrepListing list={PrepListItems} handleCardClick={handleCardClick} />
+        ) : (
           <div>
-            <PrepListBreakdown 
-              list={dailyPrepItems} 
+            <PrepListBreakdown
+              list={PrepListItems}
               onClick={handleVerifyClick}
               categories={categories}
             />
-            <div className="mt-6 mb-2">
-              <Button
-                label="Create List"
-                onClick={handleCompleteClick}
-                size="large"
-                style={{
-                  backgroundColor: "blue",
-                  color: "white",
-                  fontWeight: "bold",
-                }}
-              />
-            </div> 
-            {errorMessage ? <ErrorMessage message={errorMessage}/> : <></>}
           </div>
         )}
+        <Button
+          label="Create Prep List"
+          onClick={handleCompleteClick}
+          size="large"
+          style={{
+            backgroundColor: "green",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        />
       </div>
     </div>
   );

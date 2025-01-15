@@ -80,6 +80,7 @@ const PotentialPrepItem = ({ prepItem, onAdd })=>{
         className: "w-full p-4 border rounded-md bg-white shadow-sm flex items-center justify-between mb-2",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex-1",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                         className: "text-md font-semibold",
@@ -90,7 +91,7 @@ const PotentialPrepItem = ({ prepItem, onAdd })=>{
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-sm text-gray-500",
+                        className: "text-sm text-gray-500 line-clamp-2",
                         children: prepItem.description
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
@@ -191,17 +192,25 @@ const AllPrepList = ({ prepList, category, onAddToDailyPrep })=>{
         prepSearchTerm
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        children: filteredPrepList.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PotentialPrepItem$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                prepItem: item,
-                onAdd: ()=>onAddToDailyPrep(item)
-            }, item.prep_list_id, false, {
-                fileName: "[project]/src/app/components/PrepDash/PrepPlan/AllPrepList.tsx",
-                lineNumber: 47,
-                columnNumber: 9
-            }, this))
+        className: "flex flex-wrap",
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "w-50",
+            children: filteredPrepList.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PotentialPrepItem$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    prepItem: item,
+                    onAdd: ()=>onAddToDailyPrep(item)
+                }, item.prep_list_id, false, {
+                    fileName: "[project]/src/app/components/PrepDash/PrepPlan/AllPrepList.tsx",
+                    lineNumber: 40,
+                    columnNumber: 9
+                }, this))
+        }, void 0, false, {
+            fileName: "[project]/src/app/components/PrepDash/PrepPlan/AllPrepList.tsx",
+            lineNumber: 38,
+            columnNumber: 7
+        }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/PrepDash/PrepPlan/AllPrepList.tsx",
-        lineNumber: 45,
+        lineNumber: 37,
         columnNumber: 5
     }, this);
 };
@@ -318,7 +327,7 @@ const PrepItemCard = ({ item, handleCardClick })=>{
                         children: item.name
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                        lineNumber: 44,
+                        lineNumber: 45,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -329,13 +338,13 @@ const PrepItemCard = ({ item, handleCardClick })=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                        lineNumber: 45,
+                        lineNumber: 46,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                lineNumber: 43,
+                lineNumber: 44,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -350,12 +359,12 @@ const PrepItemCard = ({ item, handleCardClick })=>{
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                    lineNumber: 50,
+                    lineNumber: 51,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                lineNumber: 49,
+                lineNumber: 50,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -365,12 +374,12 @@ const PrepItemCard = ({ item, handleCardClick })=>{
                     children: item.description
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                    lineNumber: 57,
+                    lineNumber: 58,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                lineNumber: 56,
+                lineNumber: 57,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -388,18 +397,18 @@ const PrepItemCard = ({ item, handleCardClick })=>{
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                    lineNumber: 62,
+                    lineNumber: 63,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-                lineNumber: 61,
+                lineNumber: 62,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepItemCard.tsx",
-        lineNumber: 41,
+        lineNumber: 42,
         columnNumber: 9
     }, this);
 };
@@ -454,18 +463,18 @@ const PrepListing = ({ list, handleCardClick })=>{
                 handleCardClick: handleCardClick
             }, item.prep_list_id, false, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepListing.tsx",
-                lineNumber: 55,
+                lineNumber: 34,
                 columnNumber: 36
             }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
             children: "No items to display."
         }, void 0, false, {
             fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepListing.tsx",
-            lineNumber: 57,
+            lineNumber: 36,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/PrepDash/DailyPrep/PrepListing.tsx",
-        lineNumber: 53,
+        lineNumber: 32,
         columnNumber: 5
     }, this);
 };
@@ -652,42 +661,8 @@ __turbopack_esm__({
     "fetchDailyPrepItems": (()=>fetchDailyPrepItems),
     "fetchPrepItemCards": (()=>fetchPrepItemCards),
     "fetchRecipes": (()=>fetchRecipes),
-    "getCategories": (()=>getCategories)
+    "getDailyList": (()=>getDailyList)
 });
-const getCategories = ()=>{
-    return [
-        {
-            id: 1,
-            name: "Slicer",
-            description: "Used for slicing meats and cheeses."
-        },
-        {
-            id: 2,
-            name: "Pantry",
-            description: "Handles pantry-related items like greens and grains."
-        },
-        {
-            id: 3,
-            name: "Oven",
-            description: "For baking and roasting various items."
-        },
-        {
-            id: 4,
-            name: "Grill",
-            description: "Used for grilling meats, vegetables, and bread."
-        },
-        {
-            id: 5,
-            name: "Cold Prep",
-            description: "For cold preparation tasks like cheese and salads."
-        },
-        {
-            id: 6,
-            name: "All",
-            description: "Unfilter."
-        }
-    ];
-};
 const fetchDailyPrepItems = ()=>{
     return [
         {
@@ -1173,6 +1148,250 @@ const fetchRecipes = ()=>{
         }
     ];
 };
+const getDailyList = ()=>{
+    return [
+        {
+            prep_list_id: 1,
+            name: "Slice Prosciutto",
+            description: "Thinly slice the prosciutto for charcuterie boards.",
+            note: "...",
+            quantity: 3.00,
+            unit: "pkg",
+            status: "todo",
+            category: 1,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 2,
+            name: "Slice Coppa",
+            description: "...",
+            note: "...",
+            quantity: 2.00,
+            unit: "pkg",
+            status: "in-progress",
+            category: 1,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 3,
+            name: "Slice Sopressata",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "pkg",
+            status: "todo",
+            category: 2,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 4,
+            name: "Slice Ham",
+            description: "...",
+            note: "...",
+            quantity: 4.00,
+            unit: "6th pan",
+            status: "complete",
+            category: 2,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 5,
+            name: "Slice Provolone",
+            description: "...",
+            note: "...",
+            quantity: 1.00,
+            unit: "6th pan",
+            status: "todo",
+            category: 2,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 6,
+            name: "Set Pulled Pork",
+            description: "...",
+            note: "...",
+            quantity: 5.00,
+            unit: "lbs",
+            status: "in-progress",
+            category: 3,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 7,
+            name: "Cook Pulled Pork",
+            description: "...",
+            note: "...",
+            quantity: 7.00,
+            unit: "lbs",
+            status: "complete",
+            category: 3,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 8,
+            name: "Cook Meatballs",
+            description: "...",
+            note: "...",
+            quantity: 4.50,
+            unit: "lbs",
+            status: "todo",
+            category: 3,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 9,
+            name: "Italian Sausage Mix",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "lbs",
+            status: "todo",
+            category: 4,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 10,
+            name: "Marinate Lemongrass Pork",
+            description: "...",
+            note: "...",
+            quantity: 6.00,
+            unit: "lbs",
+            status: "in-progress",
+            category: 4,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 11,
+            name: "Grill Lemongrass Pork",
+            description: "...",
+            note: "...",
+            quantity: 2.50,
+            unit: "lbs",
+            status: "complete",
+            category: 4,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 12,
+            name: "Back Bacon Brine",
+            description: "...",
+            note: "...",
+            quantity: 8.00,
+            unit: "liters",
+            status: "todo",
+            category: 5,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 13,
+            name: "Cure Pork Loins",
+            description: "...",
+            note: "...",
+            quantity: 5.50,
+            unit: "lbs",
+            status: "in-progress",
+            category: 5,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 14,
+            name: "Dry Pork Loins",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "lbs",
+            status: "todo",
+            category: 5,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 15,
+            name: "Smoke Pork Loins",
+            description: "...",
+            note: "...",
+            quantity: 4.75,
+            unit: "lbs",
+            status: "complete",
+            category: 6,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 16,
+            name: "Bacon Strips",
+            description: "...",
+            note: "...",
+            quantity: 12.00,
+            unit: "lbs",
+            status: "todo",
+            category: 6,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 17,
+            name: "Dice & Crisp Bacon",
+            description: "...",
+            note: "...",
+            quantity: 1.50,
+            unit: "lbs",
+            status: "in-progress",
+            category: 6,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 18,
+            name: "Marinate Chicken",
+            description: "...",
+            note: "...",
+            quantity: 3.00,
+            unit: "lbs",
+            status: "todo",
+            category: 6,
+            restaurant_id: 3,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 19,
+            name: "Smoke Chicken",
+            description: "...",
+            note: "...",
+            quantity: 4.00,
+            unit: "lbs",
+            status: "in-progress",
+            category: 6,
+            restaurant_id: 1,
+            date: new Date().toISOString().split("T")[0]
+        },
+        {
+            prep_list_id: 20,
+            name: "Drain Fresh Moz",
+            description: "...",
+            note: "...",
+            quantity: 2.00,
+            unit: "lbs",
+            status: "complete",
+            category: 6,
+            restaurant_id: 2,
+            date: new Date().toISOString().split("T")[0]
+        }
+    ];
+};
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
 }
@@ -1254,13 +1473,13 @@ function PlanPage() {
     _s();
     const [selectedCategory, setSelectedCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [prepItems, setPrepItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
-    const [dailyPrepItems, setDailyPrepItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [PrepListItems, setPrepListItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [errorMessage, setErrorMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [isBreakdown, setIsBreakdown] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     const [isVerified, setIsVerified] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDispatch"])();
     // Fetch categories
-    const { data: categories = [], isLoading, isError, refetch } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQuery"])({
+    const { data: categories = [], isError, refetch } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             "categories"
         ],
@@ -1277,15 +1496,16 @@ function PlanPage() {
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "PlanPage.useEffect": ()=>{
             // Fetch all prep items
-            setPrepItems((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$data$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["fetchPrepItemCards"])());
+            setPrepItems((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$data$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getDailyList"])());
             setIsVerified(false);
         }
     }["PlanPage.useEffect"], []);
     const handleCompleteClick = ()=>{
         if (isVerified) {
+            //postPrepList(PrepListItems);
             alert("List Created!");
         } else {
-            setErrorMessage("Please Verify the list before submitting.");
+            setErrorMessage("Please Verify the list in the breakdown before submitting.");
         }
     };
     const handleBreakdownClick = ()=>{
@@ -1297,15 +1517,15 @@ function PlanPage() {
     // Dynamic handler for item movement
     const handleCardClick = (item)=>{
         if (prepItems.some((prepItem)=>prepItem.prep_list_id === item.prep_list_id)) {
-            // Move item from prepItems to dailyPrepItems
+            // Move item from prepItems to PrepListItems
             setPrepItems((prev)=>prev.filter((prepItem)=>prepItem.prep_list_id !== item.prep_list_id));
-            setDailyPrepItems((prev)=>[
+            setPrepListItems((prev)=>[
                     ...prev,
                     item
                 ]);
-        } else if (dailyPrepItems.some((dailyItem)=>dailyItem.prep_list_id === item.prep_list_id)) {
-            // Move item from dailyPrepItems back to prepItems
-            setDailyPrepItems((prev)=>prev.filter((dailyItem)=>dailyItem.prep_list_id !== item.prep_list_id));
+        } else if (PrepListItems.some((dailyItem)=>dailyItem.prep_list_id === item.prep_list_id)) {
+            // Move item from PrepListItems back to prepItems
+            setPrepListItems((prev)=>prev.filter((dailyItem)=>dailyItem.prep_list_id !== item.prep_list_id));
             setPrepItems((prev)=>[
                     ...prev,
                     item
@@ -1323,22 +1543,12 @@ function PlanPage() {
         refetch();
         setSelectedCategory(null);
     };
-    // Handle loading and error states
-    if (isLoading) {
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-            children: "Loading plan..."
-        }, void 0, false, {
-            fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-            lineNumber: 118,
-            columnNumber: 12
-        }, this);
-    }
     if (isError) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
             children: "Error loading plan..."
         }, void 0, false, {
             fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-            lineNumber: 122,
+            lineNumber: 105,
             columnNumber: 12
         }, this);
     }
@@ -1358,7 +1568,7 @@ function PlanPage() {
                                 placeholder: "Select a category"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 133,
+                                lineNumber: 114,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1367,13 +1577,13 @@ function PlanPage() {
                                 children: "Reset"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 139,
+                                lineNumber: 120,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 131,
+                        lineNumber: 112,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$AllPrepList$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1382,13 +1592,13 @@ function PlanPage() {
                         onAddToDailyPrep: handleCardClick
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 148,
+                        lineNumber: 129,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                lineNumber: 130,
+                lineNumber: 111,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1406,7 +1616,7 @@ function PlanPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 158,
+                                lineNumber: 139,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1420,81 +1630,72 @@ function PlanPage() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 161,
+                                lineNumber: 142,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 157,
+                        lineNumber: 138,
                         columnNumber: 9
                     }, this),
+                    errorMessage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ErrorMessage$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        message: errorMessage
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/prep-dash/planner/page.tsx",
+                        lineNumber: 153,
+                        columnNumber: 26
+                    }, this),
                     isBreakdown ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$DailyPrep$2f$PrepListing$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        list: dailyPrepItems,
+                        list: PrepListItems,
                         handleCardClick: handleCardClick
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 174,
+                        lineNumber: 155,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PrepListBreakdown$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                list: dailyPrepItems,
-                                onClick: handleVerifyClick,
-                                categories: categories
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 178,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "mt-6 mb-2",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                    label: "Create List",
-                                    onClick: handleCompleteClick,
-                                    size: "large",
-                                    style: {
-                                        backgroundColor: "blue",
-                                        color: "white",
-                                        fontWeight: "bold"
-                                    }
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                    lineNumber: 184,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 183,
-                                columnNumber: 13
-                            }, this),
-                            errorMessage ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ErrorMessage$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                message: errorMessage
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 195,
-                                columnNumber: 29
-                            }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {}, void 0, false)
-                        ]
-                    }, void 0, true, {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PrepListBreakdown$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                            list: PrepListItems,
+                            onClick: handleVerifyClick,
+                            categories: categories
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/prep-dash/planner/page.tsx",
+                            lineNumber: 158,
+                            columnNumber: 13
+                        }, this)
+                    }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 177,
+                        lineNumber: 157,
                         columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        label: "Create Prep List",
+                        onClick: handleCompleteClick,
+                        size: "large",
+                        style: {
+                            backgroundColor: "green",
+                            color: "white",
+                            fontWeight: "bold"
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/prep-dash/planner/page.tsx",
+                        lineNumber: 165,
+                        columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                lineNumber: 156,
+                lineNumber: 137,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-        lineNumber: 128,
+        lineNumber: 109,
         columnNumber: 5
     }, this);
 }
-_s(PlanPage, "VkXLe9vVdye1Towm9pUF75cpygI=", false, function() {
+_s(PlanPage, "q5S5Y3GuRglwxSQjvwkjIQjcxMk=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDispatch"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useQuery"]
