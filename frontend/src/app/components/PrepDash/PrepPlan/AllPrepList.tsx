@@ -23,8 +23,8 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
   const filteredPrepList = prepList.filter((item) => {
     const matchesCategory = category ? item.category === category : true;
     const matchesSearchTerm =
-      item.name.toLowerCase().includes(prepSearchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(prepSearchTerm.toLowerCase());
+      (item.name && item.name.toLowerCase().includes(prepSearchTerm.toLowerCase())) ||
+      (item.description && item.description.toLowerCase().includes(prepSearchTerm.toLowerCase()));
 
     return matchesCategory && matchesSearchTerm;
   });
@@ -41,18 +41,17 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
   };
 
   return (
-    <div className="flex flex-wrap">
-      <div className="w-50">
-        {filteredPrepList.map((item) => (
-          <PotentialPrepItem
-            key={item.prep_list_id}
-            prepItem={{ ...item, quantity: quantities[item.prep_list_id] || item.quantity }}
-            onAdd={() => onAddToDailyPrep(item)}
-            onQuantityChange={handleQuantityChange}
-            step={step} // Pass the step value
-          />
-        ))}
-      </div>
+    <div>
+      {filteredPrepList.map((item) => (
+        <PotentialPrepItem
+          key={item.prep_list_id}
+          prepItem={item}
+          onAdd={onAddToDailyPrep}
+          step={step}
+          onQuantityChange={handleQuantityChange}
+          quantity={quantities[item.prep_list_id] || item.quantity}
+        />
+      ))}
     </div>
   );
 };

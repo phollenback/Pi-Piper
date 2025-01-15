@@ -35,8 +35,8 @@ const PrepListBreakdown: React.FC<PrepListBreakdownProps> = ({ list, categories,
   }, {} as { [key: number]: PrepListItem[] });
 
   const getCategoryDetails = (categoryId: number) => {
-    const category = categories.find((cat) => cat.id === categoryId);
-    return category ? { name: category.name, description: category.description } : { name: '', description: '' };
+    const category = categories.find((cat) => cat.category_id === categoryId);
+    return category ? { name: category.category_name, description: category.description } : { name: '', description: '' };
   };
 
   return (

@@ -15,6 +15,7 @@ const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {
 
   // Sync the local searchTerm with the Redux search term
   useEffect(() => {
+    console.log("PrepListing", list);
     setSearchTerm(prepSearchTerm);
     console.log(list);
   }, [prepSearchTerm, list]);
@@ -30,6 +31,7 @@ const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {
 
   return (
     <div>
+      
       {filteredList.length > 0 ? (
         filteredList.map((item) => (
           <PrepItemCard

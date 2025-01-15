@@ -1,69 +1,85 @@
 "use client";
 
-import AllPrepList from "../../components/PrepDash/PrepPlan/AllPrepList";
-import SelectBox from "@/app/components/Elements/ui/SelectBox";
-import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
-import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
-import PrepListing from "@/app/components/PrepDash/DailyPrep/PrepListing";
-import PrepListBreakdown from "../../components/PrepDash/PrepPlan/PrepListBreakdown";
-import { getDailyList } from "@/app/util/data";
-import Button from "@/app/components/Elements/Button";
-import ErrorMessage from "@/app/components/Elements/ErrorMessage";
-import NumberSelect from "@/app/components/Elements/ui/NumberSelect";
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import AllPrepList from '../../components/PrepDash/PrepPlan/AllPrepList';
+import SelectBox from '@/app/components/Elements/ui/SelectBox';
+import PrepListing from '@/app/components/PrepDash/DailyPrep/PrepListing';
+import PrepListBreakdown from '../../components/PrepDash/PrepPlan/PrepListBreakdown';
+import Button from '@/app/components/Elements/Button';
+import ErrorMessage from '@/app/components/Elements/ErrorMessage';
+import NumberSelect from '@/app/components/Elements/ui/NumberSelect';
+import { setPrepSearchTerm } from '@/redux/features/search/searchSlice';
 
 // TYPES ***************
-import PrepListItem from "@/app/types/models/PrepListItem";
-import Category from "@/app/types/models/Category";
+import PrepListItem from '@/app/types/models/PrepListItem';
+import Category from '@/app/types/models/Category';
+import { setDailyPrepItems } from '@/redux/features/preplist/dailyPrepListSlice';
 
 // Helper function to get tomorrow's date
 const getTomorrowDate = () => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  return tomorrow.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
+};
+
+const fetchDailyList = async () => {
+  const response = await axios.get<PrepListItem[]>('http://localhost:3000/prepitems/1');
+  console.log(response.data);
+  return response.data;
 };
 
 export default function PlanPage() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [prepItems, setPrepItems] = useState<PrepListItem[]>([]);
+  const [errorMessage, setErrorMessage] = useState('');
   const [PrepListItems, setPrepListItems] = useState<PrepListItem[]>([]);
-  const [errorMessage, setErrorMessage] = useState("");
   const [isBreakdown, setIsBreakdown] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
   const [step, setStep] = useState(0.5);
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
-  const [verifierName, setVerifierName] = useState("");
+  const [verifierName, setVerifierName] = useState('');
 
   const dispatch = useDispatch();
 
+  const { data: dailyPrepList = [], isError } = useQuery<PrepListItem[]>({
+    queryKey: ['dailyPrep'],
+    queryFn: fetchDailyList,
+  });
+
   // Fetch categories
-  const { data: categories = [], isError, refetch } = useQuery({
-    queryKey: ["categories"],
+  const { data: categories = [], refetch: refetchCategories } = useQuery({
+    queryKey: ['categories'],
     queryFn: async () => {
-      const response = await fetch("http://localhost:3000/categories");
+      const response = await fetch('http://localhost:3000/categories');
       if (!response.ok) {
-        throw new Error("Failed to fetch categories");
+        throw new Error('Failed to fetch categories');
       }
       return response.json();
     },
   });
 
   useEffect(() => {
-    // Fetch all prep items
-    setPrepItems(getDailyList());
-    setIsVerified(false);
-  }, []);
+    const fetchData = async () => {
+      // Fetch all prep items
+      setPrepItems(await fetchDailyList());
+      setDailyPrepItems(dailyPrepList);
+      setIsVerified(false);
+    };
+    fetchData();
+  }, [dailyPrepList]);
 
   const handleCompleteClick = () => {
     if (isVerified && verifierName) {
       //postPrepList(PrepListItems);
-      alert("List Created!");
+      alert('List Created!');
     } else {
       setErrorMessage("Please enter the verifier's name and verify the list before submitting.");
     }
@@ -73,15 +89,11 @@ export default function PlanPage() {
     setIsBreakdown((prev) => !prev); // Toggle the `isBreakdown` state
   };
 
-  const handleVerifyClick = () => {
-    setIsVerified(!isVerified);
-  };
-
   const handleQuantityChange = (id: number, quantity: number) => {
     setQuantities((prev) => ({ ...prev, [id]: quantity }));
   };
 
-  // D ynamic handler for item movement
+  // Dynamic handler for item movement
   const handleCardClick = (item: PrepListItem) => {
     const updatedItem = { ...item, quantity: quantities[item.prep_list_id] || item.quantity };
 
@@ -100,14 +112,14 @@ export default function PlanPage() {
 
   // Prepare category options for SelectBox
   const categoryOptions = categories.map((category: Category) => ({
-    label: category.name,
-    value: category.id,
+    label: category.category_name,
+    value: category.category_id,
   }));
 
   // Handle reset action
   const handleReset = () => {
-    dispatch(setPrepSearchTerm(""));
-    refetch();
+    dispatch(setPrepSearchTerm(''));
+    refetchCategories();
     setSelectedCategory(null);
   };
 
@@ -122,7 +134,7 @@ export default function PlanPage() {
         <div className="flex items-center space-x-4 mb-4">
           {/* SelectBox */}
           <SelectBox
-            value={selectedCategory || ""}
+            value={selectedCategory || ''}
             onChange={(value) => setSelectedCategory(value ? Number(value) : null)}
             options={categoryOptions}
             placeholder="Select a category"
@@ -162,13 +174,13 @@ export default function PlanPage() {
             Daily Prep Items for Tomorrow ({getTomorrowDate()})
           </h2>
           <Button
-            label={isBreakdown ? "Hide Breakdown" : "View Breakdown"}
+            label={isBreakdown ? 'Hide Breakdown' : 'View Breakdown'}
             onClick={handleBreakdownClick}
             size="medium"
             style={{
-              backgroundColor: "yellow",
-              color: "black",
-              fontWeight: "bold",
+              backgroundColor: 'yellow',
+              color: 'black',
+              fontWeight: 'bold',
             }}
           />
         </div>
@@ -179,7 +191,7 @@ export default function PlanPage() {
           <div>
             <PrepListBreakdown
               list={PrepListItems}
-              onClick={handleVerifyClick}
+              onClick={handleCompleteClick}
               setVerifier={setVerifierName}
               setVerified={setIsVerified}
               categories={categories}
@@ -191,9 +203,9 @@ export default function PlanPage() {
           onClick={handleCompleteClick}
           size="large"
           style={{
-            backgroundColor: "green",
-            color: "white",
-            fontWeight: "bold",
+            backgroundColor: 'green',
+            color: 'white',
+            fontWeight: 'bold',
           }}
         />
       </div>

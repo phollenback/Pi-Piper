@@ -6,7 +6,7 @@ export const prepQueries = {
     `,
 
     getDailyPrepItems: `
-    SELECT pl.list_item_id as id, pi.prep_item_name as name, pi.description, pi.item_category, pl.quantity, pl.unit, pl.status
+    SELECT pl.list_item_id as id, pi.prep_item_name as name, pi.description, pi.item_category as category, pl.quantity, pl.unit, pl.status
     FROM fact_daily_prep_list pl
     JOIN dim_prep_item pi
     ON pl.prep_item_id = pi.prep_item_id

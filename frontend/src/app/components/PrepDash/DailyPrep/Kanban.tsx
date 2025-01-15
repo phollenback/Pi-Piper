@@ -3,15 +3,14 @@ import { useEffect, useState } from 'react';
 import PrepListing from './PrepListing';
 import PrepListItem from '../../../types/models/PrepListItem';
 
-
 interface KanbanProps {
     prepItems: PrepListItem[];
     category: number | null | undefined;
 }
 
 const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
-    const [todoItems, setTodoItems] = useState<PrepListItem[]>(prepItems); 
-    const [completeItems, setCompleteItems] = useState<PrepListItem[]>(prepItems.filter(item => item.status === 'complete'));
+    const [todoItems, setTodoItems] = useState<PrepListItem[]>([]);
+    const [completeItems, setCompleteItems] = useState<PrepListItem[]>([]);
 
     const splitItems = (items: PrepListItem[], category: number | null | undefined) => {
         const todos: PrepListItem[] = [];
@@ -26,13 +25,15 @@ const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
                 }
             }
         });
+        console.log("todos", todos);
+        console.log("completes", completed);
 
         setTodoItems(todos);
         setCompleteItems(completed);
     };
 
     const handleCardClick = (prepItem: PrepListItem) => {
-        const updatedItem = { ...prepItem, status: prepItem.status === 'complete' ? 'todo' : 'complete' };
+        const updatedItem: PrepListItem = { ...prepItem, status: prepItem.status === 'complete' ? 'todo' : 'complete' };
         
         // Update the item status in the prepItems array
         const updatedItems = prepItems.map(item =>
@@ -44,6 +45,8 @@ const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
     }
 
     useEffect(() => {
+        console.log('prepItems:', prepItems); // Log the prepItems being passed in
+
         splitItems(prepItems, category); 
     }, [prepItems, category]);
 

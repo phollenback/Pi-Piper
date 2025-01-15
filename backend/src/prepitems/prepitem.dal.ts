@@ -74,7 +74,7 @@ export const createDailyPrepItems = async (restaurantId: number, items: PrepList
 
             // Insert into fact_daily_prep_list
             const result = await execute(prepQueries.createDailyPrepItems, [
-                item.prep_list_id,
+                item.id,
                 restaurantId,
                 prepItemId, // Ensure this is passed correctly
                 item.quantity,

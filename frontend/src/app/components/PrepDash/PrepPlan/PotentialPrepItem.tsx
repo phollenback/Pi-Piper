@@ -5,15 +5,20 @@ import PrepListItem from "@/app/types/models/PrepListItem";
 
 interface PotentialPrepItemProps {
   prepItem: PrepListItem;
-  onAdd: () => void;
+  onAdd: (item: PrepListItem) => void;
   onQuantityChange: (id: number, quantity: number) => void;
   step: number; // Add step prop
+  quantity: number
 }
 
 const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd, onQuantityChange, step }) => {
   const handleQuantityChange = (quantity: number) => {
     onQuantityChange(prepItem.prep_list_id, quantity);
   };
+
+  const onItemClick = () => {
+      onAdd(prepItem);
+  }
 
   return (
     <div className="w-full p-4 border rounded-md bg-white shadow-sm flex items-center justify-between mb-2">
@@ -35,7 +40,7 @@ const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd, 
         </div>
         <Button
           label="ADD"
-          onClick={onAdd}
+          onClick={onItemClick}
           size="large"
           style={{
             backgroundColor: "green",

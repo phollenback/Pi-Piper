@@ -8,7 +8,7 @@ export type PrepItem = {
 }
 
 export default interface PrepListItem {
-    prep_list_id: number;
+    id: number;
     name: string;
     description: string;
     note: string;

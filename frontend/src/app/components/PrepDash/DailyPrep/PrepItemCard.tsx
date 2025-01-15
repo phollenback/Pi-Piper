@@ -20,24 +20,21 @@ const PrepItemCard: React.FC<PrepItemCardProps> = ({ item, onButtonClick }) => {
 
   return (
     <div className={`max-w-full w-full lg:max-w-full flex border-l-4 p-4 mb-4 py-4 rounded shadow ${statusColor}`}>
-      {/* Name */}
-      <div className="flex-2 px-2 my-1 border-r border-black">
-        <p className="font-semibold text-lg text-left">{item.name}</p>
-        <p className="text-xs font-bold uppercase text-left">Status: {item.status}</p>
+      {/* Name and Quantity */}
+      <div className="flex-2 flex flex-col justify-center items-center px-2 my-1 border-r border-black pr-4">
+        <p className="font-semibold text-lg text-center">{item.name}</p>
+        <div className="flex flex-col justify-center items-center mt-2">
+          <p className="text-6xl font-bold text-center">{item.quantity}</p>
+          <p className="text-lg">{item.unit}</p>
+        </div>
+        <p className="text-xs font-bold uppercase text-center mt-2">Status: {item.status}</p>
       </div>
 
-      {/* Quantity */}
-      <div className="flex-1 px-4 my-2 border-r border-black">
-        <p className="text-sm font-medium font-bold text-left">
-          Quantity: {item.quantity} {item.unit}
-        </p>
-      </div>
-
-      {/* Description */}
-      <div className="flex-2 px-4 border-r border-black">
+      {/* Description and Daily Note */}
+      <div className="flex-2 flex flex-col px-4 border-r border-black pr-4">
         <h1 className='text-md font-bold text-black'><i>Description</i>:</h1>
         {item.description ? <p className='text-sm text-gray-700'>{item.description}</p> : <p className='text-sm text-gray-700'>No description available</p>}
-        <hr className='my-4 border-black'/>
+        <hr className='border-black my-2'/>
         <h1 className='text-md font-bold text-black'><i>Daily:</i></h1>
         <textarea
           className="w-full p-2 border rounded-md text-sm text-gray-700"
@@ -49,7 +46,8 @@ const PrepItemCard: React.FC<PrepItemCardProps> = ({ item, onButtonClick }) => {
       </div>
 
       {/* Button */}
-      <div className="flex-2 my-6 px-4">
+      <div className="flex-1 flex flex-col justify-center items-center px-4">
+
         <Button
           label={item.status === 'complete' ? 'Cancel' : 'Complete'}
           onClick={onButtonClick}

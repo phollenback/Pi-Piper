@@ -1,43 +1,31 @@
 "use client"
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ButtonGroup from "../components/Elements/ButtonGroup";
 import Button from "../components/Elements/Button";
 import Kanban from "../components/PrepDash/DailyPrep/Kanban";
-import { getDailyList } from '../util/data';
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 
 
 // TYPES ***************
 import Category from "../types/models/Category";
-import PrepListItem from "../util/data";
-
+import PrepListItem from "../types/models/PrepListItem";
 
 // Fetch function for categories
 const fetchCategories = async (): Promise<Category[]> => {
     const response = await axios.get<Category[]>("http://localhost:3000/categories");
+    console.log(response.data);
     return response.data;
 };
 
-// Adjust fetch function to ensure it always returns an array
-// const fetchDailyPrepItems = (): DailyPrepItem[] => {
-//     const items = fetchPrepItemCards();
-//     if (items) {
-//         return items;
-//     } else {
-//         return []; // Ensure it always returns an array
-//     }
-// };
 
 export default function PrepContainer() {
     const dispatch = useDispatch();
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
-
-    const { data: prepItems = [], isLoading: isPrepLoading, isError: isPrepError } = useQuery<PrepListItem[]>({
-        queryKey: ["prepItems"],
-        queryFn: getDailyList,
-    });
+    const [prepItems, setPrepItems] = useState<PrepListItem[]>([]);
+   
     const { data: categories = []} = useQuery<Category[]>({
         queryKey: ["categories"],
         queryFn: fetchCategories,
@@ -73,6 +61,20 @@ export default function PrepContainer() {
         dispatch(setPrepSearchTerm("")); // Clear the search term
     };
 
+    useEffect(() => {
+        const fetchPrepItems = async () => {
+            try {
+                const response = await axios.get<PrepListItem[]>("http://localhost:3000/prepitems/daily/1");
+                setPrepItems(response.data);
+                console.log("Prep Items", response.data)
+            } catch (error) {
+                console.error("Error fetching prep items:", error);
+            }
+        };
+
+        fetchPrepItems();
+    }, []);
+
     return (
         <div className="pt-4">
             {/* Button Group and Reset Button */}
@@ -83,7 +85,7 @@ export default function PrepContainer() {
                         buttonWidth="200px" // Set button width
                         buttonHeight="80px" // Set button height
                         onButtonClick={handleButtonClick} // Handle button clicks
-                        selectedButton={selectedCategory?.name} // Pass the selected category
+                        selectedButton={selectedCategory?.category_name} // Pass the selected category
                         getButtonColor={getButtonColor} // Pass color function
                     />
                 </div>
@@ -102,21 +104,12 @@ export default function PrepContainer() {
             </div>
 
             {/* Kanban Section */}
-            {isPrepLoading ? <p>Prep Lists Loading...</p> 
-            : isPrepError ? <p>Prep List Error...</p> 
-            :
             <div className="mt-4">
                 <Kanban
-                    prepItems={prepItems.map(item => ({
-                        ...item,
-                        note: "", // Add default or fetched note
-                        restaurant_id: 0, // Add default or fetched restaurant_id
-                        date: new Date().toISOString() // Add default or fetched date
-                    }))} // Pass updated prep items
-                    category={selectedCategory?.id} // Filter by selected category
+                    prepItems={prepItems} // Pass prep items directly
+                    category={selectedCategory?.category_id} // Filter by selected category
                 />
             </div>
-            }
         </div>
     );
 }

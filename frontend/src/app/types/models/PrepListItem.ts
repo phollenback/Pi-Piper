@@ -5,7 +5,7 @@ export default interface PrepListItem {
     note: string;
     quantity: number;
     unit: string;
-    status: string;
+    status: "complete" | "todo" | "in-progress"; 
     category: number;
     restaurant_id: number;
     date: string;

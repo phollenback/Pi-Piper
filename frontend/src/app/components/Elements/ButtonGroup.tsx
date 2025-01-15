@@ -1,17 +1,14 @@
 import React from 'react';
 import Button from '../Elements/Button';
+import Category from '@/app/types/models/Category';
 
-interface Item {
-  id: number;
-  name: string;
-  description: string;
-}
+
 
 interface ButtonGroupProps {
-  items: Item[]; // Array of items with full category data
+  items: Category[]; // Array of items with full category data
   buttonWidth: string; // Button width (CSS size e.g., '200px')
   buttonHeight: string; // Button height (CSS size e.g., '60px')
-  onButtonClick: (item: Item) => void; // Click handler for buttons, passing the entire item
+  onButtonClick: (item: Category) => void; // Click handler for buttons, passing the entire item
   selectedButton?: string | null | undefined; // Optionally pass the selected button's value
   getButtonColor: (name: string) => string; // Adjusted to accept 'name' only
 }
@@ -36,7 +33,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
     >
       {items.map((item) => (
         <div
-          key={item.id}
+          key={item.category_id}
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -44,16 +41,16 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
           }}
         >
           <Button
-            label={item.name}
+            label={item.category_name}
             onClick={() => onButtonClick(item)} // Pass the entire item to the onButtonClick handler
             size="medium" // You can modify the size logic here
             style={{
               width: buttonWidth, // Adjust width
               height: buttonHeight, // Adjust height
               backgroundColor:
-                selectedButton === item.name
+                selectedButton === item.category_name
                   ? '#4CAF50' // Highlight selected button with green
-                  : getButtonColor(item.name), // Pass only name to getButtonColor
+                  : getButtonColor(item.category_name), // Pass only name to getButtonColor
               cursor: 'pointer',
             }}
           />
