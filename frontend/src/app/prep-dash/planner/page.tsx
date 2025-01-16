@@ -32,7 +32,6 @@ const getTomorrowDate = () => {
 
 const fetchDailyList = async () => {
   const response = await axios.get<PrepListItem[]>('http://localhost:3000/prepitems/1');
-  console.log(response.data);
   return response.data;
 };
 

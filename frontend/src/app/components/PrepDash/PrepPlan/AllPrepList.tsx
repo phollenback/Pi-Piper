@@ -41,10 +41,10 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
   };
 
   return (
-    <div>
-      {filteredPrepList.map((item) => (
+    <>
+      {filteredPrepList.map((item, index) => (
         <PotentialPrepItem
-          key={item.prep_list_id}
+          key={index}
           prepItem={item}
           onAdd={onAddToDailyPrep}
           step={step}
@@ -52,7 +52,7 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
           quantity={quantities[item.prep_list_id] || item.quantity}
         />
       ))}
-    </div>
+    </>
   );
 };
 

@@ -7,18 +7,11 @@ import Button from "../components/Elements/Button";
 import Kanban from "../components/PrepDash/DailyPrep/Kanban";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
-
+import { fetchCategories } from "../util/actions";
 
 // TYPES ***************
 import Category from "../types/models/Category";
 import PrepListItem from "../types/models/PrepListItem";
-
-// Fetch function for categories
-const fetchCategories = async (): Promise<Category[]> => {
-    const response = await axios.get<Category[]>("http://localhost:3000/categories");
-    console.log(response.data);
-    return response.data;
-};
 
 
 export default function PrepContainer() {

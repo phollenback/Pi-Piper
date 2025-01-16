@@ -5,7 +5,7 @@ const PrepDashLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <ManagerNav />
-      <main className="pt-16">{children}</main>  {/* Add padding for nav */}
+      <main className="">{children}</main>  {/* Add padding for nav */}
     </>
   );
 };

@@ -68,7 +68,7 @@ const PrepDashNav: React.FC = () => {
           </ul>
         )}
       </div>
-
+ 
       {/* Search Bar in the Center */}
       <div className="flex-grow flex justify-center px-4">
         <SearchInput
@@ -82,7 +82,7 @@ const PrepDashNav: React.FC = () => {
       <div>
         <Button
           label="Manager Login"
-          onClick={() => handleNavigation("/login")}
+          onClick={() => handleNavigation("/manager-dash")}
           size="large"
           style={{
             backgroundColor: "white",

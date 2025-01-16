@@ -35,16 +35,16 @@ const NumberSelect: React.FC<NumberSelectProps> = ({
     <div className="flex flex-col w-full">
       {label && <label className="mb-2 text-sm font-medium text-gray-600">{label}</label>}
       <div className="flex items-center">
-        <input
-          type="number"
-          value={qty}
-          onChange={handleChange}
-          min={0}
-          max={max}
-          step={step}
-          className="w-full px-4 py-2 border-t border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
-          placeholder={label}
-        />
+          <input
+            type="number"
+            value={qty ?? 0} // Default to 0
+            onChange={handleChange}
+            min={min}
+            max={max}
+            step={step}
+            className="w-full px-4 py-2 border-t border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+            placeholder={label}
+          />
       </div>
     </div>
   );

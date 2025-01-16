@@ -34,7 +34,7 @@ export const createPrepItem = async (restaurantId: number, items: PrepItem[]) =>
             execute<PrepItem[]>(prepQueries.createDailyPrepItems, [
                 item.prep_item_name,
                 item.description,
-                item.item_category,
+                item.category,
                 item.kitchen_department_id,
                 restaurantId
             ])
@@ -101,7 +101,7 @@ export const updatePrepItem = async (prepItemId: number, itemData: PrepItem) => 
         const prepItems = await execute<PrepItem[]>(prepQueries.updatePrepItem, [
             itemData.prep_item_name,
             itemData.description,
-            itemData.item_category,
+            itemData.category,
             itemData.kitchen_department_id,
             itemData.restaurant_id,
             prepItemId

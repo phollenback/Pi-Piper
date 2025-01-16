@@ -7,13 +7,7 @@ import RecipeListing from "@/app/components/PrepDash/Recipebook/RecipeListing"; 
 import { fetchRecipes } from "@/app/util/data";
 import { useDispatch } from "react-redux";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
-
-interface Category {
-  id: number;
-  name: string;
-  description: string;
-  type: string;
-}
+import Category from "@/app/types/models/Category";
 
 interface Recipe {
   id: number;
@@ -59,8 +53,8 @@ export default function RecipeBookContainer() {
 
   // Extract category names and IDs to pass to the SelectBox options
   const categoryOptions = categories.map((category: Category) => ({
-    label: category.name,
-    value: category.id,
+    label: category.category_name,
+    value: category.category_id,
   }));
 
   const handleReset = () => {

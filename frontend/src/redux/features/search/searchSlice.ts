@@ -23,6 +23,7 @@ export const searchSlice = createSlice({
             state.prepSearchTerm = action.payload;
         },
         setManagerSearchTerm: (state, action: PayloadAction<string>) => {
+            console.log(state.managerSearchTerm);
             state.managerSearchTerm = action.payload;
         },
         clearPrepSearchTerm: (state) => {

@@ -1,6 +1,11 @@
 {
-  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/manager-dash/prep-manager/page": "app/manager-dash/prep-manager/page.js",
+  "/manager-dash/page": "app/manager-dash/page.js",
+  "/prep-dash/page": "app/prep-dash/page.js",
   "/prep-dash/recipebook/page": "app/prep-dash/recipebook/page.js",
-  "/prep-dash/page": "app/prep-dash/page.js"
+  "/prep-dash/planner/page": "app/prep-dash/planner/page.js"
 }
