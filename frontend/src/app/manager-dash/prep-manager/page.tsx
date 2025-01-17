@@ -7,6 +7,7 @@ import ManagementTable from "@/app/components/ManagerDash/PrepManager/ManagmentT
 import PrepItem from "@/app/types/models/PrepItem";
 import Category from "@/app/types/models/Category";
 import Ingredient from "@/app/types/models/Ingredient";
+import CreateItem from "@/app/components/ManagerDash/PrepManager/CreateItem";
 
 const fetchPrepItems = () => {
     return fetchAllPrepItems(1); // Assuming 1 is the restaurantId
@@ -47,10 +48,34 @@ export default function PrepManagerContainer() {
         setSelectedCategory(cat);
     };
 
+    const handleCreateSubmit = (item: PrepItem | Ingredient) => {
+        console.log(item);
+    }
+
     return (
         <>
-            <Heading setSection={handleSectionSelect} setSelectedCategory={handleCategorySelect} categories={categories} selectedCategory={selectedCategory} />
-            <ManagementTable activeList={selectedSection == 0 ? prepItems : ingredients} category={selectedCategory} activeSection={selectedSection}/>
+            {/* Flex container for Heading and CreateItem */}
+            <div className="flex">
+                {/* Heading / filtering (left side) */}
+                <Heading 
+                    setSection={handleSectionSelect} 
+                    setSelectedCategory={handleCategorySelect} 
+                    categories={categories} 
+                    selectedCategory={selectedCategory} 
+                />
+
+                {/* Create new item (right side) */}
+                <div className=""> {/* Added some margin to the left for spacing */}
+                    <CreateItem setItem={handleCreateSubmit} categories={categories}/>
+                </div>
+            </div>
+
+            {/* Management Table */}
+            <ManagementTable 
+                activeList={selectedSection === 0 ? prepItems : ingredients} 
+                category={selectedCategory} 
+                activeSection={selectedSection}
+            />
         </>
     );
 }
