@@ -3,5 +3,6 @@ export default interface Ingredient {
     ingredient_name: string;
     unit_of_measure: string;
     cost_per_unit: number;
-    category: number;
+    ingredient_category: number;
+    restaurant_id: number;
 }

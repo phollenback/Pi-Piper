@@ -1,14 +1,19 @@
 "use client"
 import { useState } from "react";
 import Heading from "@/app/components/ManagerDash/PrepManager/Heading";
-import { fetchAllPrepItems, fetchCategories } from "@/app/util/actions";
+import { fetchAllIngredients, fetchAllPrepItems, fetchCategories } from "@/app/util/actions";
 import { useQuery } from "@tanstack/react-query";
 import ManagementTable from "@/app/components/ManagerDash/PrepManager/ManagmentTable";
 import PrepItem from "@/app/types/models/PrepItem";
 import Category from "@/app/types/models/Category";
+import Ingredient from "@/app/types/models/Ingredient";
 
 const fetchPrepItems = () => {
     return fetchAllPrepItems(1); // Assuming 1 is the restaurantId
+};
+
+const fetchIngredients = () => {
+    return fetchAllIngredients(1); 
 };
 
 const fetchAllCategories = () => {
@@ -17,10 +22,15 @@ const fetchAllCategories = () => {
 
 export default function PrepManagerContainer() {
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-    const [, setSelectedSection] = useState(0);
+    const [selectedSection, setSelectedSection] = useState(0);
     const { data: prepItems = []} = useQuery<PrepItem[]>({
         queryKey: ["prepItems"],
         queryFn: fetchPrepItems,
+    });
+    
+    const { data: ingredients = []} = useQuery<Ingredient[]>({
+        queryKey: ["ingredients"],
+        queryFn: fetchIngredients,
     });
 
     const { data: categories = []} = useQuery<Category[]>({
@@ -40,7 +50,7 @@ export default function PrepManagerContainer() {
     return (
         <>
             <Heading setSection={handleSectionSelect} setSelectedCategory={handleCategorySelect} categories={categories} selectedCategory={selectedCategory} />
-            <ManagementTable list={prepItems} category={selectedCategory} />
+            <ManagementTable activeList={selectedSection == 0 ? prepItems : ingredients} category={selectedCategory} activeSection={selectedSection}/>
         </>
     );
 }

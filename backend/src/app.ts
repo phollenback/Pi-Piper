@@ -11,6 +11,7 @@ import prepItemRouter from './prepitems/prepitems.routes';
 import managerRoutes from './managers/managers.routes';
 import ingredientRoutes from './ingredients/ingredient.routes';
 import categoryRoutes from './categories/category.routes';
+import departmentRoutes from './departments/department.routes'
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use('/prepitems', prepItemRouter);
 app.use('/managers', managerRoutes);
 app.use('/ingredients', ingredientRoutes);
 app.use('/categories', categoryRoutes);
+app.use('/departments', departmentRoutes);
 
 // Error Logging Middleware
 app.use(errorLogger); // Use error logger middleware
