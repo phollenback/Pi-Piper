@@ -18,6 +18,25 @@ const getDepartments = () => {
   return dep;
 }
 
+const createPrepItem = async (formData: PrepItem) => {
+  const response = await fetch('/api/prepitem', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        restaurantId: 1, // Pass restaurant ID dynamically
+        ...formData,
+    }),
+});
+
+if (!response.ok) {
+    throw new Error('Failed to create prep item.');
+}
+
+return response.json();
+}
+
 const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateItemProps) => {
   // Use a single state object to manage the PrepItem attributes
   const [formData, setFormData] = useState<PrepItem>({
@@ -66,9 +85,16 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
   };
 
   // Handle form submission
-  const handleSubmitClick = () => {
+  const handleSubmitClick = async () => {
     setItem(formData); // Pass the new PrepItem to the parent component
     console.log(formData); // For debugging
+
+    const res = await createPrepItem(formData);
+
+    if("insertId" in res) {
+      alert("New Prep Item Successfully created!")
+      console.log(res.insertId);
+    }
   };
 
   // Update categories when they are passed as props
@@ -78,9 +104,8 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
   }, [categories]);
 
   return (
-    <>
-      <div className="w-full">
-        <h1 className="text-center text-3xl font-bold mb-2">
+      <div className="w-full mr-12">
+        <h1 className="text-center text-3xl font-bold">
           <i>Create Prep Item</i>
         </h1>
         <div className="flex w-full gap-16">
@@ -124,7 +149,7 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
         </div>
 
         {/* Submit button */}
-        <div className="ml-10 my-5">
+        <div className="ml-10 mt-5">
           <Button
             label={"Submit"}
             onClick={handleSubmitClick}
@@ -137,7 +162,6 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
           />
         </div>
       </div>
-    </>
   );
 };
 

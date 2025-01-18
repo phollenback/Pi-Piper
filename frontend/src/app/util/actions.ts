@@ -17,7 +17,6 @@ export const fetchCategories = async (): Promise<Category[]> => {
             throw new Error(`Error fetching categories: ${response.statusText}`);
         }
         const data: Category[] = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -38,7 +37,6 @@ export const fetchAllIngredients = async (restaurantId: number): Promise<Ingredi
             throw new Error(`Error fetching categories: ${response.statusText}`);
         }
         const data: Ingredient[] = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error("Failed to fetch ingredients:", error);
@@ -60,7 +58,6 @@ export const fetchAllPrepItems = async (restaurantId: number): Promise<PrepItem[
             throw new Error(`Error fetching categories: ${response.statusText}`);
         }
         const data: PrepItem[] = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error("Failed to fetch ingredients:", error);
@@ -82,7 +79,6 @@ export const fetchDepartments = async (restaurantId: number): Promise<Department
             throw new Error(`Error fetching departments: ${response.statusText}`);
         }
         const data: Department[] = await response.json();
-        console.log(data);
         return data;
     } catch (error) {
         console.error("Failed to fetch departments:", error);
@@ -90,3 +86,26 @@ export const fetchDepartments = async (restaurantId: number): Promise<Department
     }
 };
 
+
+export const postPrepItem = async (restaurantId: number, formData: PrepItem): Promise<Department[]> => {
+    try {
+        console.log("fetching prep items");
+        const response = await fetch(`http://localhost:3000/prepitems/${restaurantId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error Posting PrepItem: ${response.statusText}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error("Failed to post Prep Item:", error);
+        throw error;
+    }
+};

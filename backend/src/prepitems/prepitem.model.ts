@@ -76,10 +76,10 @@ export const PrepItemSchema : typeof Schema = {
         notEmpty: false, 
         errorMessage: 'Description field cannot be empty.'
     },
-    item_category: {
+    category: {
         notEmpty: true,
         isInt: true,
-        errorMessage: 'Item Category field cannot be empty.'
+        errorMessage: 'Category field cannot be empty.'
     },
     kitchen_department_id: {
         notEmpty: true, 

@@ -15,7 +15,6 @@ const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {
 
   // Sync the local searchTerm with the Redux search term
   useEffect(() => {
-    console.log("PrepListing", list);
     setSearchTerm(prepSearchTerm);
     console.log(list);
   }, [prepSearchTerm, list]);
@@ -24,8 +23,8 @@ const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {
   const filteredList = list.filter((item) => {
     const lowercasedTerm = searchTerm.toLowerCase();
     return (
-      item.name.toLowerCase().includes(lowercasedTerm) ||
-      item.description.toLowerCase().includes(lowercasedTerm)
+      item.name?.toLowerCase().includes(lowercasedTerm) ||
+      item.description?.toLowerCase().includes(lowercasedTerm)
     );
   });
 
@@ -33,9 +32,9 @@ const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {
     <div>
       
       {filteredList.length > 0 ? (
-        filteredList.map((item) => (
+        filteredList.map((item, index) => (
           <PrepItemCard
-            key={item.prep_list_id}
+            key={index}
             item={item}
             onButtonClick={() => handleCardClick(item)} // Pass the item directly
           />

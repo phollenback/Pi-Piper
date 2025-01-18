@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useState } from "react";
 import Heading from "@/app/components/ManagerDash/PrepManager/Heading";
 import { fetchAllIngredients, fetchAllPrepItems, fetchCategories } from "@/app/util/actions";
@@ -54,28 +54,37 @@ export default function PrepManagerContainer() {
 
     return (
         <>
-            {/* Flex container for Heading and CreateItem */}
-            <div className="flex">
-                {/* Heading / filtering (left side) */}
-                <Heading 
-                    setSection={handleSectionSelect} 
-                    setSelectedCategory={handleCategorySelect} 
-                    categories={categories} 
-                    selectedCategory={selectedCategory} 
-                />
-
-                {/* Create new item (right side) */}
-                <div className=""> {/* Added some margin to the left for spacing */}
+            {/* Flex container for the three columns */}
+            <div className="flex justify-center items-center gap-16">
+                {/* Republic Pi Memory header (1st column) */}
+                <div className="w-[25%] text-center h-full flex items-center justify-center">
+                    <h1 className="font-bold text-6xl text-black">Republic Pi Memory</h1>
+                </div>
+    
+                {/* Heading / filtering (2nd column) */}
+                <div className="w-[50%] flex items-right justify-right pl-12 border-l-8 border-r-8 border-black">
+                    <Heading 
+                        setSection={handleSectionSelect} 
+                        setSelectedCategory={handleCategorySelect} 
+                        categories={categories} 
+                        selectedCategory={selectedCategory} 
+                    />
+                </div>
+    
+                {/* Create new item (3rd column) */}
+                <div className="w-[25%]">
                     <CreateItem setItem={handleCreateSubmit} categories={categories}/>
                 </div>
             </div>
-
+    
             {/* Management Table */}
-            <ManagementTable 
-                activeList={selectedSection === 0 ? prepItems : ingredients} 
-                category={selectedCategory} 
-                activeSection={selectedSection}
-            />
+            <div className="">
+                <ManagementTable 
+                    activeList={selectedSection === 0 ? prepItems : ingredients} 
+                    category={selectedCategory} 
+                    activeSection={selectedSection}
+                />
+            </div>
         </>
     );
 }

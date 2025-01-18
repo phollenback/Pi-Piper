@@ -56,7 +56,7 @@ export const createPrepItem = async (req: Request, res: Response) => {
     } catch (error) {
         logger.error('[prepitem.controller][createPrepItem][ERROR]', { error });
         res.status(500).json({
-            message: 'There was an error when creating the prep item'
+            message: 'There was an error when creating the prep item i am here'
         });
     }
 };

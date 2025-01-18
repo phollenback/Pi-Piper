@@ -1,3 +1,5 @@
 {
-  "/manager-dash/prep-manager/page": "app/manager-dash/prep-manager/page.js"
+  "/manager-dash/prep-manager/page": "app/manager-dash/prep-manager/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/prep-dash/planner/page": "app/prep-dash/planner/page.js"
 }

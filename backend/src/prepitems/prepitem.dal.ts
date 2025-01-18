@@ -27,21 +27,18 @@ export const getDailyPrepItems = async (restaurantId: number) => {
     }
 };
 
-export const createPrepItem = async (restaurantId: number, items: PrepItem[]) => {
-    logger.info('[prepitem.dao][createPrepItems][START]', { restaurantId, items });
+export const createPrepItem = async (restaurantId: number, item: PrepItem) => {
+    logger.info('[prepitem.dao][createPrepItems][START]', { restaurantId, item });
     try {
-        const promises = items.map((item) =>
-            execute<PrepItem[]>(prepQueries.createDailyPrepItems, [
+        const results = execute<PrepItem[]>(prepQueries.createPrepItem, [
                 item.prep_item_name,
                 item.description,
                 item.category,
                 item.kitchen_department_id,
                 restaurantId
-            ])
-        );
-        const results = await Promise.all(promises); // Executes all insertions concurrently
+            ]);
         logger.info('[prepitem.dao][createPrepItems][SUCCESS]', { results });
-        return results.flat(); // Flatten results into a single array
+        return results; 
     } catch (error) {
         logger.error('[prepitem.dao][createPrepItems][ERROR]', { error });
         throw error;
