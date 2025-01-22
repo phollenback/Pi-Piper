@@ -14,14 +14,14 @@ interface PrepItemRowProps {
 const PrepItemRow: React.FC<PrepItemRowProps> = ({ item, categoryOptions, departmentOptions, handleSelection, handleEditClick }) => {
   return (
     <tr key={item.prep_item_id}>
-      <td className="border px-4 py-2">{item.prep_item_name}</td>
+      <td className="border px-4 py-2">{item.name}</td>
       <td className="border px-4 py-2">{item.description}</td>
       <td className="border px-4 py-2 text-center">
         <SelectBox
             value={item.category}
             onChange={(value) => handleSelection(item.prep_item_id, value, 'category')}
             options={categoryOptions}
-            title={item.prep_item_name}
+            title={item.name}
         />
       </td>
       <td className="border px-4 py-2 text-center">
@@ -29,7 +29,7 @@ const PrepItemRow: React.FC<PrepItemRowProps> = ({ item, categoryOptions, depart
         value={item.kitchen_department_id}
         onChange={(value) => handleSelection(item.prep_item_id, value, 'kitchen_department_id')}
         options={departmentOptions}
-        title={item.prep_item_name}
+        title={item.name}
         />
       </td>
       <td className="border">

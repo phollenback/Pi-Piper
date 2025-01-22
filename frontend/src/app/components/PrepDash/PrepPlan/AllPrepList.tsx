@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import PotentialPrepItem from "./PotentialPrepItem";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/lib/store";
-import PrepListItem from "@/app/types/models/PrepListItem";
+import PrepItem from "@/app/types/models/PrepItem";
 
 interface AppPrepProps {
-  prepList: PrepListItem[];
+  prepList: PrepItem[];
   category: number | null;
-  onAddToDailyPrep: (item: PrepListItem) => void;
+  onAddToDailyPrep: (item: PrepItem) => void;
   step: number; // Add step prop
   onQuantityChange: (id: number, quantity: number) => void; // Add quantity change handler prop
 }
@@ -40,16 +40,17 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
     onQuantityChange(id, quantity); // Call the passed quantity change handler
   };
 
+
   return (
     <>
       {filteredPrepList.map((item, index) => (
         <PotentialPrepItem
           key={index}
           prepItem={item}
-          onAdd={onAddToDailyPrep}
+          onAdd={(item) => onAddToDailyPrep(item)}
           step={step}
           onQuantityChange={handleQuantityChange}
-          quantity={quantities[item.prep_list_id] || item.quantity}
+          quantity={quantities[item.prep_item_id]}
         />
       ))}
     </>

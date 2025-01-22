@@ -56,9 +56,9 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
       let matchesSearchTerm;
       let matchesCategory;
   
-      if ("prep_item_name" in item) {
+      if ("name" in item) {
         matchesSearchTerm =
-          item.prep_item_name.toLowerCase().includes(lowercasedTerm) ||
+          item.name.toLowerCase().includes(lowercasedTerm) ||
           item.description.toLowerCase().includes(lowercasedTerm) ||
           item.kitchen_department_id.toString().includes(lowercasedTerm) ||
           item.category.toString().includes(lowercasedTerm);
@@ -75,7 +75,7 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
   
     // Type guard to check if the object is a PrepItem
     const isPrepItem = (item: PrepItem | Ingredient): item is PrepItem =>
-      (item as PrepItem).prep_item_name !== undefined;
+      (item as PrepItem).name !== undefined;
   
     return (
       <tbody>

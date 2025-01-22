@@ -60,15 +60,15 @@ const PrepListBreakdown: React.FC<PrepListBreakdownProps> = ({ list, categories,
         />
       </div>
       
-      {Object.entries(groupedItems).map(([categoryId, items]) => {
+      {Object.entries(groupedItems).map(([categoryId, items], index) => {
         const { name, description } = getCategoryDetails(Number(categoryId));
         return (
-          <div key={categoryId} className="mb-6">
+          <div key={index} className="mb-6">
             <h3 className="text-lg font-semibold mb-2">{name}</h3>
             <p className="text-sm text-gray-500 mb-2">{description}</p>
             <ul className="list-disc pl-5 space-y-2">
-              {items.map((item) => (
-                <li key={item.prep_list_id}>
+              {items.map((item, index) => (
+                <li key={index}>
                   <div className="flex justify-between items-center">
                     <div>
                       <strong>{item.name}</strong> - {item.description}

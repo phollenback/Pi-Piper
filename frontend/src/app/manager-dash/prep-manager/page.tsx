@@ -62,7 +62,7 @@ export default function PrepManagerContainer() {
                 </div>
     
                 {/* Heading / filtering (2nd column) */}
-                <div className="w-[50%] flex items-right justify-right pl-12 border-l-8 border-r-8 border-black">
+                <div className="w-[50%] flex justify-right pl-12 border-l-8 border-r-8 border-black">
                     <Heading 
                         setSection={handleSectionSelect} 
                         setSelectedCategory={handleCategorySelect} 
@@ -72,7 +72,7 @@ export default function PrepManagerContainer() {
                 </div>
     
                 {/* Create new item (3rd column) */}
-                <div className="w-[25%]">
+                <div className="w-[25%] items-left justify-left">
                     <CreateItem setItem={handleCreateSubmit} categories={categories}/>
                 </div>
             </div>

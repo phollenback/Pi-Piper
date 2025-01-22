@@ -1,7 +1,7 @@
 
 export const prepQueries = {
     getPrepItems: `
-    SELECT prep_item_id, prep_item_name, description, item_category as category, kitchen_department_id, restaurant_id
+    SELECT prep_item_id, prep_item_name as name, description, item_category as category, kitchen_department_id, restaurant_id
     FROM dim_prep_item
     WHERE restaurant_id = ?
     `,

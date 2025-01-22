@@ -31,7 +31,7 @@ export const createPrepItem = async (restaurantId: number, item: PrepItem) => {
     logger.info('[prepitem.dao][createPrepItems][START]', { restaurantId, item });
     try {
         const results = execute<PrepItem[]>(prepQueries.createPrepItem, [
-                item.prep_item_name,
+                item.name,
                 item.description,
                 item.category,
                 item.kitchen_department_id,
@@ -96,7 +96,7 @@ export const updatePrepItem = async (prepItemId: number, itemData: PrepItem) => 
     logger.info('[prepitem.dao][updatePrepItem][START]', { prepItemId, itemData });
     try {
         const prepItems = await execute<PrepItem[]>(prepQueries.updatePrepItem, [
-            itemData.prep_item_name,
+            itemData.name,
             itemData.description,
             itemData.category,
             itemData.kitchen_department_id,

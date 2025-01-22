@@ -1,19 +1,21 @@
 import React from "react";
 import NumberSelect from "@/app/components/Elements/ui/NumberSelect";
 import Button from "../../Elements/Button";
-import PrepListItem from "@/app/types/models/PrepListItem";
+import PrepItem from "@/app/types/models/PrepItem";
 
 interface PotentialPrepItemProps {
-  prepItem: PrepListItem;
-  onAdd: (item: PrepListItem) => void;
+  prepItem: PrepItem;
+  onAdd: (item: PrepItem) => void;
   onQuantityChange: (id: number, quantity: number) => void;
   step: number; // Add step prop
   quantity: number
 }
 
 const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd, onQuantityChange, step }) => {
+  
+  
   const handleQuantityChange = (quantity: number) => {
-    onQuantityChange(prepItem.prep_list_id, quantity);
+    onQuantityChange(prepItem.prep_item_id, quantity);
   };
 
   const onItemClick = () => {
@@ -33,11 +35,8 @@ const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd, 
           step={step} // Use the step value
           onChange={handleQuantityChange}
           label="Qty"
-          value={prepItem.quantity}
+          value={0}
         />
-        <div className="text-sm font-medium text-gray-700">
-          {prepItem.unit}
-        </div>
         <Button
           label="ADD"
           onClick={onItemClick}

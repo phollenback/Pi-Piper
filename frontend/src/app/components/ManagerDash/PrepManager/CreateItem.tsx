@@ -41,7 +41,7 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
   // Use a single state object to manage the PrepItem attributes
   const [formData, setFormData] = useState<PrepItem>({
     prep_item_id: 0, // Assuming the ID is generated or handled elsewhere
-    prep_item_name: "",
+    name: "",
     description: "",
     category: 1,
     kitchen_department_id: 0,
@@ -104,33 +104,33 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
   }, [categories]);
 
   return (
-      <div className="w-full mr-12">
+      <div className="">
         <h1 className="text-center text-3xl font-bold">
           <i>Create Prep Item</i>
         </h1>
-        <div className="flex w-full gap-16">
-          <div className="flex-initial w-50 ml-10">
-            <InputField
-              id={"prep_item_name"}
-              type={"text"}
-              value={formData.prep_item_name}
-              onChange={handleChange}
-              placeholder="Enter new name"
-            />
-          </div>
+        <div className="flex flex-col gap-4"> {/* Added 'flex-col' for vertical stacking and 'gap-4' for spacing */}
+  <div className="flex-initial w-full"> {/* Changed width to 'w-full' for full-width alignment */}
+    <InputField
+      id={"prep_item_name"}
+      type={"text"}
+      value={formData.name}
+      onChange={handleChange}
+      placeholder="Enter new name"
+    />
+  </div>
 
-          <div className="flex-initial w-50">
-            <InputField
-              id={"description"}
-              type={"text"}
-              value={formData.description}
-              onChange={handleChange}
-              placeholder="Enter description"
-            />
-          </div>
-        </div>
+  <div className="flex-initial w-full"> {/* Same as above */}
+    <InputField
+      id={"description"}
+      type={"text"}
+      value={formData.description}
+      onChange={handleChange}
+      placeholder="Enter description"
+    />
+  </div>
+</div>
 
-        <div className="mt-4 ml-10">
+        <div className="mt-4">
           <SelectBox
             value={formData.kitchen_department_id}
             onChange={(e) => handleSelectChange(e, "kitchen_department_id")}
@@ -139,7 +139,7 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
           />
         </div>
 
-        <div className="mt-4 ml-10">
+        <div className="mt-4">
           <SelectBox
             value={formData.category}
             onChange={(e) => handleSelectChange(e, "category")}
@@ -149,7 +149,7 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
         </div>
 
         {/* Submit button */}
-        <div className="ml-10 mt-5">
+        <div className="mt-5">
           <Button
             label={"Submit"}
             onClick={handleSubmitClick}
@@ -161,7 +161,7 @@ const CreateItem: React.FC<CreateItemProps> = ({ setItem, categories }: CreateIt
             }}
           />
         </div>
-      </div>
+        </div>
   );
 };
 

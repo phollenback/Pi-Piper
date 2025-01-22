@@ -14,6 +14,7 @@ import NumberSelect from '@/app/components/Elements/ui/NumberSelect';
 import { setPrepSearchTerm } from '@/redux/features/search/searchSlice';
 
 // TYPES ***************
+import PrepItem from '@/app/types/models/PrepItem';
 import PrepListItem from '@/app/types/models/PrepListItem';
 import Category from '@/app/types/models/Category';
 import { setDailyPrepItems } from '@/redux/features/preplist/dailyPrepListSlice';
@@ -30,14 +31,19 @@ const getTomorrowDate = () => {
   });
 };
 
+const fetchAllPrep = async () => {
+  const response = await axios.get<PrepItem[]>('http://localhost:3000/prepitems/1');
+  return response.data;
+};
+
 const fetchDailyList = async () => {
-  const response = await axios.get<PrepListItem[]>('http://localhost:3000/prepitems/1');
+  const response = await axios.get<PrepListItem[]>('http://localhost:3000/prepitems/daily/1');
   return response.data;
 };
 
 export default function PlanPage() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
-  const [prepItems, setPrepItems] = useState<PrepListItem[]>([]);
+  const [prepItems, setPrepItems] = useState<PrepItem[]>([]);
   const [errorMessage, setErrorMessage] = useState('');
   const [PrepListItems, setPrepListItems] = useState<PrepListItem[]>([]);
   const [isBreakdown, setIsBreakdown] = useState(true);
@@ -67,10 +73,9 @@ export default function PlanPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch all prep items
-      setPrepItems(await fetchDailyList());
-      setDailyPrepItems(dailyPrepList);
-      setIsVerified(false);
+      const allPrepItems = await fetchAllPrep();
+      setPrepItems(allPrepItems); // Populate initial state
+      setDailyPrepItems(dailyPrepList); // Sync with dailyPrepList
     };
     fetchData();
   }, [dailyPrepList]);
@@ -92,20 +97,32 @@ export default function PlanPage() {
     setQuantities((prev) => ({ ...prev, [id]: quantity }));
   };
 
-  // Dynamic handler for item movement
-  const handleCardClick = (item: PrepListItem) => {
-    const updatedItem = { ...item, quantity: quantities[item.prep_list_id] || item.quantity };
+  const handleCardClick = (item: PrepItem) => {
+    const updatedItem: PrepListItem = {
+      prep_list_id: item.prep_item_id * 1000,
+      name: item.name,
+      description: item.description,
+      note: "",
+      quantity: quantities[item.prep_item_id] || 0,
+      unit: "units",
+      status: "todo", // Ensure this is one of the allowed string literals
+      category: item.category,
+      restaurant_id: 1, // Assuming a default restaurant_id
+      date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
+    };
 
-    if (prepItems.some((prepItem) => prepItem.prep_list_id === item.prep_list_id)) {
+    // Check if the item exists in prepItems
+    if (prepItems.some((prepItem) => prepItem.name === item.name)) {
       // Move item from prepItems to PrepListItems
-      setPrepItems((prev) => prev.filter((prepItem) => prepItem.prep_list_id !== item.prep_list_id));
-      setPrepListItems((prev) => [...prev, updatedItem]);
-    } else if (PrepListItems.some((dailyItem) => dailyItem.prep_list_id === item.prep_list_id)) {
+      setPrepItems((prev) => prev.filter((prepItem) => prepItem.prep_item_id !== item.prep_item_id));
+      setPrepListItems((prev) => [...prev, updatedItem]); // Add to PrepListItems
+    } // check if item exists in daily list
+    else if (PrepListItems.some((dailyItem) => dailyItem.name === item.name)) {
       // Move item from PrepListItems back to prepItems
       setPrepListItems((prev) =>
-        prev.filter((dailyItem) => dailyItem.prep_list_id !== item.prep_list_id)
+        prev.filter((dailyItem) => dailyItem.prep_list_id !== item.prep_item_id)
       );
-      setPrepItems((prev) => [...prev, updatedItem]);
+      setPrepItems((prev) => [...prev, item]); // Add back to prepItems
     }
   };
 
@@ -125,6 +142,22 @@ export default function PlanPage() {
   if (isError) {
     return <p>Error loading plan...</p>;
   }
+
+  const handleListClick = (item: PrepListItem) => {
+    const updatedItem: PrepItem = {
+      prep_item_id: item.prep_list_id / 1000, // Assuming prep_item_id is derived from prep_list_id
+      name: item.name,
+      description: item.description,
+      category: item.category,
+      kitchen_department_id: 1, // Assuming a default kitchen_department_id
+    };
+
+    // Move item from PrepListItems back to prepItems
+    setPrepListItems((prev) =>
+      prev.filter((dailyItem) => dailyItem.prep_list_id !== item.prep_list_id)
+    );
+    setPrepItems((prev) => [...prev, updatedItem]); // Add back to prepItems
+  };
 
   return (
     <div className="grid grid-cols-3 gap-4">
@@ -185,7 +218,7 @@ export default function PlanPage() {
         </div>
         {errorMessage && <ErrorMessage message={errorMessage} />}
         {isBreakdown ? (
-          <PrepListing list={PrepListItems} handleCardClick={handleCardClick} />
+          <PrepListing list={PrepListItems} handleCardClick={handleListClick} />
         ) : (
           <div>
             <PrepListBreakdown
