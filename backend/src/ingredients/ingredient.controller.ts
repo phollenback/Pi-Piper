@@ -21,6 +21,24 @@ export const readIngredients = async (req: Request, res: Response) => {
     }
 };
 
+export const readInventory = async (req: Request, res: Response) => {
+    logger.info('[ingredient.controller][readIngredients][START]');
+
+    try {
+        let restaurantId = Number(req.params.restaurantId);
+
+        const response = await IngredientDal.getIngredients(restaurantId);
+        logger.info('[ingredient.controller][readIngredients][SUCCESS]', { response });
+
+        res.status(200).json(response);
+    } catch (error) {
+        logger.error('[ingredient.controller][readIngredients][ERROR]', { error });
+        res.status(500).json({
+            message: 'There was an error when fetching ingredients'
+        });
+    }
+};
+
 export const createIngredient = async (req: Request, res: Response) => {
     logger.info('[ingredient.controller][createIngredient][START]');
 

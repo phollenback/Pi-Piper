@@ -31,7 +31,7 @@ export default function RecipeBookContainer() {
       if (!response.ok) {
         throw new Error("Failed to fetch categories");
       }
-      return response.json();
+      return  response.json();
     },
   });
 

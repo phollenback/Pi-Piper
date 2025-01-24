@@ -1,7 +1,7 @@
 import React from 'react';
 import SelectBox from '@/app/components/Elements/ui/SelectBox';
 import Button from '@/app/components/Elements/Button';
-import PrepItem from '@/app/types/models/PrepItem';
+import { PrepItem } from '@/app/types/models/PrepItem';
 
 interface PrepItemRowProps {
   item: PrepItem;

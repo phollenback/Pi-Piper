@@ -1,4 +1,4 @@
-export type Ingredient = {
+export interface Ingredient {
     ingredient_id: number,
     ingredient_name: string,
     unit_of_measure: string,

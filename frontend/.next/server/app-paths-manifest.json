@@ -1,3 +1,8 @@
 {
-  "/prep-dash/planner/page": "app/prep-dash/planner/page.js"
+  "/manager-dash/page": "app/manager-dash/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
+  "/prep-dash/recipebook/page": "app/prep-dash/recipebook/page.js",
+  "/prep-dash/page": "app/prep-dash/page.js"
 }

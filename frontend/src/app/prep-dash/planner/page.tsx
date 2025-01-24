@@ -14,7 +14,7 @@ import NumberSelect from '@/app/components/Elements/ui/NumberSelect';
 import { setPrepSearchTerm } from '@/redux/features/search/searchSlice';
 
 // TYPES ***************
-import PrepItem from '@/app/types/models/PrepItem';
+import { PrepItemAdapter, PrepItem} from '@/app/types/models/PrepItem';
 import PrepListItem from '@/app/types/models/PrepListItem';
 import Category from '@/app/types/models/Category';
 import { setDailyPrepItems } from '@/redux/features/preplist/dailyPrepListSlice';
@@ -98,33 +98,23 @@ export default function PlanPage() {
   };
 
   const handleCardClick = (item: PrepItem) => {
-    const updatedItem: PrepListItem = {
-      prep_list_id: item.prep_item_id * 1000,
-      name: item.name,
-      description: item.description,
-      note: "",
-      quantity: quantities[item.prep_item_id] || 0,
-      unit: "units",
-      status: "todo", // Ensure this is one of the allowed string literals
-      category: item.category,
-      restaurant_id: 1, // Assuming a default restaurant_id
-      date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
-    };
+    const itemTwo = new PrepItemAdapter(item, quantities[item.prep_item_id]);
 
-    // Check if the item exists in prepItems
-    if (prepItems.some((prepItem) => prepItem.name === item.name)) {
-      // Move item from prepItems to PrepListItems
-      setPrepItems((prev) => prev.filter((prepItem) => prepItem.prep_item_id !== item.prep_item_id));
-      setPrepListItems((prev) => [...prev, updatedItem]); // Add to PrepListItems
-    } // check if item exists in daily list
-    else if (PrepListItems.some((dailyItem) => dailyItem.name === item.name)) {
-      // Move item from PrepListItems back to prepItems
-      setPrepListItems((prev) =>
-        prev.filter((dailyItem) => dailyItem.prep_list_id !== item.prep_item_id)
-      );
-      setPrepItems((prev) => [...prev, item]); // Add back to prepItems
-    }
-  };
+  
+      // Check if the item exists in prepItems
+      if (prepItems.some((prepItem) => prepItem.name === item.name)) {
+        // Move item from prepItems to PrepListItems
+        setPrepItems((prev) => prev.filter((prepItem) => prepItem.prep_item_id !== item.prep_item_id));
+        setPrepListItems((prev) => [...prev, itemTwo]); // Add to PrepListItems
+      } // check if item exists in daily list
+      else if (PrepListItems.some((dailyItem) => dailyItem.name === item.name)) {
+        // Move item from PrepListItems back to prepItems
+        setPrepListItems((prev) =>
+          prev.filter((dailyItem) => dailyItem.prep_list_id !== item.prep_item_id)
+        );
+        setPrepItems((prev) => [...prev, item]); // Add back to prepItems
+      }
+    };
 
   // Prepare category options for SelectBox
   const categoryOptions = categories.map((category: Category) => ({

@@ -1,8 +1,9 @@
 "use server"
 import Category from "../types/models/Category";
 import Department from "../types/models/Department";
+import DepartmentProg from "../types/models/DepartmentProg";
 import Ingredient from "../types/models/Ingredient";
-import PrepItem from "../types/models/PrepItem";
+import {PrepItem} from "../types/models/PrepItem";
 
 export const fetchCategories = async (): Promise<Category[]> => {
     try {
@@ -106,6 +107,26 @@ export const postPrepItem = async (restaurantId: number, formData: PrepItem): Pr
         return data;
     } catch (error) {
         console.error("Failed to post Prep Item:", error);
+        throw error;
+    }
+};
+
+export const fetchDepProgress = async (restaurantId: number): Promise<DepartmentProg[]> => {
+    try {
+        const response = await fetch(`http://localhost:3000/departments/daily/${restaurantId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error fetching department Prog: ${response.statusText}`);
+        }
+        const data: DepartmentProg[] = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch ingredients:", error);
         throw error;
     }
 };

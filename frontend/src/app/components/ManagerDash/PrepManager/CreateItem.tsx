@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../Elements/Button";
 import InputField from "../../Elements/login/InputField";
-import PrepItem from "@/app/types/models/PrepItem"; // Assuming you have this interface
+import {PrepItem} from "@/app/types/models/PrepItem"; // Assuming you have this interface
 import Department from "@/app/types/models/Department";
 import Category from "@/app/types/models/Category";
 import { fetchDepartments } from "@/app/util/actions";

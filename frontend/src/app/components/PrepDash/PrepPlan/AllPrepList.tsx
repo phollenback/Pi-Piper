@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PotentialPrepItem from "./PotentialPrepItem";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/lib/store";
-import PrepItem from "@/app/types/models/PrepItem";
+import {PrepItem} from "@/app/types/models/PrepItem";
 
 interface AppPrepProps {
   prepList: PrepItem[];

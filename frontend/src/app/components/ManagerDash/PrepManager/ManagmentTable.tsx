@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import PrepItem from '@/app/types/models/PrepItem';
+import {PrepItem} from '@/app/types/models/PrepItem';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/lib/store';
 import Category from '@/app/types/models/Category';
@@ -25,7 +25,7 @@ const getDepartments = () => {
 const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category, activeSection }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
-  const [, setSection] = useState<number>(0);
+  const [activeInSection, setSection] = useState<number>(0);
   const [list, setList] = useState<PrepItem[] | Ingredient[]>([]);
   const managerSearchTerm = useSelector((state: RootState) => state.search.managerSearchTerm);
 
@@ -46,6 +46,7 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
     setSelectedCategory(category as number);
     setSection(activeSection)
     setList(activeList);
+    console.log(activeInSection)
   }, [managerSearchTerm, category, activeList]);
 
   const filteredList = (list: PrepItem[] | Ingredient[] = []) =>

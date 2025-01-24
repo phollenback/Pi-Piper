@@ -1,7 +1,7 @@
 import React from "react";
 import NumberSelect from "@/app/components/Elements/ui/NumberSelect";
 import Button from "../../Elements/Button";
-import PrepItem from "@/app/types/models/PrepItem";
+import { PrepItem } from "@/app/types/models/PrepItem";
 
 interface PotentialPrepItemProps {
   prepItem: PrepItem;

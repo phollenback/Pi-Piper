@@ -4,7 +4,7 @@ import Heading from "@/app/components/ManagerDash/PrepManager/Heading";
 import { fetchAllIngredients, fetchAllPrepItems, fetchCategories } from "@/app/util/actions";
 import { useQuery } from "@tanstack/react-query";
 import ManagementTable from "@/app/components/ManagerDash/PrepManager/ManagmentTable";
-import PrepItem from "@/app/types/models/PrepItem";
+import {PrepItem} from "@/app/types/models/PrepItem";
 import Category from "@/app/types/models/Category";
 import Ingredient from "@/app/types/models/Ingredient";
 import CreateItem from "@/app/components/ManagerDash/PrepManager/CreateItem";

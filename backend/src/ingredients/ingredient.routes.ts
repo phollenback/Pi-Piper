@@ -17,6 +17,12 @@ router
     );
 
 router
+    .get(
+        '/inventory/:restaurantId',
+        asyncHandler(IngredientController.readInventory)
+    )
+
+router
     .post(
         '/:restaurantId',
         checkSchema(IngredientSchema),
