@@ -12,7 +12,7 @@ export const prepQueries = {
     JOIN dim_prep_item pi
     ON pl.prep_item_id = pi.prep_item_id
     WHERE pi.restaurant_id = ?
-    AND pl.date = CURDATE()
+    AND pl.date = '2025-01-14'
     `,
 
     createPrepItem: `

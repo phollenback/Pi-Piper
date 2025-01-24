@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import AllPrepList from '../../components/PrepDash/PrepPlan/AllPrepList';
 import SelectBox from '@/app/components/Elements/ui/SelectBox';
-import PrepListing from '@/app/components/PrepDash/DailyPrep/PrepListing';
 import PrepListBreakdown from '../../components/PrepDash/PrepPlan/PrepListBreakdown';
 import Button from '@/app/components/Elements/Button';
 import ErrorMessage from '@/app/components/Elements/ErrorMessage';
@@ -18,6 +17,7 @@ import { PrepItemAdapter, PrepItem} from '@/app/types/models/PrepItem';
 import PrepListItem from '@/app/types/models/PrepListItem';
 import Category from '@/app/types/models/Category';
 import { setDailyPrepItems } from '@/redux/features/preplist/dailyPrepListSlice';
+import NewPrepList from '@/app/components/PrepDash/PrepPlan/NewPrepList';
 
 // Helper function to get tomorrow's date
 const getTomorrowDate = () => {
@@ -208,7 +208,7 @@ export default function PlanPage() {
         </div>
         {errorMessage && <ErrorMessage message={errorMessage} />}
         {isBreakdown ? (
-          <PrepListing list={PrepListItems} handleCardClick={handleListClick} />
+          <NewPrepList list={PrepListItems} handleCardClick={handleListClick} />
         ) : (
           <div>
             <PrepListBreakdown
