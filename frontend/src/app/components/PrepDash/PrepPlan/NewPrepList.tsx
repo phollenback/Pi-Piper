@@ -29,7 +29,7 @@ const NewPrepList: React.FC<NewPrepProps> = ({ list, handleCardClick }: NewPrepP
   });
 
   return (
-    <>
+    <div className="p-3">
       {filteredList.length > 0 ? (
         filteredList.map((item, index) => (
           <NewPrepItem
@@ -41,7 +41,7 @@ const NewPrepList: React.FC<NewPrepProps> = ({ list, handleCardClick }: NewPrepP
       ) : (
         <p>No items to display.</p>
       )}
-    </>
+    </div>
   );
 };
 

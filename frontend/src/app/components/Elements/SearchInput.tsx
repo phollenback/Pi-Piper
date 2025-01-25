@@ -7,7 +7,7 @@ import InputField from './login/InputField';
 interface SearchInputProps {
   placeholder: string;
   onSearch: (query: string) => void; 
-  error: string;
+  error?: string;
 }
 
 export default function SearchInput({ placeholder, onSearch, error }: SearchInputProps) {

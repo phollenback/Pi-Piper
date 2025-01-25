@@ -2,6 +2,7 @@ import PrepListItem, { PrepItem } from "./prepitem.model";
 import { execute } from '../services/pg.connector';
 import { prepQueries } from './prepitems.queries';
 import { logger } from '../middleware/winston.middleware';
+import { addDays } from "date-fns";
 
 export const getPrepItems = async (restaurantId: number) => {
     logger.info('[prepitem.dao][getPrepItems][START]', { restaurantId });
@@ -54,7 +55,6 @@ export const createDailyPrepItems = async (restaurantId: number, items: PrepList
         for (let item of items) {
             console.log('[prepitem.dao][createDailyPrepItems][ITEM]', { item });
 
-            // Get the prep_item_id for the given name and restaurant
             const prepItemIds = await execute<any[]>(prepQueries.getPrepItemId, [item.name, restaurantId]);
             console.log('[prepitem.dao][createDailyPrepItems][PREP_ITEM_IDS]', { prepItemIds });
 
@@ -66,18 +66,20 @@ export const createDailyPrepItems = async (restaurantId: number, items: PrepList
                 throw new Error(`PrepItem "${item.name}" not found for restaurant ${restaurantId}`);
             }
 
-            const prepItemId = Number(prepItemIds[0].prep_item_id); // Extract and convert the prep_item_id to a number
+            const prepItemId = Number(prepItemIds[0].prep_item_id);
             console.log('[prepitem.dao][createDailyPrepItems][PREP_ITEM_ID]', { prepItemId });
 
-            // Insert into fact_daily_prep_list
+            const tomorrow = addDays(new Date(), 1); // Get tomorrow's date
+            const formattedDate = tomorrow.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+
             const result = await execute(prepQueries.createDailyPrepItems, [
-                item.id,
+                item.prep_list_id,
                 restaurantId,
-                prepItemId, // Ensure this is passed correctly
+                prepItemId,
                 item.quantity,
                 item.unit,
                 item.status,
-                item.date, // Use the date from the item
+                formattedDate // Pass the formatted date
             ]);
             console.log('[prepitem.dao][createDailyPrepItems][INSERT_RESULT]', { result });
 
@@ -91,6 +93,7 @@ export const createDailyPrepItems = async (restaurantId: number, items: PrepList
         throw error;
     }
 };
+
 
 export const updatePrepItem = async (prepItemId: number, itemData: PrepItem) => {
     logger.info('[prepitem.dao][updatePrepItem][START]', { prepItemId, itemData });

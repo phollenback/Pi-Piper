@@ -18,6 +18,7 @@ import PrepListItem from '@/app/types/models/PrepListItem';
 import Category from '@/app/types/models/Category';
 import { setDailyPrepItems } from '@/redux/features/preplist/dailyPrepListSlice';
 import NewPrepList from '@/app/components/PrepDash/PrepPlan/NewPrepList';
+import { postDailyPrep } from '@/app/util/actions';
 
 // Helper function to get tomorrow's date
 const getTomorrowDate = () => {
@@ -82,12 +83,23 @@ export default function PlanPage() {
 
   const handleCompleteClick = () => {
     if (isVerified && verifierName) {
-      //postPrepList(PrepListItems);
-      alert('List Created!');
+        console.log('Posting Prep List:', PrepListItems);
+        // Check for null values
+        const hasNulls = PrepListItems.some(item => item === null);
+        if (hasNulls) {
+            console.error('Prep List contains null values:', PrepListItems);
+            return; // Prevent the post if there are nulls
+        }
+        const res = postDailyPrep(PrepListItems, 1);
+        if(!res) {
+          setErrorMessage("An Error Occurred internally.");
+        } else {
+          alert('List Created!');
+        }
     } else {
-      setErrorMessage("Please enter the verifier's name and verify the list before submitting.");
+        setErrorMessage("Please enter the verifier's name and verify the list before submitting.");
     }
-  };
+};
 
   const handleBreakdownClick = () => {
     setIsBreakdown((prev) => !prev); // Toggle the `isBreakdown` state

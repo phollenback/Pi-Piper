@@ -1,4 +1,4 @@
 {
-  "/prep-dash/page": "app/prep-dash/page.js",
-  "/prep-dash/planner/page": "app/prep-dash/planner/page.js"
+  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
+  "/prep-dash/page": "app/prep-dash/page.js"
 }
