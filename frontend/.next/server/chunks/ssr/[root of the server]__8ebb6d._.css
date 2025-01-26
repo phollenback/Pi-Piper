@@ -525,6 +525,22 @@ img, video {
   max-height: calc(100vh - 350px);
 }
 
+.max-h-\[400px\] {
+  max-height: 400px;
+}
+
+.max-h-\[800px\] {
+  max-height: 800px;
+}
+
+.max-h-\[700px\] {
+  max-height: 700px;
+}
+
+.max-h-\[650px\] {
+  max-height: 650px;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -675,6 +691,10 @@ img, video {
   overflow: auto;
 }
 
+.overflow-scroll {
+  overflow: scroll;
+}
+
 .overflow-x-auto {
   overflow-x: auto;
 }
@@ -697,6 +717,14 @@ img, video {
 
 .border {
   border-width: 1px;
+}
+
+.border-4 {
+  border-width: 4px;
+}
+
+.border-2 {
+  border-width: 2px;
 }
 
 .border-b {
