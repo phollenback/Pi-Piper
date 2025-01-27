@@ -49,12 +49,14 @@ __turbopack_export_namespace__(__turbopack_import__("[project]/src/app/prep-dash
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
-/* __next_internal_action_entry_do_not_use__ {"7f03447a864184ad99cd1c226e7e2fc7e16dd1d737":"postPrepItem","7f33cc7fd1032411f82e6fbdc2248c475df82c2a06":"fetchCategories","7f49266e824781455f55896155276e6a6ef41730c5":"fetchAllPrepItems","7f725c80df0c1c9ea215f20eec6397b1574b5e6f14":"postDailyPrep","7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8":"fetchAllIngredients","7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d":"fetchDepartments","7fc6f68946061eca83543b9ee24154bc1883f400e0":"fetchDepProgress"} */ __turbopack_esm__({
+/* __next_internal_action_entry_do_not_use__ {"7f03447a864184ad99cd1c226e7e2fc7e16dd1d737":"postPrepItem","7f33cc7fd1032411f82e6fbdc2248c475df82c2a06":"fetchCategories","7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4":"fetchIngredientPricing","7f49266e824781455f55896155276e6a6ef41730c5":"fetchAllPrepItems","7f725c80df0c1c9ea215f20eec6397b1574b5e6f14":"postDailyPrep","7f80a789cf799c4f50aedc055fdf00609660406cb2":"fetchCriticals","7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8":"fetchAllIngredients","7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d":"fetchDepartments","7fc6f68946061eca83543b9ee24154bc1883f400e0":"fetchDepProgress"} */ __turbopack_esm__({
     "fetchAllIngredients": (()=>fetchAllIngredients),
     "fetchAllPrepItems": (()=>fetchAllPrepItems),
     "fetchCategories": (()=>fetchCategories),
+    "fetchCriticals": (()=>fetchCriticals),
     "fetchDepProgress": (()=>fetchDepProgress),
     "fetchDepartments": (()=>fetchDepartments),
+    "fetchIngredientPricing": (()=>fetchIngredientPricing),
     "postDailyPrep": (()=>postDailyPrep),
     "postPrepItem": (()=>postPrepItem)
 });
@@ -99,10 +101,9 @@ const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ fetchAllIngredients = async (res
         throw error;
     }
 };
-const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ fetchAllPrepItems = async (restaurantId)=>{
+const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ fetchIngredientPricing = async (restaurantId)=>{
     try {
-        console.log("fetching prep items");
-        const response = await fetch(`http://localhost:3000/prepitems/${restaurantId}`, {
+        const response = await fetch(`http://localhost:3000/ingredients/pricing/${restaurantId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -115,6 +116,43 @@ const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ fetchAllPrepItems = async (resta
         return data;
     } catch (error) {
         console.error("Failed to fetch ingredients:", error);
+        throw error;
+    }
+};
+const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ fetchCriticals = async (restaurantId)=>{
+    try {
+        const response = await fetch(`http://localhost:3000/ingredients/suggestions/${restaurantId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Error fetching ingredient suggestions: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch ingredients suggestions:", error);
+        throw error;
+    }
+};
+const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ fetchAllPrepItems = async (restaurantId)=>{
+    try {
+        console.log("fetching prep items pricing");
+        const response = await fetch(`http://localhost:3000/prepitems/${restaurantId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Error fetching categories pricing: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch ingredients pricing:", error);
         throw error;
     }
 };
@@ -201,6 +239,8 @@ const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ postDailyPrep = async (prepList,
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$validate$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ensureServerEntryExports"])([
     fetchCategories,
     fetchAllIngredients,
+    fetchIngredientPricing,
+    fetchCriticals,
     fetchAllPrepItems,
     fetchDepartments,
     postPrepItem,
@@ -209,6 +249,8 @@ const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ postDailyPrep = async (prepList,
 ]);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(fetchCategories, "7f33cc7fd1032411f82e6fbdc2248c475df82c2a06", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(fetchAllIngredients, "7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(fetchIngredientPricing, "7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(fetchCriticals, "7f80a789cf799c4f50aedc055fdf00609660406cb2", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(fetchAllPrepItems, "7f49266e824781455f55896155276e6a6ef41730c5", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(fetchDepartments, "7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(postPrepItem, "7f03447a864184ad99cd1c226e7e2fc7e16dd1d737", null);
@@ -221,6 +263,8 @@ const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ postDailyPrep = async (prepList,
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
 __turbopack_esm__({});
+;
+;
 ;
 ;
 ;
@@ -246,8 +290,10 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "7f03447a864184ad99cd1c226e7e2fc7e16dd1d737": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["postPrepItem"]),
     "7f33cc7fd1032411f82e6fbdc2248c475df82c2a06": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["fetchCategories"]),
+    "7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["fetchIngredientPricing"]),
     "7f49266e824781455f55896155276e6a6ef41730c5": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["fetchAllPrepItems"]),
     "7f725c80df0c1c9ea215f20eec6397b1574b5e6f14": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["postDailyPrep"]),
+    "7f80a789cf799c4f50aedc055fdf00609660406cb2": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["fetchCriticals"]),
     "7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["fetchAllIngredients"]),
     "7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["fetchDepartments"]),
     "7fc6f68946061eca83543b9ee24154bc1883f400e0": (()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["fetchDepProgress"])
@@ -263,8 +309,10 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "7f03447a864184ad99cd1c226e7e2fc7e16dd1d737": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7f03447a864184ad99cd1c226e7e2fc7e16dd1d737"]),
     "7f33cc7fd1032411f82e6fbdc2248c475df82c2a06": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7f33cc7fd1032411f82e6fbdc2248c475df82c2a06"]),
+    "7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4"]),
     "7f49266e824781455f55896155276e6a6ef41730c5": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7f49266e824781455f55896155276e6a6ef41730c5"]),
     "7f725c80df0c1c9ea215f20eec6397b1574b5e6f14": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7f725c80df0c1c9ea215f20eec6397b1574b5e6f14"]),
+    "7f80a789cf799c4f50aedc055fdf00609660406cb2": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7f80a789cf799c4f50aedc055fdf00609660406cb2"]),
     "7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8"]),
     "7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d"]),
     "7fc6f68946061eca83543b9ee24154bc1883f400e0": (()=>__TURBOPACK__imported__module__$5b$project$5d2f2e$next$2d$internal$2f$server$2f$app$2f$prep$2d$dash$2f$planner$2f$page$2f$actions$2e$js__$7b$__ACTIONS_MODULE0__$3d3e$__$225b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$2922$__$7d$__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$exports$3e$__["7fc6f68946061eca83543b9ee24154bc1883f400e0"])

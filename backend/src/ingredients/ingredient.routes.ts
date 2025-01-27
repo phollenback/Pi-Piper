@@ -23,6 +23,18 @@ router
     )
 
 router
+    .get(
+        '/suggestions/:restaurantId',
+        asyncHandler(IngredientController.readSuggestions)
+    )
+
+router
+    .get(
+        '/pricing/:restaurantId',
+        asyncHandler(IngredientController.readPricing)
+    )
+
+router
     .post(
         '/:restaurantId',
         checkSchema(IngredientSchema),

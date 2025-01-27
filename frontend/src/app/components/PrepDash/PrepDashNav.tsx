@@ -31,8 +31,8 @@ const PrepDashNav: React.FC = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between bg-zinc-800 p-4 shadow-md">
-      {/* Left Dropdown */}
+<nav className="flex items-center justify-between bg-black p-4 shadow-md">
+{/* Left Dropdown */}
       <div className="relative">
         <Button
           label="Navigate Prep Dash"

@@ -1,0 +1,23 @@
+.footer {
+    display: flex;
+    justify-content: space-around; /* Change from center to space-around */
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: black;
+    padding: 5px 0; /* Increase padding for more space */
+    font-family: 'Arial', sans-serif; /* Choose a better font */
+    font-size: 18px; /* Increase font size for better readability */
+    color: #FFFFFF; /* Ensure text is visible against the dark background */
+}
+
+.footer a {
+    text-decoration: none; /* Remove underline from links */
+    color: #FFFFFF; /* Link color */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.footer a:hover {
+    color: #FFD700; /* Change link color on hover for better UX */
+}

@@ -29,7 +29,7 @@ const DailyPrepList: React.FC<DailyPrepProps> = ({list, handleCardClick}: DailyP
       });
 
       return (
-        <div className="p-3 max-h-[650px] overflow-y-auto"> {/* Tailwind classes for max height and scroll */}
+        <div className="p-3 max-h-[580px] overflow-y-auto"> {/* Tailwind classes for max height and scroll */}
           {filteredList.length > 0 ? (
             filteredList.map((item, index) => (
               <DailyPrepItem

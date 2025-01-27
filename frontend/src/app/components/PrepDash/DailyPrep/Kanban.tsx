@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import PrepListItem from '../../../types/models/PrepListItem';
 import DailyPrepList from './DailyPrepList';
+import KanbanManager from '@/app/types/manager/KanbanManager';
 
 interface KanbanProps {
     prepItems: PrepListItem[];
@@ -9,47 +10,25 @@ interface KanbanProps {
 }
 
 const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
+    const [kanban, setKanban] = useState<KanbanManager | null>(null);
     const [todoItems, setTodoItems] = useState<PrepListItem[]>([]);
     const [completeItems, setCompleteItems] = useState<PrepListItem[]>([]);
 
-    const splitItems = (items: PrepListItem[], category: number | null | undefined) => {
-        const todos: PrepListItem[] = [];
-        const completed: PrepListItem[] = [];
-
-        items.forEach(item => {
-            if (category === null || category === undefined || item.category === category || item.category == 6) {
-                if (item.status === 'complete') {
-                    completed.push(item);
-                } else if (item.status === 'in-progress' || item.status === 'todo') {
-                    todos.push(item);
-                }
-            }
-        });
-        console.log("todos", todos);
-        console.log("completes", completed);
-
-        setTodoItems(todos);
-        setCompleteItems(completed);
-    };
+    useEffect(() => {
+        // Create a new KanbanManager instance
+        const newKanban = new KanbanManager(prepItems, category);
+        setKanban(newKanban);
+        setTodoItems(newKanban.getTodoItems());
+        setCompleteItems(newKanban.getCompleteItems());
+    }, [prepItems, category]);
 
     const handleCardClick = (prepItem: PrepListItem) => {
-        const updatedItem: PrepListItem = { ...prepItem, status: prepItem.status === 'complete' ? 'todo' : 'complete' };
-        
-        // Update the specific item in the corresponding list
-        if (updatedItem.status === 'complete') {
-            // Move item from todoItems to completeItems
-            setTodoItems(prevTodos => prevTodos.filter(item => item.prep_list_id !== updatedItem.prep_list_id));
-            setCompleteItems(prevCompletes => [...prevCompletes, updatedItem]);
-        } else {
-            // Move item from completeItems to todoItems
-            setCompleteItems(prevCompletes => prevCompletes.filter(item => item.prep_list_id !== updatedItem.prep_list_id));
-            setTodoItems(prevTodos => [...prevTodos, updatedItem]);
+        if (kanban) {
+            kanban.toggleItemStatus(prepItem);
+            setTodoItems(kanban.getTodoItems());
+            setCompleteItems(kanban.getCompleteItems());
         }
-    }
-
-    useEffect(() => {
-        splitItems(prepItems, category); 
-    }, [prepItems, category]);
+    };
 
     return (
         <div className="flex">

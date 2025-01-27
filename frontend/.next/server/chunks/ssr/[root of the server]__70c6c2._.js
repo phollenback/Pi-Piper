@@ -201,7 +201,7 @@ const PrepDashNav = ()=>{
         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$search$2f$searchSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["setPrepSearchTerm"])(query));
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-        className: "flex items-center justify-between bg-zinc-800 p-4 shadow-md",
+        className: "flex items-center justify-between bg-black p-4 shadow-md",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "relative",
@@ -303,7 +303,7 @@ const PrepDashNav = ()=>{
     }, void 0, true, {
         fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
         lineNumber: 34,
-        columnNumber: 5
+        columnNumber: 1
     }, this);
 };
 const __TURBOPACK__default__export__ = PrepDashNav;

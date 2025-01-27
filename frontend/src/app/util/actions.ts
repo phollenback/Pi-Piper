@@ -3,6 +3,7 @@ import Category from "../types/models/Category";
 import Department from "../types/models/Department";
 import DepartmentProg from "../types/models/DepartmentProg";
 import Ingredient from "../types/models/Ingredient";
+import IngredientDetails from "../types/models/IngredientDetails";
 import {PrepItem, PrepItemAdapter} from "../types/models/PrepItem";
 import PrepListItem from "../types/models/PrepListItem";
 
@@ -46,10 +47,10 @@ export const fetchAllIngredients = async (restaurantId: number): Promise<Ingredi
     }
 };
 
-export const fetchAllPrepItems = async (restaurantId: number): Promise<PrepItem[]> => {
+
+export const fetchIngredientPricing = async (restaurantId: number): Promise<IngredientDetails[]> => {
     try {
-        console.log("fetching prep items");
-        const response = await fetch(`http://localhost:3000/prepitems/${restaurantId}`, {
+        const response = await fetch(`http://localhost:3000/ingredients/pricing/${restaurantId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,10 +60,55 @@ export const fetchAllPrepItems = async (restaurantId: number): Promise<PrepItem[
         if (!response.ok) {
             throw new Error(`Error fetching categories: ${response.statusText}`);
         }
-        const data: PrepItem[] = await response.json();
+        const data: IngredientDetails[] = await response.json();
         return data;
     } catch (error) {
         console.error("Failed to fetch ingredients:", error);
+        throw error;
+    }
+};
+interface Suggestion {
+    ingredient_id: number;
+    ingredient_name: string;
+}
+
+export const fetchCriticals = async (restaurantId: number): Promise<Suggestion[]> => {
+    try {
+        const response = await fetch(`http://localhost:3000/ingredients/suggestions/${restaurantId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error fetching ingredient suggestions: ${response.statusText}`);
+        }
+        const data: Suggestion[] = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch ingredients suggestions:", error);
+        throw error;
+    }
+};
+
+export const fetchAllPrepItems = async (restaurantId: number): Promise<PrepItem[]> => {
+    try {
+        console.log("fetching prep items pricing");
+        const response = await fetch(`http://localhost:3000/prepitems/${restaurantId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error fetching categories pricing: ${response.statusText}`);
+        }
+        const data: PrepItem[] = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch ingredients pricing:", error);
         throw error;
     }
 };

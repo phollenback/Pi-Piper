@@ -1,8 +1,4 @@
 {
-  "/prep-dash/page": "app/prep-dash/page.js",
-  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
-  "/prep-dash/recipebook/page": "app/prep-dash/recipebook/page.js",
-  "/manager-dash/page": "app/manager-dash/page.js",
-  "/login/page": "app/login/page.js",
-  "/_not-found/page": "app/_not-found/page.js"
+  "/manager-dash/market/page": "app/manager-dash/market/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }

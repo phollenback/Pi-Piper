@@ -359,6 +359,10 @@ img, video {
   margin: .5rem;
 }
 
+.m-4 {
+  margin: 1rem;
+}
+
 .my-1 {
   margin-top: .25rem;
   margin-bottom: .25rem;
@@ -437,6 +441,10 @@ img, video {
   display: grid;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
 .h-full {
   height: 100%;
 }
@@ -445,24 +453,12 @@ img, video {
   height: 100vh;
 }
 
+.max-h-\[580px\] {
+  max-height: 580px;
+}
+
 .max-h-\[calc\(100vh-350px\)\] {
   max-height: calc(100vh - 350px);
-}
-
-.max-h-\[400px\] {
-  max-height: 400px;
-}
-
-.max-h-\[800px\] {
-  max-height: 800px;
-}
-
-.max-h-\[700px\] {
-  max-height: 700px;
-}
-
-.max-h-\[650px\] {
-  max-height: 650px;
 }
 
 .min-h-screen {
@@ -537,12 +533,20 @@ img, video {
   grid-auto-rows: max-content;
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -563,6 +567,10 @@ img, video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
 }
 
 .gap-16 {
@@ -615,10 +623,6 @@ img, video {
   overflow: auto;
 }
 
-.overflow-scroll {
-  overflow: scroll;
-}
-
 .overflow-x-auto {
   overflow-x: auto;
 }
@@ -641,10 +645,6 @@ img, video {
 
 .border {
   border-width: 1px;
-}
-
-.border-4 {
-  border-width: 4px;
 }
 
 .border-2 {
@@ -724,6 +724,11 @@ img, video {
   border-color: rgb(254 240 138 / var(--tw-border-opacity, 1));
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
 .bg-blue-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1));
@@ -794,6 +799,11 @@ img, video {
   background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
 }
 
+.bg-zinc-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(228 228 231 / var(--tw-bg-opacity, 1));
+}
+
 .p-2 {
   padding: .5rem;
 }
@@ -842,6 +852,11 @@ img, video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .pb-20 {
@@ -1055,6 +1070,12 @@ img, video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .15s;
+}
+
 :root {
   --background: #fff;
   --foreground: #171717;
@@ -1121,14 +1142,28 @@ body {
 }
 
 @media (width >= 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .sm\:p-20 {
     padding: 5rem;
+  }
+}
+
+@media (width >= 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (width >= 1024px) {
   .lg\:max-w-full {
     max-width: 100%;
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
