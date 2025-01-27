@@ -6,7 +6,10 @@ import IngredientDetails from "@/app/types/models/IngredientDetails";
 import DailySuggestions from "@/app/components/ManagerDash/Market/DailySuggestions";
 import { fetchCriticals } from '@/app/util/actions';
 import MarketList from "@/app/components/ManagerDash/Market/MarketList";
-
+import Link from "next/link";
+import Button from "@/app/components/Elements/Button";
+import { useDispatch } from "react-redux";
+import { logCarts } from "@/redux/features/cart/cartSlice"
 interface Suggestion {
     ingredient_id: number;
     ingredient_name: string;
@@ -21,6 +24,7 @@ const getAllIngredients = async (): Promise<IngredientDetails[]> => {
 }
 
 export default function MarketContainer() {
+    const dispatch = useDispatch();
     const [suggItems, setSuggItems] = useState<IngredientDetails[]>([]);
     const [ingredients, setIngredients] = useState<IngredientDetails[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -53,6 +57,9 @@ export default function MarketContainer() {
         setSearchTerm(query);
     }
 
+    const handleCartClick = () => {
+        dispatch(logCarts());
+    }
     const filteredIngredients = ingredients.filter(ingredient => 
         ingredient.ingredientName.toLowerCase().includes(searchTerm.toLowerCase()) &&
         !suggItems.some(suggestion => suggestion.ingredientId === ingredient.ingredientId)
@@ -62,21 +69,30 @@ export default function MarketContainer() {
         <div className="flex flex-col items-center p-6">
             <div className="flex items-center mb-4 w-full justify-between">
                 <h1 className="text-3xl font-bold pl-12"><i>Provider Market</i></h1>
+                <Button
+                    label="view cart."
+                    onClick={handleCartClick}
+                    style={{
+                        backgroundColor: "black",
+                        color: "white",
+                    }}
+                />
+                <Link href="/manager-dash/market/cart"><i>View Cart</i></Link>
                 <SearchInput 
                     placeholder="Search..."
                     onSearch={handleSearch}
                     error={searchTerm ? "" : "Please enter a search term."}
                 />
             </div>
-            <div className="mt-4 w-full flex justify-center border bg-zinc-100">
+            <div className="mt-4 w-full flex justify-center border-2 border-black bg-zinc-100">
                     <DailySuggestions 
                         list={suggItems}
                     />
             </div>
-            <div className="mt-4 w-full flex justify-center border bg-zinc-100">
-                    <MarketList 
-                        list={filteredIngredients}
-                    />
+            <div className="mt-4 w-full flex justify-center border-2 border-black bg-zinc-100">
+                <MarketList 
+                    list={filteredIngredients}
+                />
             </div>
         </div>
     );

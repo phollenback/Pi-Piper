@@ -193,6 +193,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$RadioButton$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/login/RadioButton.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/redux/features/cart/cartSlice.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-redux/dist/react-redux.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Card$2f$Card$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@mui/joy/Card/Card.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$CardContent$2f$CardContent$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@mui/joy/CardContent/CardContent.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Typography$2f$Typography$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@mui/joy/Typography/Typography.js [app-ssr] (ecmascript)");
@@ -211,29 +213,46 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$mat
 ;
 ;
 ;
+;
+;
 const IngredientCard = ({ item })=>{
-    const [qty, setQty] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
-    const [selectedProvider, setSelectedProvider] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [quantity, setQuantity] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [selectedProvider, setSelectedProvider] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Sysco'); // Change to string
+    const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDispatch"])();
     const handleAddClick = ()=>{
-        setQty(qty + 1);
+        setQuantity(quantity + 1);
     };
     const handleSubClick = ()=>{
-        setQty(qty - 1);
+        setQuantity(quantity - 1);
     };
-    const handleItemAdd = ()=>{};
-    const onSyscoChange = ()=>{
-        setSelectedProvider(!selectedProvider);
+    const handleItemAdd = ()=>{
+        const itemWithQuantity = {
+            ...item,
+            quantity: quantity // Ensure we are passing the current quantity
+        };
+        console.log("Item being added to cart:", itemWithQuantity);
+        if (selectedProvider === 'Sysco') {
+            dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["addToSyscoCart"])(itemWithQuantity));
+        } else {
+            dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["addToUsFoodsCart"])(itemWithQuantity));
+        }
+    };
+    const onSyscoChange = (provider)=>{
+        setSelectedProvider(provider);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Card$2f$Card$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+        color: "primary",
         variant: "outlined",
         sx: {
             width: 450,
-            boxShadow: 2,
+            boxShadow: 3,
             borderRadius: 2,
             transition: '0.3s',
             '&:hover': {
-                boxShadow: 6
-            }
+                boxShadow: 8,
+                bgcolor: '#f0f4f8',
+                cursor: 'pointer'
+            } // Light background on hover
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$CardContent$2f$CardContent$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -243,12 +262,13 @@ const IngredientCard = ({ item })=>{
                         sx: {
                             fontWeight: 'bold',
                             marginBottom: 1,
-                            textAlign: 'center'
+                            textAlign: 'center',
+                            color: '#2C3E50'
                         },
                         children: item.ingredientName
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                        lineNumber: 40,
+                        lineNumber: 62,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Box$2f$Box$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Box$3e$__["Box"], {
@@ -268,25 +288,22 @@ const IngredientCard = ({ item })=>{
                                 children: "Sysco"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 44,
+                                lineNumber: 66,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Typography$2f$Typography$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 level: "body-lg",
-                                textColor: "text.secondary",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("b", {
-                                    children: [
-                                        "$",
-                                        item.syscoPrice.toFixed(2)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                    lineNumber: 48,
-                                    columnNumber: 25
-                                }, this)
-                            }, void 0, false, {
+                                sx: {
+                                    fontWeight: 'bold',
+                                    color: item.syscoPrice < item.usFoodsPrice ? 'green' : 'red'
+                                },
+                                children: [
+                                    "$",
+                                    item.syscoPrice.toFixed(2)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 47,
+                                lineNumber: 69,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Divider$2f$Divider$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -296,7 +313,7 @@ const IngredientCard = ({ item })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 50,
+                                lineNumber: 72,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Typography$2f$Typography$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -308,48 +325,44 @@ const IngredientCard = ({ item })=>{
                                 children: "US Foods"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 51,
+                                lineNumber: 73,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$Typography$2f$Typography$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 level: "body-lg",
-                                className: "text-bold",
-                                textColor: "text.secondary",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("b", {
-                                    children: [
-                                        "$",
-                                        item.usFoodsPrice.toFixed(2)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                    lineNumber: 55,
-                                    columnNumber: 25
-                                }, this)
-                            }, void 0, false, {
+                                sx: {
+                                    fontWeight: 'bold',
+                                    color: item.usFoodsPrice < item.syscoPrice ? 'green' : 'red'
+                                },
+                                children: [
+                                    "$",
+                                    item.usFoodsPrice.toFixed(2)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 54,
+                                lineNumber: 76,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$RadioButton$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                label: `Selected: ${selectedProvider ? 'Sysco' : 'US Foods'}`,
-                                onChange: onSyscoChange,
-                                checked: selectedProvider,
+                                label: `Selected: ${selectedProvider || 'None'}`,
+                                onChange: ()=>onSyscoChange(selectedProvider === 'Sysco' ? 'US Foods' : 'Sysco'),
+                                checked: selectedProvider === 'Sysco',
                                 size: "medium"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 57,
+                                lineNumber: 79,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                        lineNumber: 43,
+                        lineNumber: 65,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                lineNumber: 39,
+                lineNumber: 61,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$CardOverflow$2f$CardOverflow$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -377,16 +390,16 @@ const IngredientCard = ({ item })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 68,
-                                columnNumber: 21
+                                lineNumber: 90,
+                                columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "px-16",
-                                children: qty
+                                className: "px-4",
+                                children: quantity
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 78,
-                                columnNumber: 21
+                                lineNumber: 100,
+                                columnNumber: 25
                             }, this),
                             " ",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -400,11 +413,11 @@ const IngredientCard = ({ item })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 79,
-                                columnNumber: 21
+                                lineNumber: 101,
+                                columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                label: "Add",
+                                label: "Add to Cart",
                                 onClick: handleItemAdd,
                                 size: "medium",
                                 style: {
@@ -414,29 +427,29 @@ const IngredientCard = ({ item })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 89,
-                                columnNumber: 21
+                                lineNumber: 111,
+                                columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                        lineNumber: 67,
-                        columnNumber: 17
+                        lineNumber: 89,
+                        columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                    lineNumber: 66,
-                    columnNumber: 13
+                    lineNumber: 88,
+                    columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                lineNumber: 65,
+                lineNumber: 87,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-        lineNumber: 38,
+        lineNumber: 51,
         columnNumber: 9
     }, this);
 };
@@ -557,7 +570,15 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$Market$2f$DailySuggestions$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/ManagerDash/Market/DailySuggestions.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$Market$2f$MarketList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/ManagerDash/Market/MarketList.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/redux/features/cart/cartSlice.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-redux/dist/react-redux.mjs [app-ssr] (ecmascript)");
 'use client';
+;
+;
+;
+;
 ;
 ;
 ;
@@ -572,6 +593,7 @@ const getAllIngredients = async ()=>{
     return await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchIngredientPricing"])(1);
 };
 function MarketContainer() {
+    const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDispatch"])();
     const [suggItems, setSuggItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [ingredients, setIngredients] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
@@ -597,6 +619,9 @@ function MarketContainer() {
     const handleSearch = (query)=>{
         setSearchTerm(query);
     };
+    const handleCartClick = ()=>{
+        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["logCarts"])());
+    };
     const filteredIngredients = ingredients.filter((ingredient)=>ingredient.ingredientName.toLowerCase().includes(searchTerm.toLowerCase()) && !suggItems.some((suggestion)=>suggestion.ingredientId === ingredient.ingredientId));
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col items-center p-6",
@@ -610,12 +635,38 @@ function MarketContainer() {
                             children: "Provider Market"
                         }, void 0, false, {
                             fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                            lineNumber: 64,
+                            lineNumber: 71,
                             columnNumber: 58
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                        lineNumber: 64,
+                        lineNumber: 71,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        label: "view cart.",
+                        onClick: handleCartClick,
+                        style: {
+                            backgroundColor: "black",
+                            color: "white"
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/manager-dash/market/page.tsx",
+                        lineNumber: 72,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        href: "/manager-dash/market/cart",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("i", {
+                            children: "View Cart"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/manager-dash/market/page.tsx",
+                            lineNumber: 80,
+                            columnNumber: 56
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/manager-dash/market/page.tsx",
+                        lineNumber: 80,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$SearchInput$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -624,47 +675,47 @@ function MarketContainer() {
                         error: searchTerm ? "" : "Please enter a search term."
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                        lineNumber: 65,
+                        lineNumber: 81,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                lineNumber: 63,
+                lineNumber: 70,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-4 w-full flex justify-center border bg-zinc-100",
+                className: "mt-4 w-full flex justify-center border-2 border-black bg-zinc-100",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$Market$2f$DailySuggestions$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                     list: suggItems
                 }, void 0, false, {
                     fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                    lineNumber: 72,
+                    lineNumber: 88,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                lineNumber: 71,
+                lineNumber: 87,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "mt-4 w-full flex justify-center border bg-zinc-100",
+                className: "mt-4 w-full flex justify-center border-2 border-black bg-zinc-100",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$Market$2f$MarketList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                     list: filteredIngredients
                 }, void 0, false, {
                     fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                    lineNumber: 77,
-                    columnNumber: 21
+                    lineNumber: 93,
+                    columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                lineNumber: 76,
+                lineNumber: 92,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-        lineNumber: 62,
+        lineNumber: 69,
         columnNumber: 9
     }, this);
 }

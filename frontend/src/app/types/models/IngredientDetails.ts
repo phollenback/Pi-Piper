@@ -4,5 +4,6 @@ export default interface IngredientDetails {
     syscoPrice: number;
     usFoodsPrice: number;
     last_date_ordered: Date;
+    quantity? : number;
     restaurantId: number;
 }

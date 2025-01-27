@@ -533,6 +533,10 @@ img, video {
   grid-auto-rows: max-content;
 }
 
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -543,10 +547,6 @@ img, video {
 
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -799,11 +799,6 @@ img, video {
   background-color: rgb(39 39 42 / var(--tw-bg-opacity, 1));
 }
 
-.bg-zinc-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(228 228 231 / var(--tw-bg-opacity, 1));
-}
-
 .p-2 {
   padding: .5rem;
 }
@@ -852,11 +847,6 @@ img, video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.px-16 {
-  padding-left: 4rem;
-  padding-right: 4rem;
 }
 
 .pb-20 {
@@ -1160,10 +1150,6 @@ body {
 @media (width >= 1024px) {
   .lg\:max-w-full {
     max-width: 100%;
-  }
-
-  .lg\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 

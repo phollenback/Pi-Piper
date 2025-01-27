@@ -1,4 +1,4 @@
 {
   "/manager-dash/market/page": "app/manager-dash/market/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/manager-dash/market/cart/page": "app/manager-dash/market/cart/page.js"
 }
