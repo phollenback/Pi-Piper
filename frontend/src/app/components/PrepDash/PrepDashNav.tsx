@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Button from "../Elements/Button";
 import { useRouter } from "next/navigation";
 import SearchInput from "../Elements/SearchInput";
+import { SignOutButton } from "@clerk/nextjs";
 
 // *** REDUX ***
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
@@ -79,7 +80,7 @@ const PrepDashNav: React.FC = () => {
       </div>
 
       {/* Right Button */}
-      <div>
+      <div className="text-white">
         <Button
           label="Manager Login"
           onClick={() => handleNavigation("/manager-dash")}
@@ -88,8 +89,10 @@ const PrepDashNav: React.FC = () => {
             backgroundColor: "white",
             color: "black",
             fontWeight: "bold",
+            marginRight: "20px"
           }}
         />
+        <SignOutButton />
       </div>
     </nav>
   );

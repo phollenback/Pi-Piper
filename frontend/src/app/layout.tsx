@@ -1,6 +1,9 @@
+// Styles
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+// Providers
+import { ClerkProvider } from '@clerk/nextjs'
 import StoreProvider from "./StoreProvider";
 import { ReactQueryClientProvider } from "./ReactQueryClientProvider";
 
@@ -21,22 +24,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ReactQueryClientProvider>
-        <StoreProvider>
-          <html lang="en">
-            <head>
-                <link rel="manifest" href="/manifest.json" />
-                <link rel="icon" href="/next.svg" />
-                <meta name="theme-color" content="#000000" />
-            </head>
-            <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
-              {children}
-            </body>
-          </html>
-        </StoreProvider>
-    </ReactQueryClientProvider>
+    <ClerkProvider>
+      <ReactQueryClientProvider>
+          <StoreProvider>
+            <html lang="en">
+              <head>
+                  <link rel="manifest" href="/manifest.json" />
+                  <link rel="icon" href="/next.svg" />
+                  <meta name="theme-color" content="#000000" />
+              </head>
+              <body
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+              >
+                {children}
+              </body>
+            </html>
+          </StoreProvider>
+      </ReactQueryClientProvider>
+    </ClerkProvider>
 
   );
 }

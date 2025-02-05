@@ -4,13 +4,15 @@ export default function CartContainer() {
     return (
         <div className="flex w-full">
             <div className="grid grid-cols-2 gap-4 m-4 w-full">
-                <div className="flex justify-center items-center border-2 border-black h-full">
-                    <div className="text-center text-2xl">sysco</div>
-                    <ProviderCart provider="Sysco"/>
+                {/* Sysco Provider Section */}
+                <div className="flex flex-col border-2 border-black h-full p-4">
+                    <div className="text-center text-2xl mb-4">Sysco</div>
+                    <ProviderCart provider="Sysco" />
                 </div>
-                <div className="flex justify-center items-center border-2 border-black h-full">
-                    <div className="text-center">us foods</div>
-                    <ProviderCart provider="USFoods"/>
+                {/* US Foods Provider Section */}
+                <div className="flex flex-col border-2 border-black h-full p-4">
+                    <div className="text-center text-2xl mb-4">US Foods</div>
+                    <ProviderCart provider="USFoods" />
                 </div>
             </div>
         </div>
