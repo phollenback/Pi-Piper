@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import SelectBox from "../../components/Elements/ui/SelectBox";
 import RecipeDisplay from "@/app/components/PrepDash/Recipebook/RecipeDisplay";
@@ -23,25 +23,10 @@ export default function RecipeBookContainer() {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const dispatch = useDispatch();
   const recipes = fetchRecipes();
-
-  const { data: categories = [], isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await fetch("http://localhost:3000/categories");
-      if (!response.ok) {
-        throw new Error("Failed to fetch categories");
-      }
-      return  response.json();
-    },
-  });
-
-  if (isLoading) {
-    return <div>Loading categories...</div>;
-  }
-
-  if (isError) {
-    return <div>Error: {error instanceof Error ? error.message : "An error occurred"}</div>;
-  }
+  const qc = useQueryClient();
+  const categories : Category[] = [];
+  
+  qc.setQueryData(["categories"], () => categories)
 
   // Filter recipes based on selected category ID
   const filteredRecipes = recipes.filter((recipe) => {
@@ -60,7 +45,6 @@ export default function RecipeBookContainer() {
   const handleReset = () => {
     setSelectedCategory(""); // Clear selected category
     dispatch(setPrepSearchTerm("")); // Reset search term
-    refetch();
   };
 
   return (

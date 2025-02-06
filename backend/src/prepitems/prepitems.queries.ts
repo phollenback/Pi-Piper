@@ -1,3 +1,4 @@
+import { updateDailyPrepItem } from "./prepitem.dal";
 
 export const prepQueries = {
     getPrepItems: `
@@ -40,5 +41,17 @@ export const prepQueries = {
     SELECT prep_item_id
     FROM dim_prep_item
     WHERE prep_item_name = ? AND restaurant_id = ?
+    `,
+
+    updateDailyPrepItem:`
+    UPDATE fact_daily_prep_list
+    SET 
+        quantity = ?,
+        status = ?,
+        updated_at = CURRENT_TIMESTAMP
+    WHERE 
+        restaurant_id = ? 
+        && 
+        list_item_id = ?;
     `
 }

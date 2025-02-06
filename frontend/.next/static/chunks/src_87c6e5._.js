@@ -572,8 +572,27 @@ __turbopack_esm__({
     "fetchDailyPrepItems": (()=>fetchDailyPrepItems),
     "fetchPrepItemCards": (()=>fetchPrepItemCards),
     "fetchRecipes": (()=>fetchRecipes),
+    "getButtonColor": (()=>getButtonColor),
     "getDailyList": (()=>getDailyList)
 });
+const getButtonColor = (name)=>{
+    switch(name){
+        case "Slicer":
+            return "red";
+        case "Pantry":
+            return "green";
+        case "Oven":
+            return "grey";
+        case "Grill":
+            return "blue";
+        case "Cold Prep":
+            return "orange";
+        case "All":
+            return "black";
+        default:
+            return "blue";
+    }
+};
 const fetchDailyPrepItems = ()=>{
     return [
         {

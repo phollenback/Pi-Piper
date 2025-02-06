@@ -35,7 +35,22 @@ export const readDailyPrepItems = async (req: Request, res: Response) => {
     }
 };
 
+export const updateDailyPrepItem = async (req: Request, res: Response) => {
+    logger.info('[prepitems.controller][updateDailyPrepItems][START]');
+    try {
+        let restaurantId = Number(req.params.restaurantId);
 
+        const response = await PrepItemDal.updateDailyPrepItem(restaurantId, req.body);
+        logger.info('[prepitems.controller][updateDailyPrepItems][SUCCESS]', { response });
+
+        res.status(200).json(response);
+    } catch (error) {
+        logger.error('[prepitems.controller][updateDailyPrepItem][ERROR]', { error });
+        res.status(500).json({
+            message: 'There was an error when fetching prep items'
+        });
+    }
+};
 
 export const createPrepItem = async (req: Request, res: Response) => {
     logger.info('[prepitem.controller][createPrepItem][START]');

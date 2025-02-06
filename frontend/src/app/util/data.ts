@@ -1,4 +1,21 @@
-  
+export const getButtonColor = (name: string) => {
+  switch (name) {
+      case "Slicer":
+          return "red";
+      case "Pantry":
+          return "green";
+      case "Oven":
+          return "grey";
+      case "Grill":
+          return "blue";
+      case "Cold Prep":
+          return "orange";
+      case "All":
+          return "black";
+      default:
+          return "blue";
+  }
+};
   export const fetchDailyPrepItems = () => {
     return [
       { 
