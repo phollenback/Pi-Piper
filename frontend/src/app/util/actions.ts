@@ -199,3 +199,22 @@ export const postDailyPrep = async (prepList: PrepListItem[],restaurantId: numbe
     }
 };
 
+export const fetchDailyList = async (): Promise<PrepListItem[]> => {
+    try {
+        const response = await fetch(`http://localhost:3000/prepitems/daily/1`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        });
+
+        if (!response.ok) {
+            console.error("Error fetching daily list:", response.statusText);
+            return []; //
+        }
+
+        const data: PrepListItem[] = await response.json();
+        return data || []; // 
+    } catch (error) {
+        console.error("Failed to get daily prep:", error);
+        return []; // 
+    }
+};

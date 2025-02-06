@@ -39,7 +39,7 @@ export const updateDailyPrepItem = async (req: Request, res: Response) => {
     logger.info('[prepitems.controller][updateDailyPrepItems][START]');
     try {
         let restaurantId = Number(req.params.restaurantId);
-
+        console.log(req.body);
         const response = await PrepItemDal.updateDailyPrepItem(restaurantId, req.body);
         logger.info('[prepitems.controller][updateDailyPrepItems][SUCCESS]', { response });
 

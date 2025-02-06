@@ -143,7 +143,7 @@ export const getPrepItemId = async (itemName: string, restaurantId: number) => {
 export const updateDailyPrepItem = async (restaurantId: number, item : PrepListItem) => {
     logger.info('[prepitem.dao][updateDailyPrepItem][START]', { item, restaurantId });
     try {
-        const result = await execute<PrepListItem[]>(prepQueries.updateDailyPrepItem, [item.quantity, item.status, restaurantId, item.prep_list_id]);
+        const result = await execute<PrepListItem[]>(prepQueries.updateDailyPrepItem, [item.quantity, item.status, restaurantId, item.name]);
         logger.info('[prepitem.dao][updateDailyPrepItems][SUCCESS]', { result });
         return result;
     } catch (error) {

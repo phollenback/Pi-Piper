@@ -1,6 +1,5 @@
 "use client"
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ButtonGroup from "../components/Elements/ButtonGroup";
 import Button from "../components/Elements/Button";
@@ -8,17 +7,20 @@ import Kanban from "../components/PrepDash/DailyPrep/Kanban";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { fetchCategories } from "../util/actions";
+import { fetchDailyList } from "../util/actions";
 
 // TYPES ***************
 import Category from "../types/models/Category";
 import PrepListItem from "../types/models/PrepListItem";
 import { getButtonColor } from "../util/data";
 
-
 export default function PrepContainer() {
     const dispatch = useDispatch();
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
-    const [prepItems, setPrepItems] = useState<PrepListItem[]>([]);
+    const { data: prepItems = [], isLoading } = useQuery<PrepListItem[]>({
+        queryKey: ["prepItems"],
+        queryFn: fetchDailyList
+    })
    
     const { data: categories = []} = useQuery<Category[]>({
         queryKey: ["categories"],
@@ -36,20 +38,11 @@ export default function PrepContainer() {
         dispatch(setPrepSearchTerm("")); // Clear the search term
     };
 
-    useEffect(() => {
-        const fetchPrepItems = async () => {
-            try {
-                const response = await axios.get<PrepListItem[]>("http://localhost:3000/prepitems/daily/1");
-                setPrepItems(response.data);
-                console.log("Prep Items", response.data)
-            } catch (error) {
-                console.error("Error fetching prep items:", error);
-            }
-        };
-
-        fetchPrepItems();
-    }, []);
-
+    if(isLoading) {
+        return(
+            <div>loading lists...</div>
+        )
+    }
     return (
         <div className="pt-4">
             {/* Button Group and Reset Button */}

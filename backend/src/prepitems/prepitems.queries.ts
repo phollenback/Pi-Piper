@@ -44,14 +44,14 @@ export const prepQueries = {
     `,
 
     updateDailyPrepItem:`
-    UPDATE fact_daily_prep_list
+    UPDATE fact_daily_prep_list f
+    JOIN dim_prep_item d ON f.prep_item_id = d.prep_item_id
     SET 
-        quantity = ?,
-        status = ?,
-        updated_at = CURRENT_TIMESTAMP
+        f.quantity = ?,
+        f.status = ?,
+        f.updated_at = CURRENT_TIMESTAMP
     WHERE 
-        restaurant_id = ? 
-        && 
-        list_item_id = ?;
+        f.restaurant_id = ? 
+        AND d.prep_item_name = ?;
     `
 }

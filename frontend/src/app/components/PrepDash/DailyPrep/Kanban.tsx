@@ -25,25 +25,28 @@ const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
 
   const updateStatusMutation = useMutation({
     mutationFn: async (prepItem: PrepListItem) => {
-        const updatedItem: PrepListItem = {
-            ...prepItem,
-            status: prepItem.status === "complete" ? "todo" : "complete",
-          };
+      const updatedItem: PrepListItem = {
+        ...prepItem,
+        status: prepItem.status === "complete" ? "todo" : "complete",
+      };
+  
+      console.log("Updating:", updatedItem); // Debugging
+  
       const response = await fetch(`http://localhost:3000/prepitems/daily/1`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ updatedItem }),
+        body: JSON.stringify(updatedItem), // Remove the wrapping {}
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to update item status");
       }
-
-      return { ...prepItem };
+  
+      return response.json();
     },
-    onSuccess: (updatedItem: PrepListItem) => {
-        console.log(updatedItem);
-      queryClient.invalidateQueries({ queryKey: ["prepItems"] }); // Refetch lists
+    onSuccess: (data) => {
+      console.log("Mutation success:", data);
+      queryClient.invalidateQueries({ queryKey: ["prepItems"] }); // Ensure fresh data
     },
   });
 
