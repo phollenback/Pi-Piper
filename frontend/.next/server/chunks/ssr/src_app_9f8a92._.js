@@ -216,6 +216,7 @@ const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ fetchDepProgress = async (restau
     }
 };
 const /*#__TURBOPACK_DISABLE_EXPORT_MERGING__*/ postDailyPrep = async (prepList, restaurantId)=>{
+    console.log('posting', prepList);
     try {
         const response = await fetch(`http://localhost:3000/prepitems/daily/${restaurantId}`, {
             method: 'POST',

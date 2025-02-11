@@ -1,4 +1,3 @@
-import { updateDailyPrepItem } from "./prepitem.dal";
 
 export const prepQueries = {
     getPrepItems: `
@@ -23,7 +22,7 @@ export const prepQueries = {
 
     createDailyPrepItems: `
     INSERT INTO fact_daily_prep_list (prep_list_id, restaurant_id, prep_item_id, quantity, unit, status, date)
-    VALUES (?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, '2025-01-14');
     `,
 
     updatePrepItem:`
@@ -52,6 +51,6 @@ export const prepQueries = {
         f.updated_at = CURRENT_TIMESTAMP
     WHERE 
         f.restaurant_id = ? 
-        AND d.prep_item_name = ?;
+        AND d.prep_item_name = ?
     `
 }

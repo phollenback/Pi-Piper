@@ -503,6 +503,22 @@ class PrepItemAdapter {
         this.restaurant_id = 1;
         this.date = new Date().toISOString();
     }
+    toPlainObject() {
+        // Destructure properties for clarity and conciseness
+        const { prep_list_id, name, description, note, quantity, unit, status, category, restaurant_id, date } = this;
+        return {
+            prep_list_id,
+            name,
+            description,
+            note,
+            quantity,
+            unit,
+            status,
+            category,
+            restaurant_id,
+            date
+        };
+    }
 }
 }}),
 "[project]/src/app/util/data.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
@@ -1756,20 +1772,35 @@ function PlanPage() {
     }, [
         dailyPrepList
     ]);
-    const handleCompleteClick = ()=>{
+    const handleCompleteClick = async ()=>{
         if (isVerified && verifierName) {
-            console.log('Posting Prep List:', PrepListItems);
-            // Check for null values
-            const hasNulls = PrepListItems.some((item)=>item === null);
+            console.log('Preparing to post the following Prep List:', PrepListItems);
+            const hasNulls = PrepListItems.some((item)=>item == null);
             if (hasNulls) {
                 console.error('Prep List contains null values:', PrepListItems);
                 return; // Prevent the post if there are nulls
             }
-            const res = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["postDailyPrep"])(PrepListItems, 1);
-            if (!res) {
-                setErrorMessage("An Error Occurred internally.");
-            } else {
-                alert('List Created!');
+            // Convert PrepListItems to plain objects using PrepItemAdapter's method
+            const plainObjects = PrepListItems.map((item)=>{
+                if (item instanceof __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$types$2f$models$2f$PrepItem$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PrepItemAdapter"]) {
+                    return item.toPlainObject(); // Use the method defined in PrepItemAdapter
+                }
+                // You could alternatively throw an error or handle the case where it's not an instance
+                console.warn("Item is not an instance of PrepItemAdapter:", item);
+                return {};
+            });
+            console.log('plainObjects:', plainObjects);
+            try {
+                const response = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["postDailyPrep"])(plainObjects, 1);
+                if (!response) {
+                    setErrorMessage("An error occurred internally.");
+                } else {
+                    alert('List Created!');
+                    setPrepListItems([]); // Clear the list after posting
+                }
+            } catch (error) {
+                console.error("Error while posting daily prep:", error);
+                setErrorMessage("Failed to post daily prep.");
             }
         } else {
             setErrorMessage("Please enter the verifier's name and verify the list before submitting.");
@@ -1819,7 +1850,7 @@ function PlanPage() {
             children: "Error loading plan..."
         }, void 0, false, {
             fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-            lineNumber: 145,
+            lineNumber: 163,
             columnNumber: 12
         }, this);
     }
@@ -1854,7 +1885,7 @@ function PlanPage() {
                                 placeholder: "Select a category"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 170,
+                                lineNumber: 188,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1863,7 +1894,7 @@ function PlanPage() {
                                 children: "Reset"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 176,
+                                lineNumber: 194,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ui$2f$NumberSelect$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1875,20 +1906,20 @@ function PlanPage() {
                                 onChange: (value)=>setStep(value)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 182,
+                                lineNumber: 200,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 168,
+                        lineNumber: 186,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "my-4 border-black"
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 192,
+                        lineNumber: 210,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$AllPrepList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1899,13 +1930,13 @@ function PlanPage() {
                         onQuantityChange: handleQuantityChange
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 195,
+                        lineNumber: 213,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                lineNumber: 167,
+                lineNumber: 185,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1923,7 +1954,7 @@ function PlanPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 207,
+                                lineNumber: 225,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1937,20 +1968,20 @@ function PlanPage() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 210,
+                                lineNumber: 228,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 206,
+                        lineNumber: 224,
                         columnNumber: 9
                     }, this),
                     errorMessage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ErrorMessage$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                         message: errorMessage
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 221,
+                        lineNumber: 239,
                         columnNumber: 26
                     }, this),
                     isBreakdown ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$NewPrepList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1958,7 +1989,7 @@ function PlanPage() {
                         handleCardClick: handleListClick
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 223,
+                        lineNumber: 241,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PrepListBreakdown$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1969,12 +2000,12 @@ function PlanPage() {
                             categories: categories
                         }, void 0, false, {
                             fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                            lineNumber: 226,
+                            lineNumber: 244,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 225,
+                        lineNumber: 243,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1988,19 +2019,19 @@ function PlanPage() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 235,
+                        lineNumber: 253,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                lineNumber: 205,
+                lineNumber: 223,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-        lineNumber: 165,
+        lineNumber: 183,
         columnNumber: 5
     }, this);
 }

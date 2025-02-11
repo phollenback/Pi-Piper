@@ -78,7 +78,7 @@ export const createPrepItem = async (req: Request, res: Response) => {
 
 export const createDailyPrepItems = async (req: Request, res: Response) => {
     console.log('[prepitem.controller][createDailyPrepItems][START]');
-    console.log("Received body:", req.body); // Log the entire incoming body
+    console.log("Received body.prepList :", req.body.prepList); // Log the entire incoming body
 
     // Validation check
     const errors = validationResult(req);
@@ -91,7 +91,7 @@ export const createDailyPrepItems = async (req: Request, res: Response) => {
         const restaurantId = Number(req.params.restaurantId);
         console.log('[prepitem.controller][createDailyPrepItems][RESTAURANT_ID]', { restaurantId });
 
-        const items = Array.isArray(req.body) ? req.body : [req.body];
+        const items = Array.isArray(req.body.prepList) ? req.body.prepList : [req.body.prepList];
         console.log('[prepitem.controller][createDailyPrepItems][ITEMS]', { items });
 
         const response = await PrepItemDal.createDailyPrepItems(restaurantId, items); // Call the DAO function for arrays

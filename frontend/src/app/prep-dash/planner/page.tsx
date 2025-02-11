@@ -81,20 +81,38 @@ export default function PlanPage() {
     fetchData();
   }, [dailyPrepList]);
 
-  const handleCompleteClick = () => {
+  const handleCompleteClick = async () => {
     if (isVerified && verifierName) {
-        console.log('Posting Prep List:', PrepListItems);
-        // Check for null values
-        const hasNulls = PrepListItems.some(item => item === null);
+        console.log('Preparing to post the following Prep List:', PrepListItems);
+        const hasNulls = PrepListItems.some(item => item == null);
         if (hasNulls) {
             console.error('Prep List contains null values:', PrepListItems);
             return; // Prevent the post if there are nulls
         }
-        const res = postDailyPrep(PrepListItems, 1);
-        if(!res) {
-          setErrorMessage("An Error Occurred internally.");
-        } else {
-          alert('List Created!');
+
+        // Convert PrepListItems to plain objects using PrepItemAdapter's method
+        const plainObjects : PrepListItem[] | unknown = PrepListItems.map(item => {
+            if (item instanceof PrepItemAdapter) {
+                return item.toPlainObject(); // Use the method defined in PrepItemAdapter
+            }
+            // You could alternatively throw an error or handle the case where it's not an instance
+            console.warn("Item is not an instance of PrepItemAdapter:", item);
+            return {};
+        });
+
+        console.log('plainObjects:', plainObjects)
+
+        try {
+            const response = await postDailyPrep(plainObjects, 1);
+            if (!response) {
+                setErrorMessage("An error occurred internally.");
+            } else {
+                alert('List Created!');
+                setPrepListItems([]); // Clear the list after posting
+            }
+        } catch (error) {
+            console.error("Error while posting daily prep:", error);
+            setErrorMessage("Failed to post daily prep.");
         }
     } else {
         setErrorMessage("Please enter the verifier's name and verify the list before submitting.");

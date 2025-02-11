@@ -48,11 +48,14 @@ export const createPrepItem = async (restaurantId: number, item: PrepItem) => {
 
 export const createDailyPrepItems = async (restaurantId: number, items: PrepListItem[]) => {
     console.log('[prepitem.dao][createDailyPrepItems][START]', { restaurantId });
-
     try {
         const prepItems = [];
 
         for (let item of items) {
+            const prepListId = item.prep_list_id; // Accessing prep_list_id
+            console.log('Using prep_list_id:', prepListId);
+            console.log(item);
+
             console.log('[prepitem.dao][createDailyPrepItems][ITEM]', { item });
 
             const prepItemIds = await execute<any[]>(prepQueries.getPrepItemId, [item.name, restaurantId]);
@@ -69,11 +72,12 @@ export const createDailyPrepItems = async (restaurantId: number, items: PrepList
             const prepItemId = Number(prepItemIds[0].prep_item_id);
             console.log('[prepitem.dao][createDailyPrepItems][PREP_ITEM_ID]', { prepItemId });
 
-            const tomorrow = addDays(new Date(), 1); // Get tomorrow's date
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1); // Get tomorrow's date
             const formattedDate = tomorrow.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
 
             const result = await execute(prepQueries.createDailyPrepItems, [
-                item.prep_list_id,
+                prepListId, // Use prep_list_id here
                 restaurantId,
                 prepItemId,
                 item.quantity,

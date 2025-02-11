@@ -42,4 +42,33 @@ export class PrepItemAdapter implements PrepListItem {
         this.restaurant_id = 1;
         this.date = new Date().toISOString();
     }
+
+    toPlainObject() {
+        // Destructure properties for clarity and conciseness
+        const {
+            prep_list_id,
+            name,
+            description,
+            note,
+            quantity,
+            unit,
+            status,
+            category,
+            restaurant_id,
+            date,
+        } = this;
+
+        return {
+            prep_list_id,
+            name,
+            description,
+            note,
+            quantity,
+            unit,
+            status,
+            category,
+            restaurant_id,
+            date,
+        };
+    }
 }

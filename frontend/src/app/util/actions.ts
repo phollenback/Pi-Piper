@@ -178,7 +178,8 @@ export const fetchDepProgress = async (restaurantId: number): Promise<Department
     }
 };
 
-export const postDailyPrep = async (prepList: PrepListItem[],restaurantId: number): Promise<PrepItemAdapter[]> => {
+export const postDailyPrep = async (prepList: PrepListItem[] | unknown,restaurantId: number): Promise<PrepItemAdapter[]> => {
+    console.log('posting', prepList);
     try {
         const response = await fetch(`http://localhost:3000/prepitems/daily/${restaurantId}`, {
             method: 'POST',
