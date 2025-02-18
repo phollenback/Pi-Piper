@@ -3,6 +3,7 @@ import * as PrepItemDal from './prepitem.dal';
 import { logger } from '../middleware/winston.middleware';
 const { validationResult } = require('express-validator');
 
+// Retrieves all prep items for a restaurant
 export const readPrepItems = async (req: Request, res: Response) => {
     logger.info('[prepitems.controller][readPrepItems][START]');
     try {
@@ -19,6 +20,7 @@ export const readPrepItems = async (req: Request, res: Response) => {
     }
 };
 
+// Fetches daily prep items for a restaurant
 export const readDailyPrepItems = async (req: Request, res: Response) => {
     logger.info('[prepitems.controller][readDailyPrepItems][START]');
     try {
@@ -35,6 +37,7 @@ export const readDailyPrepItems = async (req: Request, res: Response) => {
     }
 };
 
+// Updates a daily prep item for a restaurant
 export const updateDailyPrepItem = async (req: Request, res: Response) => {
     logger.info('[prepitems.controller][updateDailyPrepItems][START]');
     try {
@@ -42,6 +45,8 @@ export const updateDailyPrepItem = async (req: Request, res: Response) => {
         console.log(req.body);
         const response = await PrepItemDal.updateDailyPrepItem(restaurantId, req.body);
         logger.info('[prepitems.controller][updateDailyPrepItems][SUCCESS]', { response });
+
+        const invResponse = await 
 
         res.status(200).json(response);
     } catch (error) {
@@ -52,6 +57,7 @@ export const updateDailyPrepItem = async (req: Request, res: Response) => {
     }
 };
 
+// Creates a new prep item with validation
 export const createPrepItem = async (req: Request, res: Response) => {
     logger.info('[prepitem.controller][createPrepItem][START]');
 

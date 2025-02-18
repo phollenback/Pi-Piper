@@ -9,6 +9,7 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+// Reusable input component with error handling and dynamic styling
 const InputField: React.FC<InputFieldProps> = ({ id, type, placeholder, error, value, onChange }) => (
   <div className="flex flex-col gap-2">
     <input

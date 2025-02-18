@@ -1,8 +1,9 @@
 import IngredientDetails from "@/app/types/models/IngredientDetails";
 import IngredientCard from "./IngredientCard";
 
+// MarketList component: displays a list of ingredient cards.
 interface MarketListProps {
-    list: IngredientDetails[];
+    list: IngredientDetails[]; // Array of ingredient details.
 }
 
 const MarketList: React.FC<MarketListProps> = ({list} : MarketListProps) => {

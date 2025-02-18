@@ -7,15 +7,18 @@ import { requestLogger, responseTimeLogger } from '../middleware/winston.middlew
 
 const router = Router();
 
+// Apply logging middleware
 router.use(responseTimeLogger);
 router.use(requestLogger);
 
+// Retrieve managers for a specific restaurant
 router
     .get(
         '/:restaurantId',
         asyncHandler(ManagerController.readManager) 
     );
 
+// Create new manager with validation
 router
     .post(
         '/manager',
@@ -23,6 +26,7 @@ router
         asyncHandler(ManagerController.createManager) 
     );
 
+// Update existing manager details with validation
 router
     .put(
         '/:managerId',
@@ -30,6 +34,7 @@ router
         asyncHandler(ManagerController.updateManager) 
     );
 
+// Remove manager from the system
 router
     .delete(
         '/:managerId',

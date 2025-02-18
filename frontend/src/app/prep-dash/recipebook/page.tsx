@@ -3,12 +3,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import SelectBox from "../../components/Elements/ui/SelectBox";
 import RecipeDisplay from "@/app/components/PrepDash/Recipebook/RecipeDisplay";
-import RecipeListing from "@/app/components/PrepDash/Recipebook/RecipeListing"; // Import RecipeListing
+import RecipeListing from "@/app/components/PrepDash/Recipebook/RecipeListing"; 
 import { fetchRecipes } from "@/app/util/data";
 import { useDispatch } from "react-redux";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import Category from "@/app/types/models/Category";
 
+// Recipe data structure.
 interface Recipe {
   id: number;
   name: string;
@@ -18,17 +19,18 @@ interface Recipe {
   procedure: string;
 }
 
+// RecipeBookContainer component: allows filtering and displaying recipes.
 export default function RecipeBookContainer() {
-  const [selectedCategory, setSelectedCategory] = useState<string | number>(""); // Can be string or number
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | number>(""); 
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null); // Selected recipe state.
   const dispatch = useDispatch();
-  const recipes = fetchRecipes();
+  const recipes = fetchRecipes(); // Fetch recipes (this should likely be a useQuery)
   const qc = useQueryClient();
-  const categories : Category[] = [];
+  const categories : Category[] = []; //This should probably be fetched as well.
   
   qc.setQueryData(["categories"], () => categories)
 
-  // Filter recipes based on selected category ID
+  // Filters recipes based on the selected category.
   const filteredRecipes = recipes.filter((recipe) => {
     const matchesCategory = selectedCategory
       ? recipe.category === (typeof selectedCategory === "string" ? parseInt(selectedCategory) : selectedCategory)
@@ -36,15 +38,16 @@ export default function RecipeBookContainer() {
     return matchesCategory;
   });
 
-  // Extract category names and IDs to pass to the SelectBox options
+  // Creates options for the category select box.
   const categoryOptions = categories.map((category: Category) => ({
     label: category.category_name,
     value: category.category_id,
   }));
 
+  // Resets the selected category and search term.
   const handleReset = () => {
-    setSelectedCategory(""); // Clear selected category
-    dispatch(setPrepSearchTerm("")); // Reset search term
+    setSelectedCategory(""); 
+    dispatch(setPrepSearchTerm("")); 
   };
 
   return (
@@ -53,11 +56,11 @@ export default function RecipeBookContainer() {
         {/* Left column (SelectBox and Reset Button) */}
         <div className="col-span-1 bg-zinc-50 p-4">
           <div className="flex items-center space-x-4 mb-4">
-            {/* SelectBox */}
+            {/* SelectBox for category selection. */}
             <SelectBox
               value={selectedCategory}
-              onChange={(value) => setSelectedCategory(value)} // Pass value directly
-              options={categoryOptions} // Pass category options (ID and name)
+              onChange={(value) => setSelectedCategory(value)} 
+              options={categoryOptions} 
               placeholder="Select a category"
             />
             {/* Reset Button */}
@@ -81,7 +84,7 @@ export default function RecipeBookContainer() {
 
         {/* Right column (RecipeDisplay) */}
         <div className="col-span-3">
-          {/* Display details of the selected recipe */}
+          {/* Displays the selected recipe. */}
           <RecipeDisplay selectedRecipe={selectedRecipe} />
         </div>
       </div>

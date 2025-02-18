@@ -1,4 +1,3 @@
-// Extend the Response interface to include responseTime
 declare module 'express-serve-static-core' {
     interface Response {
         responseTime?: string;

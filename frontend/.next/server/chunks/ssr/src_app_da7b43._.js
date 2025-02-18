@@ -5,11 +5,12 @@ module.exports = {
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
-/* __next_internal_action_entry_do_not_use__ {"7f03447a864184ad99cd1c226e7e2fc7e16dd1d737":"postPrepItem","7f33cc7fd1032411f82e6fbdc2248c475df82c2a06":"fetchCategories","7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4":"fetchIngredientPricing","7f49266e824781455f55896155276e6a6ef41730c5":"fetchAllPrepItems","7f725c80df0c1c9ea215f20eec6397b1574b5e6f14":"postDailyPrep","7f80a789cf799c4f50aedc055fdf00609660406cb2":"fetchCriticals","7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8":"fetchAllIngredients","7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d":"fetchDepartments","7fc6f68946061eca83543b9ee24154bc1883f400e0":"fetchDepProgress"} */ __turbopack_esm__({
+/* __next_internal_action_entry_do_not_use__ {"7f03447a864184ad99cd1c226e7e2fc7e16dd1d737":"postPrepItem","7f33cc7fd1032411f82e6fbdc2248c475df82c2a06":"fetchCategories","7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4":"fetchIngredientPricing","7f49266e824781455f55896155276e6a6ef41730c5":"fetchAllPrepItems","7f651c65f150232bdb34d12ef996aaec58d846b1cd":"fetchDailyList","7f725c80df0c1c9ea215f20eec6397b1574b5e6f14":"postDailyPrep","7f80a789cf799c4f50aedc055fdf00609660406cb2":"fetchCriticals","7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8":"fetchAllIngredients","7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d":"fetchDepartments","7fc6f68946061eca83543b9ee24154bc1883f400e0":"fetchDepProgress"} */ __turbopack_esm__({
     "fetchAllIngredients": (()=>fetchAllIngredients),
     "fetchAllPrepItems": (()=>fetchAllPrepItems),
     "fetchCategories": (()=>fetchCategories),
     "fetchCriticals": (()=>fetchCriticals),
+    "fetchDailyList": (()=>fetchDailyList),
     "fetchDepProgress": (()=>fetchDepProgress),
     "fetchDepartments": (()=>fetchDepartments),
     "fetchIngredientPricing": (()=>fetchIngredientPricing),
@@ -27,6 +28,7 @@ var fetchDepartments = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
 var postPrepItem = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7f03447a864184ad99cd1c226e7e2fc7e16dd1d737", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "postPrepItem");
 var fetchDepProgress = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7fc6f68946061eca83543b9ee24154bc1883f400e0", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "fetchDepProgress");
 var postDailyPrep = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7f725c80df0c1c9ea215f20eec6397b1574b5e6f14", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "postDailyPrep");
+var fetchDailyList = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7f651c65f150232bdb34d12ef996aaec58d846b1cd", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "fetchDailyList");
 }}),
 "[project]/src/app/components/Elements/login/InputField.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -38,6 +40,7 @@ __turbopack_esm__({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 ;
+// Reusable input component with error handling and dynamic styling
 const InputField = ({ id, type, placeholder, error, value, onChange })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col gap-2",
         children: [
@@ -51,7 +54,7 @@ const InputField = ({ id, type, placeholder, error, value, onChange })=>/*#__PUR
                 className: `border px-3 py-2 rounded-md ${error ? 'border-red-500' : 'border-gray-300'}`
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/InputField.tsx",
-                lineNumber: 14,
+                lineNumber: 15,
                 columnNumber: 5
             }, this),
             error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -59,13 +62,13 @@ const InputField = ({ id, type, placeholder, error, value, onChange })=>/*#__PUR
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/InputField.tsx",
-                lineNumber: 23,
+                lineNumber: 24,
                 columnNumber: 15
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/login/InputField.tsx",
-        lineNumber: 13,
+        lineNumber: 14,
         columnNumber: 3
     }, this);
 const __TURBOPACK__default__export__ = InputField;
@@ -80,7 +83,7 @@ __turbopack_esm__({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-ssr] (ecmascript)"); // Custom button you made earlier
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/login/InputField.tsx [app-ssr] (ecmascript)");
 'use client';
 ;
@@ -89,12 +92,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 ;
 function SearchInput({ placeholder, onSearch, error }) {
     const [query, setQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
+    // Handles changes to the input field, updating the query state.
     const handleChange = (e)=>{
         setQuery(e.target.value);
     };
+    // Handles form submission, triggering the search callback.
     const handleSearch = (e)=>{
         e.preventDefault();
-        onSearch(query); // Trigger the search with the current query
+        onSearch(query);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
         onSubmit: handleSearch,
@@ -109,7 +114,7 @@ function SearchInput({ placeholder, onSearch, error }) {
                 onChange: handleChange
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
-                lineNumber: 27,
+                lineNumber: 30,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -122,13 +127,13 @@ function SearchInput({ placeholder, onSearch, error }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
-                lineNumber: 35,
+                lineNumber: 38,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
-        lineNumber: 26,
+        lineNumber: 29,
         columnNumber: 5
     }, this);
 }
@@ -144,7 +149,7 @@ __turbopack_esm__({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 ;
 const RadioButton = ({ label, onChange, checked = false, size = "medium" })=>{
-    // Define size-specific classes
+    // Size-specific styling classes.
     const sizeClasses = {
         small: "text-sm",
         medium: "text-base",
@@ -154,14 +159,13 @@ const RadioButton = ({ label, onChange, checked = false, size = "medium" })=>{
         className: "flex items-center gap-2 text-gray-500 font-bold",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                type: "checkbox" // Changed to "checkbox" for toggle behavior
-                ,
+                type: "checkbox",
                 className: `leading-tight ${sizeClasses[size]}`,
                 onChange: onChange,
                 checked: checked
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/RadioButton.tsx",
-                lineNumber: 25,
+                lineNumber: 26,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -169,13 +173,13 @@ const RadioButton = ({ label, onChange, checked = false, size = "medium" })=>{
                 children: label
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/RadioButton.tsx",
-                lineNumber: 31,
+                lineNumber: 32,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/login/RadioButton.tsx",
-        lineNumber: 24,
+        lineNumber: 25,
         columnNumber: 5
     }, this);
 };
@@ -216,27 +220,30 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$mat
 ;
 ;
 const IngredientCard = ({ item })=>{
-    const [quantity, setQuantity] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
-    const [selectedProvider, setSelectedProvider] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Sysco'); // Change to string
+    const [quantity, setQuantity] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0); // Quantity of ingredient to add.
+    const [selectedProvider, setSelectedProvider] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('Sysco'); // Selected provider ('Sysco' or 'US Foods').
     const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDispatch"])();
+    // Increments the quantity.
     const handleAddClick = ()=>{
         setQuantity(quantity + 1);
     };
+    // Decrements the quantity.
     const handleSubClick = ()=>{
-        setQuantity(quantity - 1);
+        setQuantity(Math.max(0, quantity - 1)); // Prevents quantity from going below 0.
     };
+    // Adds the selected ingredient to the cart.
     const handleItemAdd = ()=>{
         const itemWithQuantity = {
             ...item,
-            quantity: quantity // Ensure we are passing the current quantity
-        };
-        console.log("Item being added to cart:", itemWithQuantity);
+            quantity
+        }; //Adds quantity to item object
         if (selectedProvider === 'Sysco') {
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["addToSyscoCart"])(itemWithQuantity));
         } else {
             dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["addToUsFoodsCart"])(itemWithQuantity));
         }
     };
+    // Handles the change of selected provider.
     const onSyscoChange = (provider)=>{
         setSelectedProvider(provider);
     };
@@ -252,7 +259,7 @@ const IngredientCard = ({ item })=>{
                 boxShadow: 8,
                 bgcolor: '#f0f4f8',
                 cursor: 'pointer'
-            } // Light background on hover
+            }
         },
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$joy$2f$CardContent$2f$CardContent$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -398,10 +405,9 @@ const IngredientCard = ({ item })=>{
                                 children: quantity
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 100,
+                                lineNumber: 99,
                                 columnNumber: 25
                             }, this),
-                            " ",
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 label: "Subtract",
                                 onClick: handleSubClick,
@@ -413,7 +419,7 @@ const IngredientCard = ({ item })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 101,
+                                lineNumber: 100,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -427,7 +433,7 @@ const IngredientCard = ({ item })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx",
-                                lineNumber: 111,
+                                lineNumber: 110,
                                 columnNumber: 25
                             }, this)
                         ]
@@ -467,6 +473,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$Market$2f$IngredientCard$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/ManagerDash/Market/IngredientCard.tsx [app-ssr] (ecmascript)");
 ;
 ;
+// Responsive grid display of suggested ingredients with adaptive column layout
 const DailySuggestions = ({ list })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "p-4 text-center",
@@ -487,23 +494,23 @@ const DailySuggestions = ({ list })=>{
                             item: ingredient
                         }, index, false, {
                             fileName: "[project]/src/app/components/ManagerDash/Market/DailySuggestions.tsx",
-                            lineNumber: 19,
+                            lineNumber: 18,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/Market/DailySuggestions.tsx",
-                    lineNumber: 17,
+                    lineNumber: 16,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/Market/DailySuggestions.tsx",
-                lineNumber: 16,
+                lineNumber: 15,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/ManagerDash/Market/DailySuggestions.tsx",
-        lineNumber: 11,
+        lineNumber: 12,
         columnNumber: 9
     }, this);
 };
@@ -530,7 +537,7 @@ const MarketList = ({ list })=>{
                 children: "All Ingredients"
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/Market/MarketList.tsx",
-                lineNumber: 12,
+                lineNumber: 13,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -539,18 +546,18 @@ const MarketList = ({ list })=>{
                         item: ingredient
                     }, index, false, {
                         fileName: "[project]/src/app/components/ManagerDash/Market/MarketList.tsx",
-                        lineNumber: 17,
+                        lineNumber: 18,
                         columnNumber: 25
                     }, this))
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/Market/MarketList.tsx",
-                lineNumber: 15,
+                lineNumber: 16,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/ManagerDash/Market/MarketList.tsx",
-        lineNumber: 10,
+        lineNumber: 11,
         columnNumber: 9
     }, this);
 };
@@ -586,9 +593,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$red
 ;
 ;
 ;
+// Fetch critical inventory items for the restaurant
 const getCriticals = async ()=>{
     return await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchCriticals"])(1);
 };
+// Fetch all ingredients with pricing information
 const getAllIngredients = async ()=>{
     return await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchIngredientPricing"])(1);
 };
@@ -597,6 +606,7 @@ function MarketContainer() {
     const [suggItems, setSuggItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [ingredients, setIngredients] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    // Load all ingredients on component mount
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const fetchIngredients = async ()=>{
             const ing = await getAllIngredients();
@@ -604,6 +614,7 @@ function MarketContainer() {
         };
         fetchIngredients();
     }, []);
+    // Match critical items with full ingredient details
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const fetchSuggestions = async ()=>{
             const suggestions = await getCriticals();
@@ -622,6 +633,7 @@ function MarketContainer() {
     const handleCartClick = ()=>{
         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["logCarts"])());
     };
+    // Filter ingredients excluding suggested items
     const filteredIngredients = ingredients.filter((ingredient)=>ingredient.ingredientName.toLowerCase().includes(searchTerm.toLowerCase()) && !suggItems.some((suggestion)=>suggestion.ingredientId === ingredient.ingredientId));
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col items-center p-6",
@@ -635,12 +647,12 @@ function MarketContainer() {
                             children: "Provider Market"
                         }, void 0, false, {
                             fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                            lineNumber: 71,
+                            lineNumber: 79,
                             columnNumber: 58
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                        lineNumber: 71,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -652,7 +664,7 @@ function MarketContainer() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                        lineNumber: 72,
+                        lineNumber: 80,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -661,12 +673,12 @@ function MarketContainer() {
                             children: "View Cart"
                         }, void 0, false, {
                             fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                            lineNumber: 80,
+                            lineNumber: 88,
                             columnNumber: 56
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                        lineNumber: 80,
+                        lineNumber: 88,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$SearchInput$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -675,13 +687,13 @@ function MarketContainer() {
                         error: searchTerm ? "" : "Please enter a search term."
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                        lineNumber: 81,
+                        lineNumber: 89,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                lineNumber: 70,
+                lineNumber: 78,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -690,12 +702,12 @@ function MarketContainer() {
                     list: suggItems
                 }, void 0, false, {
                     fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                    lineNumber: 88,
+                    lineNumber: 96,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                lineNumber: 87,
+                lineNumber: 95,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -704,18 +716,18 @@ function MarketContainer() {
                     list: filteredIngredients
                 }, void 0, false, {
                     fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                    lineNumber: 93,
+                    lineNumber: 101,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/manager-dash/market/page.tsx",
-                lineNumber: 92,
+                lineNumber: 100,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/manager-dash/market/page.tsx",
-        lineNumber: 69,
+        lineNumber: 77,
         columnNumber: 9
     }, this);
 }

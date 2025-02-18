@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Button from "../../Elements/Button";
 import { RootState } from "@/redux/lib/store";
 
+// Recipe data structure.
 interface Recipe {
   id: number;
   name: string;
@@ -12,15 +13,17 @@ interface Recipe {
   procedure: string;
 }
 
+// RecipeListing component: displays a list of recipes, allowing selection.
 interface RecipeListingProps {
-  recipes: Recipe[]; // Recipe data passed to the component
-  onRecipeSelect: (recipe: Recipe) => void; // Callback to handle recipe selection
+  recipes: Recipe[]; // Array of recipe objects.
+  onRecipeSelect: (recipe: Recipe) => void; // Callback function for selecting a recipe.
 }
 
 const RecipeListing: React.FC<RecipeListingProps> = ({ recipes, onRecipeSelect }) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const prepSearchTerm = useSelector((state: RootState) => state.search.prepSearchTerm);
+  const [searchTerm, setSearchTerm] = useState<string>(""); // Local search term state.
+  const prepSearchTerm = useSelector((state: RootState) => state.search.prepSearchTerm); // Redux search term.
 
+  // Filters recipes based on the search term.
   const filteredRecipes = recipes.filter((recipe) => {
     const lowercasedTerm = searchTerm.toLowerCase();
     return (
@@ -29,6 +32,7 @@ const RecipeListing: React.FC<RecipeListingProps> = ({ recipes, onRecipeSelect }
     );
   });
 
+  // Updates the local search term when the Redux search term changes.
   useEffect(() => {
     setSearchTerm(prepSearchTerm);
   }, [prepSearchTerm]);
@@ -40,14 +44,13 @@ const RecipeListing: React.FC<RecipeListingProps> = ({ recipes, onRecipeSelect }
           <Button
             key={recipe.id}
             label={recipe.name}
-            onClick={() => onRecipeSelect(recipe)} // Pass full recipe object
+            onClick={() => onRecipeSelect(recipe)} 
             size="large"
             style={{
               backgroundColor: "rgb(21, 205, 30)",
               cursor: "pointer",
               width: "90%",
-              marginBottom: "10px",
-              
+              marginBottom: "10px",              
             }}
           />
         ))}

@@ -2,9 +2,8 @@ import DepartmentProgress from "../components/ManagerDash/Dash/DepartmentProgres
 import InventoryTable from "../components/ManagerDash/Dash/InventoryTable";
 import TimeVariables from "../components/ManagerDash/Dash/TimeVariables";
 
-
+// Manager dashboard container with time tracking, inventory management, and department progress monitoring
 export default function ManagerContainer() {
-  
   return (
     <div className="min-h-screen pt-4 grid grid-cols-4">
       <div className="h-full col-span-2 border-r border-black flex flex-col">

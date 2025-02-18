@@ -3,9 +3,11 @@ import { execute } from '../services/pg.connector';
 import { categoryQueries } from './category.queries';
 import { logger } from '../middleware/winston.middleware';
 
+// Get all categories from the database
 export const getCategories = async () => {
     logger.info('[category.dao][getCategories][START]');
     try {
+        // use pg connector to execute query
         const categories = await execute<Category[]>(categoryQueries.getCategories, []);
         logger.info('[category.dao][getCategories][SUCCESS]', { categories });
         return categories;

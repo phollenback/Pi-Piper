@@ -33,6 +33,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('<h1 style="text-align:>Welcome to the Pi-Piper API</h1>');
 });
 
+// attach module routes
 app.use('/restaurants', restaurantRouter);
 app.use('/prepitems', prepItemRouter);
 app.use('/managers', managerRoutes);
@@ -53,4 +54,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 // Start Server
 app.listen(port, () => {
   console.log(`Pi Piper app listening at http://localhost:${port}`);
-  });
+});

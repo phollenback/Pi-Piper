@@ -10,9 +10,11 @@ __turbopack_esm__({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 ;
+// SelectBox component: a customizable select box with options.
 const SelectBox = ({ value, onChange, options, placeholder = "Select an option", title })=>{
+    // Handles changes to the select box, updating the parent component.
     const handleChange = (event)=>{
-        onChange(event.target.value); // Send string or number value
+        onChange(event.target.value);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col",
@@ -29,7 +31,7 @@ const SelectBox = ({ value, onChange, options, placeholder = "Select an option",
                     children: placeholder
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-                    lineNumber: 29,
+                    lineNumber: 31,
                     columnNumber: 9
                 }, this),
                 options.map((option, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -37,18 +39,18 @@ const SelectBox = ({ value, onChange, options, placeholder = "Select an option",
                         children: option.label
                     }, `${option.value}-${index}`, false, {
                         fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-                        lineNumber: 33,
+                        lineNumber: 35,
                         columnNumber: 11
                     }, this))
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-            lineNumber: 22,
+            lineNumber: 24,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-        lineNumber: 21,
+        lineNumber: 23,
         columnNumber: 5
     }, this);
 };
@@ -64,6 +66,7 @@ __turbopack_esm__({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 ;
+// Reusable input component with error handling and dynamic styling
 const InputField = ({ id, type, placeholder, error, value, onChange })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col gap-2",
         children: [
@@ -77,7 +80,7 @@ const InputField = ({ id, type, placeholder, error, value, onChange })=>/*#__PUR
                 className: `border px-3 py-2 rounded-md ${error ? 'border-red-500' : 'border-gray-300'}`
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/InputField.tsx",
-                lineNumber: 14,
+                lineNumber: 15,
                 columnNumber: 5
             }, this),
             error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -85,13 +88,13 @@ const InputField = ({ id, type, placeholder, error, value, onChange })=>/*#__PUR
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/InputField.tsx",
-                lineNumber: 23,
+                lineNumber: 24,
                 columnNumber: 15
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/login/InputField.tsx",
-        lineNumber: 13,
+        lineNumber: 14,
         columnNumber: 3
     }, this);
 const __TURBOPACK__default__export__ = InputField;
@@ -115,34 +118,26 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 ;
 ;
 const Heading = ({ setSection, setSelectedCategory, selectedCategory, categories })=>{
-    const [searchError, setSearchError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    const [selectedSection, setSelectedSection] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("prepitem");
-    const [query, setQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    const [searchError, setSearchError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(""); // Error message for invalid search.
+    const [query, setQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(""); // Current search query.
+    // Handles changes to the category selection.
     const handleCategoryChange = (value)=>{
         setSelectedCategory(value === "" ? null : Number(value));
-        setSelectedSection("prepitem");
     };
+    // Resets the search form to its initial state.
     const handleResetClick = ()=>{
         setQuery("");
         setSearchError("");
-        setSelectedCategory(0);
+        setSelectedCategory(null); // Reset category to null
     };
+    // Handles search form submission.
     const handleSearchSubmit = (query)=>{
         if (!query.trim()) {
             setSearchError("Please enter a search term.");
             return;
         }
-        console.log("Search submitted:", query);
+    //Further search logic would go here.
     };
-    const handleSectionChange = (value)=>{
-        setSelectedSection(value);
-        setSection(value);
-    };
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        setSection("prepitem");
-    }, [
-        setSection
-    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "w-full h-full flex justify-center items-center p-6 mr-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -155,12 +150,12 @@ const Heading = ({ setSection, setSelectedCategory, selectedCategory, categories
                         children: "Start filtering."
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                        lineNumber: 52,
+                        lineNumber: 45,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                    lineNumber: 51,
+                    lineNumber: 44,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -178,7 +173,7 @@ const Heading = ({ setSection, setSelectedCategory, selectedCategory, categories
                                     onChange: (e)=>setQuery(e.target.value)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                                    lineNumber: 59,
+                                    lineNumber: 52,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -192,7 +187,7 @@ const Heading = ({ setSection, setSelectedCategory, selectedCategory, categories
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                                    lineNumber: 67,
+                                    lineNumber: 60,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -206,13 +201,13 @@ const Heading = ({ setSection, setSelectedCategory, selectedCategory, categories
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                                    lineNumber: 77,
+                                    lineNumber: 70,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                            lineNumber: 58,
+                            lineNumber: 51,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -229,63 +224,55 @@ const Heading = ({ setSection, setSelectedCategory, selectedCategory, categories
                                         placeholder: "Select Category"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                                        lineNumber: 93,
+                                        lineNumber: 86,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                                    lineNumber: 92,
+                                    lineNumber: 85,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ui$2f$SelectBox$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                        value: selectedSection,
-                                        onChange: handleSectionChange,
-                                        options: [
-                                            {
-                                                label: "Prep Items",
-                                                value: "prepitem"
-                                            },
-                                            {
-                                                label: "Ingredients",
-                                                value: "ingredient"
-                                            }
-                                        ].map((option)=>({
-                                                ...option,
-                                                value: option.value.toString()
-                                            })),
-                                        placeholder: "Select Section"
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                        label: "Switch Section",
+                                        onClick: setSection,
+                                        style: {
+                                            backgroundColor: "blue",
+                                            color: "white",
+                                            fontWeight: "bold",
+                                            padding: "0.5rem 1rem"
+                                        }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                                        lineNumber: 106,
+                                        lineNumber: 99,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                                    lineNumber: 105,
+                                    lineNumber: 98,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                            lineNumber: 90,
+                            lineNumber: 83,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-                    lineNumber: 56,
+                    lineNumber: 49,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-            lineNumber: 49,
+            lineNumber: 42,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/ManagerDash/PrepManager/Heading.tsx",
-        lineNumber: 48,
+        lineNumber: 41,
         columnNumber: 5
     }, this);
 };
@@ -296,11 +283,12 @@ const __TURBOPACK__default__export__ = Heading;
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
-/* __next_internal_action_entry_do_not_use__ {"7f03447a864184ad99cd1c226e7e2fc7e16dd1d737":"postPrepItem","7f33cc7fd1032411f82e6fbdc2248c475df82c2a06":"fetchCategories","7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4":"fetchIngredientPricing","7f49266e824781455f55896155276e6a6ef41730c5":"fetchAllPrepItems","7f725c80df0c1c9ea215f20eec6397b1574b5e6f14":"postDailyPrep","7f80a789cf799c4f50aedc055fdf00609660406cb2":"fetchCriticals","7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8":"fetchAllIngredients","7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d":"fetchDepartments","7fc6f68946061eca83543b9ee24154bc1883f400e0":"fetchDepProgress"} */ __turbopack_esm__({
+/* __next_internal_action_entry_do_not_use__ {"7f03447a864184ad99cd1c226e7e2fc7e16dd1d737":"postPrepItem","7f33cc7fd1032411f82e6fbdc2248c475df82c2a06":"fetchCategories","7f44b008dd1ba7f9a4ea24d31f66da81c3009459a4":"fetchIngredientPricing","7f49266e824781455f55896155276e6a6ef41730c5":"fetchAllPrepItems","7f651c65f150232bdb34d12ef996aaec58d846b1cd":"fetchDailyList","7f725c80df0c1c9ea215f20eec6397b1574b5e6f14":"postDailyPrep","7f80a789cf799c4f50aedc055fdf00609660406cb2":"fetchCriticals","7f82487ae7269a9dc3d5820dace69ec85b9ddb64e8":"fetchAllIngredients","7fb0433f3b6ee59ceab6ae57c578b2b3eb8005706d":"fetchDepartments","7fc6f68946061eca83543b9ee24154bc1883f400e0":"fetchDepProgress"} */ __turbopack_esm__({
     "fetchAllIngredients": (()=>fetchAllIngredients),
     "fetchAllPrepItems": (()=>fetchAllPrepItems),
     "fetchCategories": (()=>fetchCategories),
     "fetchCriticals": (()=>fetchCriticals),
+    "fetchDailyList": (()=>fetchDailyList),
     "fetchDepProgress": (()=>fetchDepProgress),
     "fetchDepartments": (()=>fetchDepartments),
     "fetchIngredientPricing": (()=>fetchIngredientPricing),
@@ -318,6 +306,7 @@ var fetchDepartments = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$proj
 var postPrepItem = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7f03447a864184ad99cd1c226e7e2fc7e16dd1d737", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "postPrepItem");
 var fetchDepProgress = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7fc6f68946061eca83543b9ee24154bc1883f400e0", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "fetchDepProgress");
 var postDailyPrep = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7f725c80df0c1c9ea215f20eec6397b1574b5e6f14", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "postDailyPrep");
+var fetchDailyList = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createServerReference"])("7f651c65f150232bdb34d12ef996aaec58d846b1cd", __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["callServer"], void 0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$client$2d$wrapper$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["findSourceMapURL"], "fetchDailyList");
 }}),
 "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
@@ -341,7 +330,7 @@ const PrepItemRow = ({ item, categoryOptions, departmentOptions, handleSelection
                 children: item.name
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                lineNumber: 17,
+                lineNumber: 18,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -349,7 +338,7 @@ const PrepItemRow = ({ item, categoryOptions, departmentOptions, handleSelection
                 children: item.description
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                lineNumber: 18,
+                lineNumber: 19,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -361,12 +350,12 @@ const PrepItemRow = ({ item, categoryOptions, departmentOptions, handleSelection
                     title: item.name
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                    lineNumber: 20,
+                    lineNumber: 21,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                lineNumber: 19,
+                lineNumber: 20,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -378,12 +367,12 @@ const PrepItemRow = ({ item, categoryOptions, departmentOptions, handleSelection
                     title: item.name
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                    lineNumber: 28,
+                    lineNumber: 29,
                     columnNumber: 7
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                lineNumber: 27,
+                lineNumber: 28,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -401,23 +390,23 @@ const PrepItemRow = ({ item, categoryOptions, departmentOptions, handleSelection
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                        lineNumber: 37,
+                        lineNumber: 38,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                    lineNumber: 36,
+                    lineNumber: 37,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-                lineNumber: 35,
+                lineNumber: 36,
                 columnNumber: 7
             }, this)
         ]
     }, item.prep_item_id, true, {
         fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/PrepItemRow.tsx",
-        lineNumber: 16,
+        lineNumber: 17,
         columnNumber: 5
     }, this);
 };
@@ -432,8 +421,12 @@ __turbopack_esm__({
     "default": (()=>__TURBOPACK__default__export__)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ui$2f$SelectBox$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/ui/SelectBox.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-ssr] (ecmascript)");
 ;
-const IngredientRow = ({ item })=>{
+;
+;
+const IngredientRow = ({ item, categoryOptions, handleSelection, handleEditClick })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -441,7 +434,7 @@ const IngredientRow = ({ item })=>{
                 children: item.ingredient_name
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
-                lineNumber: 11,
+                lineNumber: 16,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -449,7 +442,7 @@ const IngredientRow = ({ item })=>{
                 children: item.unit_of_measure
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
-                lineNumber: 12,
+                lineNumber: 17,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -457,29 +450,58 @@ const IngredientRow = ({ item })=>{
                 children: item.cost_per_unit
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
-                lineNumber: 13,
+                lineNumber: 18,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                className: "border px-4 py-2",
-                children: item.ingredient_category
+                className: "border px-4 py-2 text-center",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ui$2f$SelectBox$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                    value: item.ingredient_category,
+                    onChange: (value)=>handleSelection(item.ingredient_id, value, 'ingredient_category'),
+                    options: categoryOptions,
+                    title: item.ingredient_name
+                }, void 0, false, {
+                    fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
+                    lineNumber: 20,
+                    columnNumber: 9
+                }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
-                lineNumber: 14,
+                lineNumber: 19,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                className: "border px-4 py-2",
-                children: item.restaurant_id
+                className: "border",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "w-full h-full",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        label: "Edit",
+                        onClick: ()=>handleEditClick(item),
+                        size: "large",
+                        style: {
+                            backgroundColor: "blue",
+                            color: "white",
+                            width: "100%"
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
+                        lineNumber: 29,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
+                    lineNumber: 28,
+                    columnNumber: 9
+                }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
-                lineNumber: 15,
+                lineNumber: 27,
                 columnNumber: 7
             }, this)
         ]
     }, item.ingredient_id, true, {
         fileName: "[project]/src/app/components/ManagerDash/PrepManager/Table/IngredientRow.tsx",
-        lineNumber: 10,
+        lineNumber: 15,
         columnNumber: 5
     }, this);
 };
@@ -508,16 +530,181 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2
 ;
 ;
 ;
+// Fetch departments for the restaurant
 const getDepartments = ()=>{
-    const dep = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchDepartments"])(1);
-    return dep;
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchDepartments"])(1);
 };
+// Table component for displaying prep items
+const PrepItemTable = ({ list, categoryOptions, departmentOptions, handleSelection, handleEditClick })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+        className: "min-w-full bg-white border border-gray-200",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                className: "bg-gray-200",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Name"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 31,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Description"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 32,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Category"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 33,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Department"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 34,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 35,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                    lineNumber: 30,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                lineNumber: 29,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                children: list.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$PrepManager$2f$Table$2f$PrepItemRow$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        item: item,
+                        categoryOptions: categoryOptions,
+                        departmentOptions: departmentOptions,
+                        handleSelection: handleSelection,
+                        handleEditClick: handleEditClick
+                    }, index, false, {
+                        fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                        lineNumber: 40,
+                        columnNumber: 11
+                    }, this))
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                lineNumber: 38,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+        lineNumber: 28,
+        columnNumber: 5
+    }, this);
+};
+// Table component for displaying ingredients
+const IngredientTable = ({ list, categoryOptions, handleSelection, handleEditClick })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+        className: "min-w-full bg-white border border-gray-200",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                className: "bg-gray-200",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Name"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 60,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Unit of Measure"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 61,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Cost per Unit"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 62,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300",
+                            children: "Category"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 63,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                            className: "px-4 py-2 border-b border-gray-300"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                            lineNumber: 64,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                    lineNumber: 59,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                lineNumber: 58,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                children: list.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$PrepManager$2f$Table$2f$IngredientRow$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        item: item,
+                        categoryOptions: categoryOptions,
+                        handleSelection: handleSelection,
+                        handleEditClick: handleEditClick
+                    }, index, false, {
+                        fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                        lineNumber: 69,
+                        columnNumber: 11
+                    }, this))
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+                lineNumber: 67,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+        lineNumber: 57,
+        columnNumber: 5
+    }, this);
+};
+// Dynamic table component that handles both prep items and ingredients
 const ManagementTable = ({ activeList, category, activeSection })=>{
     const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    const [selectedCategory, setSelectedCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
-    const [activeInSection, setSection] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
-    const [list, setList] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [list, setList] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(activeList);
     const managerSearchTerm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((state)=>state.search.managerSearchTerm);
+    // Fetch and cache categories and departments
     const { data: categories = [] } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             "categories"
@@ -530,97 +717,7 @@ const ManagementTable = ({ activeList, category, activeSection })=>{
         ],
         queryFn: getDepartments
     });
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        setSearchTerm(managerSearchTerm);
-        setSelectedCategory(category);
-        setSection(activeSection);
-        setList(activeList);
-        console.log(activeInSection);
-    }, [
-        managerSearchTerm,
-        category,
-        activeList
-    ]);
-    const filteredList = (list = [])=>list.filter((item)=>{
-            if (category === 0) return item;
-            const lowercasedTerm = searchTerm.toLowerCase();
-            let matchesSearchTerm;
-            let matchesCategory;
-            if ("name" in item) {
-                matchesSearchTerm = item.name.toLowerCase().includes(lowercasedTerm) || item.description.toLowerCase().includes(lowercasedTerm) || item.kitchen_department_id.toString().includes(lowercasedTerm) || item.category.toString().includes(lowercasedTerm);
-                matchesCategory = category === null || item.category === selectedCategory;
-            } else if ("ingredient_name" in item) {
-                matchesSearchTerm = item.ingredient_name.toLowerCase().includes(lowercasedTerm);
-                matchesCategory = category === null || item.ingredient_category === selectedCategory;
-            }
-            return matchesSearchTerm && matchesCategory;
-        });
-    const renderList = ()=>{
-        // Type guard to check if the object is a PrepItem
-        const isPrepItem = (item)=>item.name !== undefined;
-        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
-            children: filteredList(list).map((item)=>{
-                if (isPrepItem(item)) {
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$PrepManager$2f$Table$2f$PrepItemRow$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                        item: item,
-                        categoryOptions: categoryOptions,
-                        departmentOptions: departmentOptions,
-                        handleSelection: handleSelection,
-                        handleEditClick: handleEditClick
-                    }, item.prep_item_id, false, {
-                        fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                        lineNumber: 86,
-                        columnNumber: 15
-                    }, this);
-                } else {
-                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$PrepManager$2f$Table$2f$IngredientRow$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                        item: item
-                    }, item.ingredient_id, false, {
-                        fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                        lineNumber: 96,
-                        columnNumber: 20
-                    }, this);
-                }
-            })
-        }, void 0, false, {
-            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-            lineNumber: 82,
-            columnNumber: 7
-        }, this);
-    };
-    const handleSelection = (id, value, field)=>{
-        const newValue = Number(value);
-        setList((prevList)=>{
-            if (prevList.length === 0) return prevList;
-            if ("prep_item_id" in prevList[0]) {
-                // prevList is PrepItem[]
-                return prevList.map((item)=>{
-                    if (item.prep_item_id === id) {
-                        return {
-                            ...item,
-                            [field]: newValue
-                        }; // Dynamically update the field
-                    }
-                    return item;
-                });
-            } else {
-                // prevList is Ingredient[]
-                return prevList.map((item)=>{
-                    if (item.ingredient_id === id) {
-                        return {
-                            ...item,
-                            [field]: newValue
-                        }; // Dynamically update the field
-                    }
-                    return item;
-                });
-            }
-        });
-    };
-    const handleEditClick = (item)=>{
-        console.log(item);
-    };
-    // Extract category names and IDs to pass to the SelectBox options
+    // Transform categories and departments for select box options
     const categoryOptions = categories.map((category)=>({
             label: category.category_name,
             value: category.category_id
@@ -629,76 +726,77 @@ const ManagementTable = ({ activeList, category, activeSection })=>{
             label: department.department_name,
             value: department.kitchen_department_id
         }));
+    // Sync component state with external changes
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        // Update search term when managerSearchTerm changes
+        setSearchTerm(managerSearchTerm);
+    }, [
+        managerSearchTerm
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        // Update list when activeList or activeSection changes
+        console.log("Active List or Section changed:", activeList, activeSection);
+        setList(activeList);
+    }, [
+        activeList,
+        activeSection
+    ]);
+    // Filter list based on search term and category selection
+    const filteredList = ()=>{
+        const lowercasedTerm = searchTerm.toLowerCase();
+        return list.filter((item)=>{
+            const matchesSearchTerm = "name" in item ? item.name.toLowerCase().includes(lowercasedTerm) || (item.description ? item.description.toLowerCase().includes(lowercasedTerm) : false) : item.ingredient_name.toLowerCase().includes(lowercasedTerm);
+            const matchesCategory = category === null || ('name' in item ? item.category === category : item.ingredient_category === category);
+            return matchesSearchTerm && matchesCategory;
+        });
+    };
+    // Updates category or department selection for items in the list
+    const handleSelection = (id, value, field)=>{
+        const newValue = Number(value);
+        setList((prevList)=>{
+            if (prevList.length === 0) return prevList;
+            return prevList.map((item)=>{
+                if ("prep_item_id" in item && item.prep_item_id === id) {
+                    return {
+                        ...item,
+                        [field]: newValue
+                    };
+                } else if ("ingredient_id" in item && item.ingredient_id === id) {
+                    return {
+                        ...item,
+                        [field]: newValue
+                    };
+                }
+                return item;
+            });
+        });
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "overflow-x-auto",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
-            className: "min-w-full bg-white border border-gray-200",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
-                    className: "bg-gray-200",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border-b border-gray-300",
-                                children: "Name"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                                lineNumber: 146,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border-b border-gray-300",
-                                children: "Description"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                                lineNumber: 147,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border-b border-gray-300",
-                                children: "Category"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                                lineNumber: 148,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border-b border-gray-300",
-                                children: "Department"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                                lineNumber: 149,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border-b border-gray-300"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                                lineNumber: 150,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                        lineNumber: 145,
-                        columnNumber: 11
-                    }, this)
-                }, void 0, false, {
-                    fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-                    lineNumber: 144,
-                    columnNumber: 9
-                }, this),
-                renderList()
-            ]
-        }, void 0, true, {
+        children: activeSection === "prepitem" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(PrepItemTable, {
+            list: filteredList(),
+            categoryOptions: categoryOptions,
+            departmentOptions: departmentOptions,
+            handleSelection: handleSelection,
+            handleEditClick: (item)=>console.log(item)
+        }, void 0, false, {
             fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-            lineNumber: 143,
-            columnNumber: 7
+            lineNumber: 159,
+            columnNumber: 15
+        }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IngredientTable, {
+            list: filteredList(),
+            categoryOptions: categoryOptions,
+            handleSelection: handleSelection,
+            handleEditClick: (item)=>console.log(item)
+        }, void 0, false, {
+            fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
+            lineNumber: 167,
+            columnNumber: 15
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/ManagerDash/PrepManager/ManagmentTable.tsx",
-        lineNumber: 142,
-        columnNumber: 5
+        lineNumber: 157,
+        columnNumber: 7
     }, this);
 };
 const __TURBOPACK__default__export__ = ManagementTable;
@@ -725,10 +823,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2
 ;
 ;
 ;
+// Fetches departments for the restaurant
 const getDepartments = ()=>{
     const dep = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchDepartments"])(1);
     return dep;
 };
+// Creates new prep item in the database
 const createPrepItem = async (formData)=>{
     const response = await fetch('/api/prepitem', {
         method: 'POST',
@@ -745,8 +845,8 @@ const createPrepItem = async (formData)=>{
     }
     return response.json();
 };
+// Form component for creating new prep items with department and category selection
 const CreateItem = ({ setItem, categories })=>{
-    // Use a single state object to manage the PrepItem attributes
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         prep_item_id: 0,
         name: "",
@@ -754,16 +854,15 @@ const CreateItem = ({ setItem, categories })=>{
         category: 1,
         kitchen_department_id: 0
     });
-    // Initialize categories as an empty array
     const [cat, setCategories] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
-    // Fetch departments using react-query
+    // Fetch and cache departments data
     const { data: departments = [] } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             "departments"
         ],
         queryFn: getDepartments
     });
-    // Ensure that `cat` is always an array before calling `map()`
+    // Transform categories and departments for select box options
     const categoryOptions = Array.isArray(cat) ? cat.map((category)=>({
             label: category.category_name,
             value: category.category_id
@@ -772,7 +871,7 @@ const CreateItem = ({ setItem, categories })=>{
             label: department.department_name,
             value: department.kitchen_department_id
         }));
-    // Handle input field changes
+    // Update form data for text inputs
     const handleChange = (e)=>{
         const { id, value } = e.target;
         setFormData((prevData)=>({
@@ -780,27 +879,28 @@ const CreateItem = ({ setItem, categories })=>{
                 [id]: value
             }));
     };
+    // Handle select box changes for category and department
     const handleSelectChange = (value, field)=>{
-        const numericValue = typeof value === "string" ? Number(value) : value; // Convert value to a number if it's a string
+        const numericValue = typeof value === "string" ? Number(value) : value;
         setFormData((prevData)=>({
                 ...prevData,
                 [field]: numericValue
             }));
     };
-    // Handle form submission
+    // Submit form data and create new prep item
     const handleSubmitClick = async ()=>{
-        setItem(formData); // Pass the new PrepItem to the parent component
-        console.log(formData); // For debugging
+        setItem(formData);
+        console.log(formData);
         const res = await createPrepItem(formData);
         if ("insertId" in res) {
             alert("New Prep Item Successfully created!");
             console.log(res.insertId);
         }
     };
-    // Update categories when they are passed as props
+    // Sync categories with props
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         console.log(categories);
-        setCategories(categories); // Update the `cat` state with the categories prop
+        setCategories(categories);
     }, [
         categories
     ]);
@@ -813,64 +913,57 @@ const CreateItem = ({ setItem, categories })=>{
                     children: "Create Prep Item"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                    lineNumber: 109,
+                    lineNumber: 111,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                lineNumber: 108,
+                lineNumber: 110,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "flex flex-col gap-4",
                 children: [
-                    " ",
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex-initial w-full",
-                        children: [
-                            " ",
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                id: "prep_item_name",
-                                type: "text",
-                                value: formData.name,
-                                onChange: handleChange,
-                                placeholder: "Enter new name"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                                lineNumber: 113,
-                                columnNumber: 5
-                            }, this)
-                        ]
-                    }, void 0, true, {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            id: "prep_item_name",
+                            type: "text",
+                            value: formData.name,
+                            onChange: handleChange,
+                            placeholder: "Enter new name"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
+                            lineNumber: 115,
+                            columnNumber: 5
+                        }, this)
+                    }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                        lineNumber: 112,
+                        lineNumber: 114,
                         columnNumber: 3
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         className: "flex-initial w-full",
-                        children: [
-                            " ",
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                id: "description",
-                                type: "text",
-                                value: formData.description,
-                                onChange: handleChange,
-                                placeholder: "Enter description"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                                lineNumber: 123,
-                                columnNumber: 5
-                            }, this)
-                        ]
-                    }, void 0, true, {
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            id: "description",
+                            type: "text",
+                            value: formData.description,
+                            onChange: handleChange,
+                            placeholder: "Enter description"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
+                            lineNumber: 125,
+                            columnNumber: 1
+                        }, this)
+                    }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                        lineNumber: 122,
-                        columnNumber: 3
+                        lineNumber: 124,
+                        columnNumber: 1
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                lineNumber: 111,
+                lineNumber: 113,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -882,13 +975,13 @@ const CreateItem = ({ setItem, categories })=>{
                     placeholder: "Select Department"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                    lineNumber: 134,
-                    columnNumber: 11
+                    lineNumber: 136,
+                    columnNumber: 7
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                lineNumber: 133,
-                columnNumber: 9
+                lineNumber: 135,
+                columnNumber: 5
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "mt-4",
@@ -899,13 +992,13 @@ const CreateItem = ({ setItem, categories })=>{
                     placeholder: "Select Category"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                    lineNumber: 143,
-                    columnNumber: 11
+                    lineNumber: 145,
+                    columnNumber: 7
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                lineNumber: 142,
-                columnNumber: 9
+                lineNumber: 144,
+                columnNumber: 5
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "mt-5",
@@ -920,18 +1013,18 @@ const CreateItem = ({ setItem, categories })=>{
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                    lineNumber: 153,
-                    columnNumber: 11
+                    lineNumber: 154,
+                    columnNumber: 7
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-                lineNumber: 152,
-                columnNumber: 9
+                lineNumber: 153,
+                columnNumber: 5
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/ManagerDash/PrepManager/CreateItem.tsx",
-        lineNumber: 107,
+        lineNumber: 109,
         columnNumber: 7
     }, this);
 };
@@ -960,18 +1053,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2
 ;
 ;
 ;
+// Fetches all prep items for a given restaurant ID.
 const fetchPrepItems = ()=>{
-    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchAllPrepItems"])(1); // Assuming 1 is the restaurantId
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchAllPrepItems"])(1);
 };
+// Fetches all ingredients for a given restaurant ID.
 const fetchIngredients = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchAllIngredients"])(1);
 };
+// Fetches all categories.
 const fetchAllCategories = ()=>{
     return (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchCategories"])();
 };
 function PrepManagerContainer() {
-    const [selectedCategory, setSelectedCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
-    const [selectedSection, setSelectedSection] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [selectedCategory, setSelectedCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null); // Selected category ID.
+    const [selectedSection, setSelectedSection] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("prepitem"); // "prepitem" for prep items, "ingredients" for ingredients.
     const { data: prepItems = [] } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             "prepItems"
@@ -990,16 +1086,29 @@ function PrepManagerContainer() {
         ],
         queryFn: fetchAllCategories
     });
-    const handleSectionSelect = (choice)=>{
-        if (choice === "prepitem") setSelectedSection(0);
-        else if (choice === "ingredient") setSelectedSection(1);
+    // Handles section selection (prep items or ingredients).
+    const handleSectionSelect = ()=>{
+        const newSection = selectedSection === "prepitem" ? "ingredients" : "prepitem";
+        console.log('Switching to Section:', newSection); // Log current section
+        setSelectedSection(newSection);
     };
+    // Handles category selection.
     const handleCategorySelect = (cat)=>{
         setSelectedCategory(cat);
     };
+    // Handles submission of a new item (prep item or ingredient).
     const handleCreateSubmit = (item)=>{
+        //Further logic would go here.
         console.log(item);
     };
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        console.log("ingredients", ingredients);
+    }, []);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        console.log("Selected Section changed:", selectedSection);
+    }, [
+        selectedSection
+    ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1012,12 +1121,12 @@ function PrepManagerContainer() {
                             children: "Republic Pi Memory"
                         }, void 0, false, {
                             fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                            lineNumber: 61,
+                            lineNumber: 76,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                        lineNumber: 60,
+                        lineNumber: 75,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1029,12 +1138,12 @@ function PrepManagerContainer() {
                             selectedCategory: selectedCategory
                         }, void 0, false, {
                             fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                            lineNumber: 66,
+                            lineNumber: 81,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                        lineNumber: 65,
+                        lineNumber: 80,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1044,34 +1153,34 @@ function PrepManagerContainer() {
                             categories: categories
                         }, void 0, false, {
                             fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                            lineNumber: 76,
+                            lineNumber: 91,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                        lineNumber: 75,
+                        lineNumber: 90,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                lineNumber: 58,
+                lineNumber: 73,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$PrepManager$2f$ManagmentTable$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                    activeList: selectedSection === 0 ? prepItems : ingredients,
+                    activeList: selectedSection === "prepitem" ? prepItems : ingredients,
                     category: selectedCategory,
                     activeSection: selectedSection
                 }, void 0, false, {
                     fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                    lineNumber: 82,
+                    lineNumber: 97,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/manager-dash/prep-manager/page.tsx",
-                lineNumber: 81,
+                lineNumber: 96,
                 columnNumber: 13
             }, this)
         ]

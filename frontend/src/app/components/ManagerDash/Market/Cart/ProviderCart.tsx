@@ -8,17 +8,18 @@ interface ProviderCartProps {
     provider: "Sysco" | "USFoods";
 }
 
+// Provider-specific cart component that manages items and calculates totals based on vendor
 const ProviderCart: React.FC<ProviderCartProps> = ({ provider }) => {
-    // Use conditional selection based on the provider
+    // Select cart data based on provider from Redux store
     const cart = useSelector((state: RootState) =>
         provider === "Sysco" ? state.cart.syscoCart : state.cart.usFoodsCart
     );
 
-    // Calculate the total price of the cart
+    // Calculate total price using provider-specific pricing
     const totalPrice = useMemo(() => {
         return cart.reduce((total, item) => {
             const price = provider === "Sysco" ? item.syscoPrice : item.usFoodsPrice;
-            return total + price * (item.quantity ?? 1); // Default to quantity of 1 if undefined
+            return total + price * (item.quantity ?? 1);
         }, 0);
     }, [cart, provider]);
 
@@ -28,14 +29,12 @@ const ProviderCart: React.FC<ProviderCartProps> = ({ provider }) => {
 
     return (
         <div className="flex flex-col h-[60vh]">
-            {/* Scrollable Cart Section */}
             <div className="flex-grow overflow-y-auto p-4">
                 {cart.map((item, index) => (
                     <CartItem key={index} item={item} />
                 ))}
             </div>
 
-            {/* Total Price Section */}
             <div className="mt-4 p-4 border-t bg-white text-right">
                 <span className="text-3xl font-bold">Total: ${totalPrice.toFixed(2)}</span>
             </div>

@@ -30,13 +30,11 @@ const ButtonGroup = ({ items, buttonWidth, buttonHeight, onButtonClick, selected
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                     label: item.category_name,
                     onClick: ()=>onButtonClick(item),
-                    size: "medium" // You can modify the size logic here
-                    ,
+                    size: "medium",
                     style: {
                         width: buttonWidth,
                         height: buttonHeight,
-                        backgroundColor: selectedButton === item.category_name ? '#4CAF50' // Highlight selected button with green
-                         : getButtonColor(item.category_name),
+                        backgroundColor: selectedButton === item.category_name ? '#4CAF50' : getButtonColor(item.category_name),
                         cursor: 'pointer'
                     }
                 }, void 0, false, {
@@ -51,7 +49,7 @@ const ButtonGroup = ({ items, buttonWidth, buttonHeight, onButtonClick, selected
             }, this))
     }, void 0, false, {
         fileName: "[project]/src/app/components/Elements/ButtonGroup.tsx",
-        lineNumber: 25,
+        lineNumber: 24,
         columnNumber: 5
     }, this);
 };
@@ -79,15 +77,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$mat
 ;
 ;
 ;
+// Dynamic prep item card that changes appearance based on completion status and allows note addition
 const DailyPrepItem = ({ prepItem, onButtonClick })=>{
     const [note, setNote] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    // Updates prep item status in parent component
     const handleClick = ()=>{
         onButtonClick(prepItem);
     };
+    // Manages note input and updates prep item state
     const handleSearch = (e)=>{
-        const newNote = e.target.value; // Get the value from the input event
+        const newNote = e.target.value;
         setNote(newNote);
-        prepItem.note = newNote; // It's better to handle state updates in a parent component
+        prepItem.note = newNote;
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Card$2f$Card$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
         sx: {
@@ -115,14 +116,14 @@ const DailyPrepItem = ({ prepItem, onButtonClick })=>{
                                 children: prepItem.name
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 39,
+                                lineNumber: 43,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 children: prepItem.description
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 40,
+                                lineNumber: 44,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -133,13 +134,13 @@ const DailyPrepItem = ({ prepItem, onButtonClick })=>{
                                 onChange: handleSearch
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 41,
+                                lineNumber: 45,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                        lineNumber: 38,
+                        lineNumber: 42,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -148,7 +149,7 @@ const DailyPrepItem = ({ prepItem, onButtonClick })=>{
                                 children: "Quantity:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 50,
+                                lineNumber: 54,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -160,29 +161,6 @@ const DailyPrepItem = ({ prepItem, onButtonClick })=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 51,
-                                columnNumber: 21
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                        lineNumber: 49,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: "Status:"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 54,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-3xl",
-                                children: prepItem.status
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
                                 lineNumber: 55,
                                 columnNumber: 21
                             }, this)
@@ -191,11 +169,34 @@ const DailyPrepItem = ({ prepItem, onButtonClick })=>{
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
                         lineNumber: 53,
                         columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                children: "Status:"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                lineNumber: 58,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-3xl",
+                                children: prepItem.status
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                lineNumber: 59,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                        lineNumber: 57,
+                        columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                lineNumber: 37,
+                lineNumber: 41,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$CardActions$2f$CardActions$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -212,18 +213,18 @@ const DailyPrepItem = ({ prepItem, onButtonClick })=>{
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                    lineNumber: 59,
+                    lineNumber: 63,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                lineNumber: 58,
+                lineNumber: 62,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-        lineNumber: 27,
+        lineNumber: 31,
         columnNumber: 9
     }, this);
 };
@@ -246,41 +247,36 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$red
 ;
 ;
 const DailyPrepList = ({ list, handleCardClick })=>{
-    const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(""); // Local state to hold search term
-    const prepSearchTerm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((state)=>state.search.prepSearchTerm);
-    // Sync the local searchTerm with the Redux search term
+    const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(""); // Local search term state.
+    const prepSearchTerm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((state)=>state.search.prepSearchTerm); // Redux search term.
+    // Syncs the local searchTerm with the Redux prepSearchTerm.
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         setSearchTerm(prepSearchTerm);
-        console.log(list);
     }, [
-        prepSearchTerm,
-        list
+        prepSearchTerm
     ]);
-    // Filter items based on searchTerm
+    // Filters the list of prep items based on the search term.
     const filteredList = list.filter((item)=>{
         const lowercasedTerm = searchTerm.toLowerCase();
         return item.name?.toLowerCase().includes(lowercasedTerm) || item.description?.toLowerCase().includes(lowercasedTerm);
     });
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "p-3 max-h-[580px] overflow-y-auto",
-        children: [
-            " ",
-            filteredList.length > 0 ? filteredList.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$DailyPrep$2f$DailyPrepItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                    prepItem: item,
-                    onButtonClick: ()=>handleCardClick(item)
-                }, index, false, {
-                    fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepList.tsx",
-                    lineNumber: 35,
-                    columnNumber: 15
-                }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                children: "No items to display."
-            }, void 0, false, {
+        children: filteredList.length > 0 ? filteredList.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$DailyPrep$2f$DailyPrepItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                prepItem: item,
+                onButtonClick: ()=>handleCardClick(item)
+            }, index, false, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepList.tsx",
-                lineNumber: 42,
-                columnNumber: 13
-            }, this)
-        ]
-    }, void 0, true, {
+                lineNumber: 35,
+                columnNumber: 15
+            }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+            children: "No items to display."
+        }, void 0, false, {
+            fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepList.tsx",
+            lineNumber: 42,
+            columnNumber: 13
+        }, this)
+    }, void 0, false, {
         fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepList.tsx",
         lineNumber: 32,
         columnNumber: 9
@@ -305,10 +301,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2
 ;
 ;
 ;
+// Kanban board component for managing prep items with todo and complete columns
 const Kanban = ({ prepItems, category })=>{
     const [todoItems, setTodoItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [completeItems, setCompleteItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const queryClient = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQueryClient"])();
+    // Filter and distribute items based on status and category
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const filteredItems = prepItems.filter((item)=>category === null || category === undefined || item.category === category || item.category === 6);
         setTodoItems(filteredItems.filter((item)=>item.status === "todo" || item.status === "in-progress"));
@@ -317,13 +315,14 @@ const Kanban = ({ prepItems, category })=>{
         prepItems,
         category
     ]);
+    // Mutation for toggling item status between complete and todo
     const updateStatusMutation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useMutation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMutation"])({
         mutationFn: async (prepItem)=>{
             const updatedItem = {
                 ...prepItem,
                 status: prepItem.status === "complete" ? "todo" : "complete"
             };
-            console.log("Updating:", updatedItem); // Debugging
+            console.log("Updating:", updatedItem);
             const response = await fetch(`http://localhost:3000/prepitems/daily/1`, {
                 method: "PUT",
                 headers: {
@@ -342,7 +341,7 @@ const Kanban = ({ prepItems, category })=>{
                 queryKey: [
                     "prepItems"
                 ]
-            }); // Ensure fresh data
+            });
         }
     });
     const handleCardClick = (prepItem)=>{
@@ -359,7 +358,7 @@ const Kanban = ({ prepItems, category })=>{
                         children: "To-Do"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/Kanban.tsx",
-                        lineNumber: 61,
+                        lineNumber: 63,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$DailyPrep$2f$DailyPrepList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -367,13 +366,13 @@ const Kanban = ({ prepItems, category })=>{
                         handleCardClick: handleCardClick
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/Kanban.tsx",
-                        lineNumber: 62,
+                        lineNumber: 64,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/Kanban.tsx",
-                lineNumber: 60,
+                lineNumber: 62,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -384,7 +383,7 @@ const Kanban = ({ prepItems, category })=>{
                         children: "Completed"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/Kanban.tsx",
-                        lineNumber: 67,
+                        lineNumber: 68,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$DailyPrep$2f$DailyPrepList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -392,19 +391,19 @@ const Kanban = ({ prepItems, category })=>{
                         handleCardClick: handleCardClick
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/Kanban.tsx",
-                        lineNumber: 68,
+                        lineNumber: 69,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/Kanban.tsx",
-                lineNumber: 66,
+                lineNumber: 67,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/PrepDash/DailyPrep/Kanban.tsx",
-        lineNumber: 58,
+        lineNumber: 61,
         columnNumber: 5
     }, this);
 };
@@ -445,6 +444,10 @@ var fetchDailyList = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$projec
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
+// 
+// This file was mainly used for mock data initially. 
+// Right now it has no references but may in the future. 
+// 
 __turbopack_esm__({
     "fetchDailyPrepItems": (()=>fetchDailyPrepItems),
     "fetchPrepItemCards": (()=>fetchPrepItemCards),
@@ -1233,33 +1236,37 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2
 function PrepContainer() {
     const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDispatch"])();
     const [selectedCategory, setSelectedCategory] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    // Fetch and cache daily prep items
     const { data: prepItems = [], isLoading } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             "prepItems"
         ],
         queryFn: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchDailyList"]
     });
+    // Fetch and cache categories
     const { data: categories = [] } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             "categories"
         ],
         queryFn: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$actions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["fetchCategories"]
     });
+    // Update selected category filter
     const handleButtonClick = (cat)=>{
         if (cat) {
             setSelectedCategory(cat);
         }
     };
+    // Reset category filter and search term
     const handleResetClick = ()=>{
-        setSelectedCategory(null); // Reset selected category
-        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$search$2f$searchSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["setPrepSearchTerm"])("")); // Clear the search term
+        setSelectedCategory(null);
+        dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$search$2f$searchSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["setPrepSearchTerm"])(""));
     };
     if (isLoading) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             children: "loading lists..."
         }, void 0, false, {
             fileName: "[project]/src/app/prep-dash/page.tsx",
-            lineNumber: 43,
+            lineNumber: 47,
             columnNumber: 13
         }, this);
     }
@@ -1273,21 +1280,19 @@ function PrepContainer() {
                         className: "flex-1",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ButtonGroup$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                             items: categories,
-                            buttonWidth: "200px" // Set button width
-                            ,
-                            buttonHeight: "80px" // Set button height
-                            ,
+                            buttonWidth: "200px",
+                            buttonHeight: "80px",
                             onButtonClick: handleButtonClick,
                             selectedButton: selectedCategory?.category_name,
                             getButtonColor: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$data$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getButtonColor"]
                         }, void 0, false, {
                             fileName: "[project]/src/app/prep-dash/page.tsx",
-                            lineNumber: 51,
+                            lineNumber: 54,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/page.tsx",
-                        lineNumber: 50,
+                        lineNumber: 53,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1303,18 +1308,18 @@ function PrepContainer() {
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/app/prep-dash/page.tsx",
-                            lineNumber: 61,
+                            lineNumber: 64,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/page.tsx",
-                        lineNumber: 60,
+                        lineNumber: 63,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/prep-dash/page.tsx",
-                lineNumber: 49,
+                lineNumber: 52,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1324,18 +1329,18 @@ function PrepContainer() {
                     category: selectedCategory?.category_id
                 }, void 0, false, {
                     fileName: "[project]/src/app/prep-dash/page.tsx",
-                    lineNumber: 76,
+                    lineNumber: 78,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/prep-dash/page.tsx",
-                lineNumber: 75,
+                lineNumber: 77,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/prep-dash/page.tsx",
-        lineNumber: 47,
+        lineNumber: 51,
         columnNumber: 9
     }, this);
 }

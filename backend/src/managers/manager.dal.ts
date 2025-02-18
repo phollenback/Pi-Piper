@@ -3,6 +3,7 @@ import { execute } from "../services/pg.connector";
 import { managerQueries } from "./manager.queries";
 import { logger } from '../middleware/winston.middleware';
 
+// Retrieves all managers for a specific restaurant
 export const getManagers = async (restaurantId: number) => {
     logger.info('[manager.dao][getManagers][START]', { restaurantId });
     try {
@@ -15,6 +16,7 @@ export const getManagers = async (restaurantId: number) => {
     }
 };
 
+// Creates a new manager with provided manager data
 export const createManager = async (managerData: Manager) => {
     logger.info('[manager.dao][createManager][START]', { managerData });
     try {
@@ -34,6 +36,7 @@ export const createManager = async (managerData: Manager) => {
     }
 };
 
+// Updates existing manager information by ID
 export const updateManager = async (managerId: number, managerData: Manager) => {
     logger.info('[manager.dao][updateManager][START]', { managerId, managerData });
     try {
@@ -54,6 +57,7 @@ export const updateManager = async (managerId: number, managerData: Manager) => 
     }
 };
 
+// Removes a manager from the system by ID
 export const deleteManager = async (managerId: number) => {
     logger.info('[manager.dao][deleteManager][START]', { managerId });
     try {

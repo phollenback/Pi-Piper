@@ -1,25 +1,26 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../redux/lib/store"; // Import RootState from store.ts
+import { RootState } from "../../../../redux/lib/store";
 import PrepItemCard from "./PrepItemCard";
 import PrepListItem from "../../../types/models/PrepListItem";
 
 interface PrepListingProps {
   list: PrepListItem[];
-  handleCardClick: (item: PrepListItem) => void; // Accept PrepListItem as argument
+  handleCardClick: (item: PrepListItem) => void;
 }
 
+// Filtered list of prep items that syncs with global search state
 const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {
-  const [searchTerm, setSearchTerm] = useState(""); // Local state to hold search term
+  const [searchTerm, setSearchTerm] = useState("");
   const prepSearchTerm = useSelector((state: RootState) => state.search.prepSearchTerm);
 
-  // Sync the local searchTerm with the Redux search term
+  // Sync local search state with Redux store
   useEffect(() => {
     setSearchTerm(prepSearchTerm);
     console.log(list);
   }, [prepSearchTerm, list]);
 
-  // Filter items based on searchTerm
+  // Filter items by name and description
   const filteredList = list.filter((item) => {
     const lowercasedTerm = searchTerm.toLowerCase();
     return (
@@ -30,13 +31,12 @@ const PrepListing: React.FC<PrepListingProps> = ({ list, handleCardClick }) => {
 
   return (
     <div>
-      
       {filteredList.length > 0 ? (
         filteredList.map((item, index) => (
           <PrepItemCard
             key={index}
             item={item}
-            onButtonClick={() => handleCardClick(item)} // Pass the item directly
+            onButtonClick={() => handleCardClick(item)}
           />
         ))
       ) : (

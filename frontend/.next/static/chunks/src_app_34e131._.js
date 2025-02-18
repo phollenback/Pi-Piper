@@ -38,7 +38,7 @@ const CartItem = ({ item })=>{
                     children: item.ingredientName
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                    lineNumber: 25,
+                    lineNumber: 26,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Box$2f$Box$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Box$3e$__["Box"], {
@@ -60,13 +60,13 @@ const CartItem = ({ item })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                                    lineNumber: 32,
+                                    lineNumber: 33,
                                     columnNumber: 38
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                            lineNumber: 31,
+                            lineNumber: 32,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Typography$2f$Typography$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Typography$3e$__["Typography"], {
@@ -81,19 +81,19 @@ const CartItem = ({ item })=>{
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                                    lineNumber: 35,
+                                    lineNumber: 36,
                                     columnNumber: 41
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                            lineNumber: 34,
+                            lineNumber: 35,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                    lineNumber: 30,
+                    lineNumber: 31,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Divider$2f$Divider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Divider$3e$__["Divider"], {
@@ -102,7 +102,7 @@ const CartItem = ({ item })=>{
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                    lineNumber: 40,
+                    lineNumber: 41,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Box$2f$Box$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Box$3e$__["Box"], {
@@ -121,7 +121,7 @@ const CartItem = ({ item })=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                            lineNumber: 42,
+                            lineNumber: 43,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Typography$2f$Typography$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Typography$3e$__["Typography"], {
@@ -134,24 +134,24 @@ const CartItem = ({ item })=>{
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                            lineNumber: 45,
+                            lineNumber: 46,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-                    lineNumber: 41,
+                    lineNumber: 42,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-            lineNumber: 23,
+            lineNumber: 24,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/ManagerDash/Market/Cart/CartItem.tsx",
-        lineNumber: 10,
+        lineNumber: 11,
         columnNumber: 9
     }, this);
 };
@@ -181,19 +181,20 @@ var _s = __turbopack_refresh__.signature();
 ;
 ;
 ;
+// Provider-specific cart component that manages items and calculates totals based on vendor
 const ProviderCart = ({ provider })=>{
     _s();
-    // Use conditional selection based on the provider
+    // Select cart data based on provider from Redux store
     const cart = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSelector"])({
         "ProviderCart.useSelector[cart]": (state)=>provider === "Sysco" ? state.cart.syscoCart : state.cart.usFoodsCart
     }["ProviderCart.useSelector[cart]"]);
-    // Calculate the total price of the cart
+    // Calculate total price using provider-specific pricing
     const totalPrice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "ProviderCart.useMemo[totalPrice]": ()=>{
             return cart.reduce({
                 "ProviderCart.useMemo[totalPrice]": (total, item)=>{
                     const price = provider === "Sysco" ? item.syscoPrice : item.usFoodsPrice;
-                    return total + price * (item.quantity ?? 1); // Default to quantity of 1 if undefined
+                    return total + price * (item.quantity ?? 1);
                 }
             }["ProviderCart.useMemo[totalPrice]"], 0);
         }
@@ -236,18 +237,18 @@ const ProviderCart = ({ provider })=>{
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/ManagerDash/Market/Cart/ProviderCart.tsx",
-                    lineNumber: 40,
+                    lineNumber: 39,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/Market/Cart/ProviderCart.tsx",
-                lineNumber: 39,
+                lineNumber: 38,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/ManagerDash/Market/Cart/ProviderCart.tsx",
-        lineNumber: 30,
+        lineNumber: 31,
         columnNumber: 9
     }, this);
 };

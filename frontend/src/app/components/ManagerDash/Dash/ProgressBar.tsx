@@ -1,7 +1,9 @@
 import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
+// Dynamic progress indicator that changes color based on completion percentage
 const ProgressCircle: React.FC<{ percentage: number }> = ({ percentage }) => {
+  // Determines color based on progress thresholds: ≥75% success, ≤50% error, else primary
   const getColor = () => {
     if(percentage >= 75)
       return "success"

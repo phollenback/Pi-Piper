@@ -7,16 +7,15 @@ interface DepartmentProps {
   completed_items: number;
 }
 
+// Department progress card displaying completion metrics with visual progress indicator
 const Department: React.FC<DepartmentProps> = ({ name, progress, total_items, completed_items }: DepartmentProps) => {
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-row items-center bg-white p-8 border-b-4 border-black w-full">
-        {/* Left Section: Progress Circle */}
         <div className="w-1/4 flex justify-center">
           <ProgressCircle percentage={progress} />
         </div>
 
-        {/* Right Section: Name and Details */}
         <div className="w-3/4 pl-6">
           <div className="text-2xl font-bold">{name}</div>
           <div className="text-lg mt-4">

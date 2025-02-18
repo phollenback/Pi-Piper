@@ -1,31 +1,31 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "../Elements/Button";
 import { useRouter } from "next/navigation";
 import RadioButton from "../Elements/login/RadioButton";
 
+// InitialLogin component: presents buttons for PrepList and Manager login options.
 const InitialLogin: React.FC = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false); // State for "Stay Signed In" checkbox.
 
   const router = useRouter();
 
+  // Navigates to the PrepList dashboard.
   const handleListClick = () => {
     router.push("/prep-dash");
   };
 
+  // Navigates to the Manager login page.
   const handleManagerClick = () => {
     router.push("/manager/login");
   };
 
+  // Toggles the isChecked state for the "Stay Signed In" checkbox.
   const handleRadioChange = () => {
-    setIsChecked((prev) => !prev); // Toggle the `isChecked` state
+    setIsChecked((prev) => !prev); 
   };
 
-  // Log state changes
-  useEffect(() => {
-    console.log("isChecked state changed:", isChecked);
-  }, [isChecked]); // Dependency array ensures this runs only when isChecked changes
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">

@@ -3,12 +3,13 @@ import SelectBox from '@/app/components/Elements/ui/SelectBox';
 import Button from '@/app/components/Elements/Button';
 import { PrepItem } from '@/app/types/models/PrepItem';
 
+// PrepItemRow component: displays a single row in a prep item table, allowing for editing.
 interface PrepItemRowProps {
-  item: PrepItem;
-  categoryOptions: { label: string; value: number }[];
-  departmentOptions: { label: string; value: number }[];
-  handleSelection: (prepItemId: number, value: string | number, field: 'category' | 'kitchen_department_id' | 'ingredient_category') => void;
-  handleEditClick: (item: PrepItem) => void;
+  item: PrepItem; // Prep item data.
+  categoryOptions: { label: string; value: number }[]; // Options for the category select box.
+  departmentOptions: { label: string; value: number }[]; // Options for the department select box.
+  handleSelection: (prepItemId: number, value: string | number, field: 'category' | 'kitchen_department_id' | 'ingredient_category') => void; // Callback for select box changes.
+  handleEditClick: (item: PrepItem) => void; // Callback for edit button click.
 }
 
 const PrepItemRow: React.FC<PrepItemRowProps> = ({ item, categoryOptions, departmentOptions, handleSelection, handleEditClick }) => {

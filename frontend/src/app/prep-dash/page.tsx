@@ -8,34 +8,38 @@ import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { fetchCategories } from "../util/actions";
 import { fetchDailyList } from "../util/actions";
-
-// TYPES ***************
 import Category from "../types/models/Category";
 import PrepListItem from "../types/models/PrepListItem";
 import { getButtonColor } from "../util/data";
 
+// Container component managing prep item categories and kanban board display
 export default function PrepContainer() {
     const dispatch = useDispatch();
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+
+    // Fetch and cache daily prep items
     const { data: prepItems = [], isLoading } = useQuery<PrepListItem[]>({
         queryKey: ["prepItems"],
         queryFn: fetchDailyList
     })
    
+    // Fetch and cache categories
     const { data: categories = []} = useQuery<Category[]>({
         queryKey: ["categories"],
         queryFn: fetchCategories,
     });
 
+    // Update selected category filter
     const handleButtonClick = (cat : Category) => {
         if (cat) {
             setSelectedCategory(cat);
         }
     };
 
+    // Reset category filter and search term
     const handleResetClick = () => {
-        setSelectedCategory(null); // Reset selected category
-        dispatch(setPrepSearchTerm("")); // Clear the search term
+        setSelectedCategory(null);
+        dispatch(setPrepSearchTerm(""));
     };
 
     if(isLoading) {
@@ -45,22 +49,21 @@ export default function PrepContainer() {
     }
     return (
         <div className="pt-4">
-            {/* Button Group and Reset Button */}
             <div className="flex items-center justify-between">
                 <div className="flex-1">
                     <ButtonGroup
-                        items={categories} // Pass category objects to ButtonGroup
-                        buttonWidth="200px" // Set button width
-                        buttonHeight="80px" // Set button height
-                        onButtonClick={handleButtonClick} // Handle button clicks
-                        selectedButton={selectedCategory?.category_name} // Pass the selected category
-                        getButtonColor={getButtonColor} // Pass color function
+                        items={categories}
+                        buttonWidth="200px"
+                        buttonHeight="80px"
+                        onButtonClick={handleButtonClick}
+                        selectedButton={selectedCategory?.category_name}
+                        getButtonColor={getButtonColor}
                     />
                 </div>
                 <div className="mr-10">
                     <Button
                         label="Reset"
-                        onClick={handleResetClick} // Reset button logic
+                        onClick={handleResetClick}
                         size="large"
                         style={{
                             backgroundColor: "rgb(221, 79, 79)",
@@ -71,11 +74,10 @@ export default function PrepContainer() {
                 </div>
             </div>
 
-            {/* Kanban Section */}
             <div className="mt-4">
                 <Kanban
-                    prepItems={prepItems} // Pass prep items directly
-                    category={selectedCategory?.category_id} // Filter by selected category
+                    prepItems={prepItems}
+                    category={selectedCategory?.category_id}
                 />
             </div>
         </div>

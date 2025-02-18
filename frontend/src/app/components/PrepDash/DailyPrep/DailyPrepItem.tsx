@@ -11,25 +11,29 @@ interface DailyPrepProps {
     onButtonClick: (item: PrepListItem) => void;
 }
 
+// Dynamic prep item card that changes appearance based on completion status and allows note addition
 const DailyPrepItem: React.FC<DailyPrepProps> = ({prepItem, onButtonClick} : DailyPrepProps) => {
     const [note, setNote] = useState("");
 
+    // Updates prep item status in parent component
     const handleClick = () => {
         onButtonClick(prepItem);
-      }
-      const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newNote = e.target.value; // Get the value from the input event
-        setNote(newNote);
-        prepItem.note = newNote; // It's better to handle state updates in a parent component
-      }
+    }
 
-      return (
+    // Manages note input and updates prep item state
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newNote = e.target.value;
+        setNote(newNote);
+        prepItem.note = newNote;
+    }
+
+    return (
         <Card 
             sx={{ 
                 maxWidth: "100%", 
-                backgroundColor: prepItem.status === 'complete' ? 'rgb(229, 133, 133)' : 'rgb(228, 237, 195)', // creamier body color
-                border: '2px solid black', // black border
-                boxShadow: 3, // shadow effect
+                backgroundColor: prepItem.status === 'complete' ? 'rgb(229, 133, 133)' : 'rgb(228, 237, 195)',
+                border: '2px solid black',
+                boxShadow: 3,
                 marginBottom: '6px',
                 padding: '4px'
             }}
@@ -43,7 +47,7 @@ const DailyPrepItem: React.FC<DailyPrepProps> = ({prepItem, onButtonClick} : Dai
                         type="text"
                         placeholder={"daily notes..."}
                         value={note}
-                        onChange={handleSearch} // Pass the event correctly
+                        onChange={handleSearch}
                     />
                 </div>
                 <div>
@@ -61,7 +65,7 @@ const DailyPrepItem: React.FC<DailyPrepProps> = ({prepItem, onButtonClick} : Dai
                     onClick={handleClick}
                     size='medium'
                     style={{
-                        backgroundColor: prepItem.status === 'complete' ? 'rgb(221, 79, 79)' : 'rgb(74, 173, 78)', // Red for 'complete', Green otherwise
+                        backgroundColor: prepItem.status === 'complete' ? 'rgb(221, 79, 79)' : 'rgb(74, 173, 78)',
                         color: "white"
                     }}
                 />
@@ -69,6 +73,5 @@ const DailyPrepItem: React.FC<DailyPrepProps> = ({prepItem, onButtonClick} : Dai
         </Card>
     );
 }
-
 
 export default DailyPrepItem;

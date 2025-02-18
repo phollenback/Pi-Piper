@@ -1,11 +1,12 @@
 interface SelectBoxProps {
   value: string | number;
-  onChange: (value: string | number) => void;
-  options: { label: string; value: string | number }[]; // Array of { label, value }
-  placeholder?: string;
-  title?: string;
+  onChange: (value: string | number) => void; // Callback triggered on value change.
+  options: { label: string; value: string | number }[]; // Array of option objects.
+  placeholder?: string; // Placeholder text (default: "Select an option").
+  title?: string; // Optional title for the select box.
 }
 
+// SelectBox component: a customizable select box with options.
 const SelectBox: React.FC<SelectBoxProps> = ({
   value,
   onChange,
@@ -13,8 +14,9 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   placeholder = "Select an option",
   title,
 }) => {
+  // Handles changes to the select box, updating the parent component.
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    onChange(event.target.value); // Send string or number value
+    onChange(event.target.value); 
   };
 
   return (

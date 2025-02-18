@@ -5,23 +5,23 @@ import Button from "../Elements/Button";
 import { useRouter } from "next/navigation";
 import SearchInput from "../Elements/SearchInput";
 import { SignOutButton } from "@clerk/nextjs";
-
-// *** REDUX ***
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 
+// Navigation component with search functionality and route management for prep dashboard
 const PrepDashNav: React.FC = () => {
   const dispatch = useDispatch();
-
   const [error, setError] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
 
+  // Handle navigation and close dropdown
   const handleNavigation = (route: string) => {
     router.push(route);
-    setDropdownOpen(false); // Close dropdown after selection
+    setDropdownOpen(false);
   };
 
+  // Validate and dispatch search term to Redux store
   const handleSearchSubmit = (query: string) => {
     if (!query.trim()) {
       setError("Please enter a search term.");
@@ -32,8 +32,7 @@ const PrepDashNav: React.FC = () => {
   };
 
   return (
-<nav className="flex items-center justify-between bg-black p-4 shadow-md">
-{/* Left Dropdown */}
+    <nav className="flex items-center justify-between bg-black p-4 shadow-md">
       <div className="relative">
         <Button
           label="Navigate Prep Dash"
@@ -70,7 +69,6 @@ const PrepDashNav: React.FC = () => {
         )}
       </div>
  
-      {/* Search Bar in the Center */}
       <div className="flex-grow flex justify-center px-4">
         <SearchInput
           placeholder="Search..."
@@ -79,7 +77,6 @@ const PrepDashNav: React.FC = () => {
         />
       </div>
 
-      {/* Right Button */}
       <div className="text-white">
         <Button
           label="Manager Login"

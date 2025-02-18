@@ -1,5 +1,3 @@
 {
-  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
-  "/prep-dash/recipebook/page": "app/prep-dash/recipebook/page.js",
-  "/prep-dash/page": "app/prep-dash/page.js"
+  "/manager-dash/prep-manager/page": "app/manager-dash/prep-manager/page.js"
 }

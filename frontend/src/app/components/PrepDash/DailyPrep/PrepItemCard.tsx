@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import Button from '../../Elements/Button';
 import PrepListItem from '@/app/types/models/PrepListItem';
 
+// PrepItemCard component: displays a single prep item with details and actions.
 interface PrepItemCardProps {
-  item: PrepListItem;
-  onButtonClick: () => void;
+  item: PrepListItem; // Prep list item data.
+  onButtonClick: () => void; // Callback function for button click.
 }
 
 const PrepItemCard: React.FC<PrepItemCardProps> = ({ item, onButtonClick }) => {
-  // Determine the status color based on the item status
+  // Status color based on item status.
   const statusColor = item.status === 'complete' ? 'bg-green-100 border-green-400 text-green-800' : 'bg-red-100 border-red-400 text-red-800';
 
-  // Local state for the note
+  // Local state for the note.
   const [note, setNote] = useState(item.note);
 
+  // Handles changes to the note text area.
   const handleNoteChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote(e.target.value);
   };
@@ -47,7 +49,6 @@ const PrepItemCard: React.FC<PrepItemCardProps> = ({ item, onButtonClick }) => {
 
       {/* Button */}
       <div className="flex-1 flex flex-col justify-center items-center px-4">
-
         <Button
           label={item.status === 'complete' ? 'Cancel' : 'Complete'}
           onClick={onButtonClick}

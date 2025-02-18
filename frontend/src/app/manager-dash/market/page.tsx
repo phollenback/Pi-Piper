@@ -10,25 +10,30 @@ import Link from "next/link";
 import Button from "@/app/components/Elements/Button";
 import { useDispatch } from "react-redux";
 import { logCarts } from "@/redux/features/cart/cartSlice"
+
 interface Suggestion {
     ingredient_id: number;
     ingredient_name: string;
 }
 
+// Fetch critical inventory items for the restaurant
 const getCriticals = async (): Promise<Suggestion[]> => {
     return await fetchCriticals(1);
 }
 
+// Fetch all ingredients with pricing information
 const getAllIngredients = async (): Promise<IngredientDetails[]> => {
     return await fetchIngredientPricing(1);
 }
 
+// Container component managing market inventory, suggestions, and search functionality
 export default function MarketContainer() {
     const dispatch = useDispatch();
     const [suggItems, setSuggItems] = useState<IngredientDetails[]>([]);
     const [ingredients, setIngredients] = useState<IngredientDetails[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
 
+    // Load all ingredients on component mount
     useEffect(() => {
         const fetchIngredients = async () => {
             const ing = await getAllIngredients();
@@ -37,6 +42,7 @@ export default function MarketContainer() {
         fetchIngredients();
     }, []);
 
+    // Match critical items with full ingredient details
     useEffect(() => {
         const fetchSuggestions = async () => {
             const suggestions = await getCriticals();
@@ -60,6 +66,8 @@ export default function MarketContainer() {
     const handleCartClick = () => {
         dispatch(logCarts());
     }
+
+    // Filter ingredients excluding suggested items
     const filteredIngredients = ingredients.filter(ingredient => 
         ingredient.ingredientName.toLowerCase().includes(searchTerm.toLowerCase()) &&
         !suggItems.some(suggestion => suggestion.ingredientId === ingredient.ingredientId)
@@ -92,8 +100,8 @@ export default function MarketContainer() {
             <div className="mt-4 w-full flex justify-center border-2 border-black bg-zinc-100">
                 <MarketList 
                     list={filteredIngredients}
-                />
-            </div>
-        </div>
-    );
+            />
+</div>
+</div>
+);
 }

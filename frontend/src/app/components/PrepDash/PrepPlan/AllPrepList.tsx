@@ -4,22 +4,23 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/lib/store";
 import {PrepItem} from "@/app/types/models/PrepItem";
 
+// AllPrepList component: displays a list of potential prep items, filtered by category and search term.
 interface AppPrepProps {
-  prepList: PrepItem[];
-  category: number | null;
-  onAddToDailyPrep: (item: PrepItem) => void;
-  step: number; // Add step prop
-  onQuantityChange: (id: number, quantity: number) => void; // Add quantity change handler prop
+  prepList: PrepItem[]; // Array of prep items to display.
+  category: number | null; // Selected category filter (null for no filter).
+  onAddToDailyPrep: (item: PrepItem) => void; // Callback to add item to daily prep list.
+  step: number; // Current step in the process.
+  onQuantityChange: (id: number, quantity: number) => void; // Callback to handle quantity changes.
 }
 
 const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyPrep, step, onQuantityChange }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+  const [, setSearchTerm] = useState(""); // Local search term state.
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>({}); //State to store quantities for each item
 
-  // Get the search term from Redux (updated dynamically by other components)
+  // Redux search term (updated dynamically).
   const prepSearchTerm = useSelector((state: RootState) => state.search.prepSearchTerm);
 
-  // Filter the prepList based on the category and search term
+  // Filters the prep list based on category and search term.
   const filteredPrepList = prepList.filter((item) => {
     const matchesCategory = category ? item.category === category : true;
     const matchesSearchTerm =
@@ -29,28 +30,28 @@ const AllPrepList: React.FC<AppPrepProps> = ({ prepList, category, onAddToDailyP
     return matchesCategory && matchesSearchTerm;
   });
 
-  // Update local state for search term when the global search term changes
+  // Updates the local search term when the Redux search term changes.
   useEffect(() => {
     setSearchTerm(prepSearchTerm);
-    console.log(searchTerm);
   }, [prepSearchTerm]);
 
+  // Handles changes to the quantity of a prep item.
   const handleQuantityChange = (id: number, quantity: number) => {
     setQuantities((prev) => ({ ...prev, [id]: quantity }));
-    onQuantityChange(id, quantity); // Call the passed quantity change handler
+    onQuantityChange(id, quantity); 
   };
 
 
   return (
     <>
-      {filteredPrepList.map((item, index) => (
+      {filteredPrepList.map((item) => ( // Removed unnecessary index parameter
         <PotentialPrepItem
-          key={index}
+          key={item.prep_item_id} // Use prep_item_id as key
           prepItem={item}
           onAdd={(item) => onAddToDailyPrep(item)}
           step={step}
           onQuantityChange={handleQuantityChange}
-          quantity={quantities[item.prep_item_id]}
+          quantity={quantities[item.prep_item_id] || 0} // Default to 0 if quantity is not in state
         />
       ))}
     </>

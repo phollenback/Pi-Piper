@@ -1,3 +1,8 @@
+// 
+// This file was mainly used for mock data initially. 
+// Right now it has no references but may in the future. 
+// 
+
 export const getButtonColor = (name: string) => {
   switch (name) {
       case "Slicer":

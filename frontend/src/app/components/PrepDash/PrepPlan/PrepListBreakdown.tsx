@@ -3,29 +3,32 @@ import InputField from '../../Elements/login/InputField';
 import PrepListItem from '@/app/types/models/PrepListItem';
 import Category from '@/app/types/models/Category';
 
+// PrepListBreakdown component: displays a categorized breakdown of the prep list, allowing for verification.
 interface PrepListBreakdownProps {
-  list: PrepListItem[];
-  onClick: () => void;
-  categories: Category[];
-  setVerifier: (verifier: string) => void;
-  setVerified: (verified: boolean) => void;
+  list: PrepListItem[]; // Prep list items to display.
+  onClick: () => void; // Callback for button click (currently unused).
+  categories: Category[]; // Array of categories.
+  setVerifier: (verifier: string) => void; // Callback to update verifier name in parent component.
+  setVerified: (verified: boolean) => void; // Callback to update verification status in parent component.
 }
 
 const PrepListBreakdown: React.FC<PrepListBreakdownProps> = ({ list, categories, setVerifier, setVerified }) => {
-  const [verifierName, setVerifierName] = useState('');
-  const [isVerified, setIsVerified] = useState(false);
+  const [verifierName, setVerifierName] = useState(''); // Verifier's name.
+  const [, setIsVerified] = useState(false); // Verification status.
 
+  // Handles changes to the verifier's name.
   const handleVerifierNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVerifierName(e.target.value);
     setVerifier(e.target.value);
   };
 
+  // Handles changes to the verification checkbox.
   const handleVerifyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsVerified(e.target.checked);
     setVerified(e.target.checked);
-    console.log(isVerified);
   };
 
+  // Groups items by category.
   const groupedItems = list.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
@@ -34,6 +37,7 @@ const PrepListBreakdown: React.FC<PrepListBreakdownProps> = ({ list, categories,
     return acc;
   }, {} as { [key: number]: PrepListItem[] });
 
+  // Retrieves category name and description given its ID.
   const getCategoryDetails = (categoryId: number) => {
     const category = categories.find((cat) => cat.category_id === categoryId);
     return category ? { name: category.category_name, description: category.description } : { name: '', description: '' };

@@ -1,12 +1,14 @@
 "use client";
 import { useState } from "react";
 
+// Client-side login form component with email/password authentication and persistent session option
 const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [staySignedIn, setStaySignedIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Handles form submission and authentication
   const handleSubmit =  (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);

@@ -1,48 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SelectBox from '../../../components/Elements/ui/SelectBox';
 import Category from '@/app/types/models/Category';
 import InputField from '../../Elements/login/InputField';
 import Button from '../../Elements/Button';
 
+// Heading component: provides search and filtering options for prep items and ingredients.
 interface HeadingProps {
-  setSection: (section: string) => void;
-  setSelectedCategory: (category: number | null) => void;
-  selectedCategory: number | null;
-  categories: Category[];
+  setSection: () => void; // Callback to update the selected section.
+  setSelectedCategory: (category: number | null) => void; // Callback to update the selected category.
+  selectedCategory: number | null; // Currently selected category ID.
+  categories: Category[]; // Array of available categories.
 }
 
 const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, selectedCategory, categories }) => {
-  const [searchError, setSearchError] = useState("");
-  const [selectedSection, setSelectedSection] = useState("prepitem");
-  const [query, setQuery] = useState("");
+  const [searchError, setSearchError] = useState(""); // Error message for invalid search.
+  const [query, setQuery] = useState(""); // Current search query.
 
+  // Handles changes to the category selection.
   const handleCategoryChange = (value: string | number) => {
     setSelectedCategory(value === "" ? null : Number(value));
-    setSelectedSection("prepitem");
   };
 
+  // Resets the search form to its initial state.
   const handleResetClick = () => {
     setQuery("");
     setSearchError("");
-    setSelectedCategory(0);
+    setSelectedCategory(null); // Reset category to null
   };
 
+  // Handles search form submission.
   const handleSearchSubmit = (query: string) => {
     if (!query.trim()) {
       setSearchError("Please enter a search term.");
       return;
     }
-    console.log("Search submitted:", query);
+    //Further search logic would go here.
   };
-
-  const handleSectionChange = (value: string | number) => {
-    setSelectedSection(value as string);
-    setSection(value as string);
-  };
-
-  useEffect(() => {
-    setSection("prepitem");
-  }, [setSection]);
 
   return (
     <div className="w-full h-full flex justify-center items-center p-6 mr-8">
@@ -103,14 +96,15 @@ const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, sele
 
             {/* Section Selection */}
             <div>
-              <SelectBox
-                value={selectedSection}
-                onChange={handleSectionChange}
-                options={[
-                  { label: "Prep Items", value: "prepitem" },
-                  { label: "Ingredients", value: "ingredient" },
-                ].map((option) => ({ ...option, value: option.value.toString() }))}
-                placeholder="Select Section"
+              <Button
+                label="Switch Section"
+                onClick={setSection}
+                style={{
+                  backgroundColor: "blue",
+                  color: "white",
+                  fontWeight: "bold",
+                  padding: "0.5rem 1rem",
+                }}
               />
             </div>
           </div>

@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import Button from "../Elements/Button"; // Assuming you have a shared Button component
+import Button from "../Elements/Button"; 
 import { useRouter } from "next/navigation";
 
+// ManagerNav component: provides navigation for the manager dashboard.
 const ManagerNav: React.FC = () => {
   const router = useRouter();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // State to control dropdown visibility.
 
-  // Handle navigation
+  // Handles navigation to the specified route and closes the dropdown.
   const handleNavigation = (route: string) => {
     router.push(route);
-    setDropdownOpen(false); // Close dropdown after selection
+    setDropdownOpen(false); 
   };
 
   return (

@@ -4,38 +4,38 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import DailyPrepItem from "./DailyPrepItem";
 
+// DailyPrepList component: displays a list of daily prep items, filtering based on search term.
 interface DailyPrepProps {
-    list: PrepListItem[];
-    handleCardClick: (item: PrepListItem) => void;
+    list: PrepListItem[]; // Array of prep list items.
+    handleCardClick: (item: PrepListItem) => void; // Callback function for item clicks.
 }
 
 const DailyPrepList: React.FC<DailyPrepProps> = ({list, handleCardClick}: DailyPrepProps) => {
-    const [searchTerm, setSearchTerm] = useState(""); // Local state to hold search term
-    const prepSearchTerm = useSelector((state: RootState) => state.search.prepSearchTerm);
+    const [searchTerm, setSearchTerm] = useState(""); // Local search term state.
+    const prepSearchTerm = useSelector((state: RootState) => state.search.prepSearchTerm); // Redux search term.
 
-    // Sync the local searchTerm with the Redux search term
-      useEffect(() => {
+    // Syncs the local searchTerm with the Redux prepSearchTerm.
+    useEffect(() => {
         setSearchTerm(prepSearchTerm);
-        console.log(list);
-      }, [prepSearchTerm, list]);
+    }, [prepSearchTerm]);
     
-      // Filter items based on searchTerm
-      const filteredList = list.filter((item) => {
+    // Filters the list of prep items based on the search term.
+    const filteredList = list.filter((item) => {
         const lowercasedTerm = searchTerm.toLowerCase();
         return (
           item.name?.toLowerCase().includes(lowercasedTerm) ||
           item.description?.toLowerCase().includes(lowercasedTerm)
         );
-      });
+    });
 
-      return (
-        <div className="p-3 max-h-[580px] overflow-y-auto"> {/* Tailwind classes for max height and scroll */}
+    return (
+        <div className="p-3 max-h-[580px] overflow-y-auto"> 
           {filteredList.length > 0 ? (
             filteredList.map((item, index) => (
               <DailyPrepItem
-                key={index} // Always use a unique key
+                key={index} 
                 prepItem={item}
-                onButtonClick={() => handleCardClick(item)} // Pass the item as a parameter to handleCardClick
+                onButtonClick={() => handleCardClick(item)} 
               />
             ))
           ) : (

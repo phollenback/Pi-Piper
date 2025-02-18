@@ -7,17 +7,19 @@ interface PotentialPrepItemProps {
   prepItem: PrepItem;
   onAdd: (item: PrepItem) => void;
   onQuantityChange: (id: number, quantity: number) => void;
-  step: number; // Add step prop
+  step: number;
   quantity: number
 }
 
+// Selectable prep item component with quantity adjustment and add functionality
 const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd, onQuantityChange, step }) => {
   
-  
+  // Updates quantity in parent component
   const handleQuantityChange = (quantity: number) => {
     onQuantityChange(prepItem.prep_item_id, quantity);
   };
 
+  // Triggers item addition in parent component
   const onItemClick = () => {
       onAdd(prepItem);
   }
@@ -31,8 +33,8 @@ const PotentialPrepItem: React.FC<PotentialPrepItemProps> = ({ prepItem, onAdd, 
       <div className="flex items-center space-x-2">
         <NumberSelect
           min={0}
-          max={100} // Set a reasonable max value
-          step={step} // Use the step value
+          max={100}
+          step={step}
           onChange={handleQuantityChange}
           label="Qty"
           value={0}

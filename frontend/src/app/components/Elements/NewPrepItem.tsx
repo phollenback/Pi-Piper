@@ -11,26 +11,29 @@ interface MediaCardProps {
     onButtonClick: (item: PrepListItem) => void;
 }
 
+// Card component for creating new prep items with note-taking functionality
 const NewPrepItem: React.FC<MediaCardProps> = ({ prepItem, onButtonClick }: MediaCardProps) => {
   const [query, setQuery] = useState("");
 
+  // Updates prep item state in parent component
   const handleClick = () => {
     onButtonClick(prepItem);
   }
 
+  // Manages note input and updates prep item state
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuery = e.target.value; // Get the value from the input event
+    const newQuery = e.target.value;
     setQuery(newQuery);
-    prepItem.note = newQuery; // It's better to handle state updates in a parent component
+    prepItem.note = newQuery;
   }
 
   return (
     <Card 
       sx={{ 
         maxWidth: "100%", 
-        backgroundColor: 'rgb(208, 201, 129)', // creamier body color
-        border: '1px solid black', // black border
-        boxShadow: 3, // shadow effect
+        backgroundColor: 'rgb(208, 201, 129)',
+        border: '1px solid black',
+        boxShadow: 3,
         padding: '4px'
       }}
     >
@@ -43,7 +46,7 @@ const NewPrepItem: React.FC<MediaCardProps> = ({ prepItem, onButtonClick }: Medi
             type="text"
             placeholder={"daily notes..."}
             value={query}
-            onChange={handleSearch} // Pass the event correctly
+            onChange={handleSearch}
           />
         </div>
         <div>

@@ -1,5 +1,6 @@
 import React from "react";
 
+// RadioButton component: renders a customizable radio button with label.
 interface RadioButtonProps {
   label: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,7 +14,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   checked = false,
   size = "medium",
 }) => {
-  // Define size-specific classes
+  // Size-specific styling classes.
   const sizeClasses = {
     small: "text-sm",
     medium: "text-base",
@@ -23,7 +24,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
   return (
     <label className="flex items-center gap-2 text-gray-500 font-bold">
       <input
-        type="checkbox" // Changed to "checkbox" for toggle behavior
+        type="checkbox" 
         className={`leading-tight ${sizeClasses[size]}`}
         onChange={onChange}
         checked={checked}

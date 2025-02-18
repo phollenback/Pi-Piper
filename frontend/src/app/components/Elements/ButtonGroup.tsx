@@ -2,15 +2,14 @@ import React from 'react';
 import Button from '../Elements/Button';
 import Category from '@/app/types/models/Category';
 
-
-
+// ButtonGroup component: renders a group of buttons based on provided category data.
 interface ButtonGroupProps {
   items: Category[]; // Array of items with full category data
   buttonWidth: string; // Button width (CSS size e.g., '200px')
   buttonHeight: string; // Button height (CSS size e.g., '60px')
-  onButtonClick: (item: Category) => void; // Click handler for buttons, passing the entire item
-  selectedButton?: string | null | undefined; // Optionally pass the selected button's value
-  getButtonColor: (name: string) => string; // Adjusted to accept 'name' only
+  onButtonClick: (item: Category) => void; // Click handler, receives the entire category object.
+  selectedButton?: string | null | undefined; // Selected button's name (optional).
+  getButtonColor: (name: string) => string; // Function to determine button color based on name.
 }
 
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
@@ -25,32 +24,33 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
     <div
       style={{
         display: 'flex',
-        gap: '15px', // Add more space between buttons
-        flexWrap: 'wrap', // Wrap buttons if necessary
-        justifyContent: 'center', // Evenly distribute buttons horizontally
-        width: '100%', // Ensure it takes up the full width
+        gap: '15px', 
+        flexWrap: 'wrap', 
+        justifyContent: 'center', 
+        width: '100%', 
       }}
     >
+      {/* Map through items to render buttons */}
       {items.map((item) => (
         <div
           key={item.category_id}
           style={{
             display: 'flex',
             justifyContent: 'center',
-            flex: '1 1 auto', // Allow buttons to stretch evenly across the width
+            flex: '1 1 auto', 
           }}
         >
           <Button
             label={item.category_name}
-            onClick={() => onButtonClick(item)} // Pass the entire item to the onButtonClick handler
-            size="medium" // You can modify the size logic here
+            onClick={() => onButtonClick(item)} 
+            size="medium" 
             style={{
-              width: buttonWidth, // Adjust width
-              height: buttonHeight, // Adjust height
+              width: buttonWidth, 
+              height: buttonHeight, 
               backgroundColor:
                 selectedButton === item.category_name
-                  ? '#4CAF50' // Highlight selected button with green
-                  : getButtonColor(item.category_name), // Pass only name to getButtonColor
+                  ? '#4CAF50' 
+                  : getButtonColor(item.category_name), 
               cursor: 'pointer',
             }}
           />

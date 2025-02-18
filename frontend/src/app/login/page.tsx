@@ -10,11 +10,12 @@ import {
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+// LoginPage component: handles user authentication using Clerk.js.
 export default function LoginPage() {
-  const { isSignedIn } = useAuth(); // Access Clerk's auth state
+  const { isSignedIn } = useAuth(); // Clerk's authentication status.
   const router = useRouter();
 
-  // Redirect to "prep-dash" if signed in
+  // Redirects to prep dashboard if the user is already signed in.
   useEffect(() => {
     if (isSignedIn) {
       router.push("/prep-dash");

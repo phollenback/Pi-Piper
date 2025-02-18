@@ -4,13 +4,12 @@ import { requestLogger, responseTimeLogger } from '../middleware/winston.middlew
 
 const router = Router();
 
+// Apply middleware for logging response times and requests
 router.use(responseTimeLogger);
 router.use(requestLogger);
 
-router
-    .get('/:restaurantId', readDepartments);
-
-router
-    .get('/daily/:restaurantId', readDepProgress)
+// Define routes for reading departments and department progress
+router.get('/:restaurantId', readDepartments);
+router.get('/daily/:restaurantId', readDepProgress);
 
 export default router;

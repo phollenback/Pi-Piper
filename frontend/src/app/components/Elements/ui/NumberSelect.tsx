@@ -4,25 +4,28 @@ interface NumberSelectProps {
   onChange: (value: number) => void;
   min: number;
   max: number;
-  step?: number; // Default step value is optional
-  label?: string; // Placeholder or label text
-  value: number; // Add value prop to control the input
+  step?: number;
+  label?: string;
+  value: number;
 }
 
+// Controlled number input component with min/max validation and optional stepping
 const NumberSelect: React.FC<NumberSelectProps> = ({
   onChange,
   min,
   max,
   step = 1,
   label = "Enter a number",
-  value, // Add value prop to control the input
+  value,
 }) => {
   const [qty, setQty] = useState(value);
 
+  // Sync internal state with external value changes
   useEffect(() => {
     setQty(value);
   }, [value]);
 
+  // Validates input within min/max range before updating
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
     if (newValue >= min && newValue <= max) {
@@ -37,7 +40,7 @@ const NumberSelect: React.FC<NumberSelectProps> = ({
       <div className="flex items-center">
           <input
             type="number"
-            value={qty ?? 0} // Default to 0
+            value={qty ?? 0}
             onChange={handleChange}
             min={min}
             max={max}

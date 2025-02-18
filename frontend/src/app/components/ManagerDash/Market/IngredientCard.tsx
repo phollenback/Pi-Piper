@@ -12,30 +12,29 @@ import RadioButton from '../../Elements/login/RadioButton';
 import { useDispatch } from 'react-redux';
 import { addToSyscoCart, addToUsFoodsCart } from '@/redux/features/cart/cartSlice';
 
+// IngredientCard component: displays ingredient details and allows adding to cart.
 interface IngredientCardProps {
     item: IngredientDetails;
 }
 
 const IngredientCard: React.FC<IngredientCardProps> = ({ item }: IngredientCardProps) => {
-    const [quantity, setQuantity] = useState(0);
-    const [selectedProvider, setSelectedProvider] = useState<string>('Sysco'); // Change to string
+    const [quantity, setQuantity] = useState(0); // Quantity of ingredient to add.
+    const [selectedProvider, setSelectedProvider] = useState<string>('Sysco'); // Selected provider ('Sysco' or 'US Foods').
     const dispatch = useDispatch();
 
+    // Increments the quantity.
     const handleAddClick = () => {
         setQuantity(quantity + 1);
     };
 
+    // Decrements the quantity.
     const handleSubClick = () => {
-        setQuantity(quantity - 1);
+        setQuantity(Math.max(0, quantity - 1)); // Prevents quantity from going below 0.
     };
 
+    // Adds the selected ingredient to the cart.
     const handleItemAdd = () => {
-        const itemWithQuantity = {
-            ...item,
-            quantity: quantity // Ensure we are passing the current quantity
-        };
-        console.log("Item being added to cart:", itemWithQuantity);
-        
+        const itemWithQuantity = { ...item, quantity }; //Adds quantity to item object
         if (selectedProvider === 'Sysco') {
             dispatch(addToSyscoCart(itemWithQuantity));
         } else {
@@ -43,8 +42,9 @@ const IngredientCard: React.FC<IngredientCardProps> = ({ item }: IngredientCardP
         }
     };
 
+    // Handles the change of selected provider.
     const onSyscoChange = (provider: string) => {
-        setSelectedProvider(provider); 
+        setSelectedProvider(provider);
     };
 
     return (
@@ -56,7 +56,7 @@ const IngredientCard: React.FC<IngredientCardProps> = ({ item }: IngredientCardP
                 boxShadow: 3, 
                 borderRadius: 2, 
                 transition: '0.3s', 
-                '&:hover': { boxShadow: 8, bgcolor: '#f0f4f8', cursor: 'pointer' } // Light background on hover
+                '&:hover': { boxShadow: 8, bgcolor: '#f0f4f8', cursor: 'pointer' } 
             }}>
             <CardContent>
                 <Typography level="title-lg" sx={{ fontWeight: 'bold', marginBottom: 1, textAlign: 'center', color: '#2C3E50' }}>
@@ -77,9 +77,9 @@ const IngredientCard: React.FC<IngredientCardProps> = ({ item }: IngredientCardP
                         ${item.usFoodsPrice.toFixed(2)}
                     </Typography>
                     <RadioButton 
-                        label={`Selected: ${selectedProvider || 'None'}`} // Update to show selected provider
-                        onChange={() => onSyscoChange(selectedProvider === 'Sysco' ? 'US Foods' : 'Sysco')} // Toggle between providers
-                        checked={selectedProvider === 'Sysco'} // Check if Sysco is selected
+                        label={`Selected: ${selectedProvider || 'None'}`} 
+                        onChange={() => onSyscoChange(selectedProvider === 'Sysco' ? 'US Foods' : 'Sysco')} 
+                        checked={selectedProvider === 'Sysco'} 
                         size='medium'
                     />
                 </Box>
@@ -92,12 +92,11 @@ const IngredientCard: React.FC<IngredientCardProps> = ({ item }: IngredientCardP
                             onClick={handleAddClick}
                             size='medium'
                             style={{
-                                backgroundColor: "green",
-                                color: "white",
+                                backgroundColor: "green",                                color: "white",
                                 padding: "12px",
                             }}  
                         />
-                        <p className='px-4'>{quantity}</p> {/* Adjust spacing as needed */}
+                        <p className='px-4'>{quantity}</p> 
                         <Button
                             label='Subtract'
                             onClick={handleSubClick}

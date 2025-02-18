@@ -1,25 +1,28 @@
 'use client';
 
 import { useState } from 'react';
-import Button from './Button'; // Custom button you made earlier
+import Button from './Button'; 
 import InputField from './login/InputField';
 
+// SearchInput component: a search bar with input field and search button.
 interface SearchInputProps {
   placeholder: string;
-  onSearch: (query: string) => void; 
-  error?: string;
+  onSearch: (query: string) => void; // Callback function triggered on search.
+  error?: string; // Optional error message to display.
 }
 
 export default function SearchInput({ placeholder, onSearch, error }: SearchInputProps) {
   const [query, setQuery] = useState('');
 
+  // Handles changes to the input field, updating the query state.
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
+  // Handles form submission, triggering the search callback.
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(query); // Trigger the search with the current query
+    onSearch(query); 
   };
 
   return (
@@ -34,7 +37,7 @@ export default function SearchInput({ placeholder, onSearch, error }: SearchInpu
       />
       <Button
         label="Search"
-        onClick={() => onSearch(query)} // Trigger search on button click
+        onClick={() => onSearch(query)} 
         size="medium"
         style={{
           backgroundColor: '#4caf50',

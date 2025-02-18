@@ -3,7 +3,8 @@ import { execute } from '../services/pg.connector';
 import { ingredientQueries } from './ingredient.queries';
 import { logger } from '../middleware/winston.middleware';
 
-export const getIngredients = async (restaurantId: number) => {
+// Retrieves all ingredients for a given restaurant.
+export const getIngredients = async (restaurantId: number): Promise<Ingredient[]> => {
     logger.info('[ingredient.dao][getIngredients][START]', { restaurantId });
     try {
         const ingredients = await execute<Ingredient[]>(ingredientQueries.getIngredients, [restaurantId]);
@@ -11,60 +12,64 @@ export const getIngredients = async (restaurantId: number) => {
         return ingredients;
     } catch (error) {
         logger.error('[ingredient.dao][getIngredients][ERROR]', { error });
-        throw error;
+        throw error; // Re-throwing the error allows the calling function to handle it.
     }
 };
 
-export const createIngredient = async (restaurantId: number, ingredientData: Ingredient) => {
+// Creates a new ingredient for a given restaurant.
+export const createIngredient = async (restaurantId: number, ingredientData: Ingredient): Promise<Ingredient[]> => {
     logger.info('[ingredient.dao][createIngredient][START]', { restaurantId, ingredientData });
     try {
-        const ingredients = await execute<Ingredient[]>(ingredientQueries.createIngredient, [
+        const newIngredient = await execute<Ingredient[]>(ingredientQueries.createIngredient, [
             ingredientData.ingredient_name,
             ingredientData.unit_of_measure,
             ingredientData.cost_per_unit,
             ingredientData.ingredient_category,
-            restaurantId
+            restaurantId,
         ]);
-        logger.info('[ingredient.dao][createIngredient][SUCCESS]', { ingredients });
-        return ingredients;
+        logger.info('[ingredient.dao][createIngredient][SUCCESS]', { newIngredient });
+        return newIngredient;
     } catch (error) {
         logger.error('[ingredient.dao][createIngredient][ERROR]', { error });
         throw error;
     }
 };
 
-export const updateIngredient = async (ingredientData: Ingredient) => {
+// Updates an existing ingredient.
+export const updateIngredient = async (ingredientData: Ingredient): Promise<Ingredient[]> => {
     logger.info('[ingredient.dao][updateIngredient][START]', { ingredientData });
     try {
-        const ingredients = await execute<Ingredient[]>(ingredientQueries.updateIngredient, [
+        const updatedIngredient = await execute<Ingredient[]>(ingredientQueries.updateIngredient, [
             ingredientData.ingredient_name,
             ingredientData.unit_of_measure,
             ingredientData.cost_per_unit,
             ingredientData.ingredient_category,
             ingredientData.restaurant_id,
-            ingredientData.ingredient_id
+            ingredientData.ingredient_id,
         ]);
-        logger.info('[ingredient.dao][updateIngredient][SUCCESS]', { ingredients });
-        return ingredients;
+        logger.info('[ingredient.dao][updateIngredient][SUCCESS]', { updatedIngredient });
+        return updatedIngredient;
     } catch (error) {
         logger.error('[ingredient.dao][updateIngredient][ERROR]', { error });
         throw error;
     }
 };
 
-export const deleteIngredient = async (ingredientId: number, restaurantId: number) => {
+// Deletes an ingredient.
+export const deleteIngredient = async (ingredientId: number, restaurantId: number): Promise<Ingredient[]> => {
     logger.info('[ingredient.dao][deleteIngredient][START]', { ingredientId, restaurantId });
     try {
-        const ingredients = await execute<Ingredient[]>(ingredientQueries.deleteIngredient, [ingredientId, restaurantId]);
-        logger.info('[ingredient.dao][deleteIngredient][SUCCESS]', { ingredients });
-        return ingredients;
+        const result = await execute<Ingredient[]>(ingredientQueries.deleteIngredient, [ingredientId, restaurantId]);
+        logger.info('[ingredient.dao][deleteIngredient][SUCCESS]', { result });
+        return result;
     } catch (error) {
         logger.error('[ingredient.dao][deleteIngredient][ERROR]', { error });
         throw error;
     }
 };
 
-export const getSuggestions = async (restaurantId: number) => {
+// Retrieves ingredient suggestions for a given restaurant.
+export const getSuggestions = async (restaurantId: number): Promise<{ingredient_id: number, ingredient_name: string, inv: number}[]> => {
     logger.info('[ingredient.dao][getSuggestions][START]', { restaurantId });
     try {
         const suggestions = await execute<{ingredient_id: number, ingredient_name: string, inv: number}[]>(ingredientQueries.getSuggestions, [restaurantId]);
@@ -76,74 +81,76 @@ export const getSuggestions = async (restaurantId: number) => {
     }
 };
 
-
-const getSyscoPricing = async (restaurantId: number) => {
-    logger.info('[ingredient.dao][getSYSCOPricing][START]', { restaurantId });
+// Helper function to fetch pricing from Sysco.
+const getSyscoPricing = async (restaurantId: number): Promise<IngredientDetails[]> => {
+    logger.info('[ingredient.dao][getSyscoPricing][START]', { restaurantId });
     try {
         const ingredients = await execute<IngredientDetails[]>(ingredientQueries.getSyscoPricing, [restaurantId]);
-        logger.info('[ingredient.dao][getSYSCOPricing][SUCCESS]', { ingredients });
+        logger.info('[ingredient.dao][getSyscoPricing][SUCCESS]', { ingredients });
         return ingredients;
     } catch (error) {
-        logger.error('[ingredient.dao][getSYSCOPricing][ERROR]', { error });
+        logger.error('[ingredient.dao][getSyscoPricing][ERROR]', { error });
         throw error;
     }
-}
+};
 
-const getUsFoodsPricing = async (restaurantId: number) => {
-    logger.info('[ingredient.dao][getUSFOODSPricing][START]', { restaurantId });
+// Helper function to fetchpricing from US Foods.
+const getUsFoodsPricing = async (restaurantId: number): Promise<IngredientDetails[]> => {
+    logger.info('[ingredient.dao][getUsFoodsPricing][START]', { restaurantId });
     try {
         const ingredients = await execute<IngredientDetails[]>(ingredientQueries.getUsFoodsPricing, [restaurantId]);
-        logger.info('[ingredient.dao][getUSFOODSPricing][SUCCESS]', { ingredients });
+        logger.info('[ingredient.dao][getUsFoodsPricing][SUCCESS]', { ingredients });
         return ingredients;
     } catch (error) {
-        logger.error('[ingredient.dao][getUSFOODSPricing][ERROR]', { error });
+        logger.error('[ingredient.dao][getUsFoodsPricing][ERROR]', { error });
         throw error;
     }
-}
+};
 
+// Retrieves all pricing information (Sysco and US Foods) for a given restaurant.
 export const getAllPricing = async (restaurantId: number): Promise<IngredientDetails[]> => {
     logger.info('[ingredient.dao][getAllPricing][START]', { restaurantId });
     try {
         const [syscoIngredients, usFoodsIngredients] = await Promise.all([
             getSyscoPricing(restaurantId),
-            getUsFoodsPricing(restaurantId)
+            getUsFoodsPricing(restaurantId),
         ]);
 
-        // Create a map to hold the ingredients by their IDs for easy merging
-        const ingredientMap: { [key: number]: IngredientDetails } = {};
+        // Use a Map for efficient merging based on ingredientId
+        const ingredientMap = new Map<number, IngredientDetails>();
 
-        // Fill the map with Sysco pricing
+        // Add Sysco pricing
         syscoIngredients.forEach(ingredient => {
-            ingredientMap[ingredient.ingredientId] = {
-                ingredientId: ingredient.ingredientId,
-                ingredientName: ingredient.ingredientName,
-                syscoPrice: ingredient.syscoPrice,
-                usFoodsPrice: 0, // Placeholder for now
-                last_date_ordered: new Date(), // Placeholder for now
-                category: ingredient.category, // Include category from Sysco
-                restaurantId
-            };
+            ingredientMap.set(ingredient.ingredientId, {
+                ...ingredient,
+                usFoodsPrice: 0, // Initialize US Foods price to 0
+                last_date_ordered: ingredient.last_date_ordered || new Date(), // Use existing date or default
+                restaurantId, // Ensure restaurantId is included
+            });
         });
 
-        // Merge in US Foods pricing
+        // Merge US Foods pricing
         usFoodsIngredients.forEach(ingredient => {
-            if (ingredientMap[ingredient.ingredientId]) {
-                ingredientMap[ingredient.ingredientId].usFoodsPrice = ingredient.usFoodsPrice;
-            } else {
-                ingredientMap[ingredient.ingredientId] = {
-                    ingredientId: ingredient.ingredientId,
-                    ingredientName: ingredient.ingredientName,
-                    syscoPrice: 0, // Placeholder for now
+            const existingIngredient = ingredientMap.get(ingredient.ingredientId);
+            if (existingIngredient) {
+                ingredientMap.set(ingredient.ingredientId, {
+                    ...existingIngredient,
                     usFoodsPrice: ingredient.usFoodsPrice,
-                    last_date_ordered: new Date(), // Placeholder for now
-                    category: ingredient.category, // Include category from US Foods
-                    restaurantId
-                };
+                    last_date_ordered: ingredient.last_date_ordered || existingIngredient.last_date_ordered, // Prioritize existing date
+                    category: ingredient.category, // Ensure category is updated
+                });
+            } else {
+                ingredientMap.set(ingredient.ingredientId, {
+                    ...ingredient,
+                    syscoPrice: 0, // Initialize Sysco price to 0
+                    last_date_ordered: ingredient.last_date_ordered || new Date(), // Use existing date or default
+                    restaurantId, // Ensure restaurantId is included
+                });
             }
         });
 
-        // Convert the map back to an array
-        const allIngredients = Object.values(ingredientMap);
+        // Convert the Map back to an array
+        const allIngredients = Array.from(ingredientMap.values());
         logger.info('[ingredient.dao][getAllPricing][SUCCESS]', { allIngredients });
         return allIngredients;
     } catch (error) {
@@ -151,7 +158,3 @@ export const getAllPricing = async (restaurantId: number): Promise<IngredientDet
         throw error;
     }
 };
-
-export function readSuggestions(restaurantId: number) {
-    throw new Error('Function not implemented.');
-}

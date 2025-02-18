@@ -1,6 +1,7 @@
 import IngredientDetails from "@/app/types/models/IngredientDetails";
 import { Card, CardContent, Typography, Box, Divider } from "@mui/material";
 
+// CartItem component: displays details of a single ingredient in a cart.
 interface CartItemProps {
     item: IngredientDetails;
 }

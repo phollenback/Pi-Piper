@@ -1,10 +1,12 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 
+// TimeVariables component: displays the current time and the time until noon.
 const TimeVariables: React.FC = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [timeUntilNoon, setTimeUntilNoon] = useState('');
+  const [currentTime, setCurrentTime] = useState(new Date()); // Current time.
+  const [timeUntilNoon, setTimeUntilNoon] = useState(''); // Time until noon.
 
+  // Updates the currentTime state every second.
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTime(new Date());
@@ -13,6 +15,7 @@ const TimeVariables: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Calculates and updates the timeUntilNoon state every second.
   useEffect(() => {
     const calculateTimeUntilNoon = () => {
       const now = new Date();

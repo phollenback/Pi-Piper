@@ -7,33 +7,39 @@ const { checkSchema } = require('express-validator');
 
 const router = Router();
 
+// Apply logging middleware
 router.use(responseTimeLogger);
 router.use(requestLogger);
 
+// Retrieve all ingredients for a restaurant
 router
     .get(
         '/:restaurantId',
         asyncHandler(IngredientController.readIngredients)
     );
 
+// Get inventory status for a restaurant
 router
     .get(
         '/inventory/:restaurantId',
         asyncHandler(IngredientController.readInventory)
     )
 
+// Get ingredient suggestions for a restaurant
 router
     .get(
         '/suggestions/:restaurantId',
         asyncHandler(IngredientController.readSuggestions)
     )
 
+// Get pricing information for restaurant ingredients
 router
     .get(
         '/pricing/:restaurantId',
         asyncHandler(IngredientController.readPricing)
     )
 
+// Create new ingredient with validation
 router
     .post(
         '/:restaurantId',
@@ -41,6 +47,7 @@ router
         asyncHandler(IngredientController.createIngredient)
     );
 
+// Update existing ingredient with validation
 router
     .put(
         '/ingredient',
@@ -48,6 +55,7 @@ router
         asyncHandler(IngredientController.updateIngredient)
     );
 
+// Remove ingredient from restaurant
 router
     .delete(
         '/:restaurantId/:ingredientId',

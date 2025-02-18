@@ -12,13 +12,16 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 ;
 ;
+// Controlled number input component with min/max validation and optional stepping
 const NumberSelect = ({ onChange, min, max, step = 1, label = "Enter a number", value })=>{
     const [qty, setQty] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(value);
+    // Sync internal state with external value changes
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         setQty(value);
     }, [
         value
     ]);
+    // Validates input within min/max range before updating
     const handleChange = (e)=>{
         const newValue = Number(e.target.value);
         if (newValue >= min && newValue <= max) {
@@ -34,7 +37,7 @@ const NumberSelect = ({ onChange, min, max, step = 1, label = "Enter a number", 
                 children: label
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/ui/NumberSelect.tsx",
-                lineNumber: 36,
+                lineNumber: 39,
                 columnNumber: 17
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -50,18 +53,18 @@ const NumberSelect = ({ onChange, min, max, step = 1, label = "Enter a number", 
                     placeholder: label
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Elements/ui/NumberSelect.tsx",
-                    lineNumber: 38,
+                    lineNumber: 41,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/ui/NumberSelect.tsx",
-                lineNumber: 37,
+                lineNumber: 40,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/ui/NumberSelect.tsx",
-        lineNumber: 35,
+        lineNumber: 38,
         columnNumber: 5
     }, this);
 };
@@ -81,10 +84,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 ;
 ;
 ;
+// Selectable prep item component with quantity adjustment and add functionality
 const PotentialPrepItem = ({ prepItem, onAdd, onQuantityChange, step })=>{
+    // Updates quantity in parent component
     const handleQuantityChange = (quantity)=>{
         onQuantityChange(prepItem.prep_item_id, quantity);
     };
+    // Triggers item addition in parent component
     const onItemClick = ()=>{
         onAdd(prepItem);
     };
@@ -99,7 +105,7 @@ const PotentialPrepItem = ({ prepItem, onAdd, onQuantityChange, step })=>{
                         children: prepItem.name
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
-                        lineNumber: 28,
+                        lineNumber: 30,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -107,13 +113,13 @@ const PotentialPrepItem = ({ prepItem, onAdd, onQuantityChange, step })=>{
                         children: prepItem.description
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
-                        lineNumber: 29,
+                        lineNumber: 31,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
-                lineNumber: 27,
+                lineNumber: 29,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -128,7 +134,7 @@ const PotentialPrepItem = ({ prepItem, onAdd, onQuantityChange, step })=>{
                         value: 0
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
-                        lineNumber: 32,
+                        lineNumber: 34,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -141,19 +147,19 @@ const PotentialPrepItem = ({ prepItem, onAdd, onQuantityChange, step })=>{
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
-                        lineNumber: 40,
+                        lineNumber: 42,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
-                lineNumber: 31,
+                lineNumber: 33,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PotentialPrepItem.tsx",
-        lineNumber: 26,
+        lineNumber: 28,
         columnNumber: 5
     }, this);
 };
@@ -176,40 +182,40 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$red
 ;
 ;
 const AllPrepList = ({ prepList, category, onAddToDailyPrep, step, onQuantityChange })=>{
-    const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    const [quantities, setQuantities] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});
-    // Get the search term from Redux (updated dynamically by other components)
+    const [, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(""); // Local search term state.
+    const [quantities, setQuantities] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({}); //State to store quantities for each item
+    // Redux search term (updated dynamically).
     const prepSearchTerm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((state)=>state.search.prepSearchTerm);
-    // Filter the prepList based on the category and search term
+    // Filters the prep list based on category and search term.
     const filteredPrepList = prepList.filter((item)=>{
         const matchesCategory = category ? item.category === category : true;
         const matchesSearchTerm = item.name && item.name.toLowerCase().includes(prepSearchTerm.toLowerCase()) || item.description && item.description.toLowerCase().includes(prepSearchTerm.toLowerCase());
         return matchesCategory && matchesSearchTerm;
     });
-    // Update local state for search term when the global search term changes
+    // Updates the local search term when the Redux search term changes.
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         setSearchTerm(prepSearchTerm);
-        console.log(searchTerm);
     }, [
         prepSearchTerm
     ]);
+    // Handles changes to the quantity of a prep item.
     const handleQuantityChange = (id, quantity)=>{
         setQuantities((prev)=>({
                 ...prev,
                 [id]: quantity
             }));
-        onQuantityChange(id, quantity); // Call the passed quantity change handler
+        onQuantityChange(id, quantity);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
-        children: filteredPrepList.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PotentialPrepItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+        children: filteredPrepList.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PotentialPrepItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 prepItem: item,
                 onAdd: (item)=>onAddToDailyPrep(item),
                 step: step,
                 onQuantityChange: handleQuantityChange,
-                quantity: quantities[item.prep_item_id]
-            }, index, false, {
+                quantity: quantities[item.prep_item_id] || 0
+            }, item.prep_item_id, false, {
                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/AllPrepList.tsx",
-                lineNumber: 47,
+                lineNumber: 48,
                 columnNumber: 9
             }, this))
     }, void 0, false);
@@ -226,9 +232,11 @@ __turbopack_esm__({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 ;
+// SelectBox component: a customizable select box with options.
 const SelectBox = ({ value, onChange, options, placeholder = "Select an option", title })=>{
+    // Handles changes to the select box, updating the parent component.
     const handleChange = (event)=>{
-        onChange(event.target.value); // Send string or number value
+        onChange(event.target.value);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col",
@@ -245,7 +253,7 @@ const SelectBox = ({ value, onChange, options, placeholder = "Select an option",
                     children: placeholder
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-                    lineNumber: 29,
+                    lineNumber: 31,
                     columnNumber: 9
                 }, this),
                 options.map((option, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -253,18 +261,18 @@ const SelectBox = ({ value, onChange, options, placeholder = "Select an option",
                         children: option.label
                     }, `${option.value}-${index}`, false, {
                         fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-                        lineNumber: 33,
+                        lineNumber: 35,
                         columnNumber: 11
                     }, this))
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-            lineNumber: 22,
+            lineNumber: 24,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/Elements/ui/SelectBox.tsx",
-        lineNumber: 21,
+        lineNumber: 23,
         columnNumber: 5
     }, this);
 };
@@ -285,17 +293,19 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 ;
 ;
 const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
-    const [verifierName, setVerifierName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
-    const [isVerified, setIsVerified] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [verifierName, setVerifierName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(''); // Verifier's name.
+    const [, setIsVerified] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false); // Verification status.
+    // Handles changes to the verifier's name.
     const handleVerifierNameChange = (e)=>{
         setVerifierName(e.target.value);
         setVerifier(e.target.value);
     };
+    // Handles changes to the verification checkbox.
     const handleVerifyChange = (e)=>{
         setIsVerified(e.target.checked);
         setVerified(e.target.checked);
-        console.log(isVerified);
     };
+    // Groups items by category.
     const groupedItems = list.reduce((acc, item)=>{
         if (!acc[item.category]) {
             acc[item.category] = [];
@@ -303,6 +313,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
         acc[item.category].push(item);
         return acc;
     }, {});
+    // Retrieves category name and description given its ID.
     const getCategoryDetails = (categoryId)=>{
         const category = categories.find((cat)=>cat.category_id === categoryId);
         return category ? {
@@ -321,7 +332,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                 children: "Prep List Breakdown"
             }, void 0, false, {
                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                lineNumber: 44,
+                lineNumber: 48,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -333,7 +344,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                         children: "Verify?"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                        lineNumber: 47,
+                        lineNumber: 51,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -343,7 +354,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                         className: "mr-2"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                        lineNumber: 48,
+                        lineNumber: 52,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -354,13 +365,13 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                         onChange: handleVerifierNameChange
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                        lineNumber: 54,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                lineNumber: 46,
+                lineNumber: 50,
                 columnNumber: 7
             }, this),
             Object.entries(groupedItems).map(([categoryId, items], index)=>{
@@ -373,7 +384,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                             children: name
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                            lineNumber: 67,
+                            lineNumber: 71,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -381,7 +392,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                             children: description
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                            lineNumber: 68,
+                            lineNumber: 72,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -396,7 +407,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                                                         children: item.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                                                        lineNumber: 74,
+                                                        lineNumber: 78,
                                                         columnNumber: 23
                                                     }, this),
                                                     " - ",
@@ -404,7 +415,7 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                                                lineNumber: 73,
+                                                lineNumber: 77,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -415,36 +426,36 @@ const PrepListBreakdown = ({ list, categories, setVerifier, setVerified })=>{
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                                                lineNumber: 76,
+                                                lineNumber: 80,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                                        lineNumber: 72,
+                                        lineNumber: 76,
                                         columnNumber: 19
                                     }, this)
                                 }, index, false, {
                                     fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                                    lineNumber: 71,
+                                    lineNumber: 75,
                                     columnNumber: 17
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                            lineNumber: 69,
+                            lineNumber: 73,
                             columnNumber: 13
                         }, this)
                     ]
                 }, index, true, {
                     fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-                    lineNumber: 66,
+                    lineNumber: 70,
                     columnNumber: 11
                 }, this);
             })
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/PrepDash/PrepPlan/PrepListBreakdown.tsx",
-        lineNumber: 43,
+        lineNumber: 47,
         columnNumber: 5
     }, this);
 };
@@ -526,6 +537,10 @@ class PrepItemAdapter {
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, x: __turbopack_external_require__, y: __turbopack_external_import__, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
+// 
+// This file was mainly used for mock data initially. 
+// Right now it has no references but may in the future. 
+// 
 __turbopack_esm__({
     "fetchDailyPrepItems": (()=>fetchDailyPrepItems),
     "fetchPrepItemCards": (()=>fetchPrepItemCards),
@@ -1343,15 +1358,18 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$mat
 ;
 ;
 ;
+// Card component for creating new prep items with note-taking functionality
 const NewPrepItem = ({ prepItem, onButtonClick })=>{
     const [query, setQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
+    // Updates prep item state in parent component
     const handleClick = ()=>{
         onButtonClick(prepItem);
     };
+    // Manages note input and updates prep item state
     const handleSearch = (e)=>{
-        const newQuery = e.target.value; // Get the value from the input event
+        const newQuery = e.target.value;
         setQuery(newQuery);
-        prepItem.note = newQuery; // It's better to handle state updates in a parent component
+        prepItem.note = newQuery;
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Card$2f$Card$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
         sx: {
@@ -1378,14 +1396,14 @@ const NewPrepItem = ({ prepItem, onButtonClick })=>{
                                 children: prepItem.name
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                                lineNumber: 39,
+                                lineNumber: 42,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 children: prepItem.description
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                                lineNumber: 40,
+                                lineNumber: 43,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1396,13 +1414,13 @@ const NewPrepItem = ({ prepItem, onButtonClick })=>{
                                 onChange: handleSearch
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                                lineNumber: 41,
+                                lineNumber: 44,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                        lineNumber: 38,
+                        lineNumber: 41,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1411,7 +1429,7 @@ const NewPrepItem = ({ prepItem, onButtonClick })=>{
                                 children: "Quantity:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                                lineNumber: 50,
+                                lineNumber: 53,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1423,13 +1441,13 @@ const NewPrepItem = ({ prepItem, onButtonClick })=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                                lineNumber: 51,
+                                lineNumber: 54,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                        lineNumber: 49,
+                        lineNumber: 52,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1438,7 +1456,7 @@ const NewPrepItem = ({ prepItem, onButtonClick })=>{
                                 children: "Status:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                                lineNumber: 54,
+                                lineNumber: 57,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1446,19 +1464,19 @@ const NewPrepItem = ({ prepItem, onButtonClick })=>{
                                 children: prepItem.status
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                                lineNumber: 55,
+                                lineNumber: 58,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                        lineNumber: 53,
+                        lineNumber: 56,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                lineNumber: 37,
+                lineNumber: 40,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$CardActions$2f$CardActions$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1472,18 +1490,18 @@ const NewPrepItem = ({ prepItem, onButtonClick })=>{
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                    lineNumber: 59,
+                    lineNumber: 62,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-                lineNumber: 58,
+                lineNumber: 61,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/NewPrepItem.tsx",
-        lineNumber: 28,
+        lineNumber: 31,
         columnNumber: 5
     }, this);
 };
@@ -1506,27 +1524,25 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$red
 ;
 ;
 const NewPrepList = ({ list, handleCardClick })=>{
-    const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(""); // Local state to hold search term
-    const prepSearchTerm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((state)=>state.search.prepSearchTerm);
-    // Sync the local searchTerm with the Redux search term
+    const [searchTerm, setSearchTerm] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(""); // Local search term state.
+    const prepSearchTerm = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSelector"])((state)=>state.search.prepSearchTerm); // Redux search term.
+    // Syncs local search state with Redux store.
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         setSearchTerm(prepSearchTerm);
-        console.log(list);
     }, [
-        prepSearchTerm,
-        list
+        prepSearchTerm
     ]);
-    // Filter items based on searchTerm
+    // Filters the list of prep items based on the search term.
     const filteredList = list.filter((item)=>{
         const lowercasedTerm = searchTerm.toLowerCase();
         return item.name?.toLowerCase().includes(lowercasedTerm) || item.description?.toLowerCase().includes(lowercasedTerm);
     });
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "p-3",
-        children: filteredList.length > 0 ? filteredList.map((item, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$NewPrepItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+        children: filteredList.length > 0 ? filteredList.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$NewPrepItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 prepItem: item,
                 onButtonClick: ()=>handleCardClick(item)
-            }, index, false, {
+            }, item.prep_list_id, false, {
                 fileName: "[project]/src/app/components/PrepDash/PrepPlan/NewPrepList.tsx",
                 lineNumber: 35,
                 columnNumber: 11
@@ -1688,7 +1704,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ErrorMessage$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/ErrorMessage.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ui$2f$NumberSelect$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/ui/NumberSelect.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$search$2f$searchSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/redux/features/search/searchSlice.ts [app-ssr] (ecmascript)");
-// TYPES ***************
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$types$2f$models$2f$PrepItem$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/types/models/PrepItem.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$preplist$2f$dailyPrepListSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/redux/features/preplist/dailyPrepListSlice.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$NewPrepList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/PrepDash/PrepPlan/NewPrepList.tsx [app-ssr] (ecmascript)");
@@ -1713,7 +1728,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2
 ;
 ;
 ;
-// Helper function to get tomorrow's date
+// Formats tomorrow's date for display
 const getTomorrowDate = ()=>{
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -1724,10 +1739,12 @@ const getTomorrowDate = ()=>{
         day: 'numeric'
     });
 };
+// Fetch all prep items for the restaurant
 const fetchAllPrep = async ()=>{
     const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get('http://localhost:3000/prepitems/1');
     return response.data;
 };
+// Fetch current daily prep list
 const fetchDailyList = async ()=>{
     const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get('http://localhost:3000/prepitems/daily/1');
     return response.data;
@@ -1743,13 +1760,14 @@ function PlanPage() {
     const [quantities, setQuantities] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({});
     const [verifierName, setVerifierName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('');
     const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useDispatch"])();
+    // Fetch and cache daily prep list
     const { data: dailyPrepList = [], isError } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             'dailyPrep'
         ],
         queryFn: fetchDailyList
     });
-    // Fetch categories
+    // Fetch and cache categories
     const { data: categories = [], refetch: refetchCategories } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             'categories'
@@ -1762,30 +1780,31 @@ function PlanPage() {
             return response.json();
         }
     });
+    // Initialize prep items and sync with daily list
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const fetchData = async ()=>{
             const allPrepItems = await fetchAllPrep();
-            setPrepItems(allPrepItems); // Populate initial state
-            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$preplist$2f$dailyPrepListSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["setDailyPrepItems"])(dailyPrepList); // Sync with dailyPrepList
+            setPrepItems(allPrepItems);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$preplist$2f$dailyPrepListSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["setDailyPrepItems"])(dailyPrepList);
         };
         fetchData();
     }, [
         dailyPrepList
     ]);
+    // Submit verified prep list to backend
     const handleCompleteClick = async ()=>{
         if (isVerified && verifierName) {
             console.log('Preparing to post the following Prep List:', PrepListItems);
             const hasNulls = PrepListItems.some((item)=>item == null);
             if (hasNulls) {
                 console.error('Prep List contains null values:', PrepListItems);
-                return; // Prevent the post if there are nulls
+                return;
             }
-            // Convert PrepListItems to plain objects using PrepItemAdapter's method
+            // Convert items to plain objects for API submission
             const plainObjects = PrepListItems.map((item)=>{
                 if (item instanceof __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$types$2f$models$2f$PrepItem$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PrepItemAdapter"]) {
-                    return item.toPlainObject(); // Use the method defined in PrepItemAdapter
+                    return item.toPlainObject();
                 }
-                // You could alternatively throw an error or handle the case where it's not an instance
                 console.warn("Item is not an instance of PrepItemAdapter:", item);
                 return {};
             });
@@ -1796,7 +1815,7 @@ function PlanPage() {
                     setErrorMessage("An error occurred internally.");
                 } else {
                     alert('List Created!');
-                    setPrepListItems([]); // Clear the list after posting
+                    setPrepListItems([]);
                 }
             } catch (error) {
                 console.error("Error while posting daily prep:", error);
@@ -1806,40 +1825,39 @@ function PlanPage() {
             setErrorMessage("Please enter the verifier's name and verify the list before submitting.");
         }
     };
+    // Toggle breakdown view
     const handleBreakdownClick = ()=>{
-        setIsBreakdown((prev)=>!prev); // Toggle the `isBreakdown` state
+        setIsBreakdown((prev)=>!prev);
     };
+    // Update item quantities in state
     const handleQuantityChange = (id, quantity)=>{
         setQuantities((prev)=>({
                 ...prev,
                 [id]: quantity
             }));
     };
+    // Move items between prep lists and daily lists
     const handleCardClick = (item)=>{
         const itemTwo = new __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$types$2f$models$2f$PrepItem$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PrepItemAdapter"](item, quantities[item.prep_item_id]);
-        // Check if the item exists in prepItems
         if (prepItems.some((prepItem)=>prepItem.name === item.name)) {
-            // Move item from prepItems to PrepListItems
             setPrepItems((prev)=>prev.filter((prepItem)=>prepItem.prep_item_id !== item.prep_item_id));
             setPrepListItems((prev)=>[
                     ...prev,
                     itemTwo
-                ]); // Add to PrepListItems
+                ]);
         } else if (PrepListItems.some((dailyItem)=>dailyItem.name === item.name)) {
-            // Move item from PrepListItems back to prepItems
             setPrepListItems((prev)=>prev.filter((dailyItem)=>dailyItem.prep_list_id !== item.prep_item_id));
             setPrepItems((prev)=>[
                     ...prev,
                     item
-                ]); // Add back to prepItems
+                ]);
         }
     };
-    // Prepare category options for SelectBox
     const categoryOptions = categories.map((category)=>({
             label: category.category_name,
             value: category.category_id
         }));
-    // Handle reset action
+    // Reset filters and reload categories
     const handleReset = ()=>{
         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$search$2f$searchSlice$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["setPrepSearchTerm"])(''));
         refetchCategories();
@@ -1850,10 +1868,11 @@ function PlanPage() {
             children: "Error loading plan..."
         }, void 0, false, {
             fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-            lineNumber: 163,
+            lineNumber: 164,
             columnNumber: 12
         }, this);
     }
+    // Handle item removal from daily list
     const handleListClick = (item)=>{
         const updatedItem = {
             prep_item_id: item.prep_list_id / 1000,
@@ -1862,12 +1881,11 @@ function PlanPage() {
             category: item.category,
             kitchen_department_id: 1
         };
-        // Move item from PrepListItems back to prepItems
         setPrepListItems((prev)=>prev.filter((dailyItem)=>dailyItem.prep_list_id !== item.prep_list_id));
         setPrepItems((prev)=>[
                 ...prev,
                 updatedItem
-            ]); // Add back to prepItems
+            ]);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "grid grid-cols-3 gap-4",
@@ -1885,7 +1903,7 @@ function PlanPage() {
                                 placeholder: "Select a category"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 188,
+                                lineNumber: 187,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1894,7 +1912,7 @@ function PlanPage() {
                                 children: "Reset"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 194,
+                                lineNumber: 193,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ui$2f$NumberSelect$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1906,7 +1924,7 @@ function PlanPage() {
                                 onChange: (value)=>setStep(value)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 200,
+                                lineNumber: 199,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -1919,7 +1937,7 @@ function PlanPage() {
                         className: "my-4 border-black"
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 210,
+                        lineNumber: 209,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$AllPrepList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1930,7 +1948,7 @@ function PlanPage() {
                         onQuantityChange: handleQuantityChange
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 213,
+                        lineNumber: 211,
                         columnNumber: 9
                     }, this)
                 ]
@@ -1954,7 +1972,7 @@ function PlanPage() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 225,
+                                lineNumber: 222,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1968,20 +1986,20 @@ function PlanPage() {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                                lineNumber: 228,
+                                lineNumber: 225,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 224,
+                        lineNumber: 221,
                         columnNumber: 9
                     }, this),
                     errorMessage && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$ErrorMessage$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                         message: errorMessage
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 239,
+                        lineNumber: 236,
                         columnNumber: 26
                     }, this),
                     isBreakdown ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$NewPrepList$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1989,7 +2007,7 @@ function PlanPage() {
                         handleCardClick: handleListClick
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 241,
+                        lineNumber: 238,
                         columnNumber: 11
                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$PrepPlan$2f$PrepListBreakdown$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2000,12 +2018,12 @@ function PlanPage() {
                             categories: categories
                         }, void 0, false, {
                             fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                            lineNumber: 244,
+                            lineNumber: 241,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 243,
+                        lineNumber: 240,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2019,19 +2037,19 @@ function PlanPage() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                        lineNumber: 253,
+                        lineNumber: 250,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-                lineNumber: 223,
+                lineNumber: 220,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/prep-dash/planner/page.tsx",
-        lineNumber: 183,
+        lineNumber: 184,
         columnNumber: 5
     }, this);
 }
