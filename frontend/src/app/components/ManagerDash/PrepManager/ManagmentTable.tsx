@@ -10,6 +10,11 @@ import { fetchCategories, fetchDepartments } from '@/app/util/actions';
 import Ingredient from '@/app/types/models/Ingredient';
 import IngredientTable from './Table/Ingredient/IngredientTable';
 import PrepItemTable from './Table/PrepItem/PrepItemTable';
+import IngredientEditModal from './Table/Ingredient/IngredientEditModal';
+import PrepItemEditModal from './Table/PrepItem/PrepItemEditModal';
+import ConfirmationModal from '@/app/components/Elements/ui/ConfirmationModal';
+import { deletePrepItem } from './Table/PrepItem/actions';
+import { deleteIngredient } from './Table/Ingredient/actions';
 
 interface ManagementTableProps {
   activeList: PrepItem[] | Ingredient[];
@@ -26,6 +31,8 @@ const getDepartments = () => {
 const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category, activeSection }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState<PrepItem[] | Ingredient[]>([]);
+  const [selectedItem, setSelectedItem] = useState<PrepItem | Ingredient | null>(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const managerSearchTerm = useSelector((state: RootState) => state.search.managerSearchTerm);
 
   // Fetch and cache categories and departments
@@ -88,27 +95,89 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
             return item;
         }) as PrepItem[] | Ingredient[];
     });
-};
+  };
+
+  const handleEditClick = (item: PrepItem | Ingredient) => {
+    setSelectedItem(item);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedItem(null);
+  };
+
+  const handleDeleteClick = (item: PrepItem | Ingredient) => {
+    setSelectedItem(item);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setSelectedItem(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      if (selectedItem) {
+        if ("prep_item_id" in selectedItem) {
+          await deletePrepItem(selectedItem.prep_item_id, 1);
+        } else if ("ingredient_id" in selectedItem) {
+          await deleteIngredient(selectedItem.ingredient_id, selectedItem.restaurant_id);
+        }
+        setIsDeleteModalOpen(false);
+        setSelectedItem(null);
+        // Optionally, you can add a callback to refresh the list after deletion
+      }
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
 
   return (
-      <div className="overflow-x-auto">
-          {activeSection === "prepitem" ? (
-              <PrepItemTable
-                  list={filteredList() as PrepItem[]}
-                  categoryOptions={categoryOptions}
-                  departmentOptions={departmentOptions}
-                  handleSelection={handleSelection}
-                  handleEditClick={(item: PrepItem) => console.log(item)}
-              />
-          ) : (
-              <IngredientTable
-                  list={filteredList() as Ingredient[]}
-                  categoryOptions={categoryOptions}
-                  handleSelection={handleSelection}
-                  handleEditClick={(item: Ingredient) => console.log(item)}
-              />
+    <div className="overflow-x-auto">
+      {activeSection === "prepitem" ? (
+        <>
+          <PrepItemTable
+            list={filteredList() as PrepItem[]}
+            categoryOptions={categoryOptions}
+            departmentOptions={departmentOptions}
+            onEditClick={handleEditClick}
+            onDeleteClick={handleDeleteClick}
+          />
+          {selectedItem && "prep_item_id" in selectedItem && (
+            <PrepItemEditModal
+              item={selectedItem}
+              categoryOptions={categoryOptions}
+              departmentOptions={departmentOptions}
+              handleClose={handleCloseModal}
+            />
           )}
-      </div>
+        </>
+      ) : (
+        <>
+          <IngredientTable
+            list={filteredList() as Ingredient[]}
+            categoryOptions={categoryOptions}
+            handleSelection={handleSelection}
+            onEditClick={handleEditClick}
+            onDeleteClick={handleDeleteClick}
+          />
+          {selectedItem && "ingredient_id" in selectedItem && (
+            <IngredientEditModal
+              item={selectedItem}
+              categoryOptions={categoryOptions}
+              handleClose={handleCloseModal}
+            />
+          )}
+        </>
+      )}
+      {isDeleteModalOpen && (
+        <ConfirmationModal
+          message="Are you sure you want to delete this item?"
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCloseDeleteModal}
+        />
+      )}
+    </div>
   );
 };
 
