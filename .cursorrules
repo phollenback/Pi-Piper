@@ -1,0 +1,146 @@
+# Basic cursor rules for Republic Pi Memory project
+
+# Project structure
+project:
+  frontend_framework: "nextjs"
+  backend_framework: "express"
+  root_dirs:
+    frontend: "frontend"
+    backend: "backend"
+
+# File patterns to include/exclude
+include_patterns:
+  # Frontend patterns
+  - "frontend/src/**/*.ts"
+  - "frontend/src/**/*.tsx"
+  - "frontend/src/**/*.css"
+  - "frontend/src/**/*.json"
+  - "frontend/app/**/*.ts"
+  - "frontend/app/**/*.tsx"
+  - "frontend/pages/**/*.ts"
+  - "frontend/pages/**/*.tsx"
+  # Backend patterns
+  - "backend/src/**/*.ts"
+  - "backend/routes/**/*.ts"
+  - "backend/controllers/**/*.ts"
+  - "backend/models/**/*.ts"
+
+exclude_patterns:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/.next/**"
+  - "**/build/**"
+
+# Cursor behavior settings
+cursor:
+  tab_size: 2
+  insert_spaces: true
+  trim_trailing_whitespace: true
+  insert_final_newline: true
+
+# Language-specific settings
+language_specific:
+  typescript:
+    quote_style: single
+    semicolons: true
+    trailing_comma: es5
+    
+  typescriptreact:
+    quote_style: single
+    semicolons: true
+    trailing_comma: es5
+    jsx_quote_style: double
+    next_features: true  # Enable Next.js specific features
+
+  express:
+    quote_style: single
+    semicolons: true
+    trailing_comma: es5
+
+# Framework-specific settings
+frameworks:
+  nextjs:
+    version: 13  # Specify Next.js version
+    app_directory: true  # Using App Directory structure
+    strict_mode: true
+    server_components: true
+    client_components: true
+    route_handlers: true
+
+  express:
+    version: 4  # Specify Express.js version
+    typescript: true
+    controllers: true
+    routes: true
+    middleware: true
+
+# Format settings
+format:
+  enabled: true
+  line_width: 100
+  organize_imports: true
+  sort_imports: true
+
+# Editor behavior
+editor:
+  word_separators: "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?"
+  word_wrap: true
+  rulers: [100]
+  guides: true
+  suggest_imports: true
+  path_intellisense: true
+  path_completion: true
+
+# Search settings
+search:
+  exclude_patterns:
+    - "**/*.min.js"
+    - "**/*.map"
+    - "**/build/**"
+    - "**/dist/**"
+    - "**/.next/**"
+  include_hidden: false
+  case_sensitive: false
+
+# Git settings
+git:
+  enabled: true
+  auto_fetch: true
+  fetch_interval_seconds: 300
+  ignore_file_patterns:
+    - ".next"
+    - "node_modules"
+    - "dist"
+    - "build"
+
+# Completion settings
+completion:
+  enable_snippets: true
+  enable_auto_import: true
+  enable_function_params: true
+  nextjs_snippets: true
+  express_snippets: true
+  react_snippets: true
+
+# Diagnostic settings
+diagnostics:
+  enabled: true
+  typescript:
+    suggest_strict_mode: true
+    suggest_complete_function_calls: true
+    next_types: true  # Enable Next.js type checking
+    express_types: true  # Enable Express.js type checking
+
+# Path aliases
+path_aliases:
+  "@/*": ["frontend/src/*"]
+  "@components/*": ["frontend/src/components/*"]
+  "@lib/*": ["frontend/src/lib/*"]
+  "@utils/*": ["frontend/src/utils/*"]
+  "@backend/*": ["backend/src/*"]
+
+# Environment
+environment:
+  node_version: ">=16"
+  typescript_version: ">=4.5"

@@ -3,86 +3,108 @@ import SelectBox from '../../../components/Elements/ui/SelectBox';
 import Category from '@/app/types/models/Category';
 import InputField from '../../Elements/login/InputField';
 import Button from '../../Elements/Button';
+import { useQuery } from '@tanstack/react-query';
+import { getGroups } from '@/app/components/PrepDash/Grouper/actions';
 
-// Heading component: provides search and filtering options for prep items and ingredients.
 interface HeadingProps {
-  setSection: () => void; // Callback to update the selected section.
-  setSelectedCategory: (category: number | null) => void; // Callback to update the selected category.
-  selectedCategory: number | null; // Currently selected category ID.
-  categories: Category[]; // Array of available categories.
+  setSection: () => void; 
+  setSelectedCategory: (category: number | null) => void; 
+  selectedCategory: number | null; 
+  categories: Category[]; 
+  selectedGroup?: number | null;
+  setSelectedGroup?: (group: number | null) => void;
 }
 
-const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, selectedCategory, categories }) => {
-  const [searchError, setSearchError] = useState(""); // Error message for invalid search.
-  const [query, setQuery] = useState(""); // Current search query.
+const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, selectedCategory, categories, selectedGroup, setSelectedGroup }) => {
+  const [searchError, setSearchError] = useState(""); 
+  const [query, setQuery] = useState(""); 
+  const RESTAURANT_ID = 1;
+  
+  // Fetch groups
+  const { data: groups = [] } = useQuery({
+    queryKey: ['groups', RESTAURANT_ID],
+    queryFn: () => getGroups(RESTAURANT_ID)
+  });
 
-  // Handles changes to the category selection.
   const handleCategoryChange = (value: string | number) => {
     setSelectedCategory(value === "" ? null : Number(value));
   };
 
-  // Resets the search form to its initial state.
+  const handleGroupChange = (value: string | number) => {
+    setSelectedGroup?.(value === "" ? null : Number(value));
+  };
+
   const handleResetClick = () => {
     setQuery("");
     setSearchError("");
-    setSelectedCategory(null); // Reset category to null
+    setSelectedCategory(null);
+    setSelectedGroup?.(null);
   };
 
-  // Handles search form submission.
   const handleSearchSubmit = (query: string) => {
     if (!query.trim()) {
       setSearchError("Please enter a search term.");
       return;
     }
-    //Further search logic would go here.
+    console.log("query", query);
+    // Further search logic would go here.
   };
 
   return (
     <div className="w-full h-full flex justify-center items-center p-6 mr-8">
-      <div className="w-full max-w-4xl flex flex-col items-center">
+      <div className="w-full max-w-4xl flex flex-col items-center space-y-8">
         {/* Heading Section */}
-        <div className="w-full text-center mb-4">
-          <h1 className="font-bold text-5xl">Start filtering.</h1>
+        <div className="w-full text-center">
+          <h1 className="font-bold text-5xl bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+            Start Filtering
+          </h1>
         </div>
 
         {/* Filters Section */}
-        <div className="flex flex-col items-center gap-4 w-full">
+        <div className="flex flex-col items-center gap-6 w-full max-w-2xl">
           {/* Search Bar and Buttons */}
-          <div className="flex items-center space-x-4 mb-4">
-            <InputField
-              id="search"
-              type="text"
-              placeholder="Search..."
-              error={searchError ? searchError : ""}
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
+          <div className="flex items-center gap-4 w-full">
+            <div className="flex-1">
+              <InputField
+                id="search"
+                type="text"
+                placeholder="Search..."
+                error={searchError ? searchError : ""}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </div>
             <Button
               label="Search"
               onClick={() => handleSearchSubmit(query)}
               style={{
-                backgroundColor: "green",
+                backgroundColor: "#4CAF50",
                 color: "white",
                 fontWeight: "bold",
-                padding: "0.5rem 1rem",
+                padding: "0.75rem 1.5rem",
+                borderRadius: "0.5rem",
+                transition: "all 0.2s ease-in-out",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
               }}
             />
             <Button
               label="Reset"
               onClick={() => handleResetClick()}
               style={{
-                backgroundColor: "red",
+                backgroundColor: "#f44336",
                 color: "white",
                 fontWeight: "bold",
-                padding: "0.5rem 1rem",
+                padding: "0.75rem 1.5rem",
+                borderRadius: "0.5rem",
+                transition: "all 0.2s ease-in-out",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
               }}
             />
           </div>
 
-          {/* Category and Section Selection (Next to each other) */}
-          <div className="flex items-center gap-4 mt-4">
-            {/* Category Selection */}
-            <div>
+          {/* Category, Group and Section Selection */}
+          <div className="flex items-center gap-4 w-full justify-center">
+            <div className="w-64">
               <SelectBox
                 value={selectedCategory !== null ? selectedCategory.toString() : ""}
                 onChange={handleCategoryChange}
@@ -93,20 +115,33 @@ const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, sele
                 placeholder="Select Category"
               />
             </div>
-
-            {/* Section Selection */}
-            <div>
-              <Button
-                label="Switch Section"
-                onClick={setSection}
-                style={{
-                  backgroundColor: "blue",
-                  color: "white",
-                  fontWeight: "bold",
-                  padding: "0.5rem 1rem",
-                }}
+            <div className="w-64">
+              <SelectBox
+                value={selectedGroup !== null ? selectedGroup.toString() : ""}
+                onChange={handleGroupChange}
+                options={[
+                  { label: 'All Items', value: '' },
+                  ...groups.map(group => ({
+                    label: group.group_name,
+                    value: group.group_id
+                  }))
+                ]}
+                placeholder="Filter by Group"
               />
             </div>
+            <Button
+              label="Switch Section"
+              onClick={setSection}
+              style={{
+                backgroundColor: "#2196F3",
+                color: "white",
+                fontWeight: "bold",
+                padding: "0.75rem 1.5rem",
+                borderRadius: "0.5rem",
+                transition: "all 0.2s ease-in-out",
+                boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+              }}
+            />
           </div>
         </div>
       </div>

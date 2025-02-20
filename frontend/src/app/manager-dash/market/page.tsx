@@ -87,6 +87,8 @@ export default function MarketContainer() {
                 />
                 <Link href="/manager-dash/market/cart"><i>View Cart</i></Link>
                 <SearchInput 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search..."
                     onSearch={handleSearch}
                     error={searchTerm ? "" : "Please enter a search term."}

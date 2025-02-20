@@ -15,11 +15,13 @@ import PrepItemEditModal from './Table/PrepItem/PrepItemEditModal';
 import ConfirmationModal from '@/app/components/Elements/ui/ConfirmationModal';
 import { deletePrepItem } from './Table/PrepItem/actions';
 import { deleteIngredient } from './Table/Ingredient/actions';
+import { getGroups, filterByGroup } from './actions';
 
 interface ManagementTableProps {
   activeList: PrepItem[] | Ingredient[];
   category: number | null;
   activeSection: string; // "prepitem" for prep items, "ingredients" for ingredients
+  selectedGroup: number | null;
 }
 
 // Fetch departments for the restaurant
@@ -28,7 +30,7 @@ const getDepartments = () => {
 }
 
 // Dynamic table component that handles both prep items and ingredients
-const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category, activeSection }) => {
+const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category, activeSection, selectedGroup }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState<PrepItem[] | Ingredient[]>([]);
   const [selectedItem, setSelectedItem] = useState<PrepItem | Ingredient | null>(null);
@@ -44,6 +46,11 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
   const { data: departments = [] } = useQuery<Department[]>({
       queryKey: ["departments"],
       queryFn: getDepartments,
+  });
+
+  const { data: groups = [] } = useQuery({
+    queryKey: ['groups', 1],
+    queryFn: () => getGroups(1)
   });
 
   // Transform categories and departments for select box options using adapters
@@ -75,7 +82,15 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
         const matchesCategory = category === null || 
             ('name' in item ? item.category === category : item.ingredient_category === category);
 
-        return matchesSearchTerm && matchesCategory;
+        const matchesGroup = selectedGroup === null || 
+            filterByGroup(
+                activeSection === 'prepitem' ? [item as PrepItem] : [item as Ingredient],
+                selectedGroup,
+                activeSection === 'prepitem' ? 'prep_items' : 'ingredients',
+                groups
+            ).length > 0;
+
+        return matchesSearchTerm && matchesCategory && matchesGroup;
     });
 };
 

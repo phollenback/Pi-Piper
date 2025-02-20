@@ -35,39 +35,45 @@ const PrepItemEditModal: React.FC<PrepItemEditModalProps> = ({ item, categoryOpt
         <h2 className="text-xl font-bold mb-4">Edit Prep Item</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <label htmlFor="prep-name" className="block text-sm font-medium text-gray-700">Name</label>
             <input
+              id="prep-name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded-md"
+              title="Prep Item Name"
+              placeholder="Enter prep item name"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Description</label>
+            <label htmlFor="prep-description" className="block text-sm font-medium text-gray-700">Description</label>
             <input
+              id="prep-description"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded-md"
+              title="Prep Item Description"
+              placeholder="Enter prep item description"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Category</label>
+            <label htmlFor="prep-category" className="block text-sm font-medium text-gray-700">Category</label>
             <SelectBox
               value={selectedCategory}
               onChange={(value) => setSelectedCategory(Number(value))}
               options={categoryOptions}
-              title={item.name}
+              title="Category Selection"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Department</label>
+            <label htmlFor="prep-department" className="block text-sm font-medium text-gray-700">Department</label>
             <SelectBox
               value={selectedDepartment}
               onChange={(value) => setSelectedDepartment(Number(value))}
               options={departmentOptions}
-              title={item.name}
+              title="Department Selection"
             />
           </div>
           <div className="flex justify-end space-x-2">

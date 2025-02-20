@@ -38,6 +38,8 @@ const IngredientEditModal: React.FC<IngredientEditModalProps> = ({ item, categor
               value={ingredientName}
               onChange={(e) => setIngredientName(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded-md"
+              title="Ingredient Name"
+              placeholder="Enter ingredient name"
             />
           </div>
           <div>
@@ -47,6 +49,8 @@ const IngredientEditModal: React.FC<IngredientEditModalProps> = ({ item, categor
               value={unitOfMeasure}
               onChange={(e) => setUnitOfMeasure(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded-md"
+              title="Unit of Measure"
+              placeholder="Enter unit of measure"
             />
           </div>
           <div>

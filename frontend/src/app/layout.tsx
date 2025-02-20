@@ -6,6 +6,7 @@ import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import StoreProvider from "./StoreProvider";
 import { ReactQueryClientProvider } from "./ReactQueryClientProvider";
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,12 +32,14 @@ export default function RootLayout({
               <head>
                   <link rel="manifest" href="/manifest.json" />
                   <link rel="icon" href="/next.svg" />
+                  <link rel="apple-touch-icon" href="/icon.png" />
                   <meta name="theme-color" content="#000000" />
               </head>
               <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
               >
                 {children}
+                <Toaster />
               </body>
             </html>
           </StoreProvider>

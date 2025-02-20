@@ -41,7 +41,7 @@ __turbopack_esm__({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 ;
 const RadioButton = ({ label, onChange, checked = false, size = "medium" })=>{
-    // Define size-specific classes
+    // Size-specific styling classes.
     const sizeClasses = {
         small: "text-sm",
         medium: "text-base",
@@ -51,14 +51,13 @@ const RadioButton = ({ label, onChange, checked = false, size = "medium" })=>{
         className: "flex items-center gap-2 text-gray-500 font-bold",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                type: "checkbox" // Changed to "checkbox" for toggle behavior
-                ,
+                type: "checkbox",
                 className: `leading-tight ${sizeClasses[size]}`,
                 onChange: onChange,
                 checked: checked
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/RadioButton.tsx",
-                lineNumber: 25,
+                lineNumber: 26,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -66,13 +65,13 @@ const RadioButton = ({ label, onChange, checked = false, size = "medium" })=>{
                 children: label
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/login/RadioButton.tsx",
-                lineNumber: 31,
+                lineNumber: 32,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/login/RadioButton.tsx",
-        lineNumber: 24,
+        lineNumber: 25,
         columnNumber: 5
     }, this);
 };
@@ -97,24 +96,22 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 ;
 ;
 ;
+// InitialLogin component: presents buttons for PrepList and Manager login options.
 const InitialLogin = ()=>{
-    const [isChecked, setIsChecked] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isChecked, setIsChecked] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false); // State for "Stay Signed In" checkbox.
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
+    // Navigates to the PrepList dashboard.
     const handleListClick = ()=>{
         router.push("/prep-dash");
     };
+    // Navigates to the Manager login page.
     const handleManagerClick = ()=>{
         router.push("/manager/login");
     };
+    // Toggles the isChecked state for the "Stay Signed In" checkbox.
     const handleRadioChange = ()=>{
-        setIsChecked((prev)=>!prev); // Toggle the `isChecked` state
+        setIsChecked((prev)=>!prev);
     };
-    // Log state changes
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        console.log("isChecked state changed:", isChecked);
-    }, [
-        isChecked
-    ]); // Dependency array ensures this runs only when isChecked changes
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]",
         children: [

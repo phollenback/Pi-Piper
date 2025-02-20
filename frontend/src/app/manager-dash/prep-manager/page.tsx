@@ -26,7 +26,8 @@ const fetchAllCategories = () => {
 
 // PrepManagerContainer component: Main container for prep item management.
 export default function PrepManagerContainer() {
-    const [selectedCategory, setSelectedCategory] = useState<number | null>(null); // Selected category ID.
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const [selectedGroup, setSelectedGroup] = useState<number | null>(null);
     const [selectedSection, setSelectedSection] = useState<string>("prepitem"); // "prepitem" for prep items, "ingredients" for ingredients.
     const { data: prepItems = []} = useQuery<PrepItem[]>({
         queryKey: ["prepItems"],
@@ -55,6 +56,10 @@ export default function PrepManagerContainer() {
         setSelectedCategory(cat);
     };
 
+    // Handles group selection.
+    const handleGroupSelect = (group: number | null) => {
+        setSelectedGroup(group);
+    };
 
     useEffect(() => {
         console.log("ingredients", ingredients);
@@ -63,40 +68,43 @@ export default function PrepManagerContainer() {
         console.log("Selected Section changed:", selectedSection);
     }, [selectedSection]);
     return (
-        <>
-            {/* Flex container for the three columns */}
-            <div className="flex justify-center items-center gap-8">
-                {/* Republic Pi Memory header (1st column) */}
-                <div className="w-[100%] text-center h-full flex items-center justify-center">
-                    <h1 className="font-bold text-6xl text-black">Republic Pi Memory</h1>
-                </div>
-    
-                {/* Heading / filtering (2nd column) */}
-                <div className="w-[100%] flex justify-right pl-12 border-l-8 border-r-8 border-black">
+        <main className="container mx-auto px-4">
+            {/* Header section with responsive columns */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8">
+                {/* Brand header */}
+                <header className="text-center py-4">
+                    <h1 className="font-bold text-4xl md:text-6xl text-black">Republic Pi Memory</h1>
+                </header>
+
+                {/* Filtering section */}
+                <div className="border-l-0 md:border-l-8 md:border-r-8 border-black px-4 md:px-8">
                     <Heading 
                         setSection={handleSectionSelect} 
                         setSelectedCategory={handleCategorySelect} 
                         categories={categories} 
                         selectedCategory={selectedCategory} 
+                        selectedGroup={selectedGroup}
+                        setSelectedGroup={handleGroupSelect}
                     />
                 </div>
-    
-                {/* Create new item (3rd column) */}
-                <div className="w-[100%]">
+
+                {/* Create item section */}
+                <div className="w-full">
                     <CreateItem 
                         selectedSection={selectedSection}
                     />
                 </div>
             </div>
-    
-            {/* Management Table */}
-            <div className="">
+
+            {/* Management Table section */}
+            <section className="mt-8">
                 <ManagementTable 
                     activeList={selectedSection === "prepitem" ? prepItems : ingredients} 
                     category={selectedCategory} 
                     activeSection={selectedSection}
+                    selectedGroup={selectedGroup}
                 />
-            </div>
-        </>
+            </section>
+        </main>
     );
 }
