@@ -7,7 +7,7 @@
   "chunks": [
     "static/chunks/[root of the server]__8ebb6d._.css",
     "static/chunks/node_modules_256843._.js",
-    "static/chunks/src_91a6f4._.js"
+    "static/chunks/src_36766a._.js"
   ],
   "source": "dynamic"
 });

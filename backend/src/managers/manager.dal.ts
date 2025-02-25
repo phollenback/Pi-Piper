@@ -1,67 +1,81 @@
-import { Manager } from "./manager.model";
 import { execute } from "../services/pg.connector";
-import { managerQueries } from "./manager.queries";
+import { userQueries } from "./manager.queries";
 import { logger } from '../middleware/winston.middleware';
 
+// User interface definition
+export interface User {
+  user_id: number;
+  username: string;
+  email: string;
+  phone_number: string;
+  role: string;
+  restaurant_id: number;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
 // Retrieves all managers for a specific restaurant
-export const getManagers = async (restaurantId: number) => {
-    logger.info('[manager.dao][getManagers][START]', { restaurantId });
+export const getUsers = async (restaurantId: number): Promise<User[]> => {
+    logger.info('[user.dal][getUsers][START]', { restaurantId });
     try {
-        const managers = await execute<Manager[]>(managerQueries.getManagers, [restaurantId]);
-        logger.info('[manager.dao][getManagers][SUCCESS]', { managers });
-        return managers;
+        const users = await execute(userQueries.getUsers, [restaurantId]);
+        logger.info('[user.dal][getUsers][SUCCESS]', { users });
+        return users as User[];
     } catch (error) {
-        logger.error('[manager.dao][getManagers][ERROR]', { error });
+        logger.error('[user.dal][getUsers][ERROR]', { error });
         throw error;
     }
 };
 
 // Creates a new manager with provided manager data
-export const createManager = async (managerData: Manager) => {
-    logger.info('[manager.dao][createManager][START]', { managerData });
+export const createUser = async (userData: any): Promise<any> => {
+    logger.info('[user.dal][createUser][START]', { userData });
     try {
-        const managers = await execute<Manager[]>(managerQueries.createManager, [
-            managerData.manager_name,
-            managerData.email,
-            managerData.phone_number,
-            managerData.role,
-            managerData.restaurant_id,
-            managerData.status
+        const result = await execute(userQueries.createUser, [
+            userData.username,
+            userData.password,
+            userData.email,
+            userData.phone_number,
+            userData.role,
+            userData.restaurant_id,
+            userData.status
         ]);
-        logger.info('[manager.dao][createManager][SUCCESS]', { managers });
-        return managers;
+        logger.info('[user.dal][createUser][SUCCESS]', { result });
+        return result;
     } catch (error) {
-        logger.error('[manager.dao][createManager][ERROR]', { error });
+        logger.error('[user.dal][createUser][ERROR]', { error });
         throw error;
     }
 };
 
 // Updates existing manager information by ID
-export const updateManager = async (managerId: number, managerData: Manager) => {
-    logger.info('[manager.dao][updateManager][START]', { managerId, managerData });
+export const updateUser = async (userId: number, userData: any): Promise<any> => {
+    logger.info('[user.dal][updateUser][START]', { userId, userData });
     try {
-        const managers = await execute<Manager[]>(managerQueries.updateManager, [
-            managerData.manager_name,
-            managerData.email,
-            managerData.phone_number,
-            managerData.role,
-            managerData.restaurant_id,
-            managerData.status,
-            managerId
+        const result = await execute(userQueries.updateUser, [
+            userData.username,
+            userData.email,
+            userData.phone_number,
+            userData.role,
+            userData.restaurant_id,
+            userData.status,
+            userId
         ]);
-        logger.info('[manager.dao][updateManager][SUCCESS]', { managers });
-        return managers;
+        logger.info('[user.dal][updateUser][SUCCESS]', { result });
+        return result;
     } catch (error) {
-        logger.error('[manager.dao][updateManager][ERROR]', { error });
+        logger.error('[user.dal][updateUser][ERROR]', { error });
         throw error;
     }
 };
 
 // Removes a manager from the system by ID
-export const deleteManager = async (managerId: number) => {
-    logger.info('[manager.dao][deleteManager][START]', { managerId });
+export const deleteUser = async (userId: number): Promise<any> => {
+    logger.info('[user.dal][deleteUser][START]', { userId });
     try {
-        const managers = await execute<Manager[]>(managerQueries.deleteManager, [managerId]);
+        const result = await execute(userQueries.deleteUser, [userId]);
+        const managers = await execute(userQueries.deleteUser, [userId]);
         logger.info('[manager.dao][deleteManager][SUCCESS]', { managers });
         return managers;
     } catch (error) {

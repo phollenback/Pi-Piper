@@ -124,10 +124,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Card$2f$Card$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@mui/material/Card/Card.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$CardContent$2f$CardContent$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@mui/material/CardContent/CardContent.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$CardActions$2f$CardActions$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@mui/material/CardActions/CardActions.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_refresh__.signature();
-;
 ;
 ;
 ;
@@ -147,141 +145,172 @@ const DailyPrepItem = ({ prepItem, onButtonClick })=>{
         setNote(newNote);
         prepItem.note = newNote;
     };
+    const isComplete = prepItem.status === 'complete';
+    const cardBgColor = isComplete ? 'rgb(239, 68, 68, 0.1)' : 'rgb(74, 173, 78, 0.1)';
+    const buttonBgColor = isComplete ? 'rgb(239, 68, 68)' : 'rgb(74, 173, 78)';
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$Card$2f$Card$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
         sx: {
-            maxWidth: "100%",
-            backgroundColor: prepItem.status === 'complete' ? 'rgb(229, 133, 133)' : 'rgb(228, 237, 195)',
-            border: '2px solid black',
-            boxShadow: 3,
-            marginBottom: '6px',
-            padding: '4px'
+            width: "100%",
+            backgroundColor: cardBgColor,
+            border: '1px solid rgba(0, 0, 0, 0.12)',
+            borderLeft: `6px solid ${buttonBgColor}`,
+            borderRadius: '12px',
+            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+            marginBottom: '12px',
+            transition: 'all 0.2s ease-in-out',
+            transform: 'translateY(0)',
+            '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: '0 6px 8px -1px rgba(0, 0, 0, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.06)'
+            }
         },
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$CardContent$2f$CardContent$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                sx: {
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                },
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$CardContent$2f$CardContent$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            sx: {
+                padding: '20px',
+                '&:last-child': {
+                    paddingBottom: '20px'
+                }
+            },
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "flex flex-col md:flex-row items-start md:items-center justify-between gap-4",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex-start",
+                        className: "flex-grow space-y-2 min-w-[50%]",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-3xl",
-                                children: prepItem.name
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 43,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: prepItem.description
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 44,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                id: "search",
-                                type: "text",
-                                placeholder: "daily notes...",
-                                value: note,
-                                onChange: handleSearch
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 45,
-                                columnNumber: 21
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                        lineNumber: 42,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: "Quantity:"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 54,
-                                columnNumber: 21
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-3xl",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-center gap-3",
                                 children: [
-                                    prepItem.quantity,
-                                    " ",
-                                    prepItem.unit
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                        className: "text-2xl font-semibold text-gray-800",
+                                        children: prepItem.name
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                        lineNumber: 58,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: `px-3 py-1 rounded-full text-sm font-medium ${isComplete ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`,
+                                        children: prepItem.status
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                        lineNumber: 61,
+                                        columnNumber: 29
+                                    }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 55,
-                                columnNumber: 21
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                        lineNumber: 53,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                children: "Status:"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 58,
-                                columnNumber: 21
+                                lineNumber: 57,
+                                columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-3xl",
-                                children: prepItem.status
+                                className: "text-gray-600 text-sm",
+                                children: prepItem.description
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                                lineNumber: 59,
-                                columnNumber: 21
+                                lineNumber: 69,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "w-full max-w-md",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$login$2f$InputField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                    id: "notes",
+                                    type: "text",
+                                    placeholder: "Add notes...",
+                                    value: note,
+                                    onChange: handleSearch
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                    lineNumber: 71,
+                                    columnNumber: 29
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                lineNumber: 70,
+                                columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                        lineNumber: 57,
-                        columnNumber: 17
+                        lineNumber: 56,
+                        columnNumber: 21
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex items-center gap-8",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-center",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-sm font-medium text-gray-500 mb-1",
+                                        children: "Quantity"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                        lineNumber: 83,
+                                        columnNumber: 29
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-2xl font-bold text-gray-800",
+                                        children: [
+                                            prepItem.quantity,
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-base ml-1 text-gray-600",
+                                                children: prepItem.unit
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                                lineNumber: 86,
+                                                columnNumber: 33
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                        lineNumber: 84,
+                                        columnNumber: 29
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                lineNumber: 82,
+                                columnNumber: 25
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                label: isComplete ? 'Undo' : 'Complete',
+                                onClick: handleClick,
+                                size: "medium",
+                                style: {
+                                    backgroundColor: buttonBgColor,
+                                    color: "white",
+                                    fontWeight: "600",
+                                    padding: "8px 20px",
+                                    borderRadius: "8px",
+                                    transition: "all 0.2s ease",
+                                    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                                    border: "none"
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                                lineNumber: 92,
+                                columnNumber: 25
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+                        lineNumber: 81,
+                        columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                lineNumber: 41,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$mui$2f$material$2f$CardActions$2f$CardActions$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                sx: {
-                    justifyContent: prepItem.status === 'complete' ? 'flex-start' : 'flex-end'
-                },
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                    label: prepItem.status === 'complete' ? 'Cancel' : 'Complete',
-                    onClick: handleClick,
-                    size: "medium",
-                    style: {
-                        backgroundColor: prepItem.status === 'complete' ? 'rgb(221, 79, 79)' : 'rgb(74, 173, 78)',
-                        color: "white"
-                    }
-                }, void 0, false, {
-                    fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                    lineNumber: 63,
-                    columnNumber: 17
-                }, this)
-            }, void 0, false, {
-                fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-                lineNumber: 62,
-                columnNumber: 13
+                lineNumber: 55,
+                columnNumber: 17
             }, this)
-        ]
-    }, void 0, true, {
+        }, void 0, false, {
+            fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
+            lineNumber: 51,
+            columnNumber: 13
+        }, this)
+    }, void 0, false, {
         fileName: "[project]/src/app/components/PrepDash/DailyPrep/DailyPrepItem.tsx",
-        lineNumber: 31,
+        lineNumber: 34,
         columnNumber: 9
     }, this);
 };

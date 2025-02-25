@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import { initializePgConnector } from './services/pg.connector';
 import { requestLogger, errorLogger, logger } from './middleware/winston.middleware';
 
@@ -14,8 +14,7 @@ import categoryRoutes from './categories/category.routes';
 import departmentRoutes from './departments/department.routes'
 import groupRoutes from './groups/group.routes';
 import authRoutes from './auth/auth.routes';
-
-dotenv.config();
+import userRoutes from './users/users.routes';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,7 +27,14 @@ app.use(helmet());
 app.use(requestLogger); // Use request logger middleware
 
 // Database Initialization
-initializePgConnector();
+(async () => {
+    try {
+        await initializePgConnector();
+        console.log('Database initialized successfully.');
+    } catch (err: any) {
+        console.error('Database initialization failed:', err);
+    }
+})();
 
 // Routes
 app.get('/', (req: Request, res: Response) => {
@@ -44,6 +50,7 @@ app.use('/categories', categoryRoutes);
 app.use('/departments', departmentRoutes);
 app.use('/groups', groupRoutes);
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 // Error Logging Middleware
 app.use(errorLogger); // Use error logger middleware

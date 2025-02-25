@@ -187,20 +187,20 @@ const TimeVariables: React.FC = () => {
 
       return (
         <div className="overflow-auto max-h-[calc(100vh-350px)] pl-4">
-          <table className="w-full mt-4 border border-gray-300">
+          <table className="w-full mt-4 border border-accent-dark">
             <thead>
-              <tr className="bg-gray-200">
-                <th className="px-4 py-2 border border-gray-300">Index</th>
-                <th className="px-4 py-2 border border-gray-300">Ingredient Name</th>
-                <th className="px-4 py-2 border border-gray-300">Status</th>
+              <tr className="bg-secondary">
+                <th className="px-4 py-2 border border-accent-dark text-text-primary">Index</th>
+                <th className="px-4 py-2 border border-accent-dark text-text-primary">Ingredient Name</th>
+                <th className="px-4 py-2 border border-accent-dark text-text-primary">Status</th>
               </tr>
             </thead>
             <tbody>
               {sortIngredients().map((item, idx) => (
-                <tr key={idx} className="even:bg-gray-100">
-                  <td className="px-4 py-2 border border-gray-300 text-center">{item.ingredient_id}</td>
-                  <td className="px-4 py-2 border border-gray-300">{item.ingredient_name}</td>
-                  <td className="px-4 py-2 border border-gray-300 text-center">{item.cost_per_unit}</td>
+                <tr key={idx} className="even:bg-background-light">
+                  <td className="px-4 py-2 border border-accent-dark text-text-primary text-center">{item.ingredient_id}</td>
+                  <td className="px-4 py-2 border border-accent-dark text-text-primary">{item.ingredient_name}</td>
+                  <td className="px-4 py-2 border border-accent-dark text-text-primary text-center">{item.cost_per_unit}</td>
                 </tr>
               ))}
             </tbody>

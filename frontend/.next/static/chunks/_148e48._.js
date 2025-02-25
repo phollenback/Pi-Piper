@@ -42,25 +42,51 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
 __turbopack_esm__({
-    "default": (()=>SearchInput)
+    "default": (()=>__TURBOPACK__default__export__)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 'use client';
 ;
-function SearchInput({ value, onChange, placeholder }) {
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-        type: "text",
-        value: value,
-        onChange: onChange,
-        placeholder: placeholder,
-        className: "w-full p-2 border rounded"
-    }, void 0, false, {
+const SearchInput = ({ value, onChange, placeholder, onSearch, error, className })=>{
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "w-full",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "relative",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                    type: "text",
+                    value: value,
+                    onChange: onChange,
+                    onKeyPress: (e)=>e.key === 'Enter' && onSearch(value),
+                    placeholder: placeholder,
+                    className: `w-full ${className}`
+                }, void 0, false, {
+                    fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
+                    lineNumber: 23,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
+                lineNumber: 22,
+                columnNumber: 7
+            }, this),
+            error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                className: "text-red-500 text-sm mt-1",
+                children: error
+            }, void 0, false, {
+                fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
+                lineNumber: 33,
+                columnNumber: 17
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
-        lineNumber: 13,
+        lineNumber: 21,
         columnNumber: 5
     }, this);
-}
+};
 _c = SearchInput;
+const __TURBOPACK__default__export__ = SearchInput;
 var _c;
 __turbopack_refresh__.register(_c, "SearchInput");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
@@ -114,133 +140,205 @@ const PrepDashNav = ()=>{
             setError("Please enter a search term.");
             return;
         }
-        console.log("Search submitted:", query);
         dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$search$2f$searchSlice$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["setPrepSearchTerm"])(query));
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-        className: "flex items-center justify-between bg-black p-4 shadow-md",
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        label: "Navigate Prep Dash",
-                        onClick: ()=>setDropdownOpen(!dropdownOpen),
-                        size: "large",
-                        style: {
-                            backgroundColor: "white",
-                            color: "black",
-                            fontWeight: "bold",
-                            width: "100%"
-                        }
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                        lineNumber: 40,
-                        columnNumber: 9
-                    }, this),
-                    dropdownOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                        className: "absolute bg-white shadow-lg mt-2 py-2 rounded w-48",
+        className: "bg-gradient-to-r from-gray-900 to-black p-4 shadow-xl",
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: "container mx-auto flex items-center justify-between",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "relative",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                            label: "Navigate ▼",
+                            onClick: ()=>setDropdownOpen(!dropdownOpen),
+                            style: {
+                                backgroundColor: '#3c4b5f',
+                                color: 'white',
+                                padding: '0.5rem 1.5rem',
+                                borderRadius: '0.5rem',
+                                fontWeight: '600',
+                                transition: 'all 0.2s',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                            }
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                            lineNumber: 41,
+                            columnNumber: 11
+                        }, this),
+                        dropdownOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                            className: "absolute z-50 bg-white shadow-2xl mt-3 py-2 rounded-lg w-64 border border-gray-200",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                    className: "px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 border-b border-gray-100 transition-colors duration-200",
+                                    onClick: ()=>handleNavigation("/prep-dash"),
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-gray-700 font-medium",
+                                        children: "Daily Prep"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                        lineNumber: 60,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                    lineNumber: 56,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                    className: "px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 border-b border-gray-100 transition-colors duration-200",
+                                    onClick: ()=>handleNavigation("/prep-dash/recipebook"),
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-gray-700 font-medium",
+                                        children: "Recipe Book"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                        lineNumber: 66,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                    lineNumber: 62,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                    className: "px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 transition-colors duration-200",
+                                    onClick: ()=>handleNavigation("/prep-dash/planner"),
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-gray-700 font-medium",
+                                        children: "Prep Planner"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                        lineNumber: 72,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                    lineNumber: 68,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                            lineNumber: 55,
+                            columnNumber: 13
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                    lineNumber: 40,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex-grow flex justify-center px-4",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "w-2/3 flex items-center bg-gray-100 rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105",
                         children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                className: "px-4 py-2 hover:bg-gray-100 cursor-pointer",
-                                onClick: ()=>handleNavigation("/prep-dash"),
-                                children: "Daily Prep"
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$SearchInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                value: searchValue,
+                                onChange: (e)=>setSearchValue(e.target.value),
+                                placeholder: "Search prep...",
+                                onSearch: handleSearchSubmit,
+                                error: error,
+                                className: "input flex-grow border-none focus:ring-0 p-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                                lineNumber: 53,
+                                lineNumber: 81,
                                 columnNumber: 13
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                className: "px-4 py-2 hover:bg-gray-100 cursor-pointer",
-                                onClick: ()=>handleNavigation("/prep-dash/recipebook"),
-                                children: "Recipebook"
-                            }, void 0, false, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex-shrink-0 ml-2",
+                                children: [
+                                    " ",
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        label: "Search",
+                                        onClick: ()=>handleSearchSubmit(searchValue),
+                                        style: {
+                                            backgroundColor: '#2b6cb0',
+                                            color: 'white',
+                                            padding: '0.75rem 1.5rem',
+                                            borderRadius: '0.375rem',
+                                            fontWeight: '600',
+                                            transition: 'all 0.2s',
+                                            boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                                        }
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                        lineNumber: 90,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                                lineNumber: 59,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                className: "px-4 py-2 hover:bg-gray-100 cursor-pointer",
-                                onClick: ()=>handleNavigation("/prep-dash/planner"),
-                                children: "Prep Planner"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                                lineNumber: 65,
+                                lineNumber: 89,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                        lineNumber: 52,
+                        lineNumber: 80,
                         columnNumber: 11
                     }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                lineNumber: 39,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex-grow flex justify-center px-4",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$SearchInput$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                    value: searchValue,
-                    onChange: (e)=>setSearchValue(e.target.value),
-                    placeholder: "Search...",
-                    onSearch: handleSearchSubmit,
-                    error: error
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                    lineNumber: 76,
+                    lineNumber: 79,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center space-x-6",
+                    children: [
+                        (session?.user?.role === 'manager' || session?.user?.role === 'owner') && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                            label: "Manager Dashboard",
+                            onClick: ()=>handleNavigation("/manager-dash"),
+                            style: {
+                                backgroundColor: '#3c4b5f',
+                                color: 'white',
+                                padding: '0.5rem 1.5rem',
+                                borderRadius: '0.5rem',
+                                fontWeight: '600',
+                                transition: 'all 0.2s',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                            }
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                            lineNumber: 110,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                            label: "Sign Out",
+                            onClick: ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signOut"])({
+                                    callbackUrl: '/login'
+                                }),
+                            style: {
+                                backgroundColor: '#dc2626',
+                                color: 'white',
+                                padding: '0.5rem 1.5rem',
+                                borderRadius: '0.5rem',
+                                fontWeight: '600',
+                                transition: 'all 0.2s',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                            }
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                            lineNumber: 124,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                    lineNumber: 108,
                     columnNumber: 9
                 }, this)
-            }, void 0, false, {
-                fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                lineNumber: 75,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "text-white flex gap-4",
-                children: [
-                    (session?.user?.role === 'manager' || session?.user?.role === 'owner') && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        label: "Manager Login",
-                        onClick: ()=>handleNavigation("/manager-dash"),
-                        size: "large",
-                        style: {
-                            backgroundColor: "white",
-                            color: "black",
-                            fontWeight: "bold"
-                        }
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                        lineNumber: 87,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                        label: "Sign Out",
-                        onClick: ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["signOut"])({
-                                callbackUrl: '/login'
-                            }),
-                        size: "large",
-                        style: {
-                            backgroundColor: "#ef4444",
-                            color: "white",
-                            fontWeight: "bold"
-                        }
-                    }, void 0, false, {
-                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                        lineNumber: 98,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                lineNumber: 85,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true, {
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+            lineNumber: 38,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
         fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-        lineNumber: 38,
+        lineNumber: 37,
         columnNumber: 5
     }, this);
 };

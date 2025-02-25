@@ -1,7 +1,7 @@
 import { createPool, Pool } from 'mysql';
 let pool: Pool | null = null;
 
-export const initializePgConnector = () => {
+export const initializePgConnector = async (): Promise<void> => {
     try
     {
         pool = createPool({
@@ -34,25 +34,25 @@ export const initializePgConnector = () => {
     }
 }
 
-export const execute = <T>(query: string, params: string[] | Object) : Promise<T> => {
+export { pool };
+
+export const execute = async <T>(query: string, params: string[] | Object): Promise<T> => {
     try {
-        if(!pool) {
-            initializePgConnector();
+        if (!pool) {
+            await initializePgConnector();
         }
         
         return new Promise<T>((resolve, reject) => {
             pool!.query(query, params, (error: any, results: any) => {
-                if(error){
-                    
+                if (error) {
                     reject(error);
                 } else {
-                    
                     resolve(results);
                 }
             });
         });
 
-    } catch(error) {
+    } catch (error) {
         console.error('[mysql.connector][execute][Error]: ', error);
         throw new Error('Failed to execute MySql query');
     }

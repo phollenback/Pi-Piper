@@ -1,39 +1,68 @@
-export type Manager = {
-    manager_id: number;
-    manager_name: string;
-    email : string;
-    phone_number: string;
-    role: string;
+export default interface User {
+    user_id: number;
+    username: string;
+    password: string;
+    email: string | null;
+    phone_number: string | null;
+    role: 'owner' | 'manager' | 'prep';
     restaurant_id: number;
-    status: string;
+    status: 'active' | 'inactive';
+    created_at: string;
+    updated_at: string;
 }
 
-const { Schema } = require('express-validator');
-
-export const ManagerSchema : typeof Schema = {
-    manager_name: {
-        notEmpty: true, 
-        errorMessage: 'Name field cannot be empty.'
+export const UserSchema = {
+    
+    username: {
+        in: ['body'],
+        isString: true,
+        isLength: {
+            options: { min: 1, max: 50 },
+            errorMessage: 'Username must be between 1 and 50 characters'
+        }
+    },
+    password: {
+        in: ['body'],
+        isString: true,
+        isLength: {
+            options: { min: 6, max: 255 },
+            errorMessage: 'Password must be at least 6 characters'
+        },
+        optional: { options: { nullable: true } } // Optional for updates
     },
     email: {
-        notEmpty: true, 
-        errorMessage: 'Email field cannot be empty.'
+        in: ['body'],
+        isEmail: {
+            errorMessage: 'Must be a valid email address'
+        },
+        optional: { options: { nullable: true } }
     },
     phone_number: {
-        notEmpty: true, 
-        errorMessage: 'Phone Number field cannot be empty.'
+        in: ['body'],
+        matches: {
+            options: /^\+?[\d\s-]{10,15}$/,
+            errorMessage: 'Must be a valid phone number'
+        },
+        optional: { options: { nullable: true } }
     },
     role: {
-        notEmpty: true, 
-        errorMessage: 'Role field cannot be empty.'
+        in: ['body'],
+        isIn: {
+            options: [['owner', 'manager', 'prep']],
+            errorMessage: 'Role must be owner, manager, or prep'
+        }
     },
     restaurant_id: {
-        notEmpty: true, 
+        in: ['body'],
         isInt: true,
-        errorMessage: 'Restaurant ID field cannot be empty.'
+        toInt: true
     },
     status: {
-        notEmpty: true, 
-        errorMessage: 'Status field cannot be empty.'
+        in: ['body'],
+        isIn: {
+            options: [['active', 'inactive']],
+            errorMessage: 'Status must be active or inactive'
+        },
+        optional: { options: { nullable: true, defaults: 'active' } }
     }
-}
+};

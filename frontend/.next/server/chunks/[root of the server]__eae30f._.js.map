@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":["file:///Users/peytonhollenback/GitHub/Pi-Piper/frontend/src/app/api/restaurants/route.ts"],"sourcesContent":["import { NextResponse } from 'next/server';\n\nexport async function GET() {\n  try {\n    const backendUrl = process.env.BACKEND_API_URL || 'http://localhost:3001';\n    console.log(\"url\",backendUrl + '/restaurants');\n    const response = await fetch(`${backendUrl}/restaurants`);\n    \n    if (!response.ok) {\n      throw new Error('Failed to fetch restaurants');\n    }\n\n    const data = await response.json();\n    return NextResponse.json(data);\n  } catch (error) {\n    console.error('Error in restaurants API route:', error);\n    return NextResponse.json(\n      { message: 'Failed to fetch restaurants' },\n      { status: 500 }\n    );\n  }\n} "],"names":[],"mappings":";;;AAAA;;AAEO,eAAe;IACpB,IAAI;QACF,MAAM,aAAa,QAAQ,GAAG,CAAC,eAAe,IAAI;QAClD,QAAQ,GAAG,CAAC,OAAM,aAAa;QAC/B,MAAM,WAAW,MAAM,MAAM,GAAG,WAAW,YAAY,CAAC;QAExD,IAAI,CAAC,SAAS,EAAE,EAAE;YAChB,MAAM,IAAI,MAAM;QAClB;QAEA,MAAM,OAAO,MAAM,SAAS,IAAI;QAChC,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CAAC;IAC3B,EAAE,OAAO,OAAO;QACd,QAAQ,KAAK,CAAC,mCAAmC;QACjD,OAAO,gIAAA,CAAA,eAAY,CAAC,IAAI,CACtB;YAAE,SAAS;QAA8B,GACzC;YAAE,QAAQ;QAAI;IAElB;AACF"}},
+    {"offset": {"line": 79, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

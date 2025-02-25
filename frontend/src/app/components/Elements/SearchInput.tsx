@@ -4,18 +4,35 @@ interface SearchInputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  error?: string;
   onSearch: (query: string) => void;
+  error?: string;
+  className?: string;
 }
 
-export default function SearchInput({ value, onChange, placeholder }: SearchInputProps) {
+const SearchInput: React.FC<SearchInputProps> = ({
+  value,
+  onChange,
+  placeholder,
+  onSearch,
+  error,
+  className
+}) => {
   return (
-    <input
-      type="text"
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      className="w-full p-2 border rounded"
-    />
+    <div className="w-full">
+      <div className="relative">
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+          onKeyPress={(e) => e.key === 'Enter' && onSearch(value)}
+          placeholder={placeholder}
+          className={`w-full ${className}`}
+        />
+        {/* ... rest of the component ... */}
+      </div>
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+    </div>
   );
-}
+};
+
+export default SearchInput;

@@ -234,14 +234,14 @@ const TimeVariables = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "overflow-auto max-h-[calc(100vh-350px)] pl-4",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
-            className: "w-full mt-4 border border-gray-300",
+            className: "w-full mt-4 border border-accent-dark",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                        className: "bg-gray-200",
+                        className: "bg-secondary",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border border-gray-300",
+                                className: "px-4 py-2 border border-accent-dark text-text-primary",
                                 children: "Index"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Dash/InventoryTable.tsx",
@@ -249,7 +249,7 @@ const TimeVariables = ()=>{
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border border-gray-300",
+                                className: "px-4 py-2 border border-accent-dark text-text-primary",
                                 children: "Ingredient Name"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Dash/InventoryTable.tsx",
@@ -257,7 +257,7 @@ const TimeVariables = ()=>{
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                className: "px-4 py-2 border border-gray-300",
+                                className: "px-4 py-2 border border-accent-dark text-text-primary",
                                 children: "Status"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/Dash/InventoryTable.tsx",
@@ -277,10 +277,10 @@ const TimeVariables = ()=>{
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
                     children: sortIngredients().map((item, idx)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                            className: "even:bg-gray-100",
+                            className: "even:bg-background-light",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                    className: "px-4 py-2 border border-gray-300 text-center",
+                                    className: "px-4 py-2 border border-accent-dark text-text-primary text-center",
                                     children: item.ingredient_id
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/Dash/InventoryTable.tsx",
@@ -288,7 +288,7 @@ const TimeVariables = ()=>{
                                     columnNumber: 19
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                    className: "px-4 py-2 border border-gray-300",
+                                    className: "px-4 py-2 border border-accent-dark text-text-primary",
                                     children: item.ingredient_name
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/Dash/InventoryTable.tsx",
@@ -296,7 +296,7 @@ const TimeVariables = ()=>{
                                     columnNumber: 19
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                    className: "px-4 py-2 border border-gray-300 text-center",
+                                    className: "px-4 py-2 border border-accent-dark text-text-primary text-center",
                                     children: item.cost_per_unit
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/Dash/InventoryTable.tsx",
@@ -382,7 +382,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 ;
 ;
 ;
-function ManagerContainer() {
+async function ManagerContainer() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen pt-4 grid grid-cols-4",
         children: [

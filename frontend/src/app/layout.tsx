@@ -7,6 +7,7 @@ import StoreProvider from "./StoreProvider";
 import { ReactQueryClientProvider } from "./ReactQueryClientProvider";
 import { Toaster } from 'react-hot-toast';
 import { SessionProvider } from 'next-auth/react'
+import Footer from './components/Footer';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,12 +38,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
         <SessionProvider>
           <ReactQueryClientProvider>
             <StoreProvider>
               {children}
               <Toaster />
+              <Footer />
             </StoreProvider>
           </ReactQueryClientProvider>
         </SessionProvider>

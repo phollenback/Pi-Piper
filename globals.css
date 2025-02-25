@@ -1,0 +1,22 @@
+body {
+  @apply bg-background text-text-primary;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply bg-primary text-white hover:bg-primary-dark transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-text-primary hover:bg-secondary-light transition-colors;
+}
+
+/* Cards */
+.card {
+  @apply bg-background-light rounded-lg shadow-lg p-6;
+}
+
+/* Inputs */
+.input {
+  @apply bg-background-light border border-accent-dark rounded-md p-2 text-text-primary focus:ring-primary focus:border-primary;
+} 

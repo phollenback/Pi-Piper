@@ -1,22 +1,63 @@
-export const managerQueries = {
-    getManagers:`
-    SELECT * FROM Managers
-    WHERE restaurant_id = ?
+export const userQueries = {
+    getUsers: `
+        SELECT 
+            user_id,
+            username,
+            email,
+            phone_number,
+            role,
+            restaurant_id,
+            status,
+            created_at,
+            updated_at
+        FROM dim_users
+        WHERE restaurant_id = ?
+        AND role = 'manager'
+        AND status = 'active'
     `,
 
-    createManager:`
-    INSERT INTO Managers (manager_name, email, phone_number, role, restaurant_id, status)
-    VALUES (?, ?, ?, ?, ?, ?)
+    createUser: `
+        INSERT INTO dim_users (
+            username,
+            password,
+            email,
+            phone_number,
+            role,
+            restaurant_id,
+            status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
     `,
 
-    updateManager:`
-    UPDATE Managers
-    SET manager_name = ?, email = ?, phone_number = ?, role = ?, restaurant_id = ?, status = ?
-    WHERE manager_id = ?
+    updateUser: `
+        UPDATE dim_users
+        SET 
+            username = COALESCE(?, username),
+            email = COALESCE(?, email),
+            phone_number = COALESCE(?, phone_number),
+            role = COALESCE(?, role),
+            restaurant_id = COALESCE(?, restaurant_id),
+            status = COALESCE(?, status),
+            updated_at = CURRENT_TIMESTAMP
+        WHERE user_id = ?
     `,
 
-    deleteManager:`
-    DELETE FROM Managers
-    WHERE manager_id = ?
+    deleteUser: `
+        DELETE FROM dim_users
+        WHERE user_id = ?
+    `,
+
+    getUserById: `
+        SELECT 
+            user_id,
+            username,
+            email,
+            phone_number,
+            role,
+            restaurant_id,
+            status,
+            created_at,
+            updated_at
+        FROM dim_users
+        WHERE user_id = ?
     `
-}
+};

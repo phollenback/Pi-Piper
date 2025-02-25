@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { execute } from '../services/pg.connector';
 import bcrypt from 'bcrypt';
 import { logger } from '../middleware/winston.middleware';
+import { pool } from '../services/pg.connector';
+import jwt from 'jsonwebtoken';
 
 interface User {
   user_id: number;
@@ -14,41 +16,40 @@ interface User {
 
 interface QueryResult extends Array<User> {}
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { username, password } = req.body;
-    
-    logger.info('[auth.controller][login] Login attempt:', { username });
 
-    const [user] = (await execute(
-      `SELECT user_id, username, password, role, restaurant_id, status 
-       FROM dim_users 
-       WHERE username = ? 
-       AND status = 'active'`,
-      [username]
-    ) as QueryResult);
+    // Check for missing credentials
+    if (!username || !password) {
+      res.status(400).json({ message: 'Username and password are required' });
+      return;
+    }
+
+    const [user] = await execute(
+      'SELECT user_id, username, password, role, restaurant_id, status FROM dim_users WHERE username = ? AND status = ?',
+      [username, 'active']
+    ) as any[];
 
     if (!user) {
-      logger.error('[auth.controller][login] User not found');
-      return res.status(401).json({ message: 'Invalid credentials' });
+      res.status(401).json({ message: 'Invalid credentials' });
+      return;
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
-
     if (!isValidPassword) {
-      logger.error('[auth.controller][login] Invalid password');
-      return res.status(401).json({ message: 'Invalid credentials' });
+      res.status(401).json({ message: 'Invalid credentials' });
+      return;
     }
 
-    // Format response to match NextAuth User interface
-    res.json({
+    res.status(200).json({
       id: user.user_id.toString(),
       name: user.username,
-      email: user.username, // Using username as email
+      email: user.username,
       role: user.role,
       restaurant_id: user.restaurant_id
     });
-    
+
   } catch (error) {
     logger.error('[auth.controller][login][ERROR]', { error });
     res.status(500).json({ message: 'Server error' });

@@ -1,77 +1,87 @@
 import { Request, Response } from 'express';
-import * as ManagerDal from './manager.dal';
+import * as UserDal from './manager.dal';
 import { logger } from '../middleware/winston.middleware';
 const { validationResult } = require('express-validator');
 
-// Retrieves manager information for a given restaurant.
-export const readManager = async (req: Request, res: Response) => {
-    logger.info('[manager.controller][readManager][START]', { restaurantId: req.params.restaurantId }); //Added restaurantId to log
+// Retrieves users with manager role for a given restaurant
+export const getUsers = async (req: Request, res: Response) => {
+    logger.info('[users.controller][getUsers][START]', { restaurantId: req.params.restaurantId });
 
     try {
         const restaurantId = Number(req.params.restaurantId);
-        const managers = await ManagerDal.getManagers(restaurantId);
-        logger.info('[manager.controller][readManager][SUCCESS]', { managers });
-        res.status(200).json(managers);
+        const users = await UserDal.getUsers(restaurantId);
+        logger.info('[users.controller][getUsers][SUCCESS]', { users });
+        res.status(200).json(users);
     } catch (error) {
-        logger.error('[manager.controller][readManager][ERROR]', { error });
-        res.status(500).json({ message: 'Failed to retrieve managers' });
+        logger.error('[users.controller][getUsers][ERROR]', { error });
+        res.status(500).json({ message: 'Failed to retrieve users' });
     }
 };
 
-// Creates a new manager.
-export const createManager = async (req: Request, res: Response) => {
-    logger.info('[manager.controller][createManager][START]');
+// Creates a new user
+export const createUser = async (req: Request, res: Response) => {
+    logger.info('[users.controller][createUser][START]');
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        logger.error('[manager.controller][createManager][VALIDATION_ERROR]', { errors: errors.array() });
+        logger.error('[users.controller][createUser][VALIDATION_ERROR]', { errors: errors.array() });
         return res.status(400).json({ errors: errors.array() });
     }
 
     try {
-        const managerData = req.body;
-        const newManager = await ManagerDal.createManager(managerData);
-        logger.info('[manager.controller][createManager][SUCCESS]', { newManager });
-        res.status(201).json(newManager);
+        const userData = req.body;
+        const newUser = await UserDal.createUser(userData);
+        logger.info('[users.controller][createUser][SUCCESS]', { newUser });
+        res.status(201).json(newUser);
     } catch (error) {
-        logger.error('[manager.controller][createManager][ERROR]', { error });
-        res.status(500).json({ message: 'Failed to create manager' });
+        logger.error('[users.controller][createUser][ERROR]', { error });
+        res.status(500).json({ message: 'Failed to create user' });
     }
 };
 
-// Updates an existing manager.
-export const updateManager = async (req: Request, res: Response) => {
-    logger.info('[manager.controller][updateManager][START]', { managerId: req.params.managerId }); //Added managerId to log
+// Updates an existing user
+export const updateUser = async (req: Request, res: Response) => {
+    logger.info('[users.controller][updateUser][START]', { userId: req.params.userId });
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        logger.error('[manager.controller][updateManager][VALIDATION_ERROR]', { errors: errors.array() });
+        logger.error('[users.controller][updateUser][VALIDATION_ERROR]', { errors: errors.array() });
         return res.status(400).json({ errors: errors.array() });
     }
 
     try {
-        const managerId = Number(req.params.managerId);
-        const managerData = req.body;
-        const updatedManager = await ManagerDal.updateManager(managerId, managerData);
-        logger.info('[manager.controller][updateManager][SUCCESS]', { updatedManager });
-        res.status(200).json(updatedManager);
+        const userId = Number(req.params.userId);
+        const userData = req.body;
+        const updatedUser = await UserDal.updateUser(userId, userData);
+        
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        logger.info('[users.controller][updateUser][SUCCESS]', { updatedUser });
+        res.status(200).json(updatedUser);
     } catch (error) {
-        logger.error('[manager.controller][updateManager][ERROR]', { error });
-        res.status(500).json({ message: 'Failed to update manager' });
+        logger.error('[users.controller][updateUser][ERROR]', { error });
+        res.status(500).json({ message: 'Failed to update user' });
     }
 };
 
-// Deletes a manager.
-export const deleteManager = async (req: Request, res: Response) => {
-    logger.info('[manager.controller][deleteManager][START]', { managerId: req.params.managerId });
+// Deletes a user
+export const deleteUser = async (req: Request, res: Response) => {
+    logger.info('[users.controller][deleteUser][START]', { userId: req.params.userId });
 
     try {
-        const managerId = Number(req.params.managerId);
-        const result = await ManagerDal.deleteManager(managerId);
-        logger.info('[manager.controller][deleteManager][SUCCESS]', { result });
-        res.status(200).json(result);
+        const userId = Number(req.params.userId);
+        const result = await UserDal.deleteUser(userId);
+        
+        if (!result) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        
+        logger.info('[users.controller][deleteUser][SUCCESS]', { result });
+        res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
-        logger.error('[manager.controller][deleteManager][ERROR]', { error });
-        res.status(500).json({ message: 'Failed to delete manager' });
+        logger.error('[users.controller][deleteUser][ERROR]', { error });
+        res.status(500).json({ message: 'Failed to delete user' });
     }
 };
