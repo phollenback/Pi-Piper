@@ -1,16 +1,16 @@
 {
-  "name": "Peytons Next.js PWA",
-  "short_name": "PeyWA",
-  "description": "A PeyWA for the books to show that i know what this",
-  "start_url": "/home",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "name": "Restaurant Management System",
+  "short_name": "RestaurantMS",
   "icons": [
     {
-      "src": "/icons/node-logo.png",
-      "sizes": "800x800",
+      "src": "/icon.png",
+      "sizes": "192x192",
       "type": "image/png"
     }
-  ]
+  ],
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
 }

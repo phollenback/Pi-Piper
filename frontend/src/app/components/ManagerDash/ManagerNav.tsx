@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Button from "../Elements/Button"; 
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 // ManagerNav component: provides navigation for the manager dashboard.
 const ManagerNav: React.FC = () => {
@@ -80,15 +81,15 @@ const ManagerNav: React.FC = () => {
       </div>
 
       {/* Right Section - Logout Button */}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-4">
         <Button
-          label="Logout"
-          onClick={() => handleNavigation("/login")}
+          label="Sign Out"
+          onClick={() => signOut({ callbackUrl: '/login' })}
           size="large"
           style={{
-            backgroundColor: "white",
-            color: "black",
-            fontWeight: "bold",
+            backgroundColor: "#ef4444",
+            color: "white",
+            fontWeight: "bold"
           }}
         />
       </div>

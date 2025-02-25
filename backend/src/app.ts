@@ -13,6 +13,7 @@ import ingredientRoutes from './ingredients/ingredient.routes';
 import categoryRoutes from './categories/category.routes';
 import departmentRoutes from './departments/department.routes'
 import groupRoutes from './groups/group.routes';
+import authRoutes from './auth/auth.routes';
 
 dotenv.config();
 
@@ -42,6 +43,8 @@ app.use('/ingredients', ingredientRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/departments', departmentRoutes);
 app.use('/groups', groupRoutes);
+app.use('/auth', authRoutes);
+
 // Error Logging Middleware
 app.use(errorLogger); // Use error logger middleware
 
