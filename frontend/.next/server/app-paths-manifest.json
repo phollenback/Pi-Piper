@@ -1,9 +1,5 @@
 {
-  "/manager-dash/page": "app/manager-dash/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/manager-dash/admin/page": "app/manager-dash/admin/page.js",
-  "/api/managers/route": "app/api/managers/route.js",
-  "/api/users/route": "app/api/users/route.js",
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/prep-dash/page": "app/prep-dash/page.js",
+  "/_not-found/page": "app/_not-found/page.js"
 }

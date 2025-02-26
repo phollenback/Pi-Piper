@@ -51,6 +51,7 @@ const SearchInput = ({ value, onChange, placeholder, onSearch, error, className 
                     type: "text",
                     value: value,
                     onChange: onChange,
+                    onKeyPress: (e)=>e.key === 'Enter' && onSearch(value),
                     placeholder: placeholder,
                     className: `w-full ${className}`
                 }, void 0, false, {
@@ -68,7 +69,7 @@ const SearchInput = ({ value, onChange, placeholder, onSearch, error, className 
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/app/components/Elements/SearchInput.tsx",
-                lineNumber: 32,
+                lineNumber: 33,
                 columnNumber: 17
             }, this)
         ]

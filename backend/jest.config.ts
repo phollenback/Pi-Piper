@@ -1,14 +1,17 @@
 import type { Config } from '@jest/types';
 
-const config: Config.InitialOptions = {
+export default {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  globalTeardown: './src/tests/teardown.js',
   testMatch: ['**/*.test.ts'],
-  verbose: true,
-  forceExit: true,
-  clearMocks: true,
-  resetMocks: true,
-  restoreMocks: true,
-};
-
-export default config; 
+  setupFilesAfterEnv: ['./src/tests/setup.ts'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  // Add test timeout
+  testTimeout: 30000, // Increase timeout to 30 seconds
+  // Detect open handles
+  detectOpenHandles: true,
+  // Add any other configurations from jest.config.js here
+}; 

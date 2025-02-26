@@ -39,7 +39,7 @@ const config: Config = {
   coverageProvider: "v8",
   testEnvironment: "jsdom",
   
-  
+  moduleFileExtensions: ['js', 'mjs', 'cjs', 'jsx', 'ts', 'tsx', 'json', 'node'],
 };
 
 export default createJestConfig(config);

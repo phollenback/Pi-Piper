@@ -5,18 +5,16 @@ export const initializePgConnector = async (): Promise<void> => {
     try
     {
         pool = createPool({
-            connectionLimit:
-                parseInt(process.env.MY_SQL_DB_CONNECTION_LIMIT != undefined ? process.env.MY_SQL_DB_CONNECTION_LIMIT : ""),
-            port: 
-                parseInt(process.env.MY_SQL_DB_PORT != undefined ? process.env.MY_SQL_DB_PORT : ""),
-            host : process.env.MY_SQL_DB_HOST,
-            user : process.env.MY_SQL_DB_USER,
-            password : process.env.MY_SQL_DB_PASSWORD,
+            host: process.env.MY_SQL_DB_HOST,
+            user: process.env.MY_SQL_DB_USER,
+            password: process.env.MY_SQL_DB_PASSWORD,
+            port: Number(process.env.MY_SQL_DB_PORT),
             database: process.env.MY_SQL_DB_DATABASE,
+            connectionLimit: Number(process.env.MY_SQL_DB_CONNECTION_LIMIT)
         });
 
-        console.debug('Mysql Adapter Pool generated successsfully');
-        console.log('process.env.DB_DATABASE', process.env.MY_SQL_DB_DATABASE);
+        console.debug('Mysql Adapter Pool generated successfully');
+        console.log('process.env.DB_MY_SQL_DATABASE', process.env.MY_SQL_DB_DATABASE);
         
         pool.getConnection((err: any, connection: any) => {
             if(err) {
@@ -30,7 +28,7 @@ export const initializePgConnector = async (): Promise<void> => {
         })
     } catch (error) {
         console.error('[mysql.connector][initializeMySqlConnector][Error]: ', error);
-        throw new Error('failed to initilize pool'); 
+        throw new Error('Failed to initialize pool'); 
     }
 }
 

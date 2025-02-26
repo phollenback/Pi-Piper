@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "start": "npx ts-node ./src/app.ts",
-    "dev": "ts-node src/app.ts",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon src/index.ts",
     "build": "tsc",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:all": "ts-node src/tests/run-all-tests.ts",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "author": "",
   "license": "ISC",

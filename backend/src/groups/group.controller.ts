@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import * as GroupDal from './group.dal';
 import { logger } from '../middleware/winston.middleware';
 import { GroupItem } from './group.model';
+import * as GroupService from './group.service';
 
-export const createGroup = async (req: Request, res: Response) => {
+export const createGroup = async (req: Request, res: Response): Promise<void> => {
   logger.info('[group.controller][createGroup][START]', { body: req.body });
   
   try {
@@ -11,9 +12,10 @@ export const createGroup = async (req: Request, res: Response) => {
     
     if (!name || !restaurant_id || !items?.length) {
       logger.error('[group.controller][createGroup][VALIDATION_ERROR]', { body: req.body });
-      return res.status(400).json({
+      res.status(400).json({
         message: 'Missing required fields: name, restaurant_id, or items'
       });
+      return; // Explicitly return to avoid further execution
     }
 
     const groupId = await GroupDal.createGroup(
@@ -41,10 +43,10 @@ export const createGroup = async (req: Request, res: Response) => {
   }
 };
 
-export const getGroups = async (req: Request, res: Response) => {
+export const getGroups = async (req: Request, res: Response): Promise<void> => {
   try {
-    const groups = await GroupDal.getGroups(req.params.restaurantId);
-    res.json(groups);
+    const groups = await GroupService.getGroups(req.params.restaurantId);
+    res.status(200).json(groups);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch groups' });
   }

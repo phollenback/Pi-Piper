@@ -66,10 +66,16 @@ const PrepDashNav: React.FC = () => {
                 <span className="text-gray-700 font-medium">Recipe Book</span>
               </li>
               <li
-                className="px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 transition-colors duration-200"
+                className="px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 border-b border-gray-100 transition-colors duration-200"
                 onClick={() => handleNavigation("/prep-dash/planner")}
               >
                 <span className="text-gray-700 font-medium">Prep Planner</span>
+              </li>
+              <li
+                className="px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 transition-colors duration-200"
+                onClick={() => handleNavigation("/prep-dash/grouper")}
+              >
+                <span className="text-gray-700 font-medium">Grouper</span>
               </li>
             </ul>
           )}

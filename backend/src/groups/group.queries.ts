@@ -31,7 +31,7 @@ export const GROUP_QUERIES = {
           )
         )
       ) as items
-    FROM dim_group g
+    FROM dim_groups g
     LEFT JOIN bridge_group_items gi ON g.group_id = gi.group_id
     LEFT JOIN dim_prep_item p ON gi.prep_item_id = p.prep_item_id
     LEFT JOIN dim_ingredient i ON gi.ingredient_id = i.ingredient_id
