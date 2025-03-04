@@ -213,7 +213,7 @@ const PrepDashNav = ()=>{
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                    className: "px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 transition-colors duration-200",
+                                    className: "px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 border-b border-gray-100 transition-colors duration-200",
                                     onClick: ()=>handleNavigation("/prep-dash/planner"),
                                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         className: "text-gray-700 font-medium",
@@ -226,6 +226,22 @@ const PrepDashNav = ()=>{
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
                                     lineNumber: 68,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                    className: "px-6 py-3 hover:bg-gray-50 cursor-pointer flex items-center space-x-3 transition-colors duration-200",
+                                    onClick: ()=>handleNavigation("/prep-dash/grouper"),
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-gray-700 font-medium",
+                                        children: "Grouper"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                        lineNumber: 78,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
+                                    lineNumber: 74,
                                     columnNumber: 15
                                 }, this)
                             ]
@@ -254,7 +270,7 @@ const PrepDashNav = ()=>{
                                 className: "input flex-grow border-none focus:ring-0 p-2"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                                lineNumber: 81,
+                                lineNumber: 87,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -275,24 +291,24 @@ const PrepDashNav = ()=>{
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                                        lineNumber: 90,
+                                        lineNumber: 96,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                                lineNumber: 89,
+                                lineNumber: 95,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                        lineNumber: 80,
+                        lineNumber: 86,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                    lineNumber: 79,
+                    lineNumber: 85,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -312,7 +328,7 @@ const PrepDashNav = ()=>{
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                            lineNumber: 110,
+                            lineNumber: 116,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -331,13 +347,13 @@ const PrepDashNav = ()=>{
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                            lineNumber: 124,
+                            lineNumber: 130,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/PrepDash/PrepDashNav.tsx",
-                    lineNumber: 108,
+                    lineNumber: 114,
                     columnNumber: 9
                 }, this)
             ]

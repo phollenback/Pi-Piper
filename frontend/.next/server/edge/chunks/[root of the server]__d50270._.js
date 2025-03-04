@@ -37,13 +37,16 @@ async function middleware(request) {
         secret: process.env.NEXTAUTH_SECRET
     });
     const isManagerRoute = request.nextUrl.pathname.startsWith('/manager-dash');
-    const isPrepRoute = request.nextUrl.pathname.startsWith('/prep-dash');
     // No token, redirect to login
     if (!token) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/login', request.url));
     }
-    // Check role-based access
-    if (isManagerRoute && token.role !== 'manager' && token.role !== 'owner') {
+    // Manager can access manager-dash and prep-dash
+    if (token.role === 'manager') {
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["NextResponse"].next();
+    }
+    // Prep users can only access prep-dash
+    if (token.role === 'prep' && isManagerRoute) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["NextResponse"].redirect(new URL('/prep-dash', request.url));
     }
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$spec$2d$extension$2f$response$2e$js__$5b$middleware$5d$__$28$ecmascript$29$__["NextResponse"].next();

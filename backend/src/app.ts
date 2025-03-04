@@ -3,7 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import 'dotenv/config';
 import { initializePgConnector } from './services/pg.connector';
-import { requestLogger, errorLogger, logger } from './middleware/winston.middleware';
+import { requestLogger, logger, errorLogger } from './middleware/winston.middleware';
 
 // ROUTES **************
 import restaurantRouter from './restaurants/restaurant.routes';
@@ -53,9 +53,6 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 
 // Error Logging Middleware
-app.use(errorLogger); // Use error logger middleware
-
-// Error Handling Middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   logger.error(`${req.method} ${req.url} ${res.statusCode} - ${err.message}`);
   console.error(err.stack);

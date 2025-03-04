@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Ingredient from '@/app/types/models/Ingredient';
 import SelectBox from '@/app/components/Elements/ui/SelectBox';
 import Button from '@/app/components/Elements/Button';
-import { editIngredient } from './actions';
+import { editIngredient } from '@/app/actions/ingredientActions';
 
 interface IngredientEditModalProps {
   item: Ingredient;

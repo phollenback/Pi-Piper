@@ -3,7 +3,7 @@ import SelectBox from "@/app/components/Elements/ui/SelectBox";
 import Category, { categoryAdapter } from "@/app/types/models/Category";
 import { useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { createIngredient } from "./actions";
+import { createIngredient } from "@/app/actions/ingredientActions";
 
 type IngredientFields = {
     ingredient_name: string;

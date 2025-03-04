@@ -6,16 +6,17 @@ import { RootState } from '@/redux/lib/store';
 import Category, { categoryAdapter } from '@/app/types/models/Category';
 import Department, { departmentAdapter } from '@/app/types/models/Department';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCategories, fetchDepartments } from '@/app/util/actions';
+import { fetchCategories } from '@/app/util/actions';
+import { fetchDepartments } from '@/app/actions/departmentActions';
 import Ingredient from '@/app/types/models/Ingredient';
 import IngredientTable from './Table/Ingredient/IngredientTable';
 import PrepItemTable from './Table/PrepItem/PrepItemTable';
 import IngredientEditModal from './Table/Ingredient/IngredientEditModal';
 import PrepItemEditModal from './Table/PrepItem/PrepItemEditModal';
 import ConfirmationModal from '@/app/components/Elements/ui/ConfirmationModal';
-import { deletePrepItem } from './Table/PrepItem/actions';
-import { deleteIngredient } from './Table/Ingredient/actions';
-import { getGroups, filterByGroup } from './actions';
+import { deletePrepItem } from '@/app/actions/prepItemActions';
+import { deleteIngredient } from '@/app/actions/ingredientActions';
+import { getGroups, filterByGroup } from '@/app/actions/groupActions';
 
 interface ManagementTableProps {
   activeList: PrepItem[] | Ingredient[];

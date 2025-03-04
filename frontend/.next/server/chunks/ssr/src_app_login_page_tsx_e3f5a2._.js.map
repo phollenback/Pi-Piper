@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/peytonhollenback/HooliDocs/Pi-Piper/frontend/src/app/login/page.tsx"],"sourcesContent":["\"use client\";\n\nimport { useState } from 'react';\nimport { useRouter } from 'next/navigation';\nimport { signIn } from 'next-auth/react';\nimport toast from 'react-hot-toast';\nimport { useDispatch } from 'react-redux';\nimport { setAuthInfo } from '../../redux/features/auth/authSlice';\nimport { useRestaurants } from '../../hooks/useRestaurants';\nimport LoginSteps from '../../components/LoginSteps';\n\ninterface Restaurant {\n  restaurant_id: number;\n  restaurant_name: string;\n  logo: string;\n}\n\nexport default function LoginPage() {\n  return <div>Login Page</div>\n}"],"names":[],"mappings":";;;;AAAA;;AAiBe,SAAS;IACtB,qBAAO,8OAAC;kBAAI;;;;;;AACd"}},
+    {"offset": {"line": 22, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

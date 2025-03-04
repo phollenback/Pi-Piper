@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.89% </span>
+                <span class="strong">5.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/591</span>
+                <span class='fraction'>34/591</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">14.28% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>1/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.89% </span>
+                <span class="strong">5.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/591</span>
+                <span class='fraction'>34/591</span>
             </div>
         
             
@@ -659,23 +659,23 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1248,24 +1248,24 @@
 // Right now it has no references but may in the future. 
 // 
 &nbsp;
-export const getButtonColor = <span class="fstat-no" title="function not covered" >(name: string) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  switch (name) {</span>
-<span class="cstat-no" title="statement not covered" >      case "Slicer":</span>
+export const getButtonColor = (name: string) =&gt; {
+  switch (name) {
+<span class="branch-0 cbranch-no" title="branch not covered" >      case "Slicer":</span>
 <span class="cstat-no" title="statement not covered" >          return "red";</span>
-<span class="cstat-no" title="statement not covered" >      case "Pantry":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >      case "Pantry":</span>
 <span class="cstat-no" title="statement not covered" >          return "green";</span>
-<span class="cstat-no" title="statement not covered" >      case "Oven":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >      case "Oven":</span>
 <span class="cstat-no" title="statement not covered" >          return "grey";</span>
-<span class="cstat-no" title="statement not covered" >      case "Grill":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >      case "Grill":</span>
 <span class="cstat-no" title="statement not covered" >          return "blue";</span>
-<span class="cstat-no" title="statement not covered" >      case "Cold Prep":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >      case "Cold Prep":</span>
 <span class="cstat-no" title="statement not covered" >          return "orange";</span>
-<span class="cstat-no" title="statement not covered" >      case "All":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >      case "All":</span>
 <span class="cstat-no" title="statement not covered" >          return "black";</span>
-<span class="cstat-no" title="statement not covered" >      default:</span>
-<span class="cstat-no" title="statement not covered" >          return "blue";</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >};</span>
+      default:
+          return "blue";
+  }
+};
   export const fetchDailyPrepItems = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    return [</span>
 <span class="cstat-no" title="statement not covered" >      { </span>
@@ -1840,7 +1840,7 @@ export const getDailyList = <span class="fstat-no" title="function not covered" 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-26T00:51:22.448Z
+                at 2025-02-27T22:19:39.924Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

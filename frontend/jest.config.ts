@@ -40,6 +40,42 @@ const config: Config = {
   testEnvironment: "jsdom",
   
   moduleFileExtensions: ['js', 'mjs', 'cjs', 'jsx', 'ts', 'tsx', 'json', 'node'],
+
+  // Add these new configurations
+  moduleDirectories: ['node_modules', '<rootDir>/'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@/app/(.*)$': '<rootDir>/src/app/$1',
+    '^@/components/(.*)$': '<rootDir>/src/app/components/$1',
+    '^next-auth/react$': require.resolve('next-auth/react'),
+    '^next-auth$': require.resolve('next-auth'),
+  },
+  transformIgnorePatterns: [
+    '/node_modules/(?!(next-auth|@next-auth|@auth)/)',
+  ],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/.next/',
+  ],
+  transform: {
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
+      {
+        jsc: {
+          parser: {
+            syntax: 'typescript',
+            tsx: true,
+          },
+          transform: {
+            react: {
+              runtime: 'automatic',
+            },
+          },
+        },
+      },
+    ],
+  },
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
 };
 
 export default createJestConfig(config);

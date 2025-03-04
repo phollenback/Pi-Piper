@@ -8,13 +8,13 @@ import PrepListItem from '@/app/types/models/PrepListItem';
 
 // Mock data
 const mockCategories = [
-  { category_id: 1, category_name: 'Meat', color: 'red' },
-  { category_id: 2, category_name: 'Vegetables', color: 'green' },
+  { id: 1, category_id: 1, category_name: 'Meat', color: 'red' },
+  { id: 2, category_id: 2, category_name: 'Vegetables', color: 'green' },
 ];
 
 const mockPrepItems = [
-  { prep_item_id: 1, name: 'Slice Prosciutto', category: 1 },
-  { prep_item_id: 2, name: 'Chop Carrots', category: 2 },
+  { id: 1, prep_item_id: 1, name: 'Slice Prosciutto', category: 1 },
+  { id: 2, prep_item_id: 2, name: 'Chop Carrots', category: 2 },
 ];
 
 // Mock useQuery globally

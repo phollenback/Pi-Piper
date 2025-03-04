@@ -9,18 +9,22 @@ export async function middleware(request: NextRequest) {
   })
   
   const isManagerRoute = request.nextUrl.pathname.startsWith('/manager-dash')
-  const isPrepRoute = request.nextUrl.pathname.startsWith('/prep-dash')
 
   // No token, redirect to login
   if (!token) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
-  // Check role-based access
-  if (isManagerRoute && token.role !== 'manager' && token.role !== 'owner') {
-    return NextResponse.redirect(new URL('/prep-dash', request.url))
+  // Manager can access manager-dash and prep-dash
+  if (token.role === 'manager') {
+    return NextResponse.next()
   }
 
+  // Prep users can only access prep-dash
+  if (token.role === 'prep' && isManagerRoute) {
+    return NextResponse.redirect(new URL('/prep-dash', request.url))
+  }
+  
   return NextResponse.next()
 }
 

@@ -7,7 +7,6 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { setAuthInfo } from '../../redux/features/auth/authSlice';
 import { useRestaurants } from '../../hooks/useRestaurants';
-import { RestaurantSkeleton } from '../../components/RestaurantSkeleton';
 import LoginSteps from '../../components/LoginSteps';
 
 interface Restaurant {
