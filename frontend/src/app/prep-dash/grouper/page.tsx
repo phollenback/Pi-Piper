@@ -1,14 +1,22 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { TableCellsIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
 import SelectBox from '@/app/components/Elements/ui/SelectBox';
 import Button from '@/app/components/Elements/Button';
 import { PrepItem } from '@/app/types/models/PrepItem';
 import Ingredient from '@/app/types/models/Ingredient';
-import { getIngredients, getPrepItems, createGroup } from '@/app/components/PrepDash/Grouper/actions';
-import Category from '@/app/types/models/Category';
+import { createGroup } from '../../actions/groupActions';
+import {Category} from '@/app/types/models/Category';
 import { toast } from 'react-hot-toast';
+import { fetchCategories, getPrepItems } from '@/app/actions/prepItemActions';
+import { getIngredients } from '@/app/actions/ingredientActions';
+import { RootState } from "@/redux/lib/store";
+import { useDispatch, useSelector } from "react-redux";
+import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
+
+
+
 
 type ItemType = 'ingredients' | 'prep_items';
 type ViewMode = 'table' | 'badge';
@@ -21,15 +29,14 @@ export default function GrouperPage() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const RESTAURANT_ID = 1;
 
-  const { data: categories = [] } = useQuery({
-    queryKey: ['categories'],
-    queryFn: async () => {
-      const response = await fetch('http://localhost:3000/categories');
-      if (!response.ok) {
-        throw new Error('Failed to fetch categories');
-      }
-      return response.json();
-    },
+  const dispatch = useDispatch();
+  const { prepSearchTerm } = useSelector((state: RootState) => state.search);
+
+  const { data: categories = [] } = useQuery<Category[]>({
+    queryKey: ['categories', RESTAURANT_ID],
+    queryFn: () => fetchCategories(RESTAURANT_ID),
+    enabled: !!RESTAURANT_ID,
+    staleTime: 1000 * 60 * 5
   });
 
   const { data: ingredientItems = [] } = useQuery({
@@ -46,33 +53,39 @@ export default function GrouperPage() {
 
   const currentItems = selectedType === 'ingredients' ? ingredientItems : prepItems;
 
-  const filteredItems = selectedCategory
+  const filteredItems = (selectedCategory
     ? currentItems.filter(item => 
         selectedType === 'ingredients' 
-          ? (item as Ingredient).ingredient_category === selectedCategory
+          ? (item as Ingredient).ingredientCategory === selectedCategory
           : (item as PrepItem).category === selectedCategory
       )
-    : currentItems;
+    : currentItems).filter(item => {
+      const name = selectedType === 'ingredients' 
+        ? (item as Ingredient).ingredientName 
+        : (item as PrepItem).name;
+      return name.toLowerCase().includes(prepSearchTerm.toLowerCase());
+    });
 
   const categoryOptions = categories.map((category: Category) => ({
-    label: category.category_name,
-    value: category.category_id,
+    label: category.categoryName,
+    value: category.categoryId,
   }));
 
   const handleReset = () => {
     setSelectedCategory(null);
+    dispatch(setPrepSearchTerm(""));
   };
 
   const getItemName = (item: Ingredient | PrepItem): string => {
     if (selectedType === 'ingredients') {
-      return (item as Ingredient).ingredient_name;
+      return (item as Ingredient).ingredientName;
     }
     return (item as PrepItem).name;
   };
 
   const getItemId = (item: Ingredient | PrepItem): number => {
     if (selectedType === 'ingredients') {
-      return (item as Ingredient).ingredient_id;
+      return (item as Ingredient).ingredientId;
     }
     return (item as PrepItem).prep_item_id;
   };
@@ -92,18 +105,10 @@ export default function GrouperPage() {
     if (!groupName || selectedItems.size === 0) return;
 
     try {
-      const mappedItems = Array.from(selectedItems).map(itemId => {
-        console.log('Mapping item:', { 
-          itemId, 
-          type: selectedType,
-          prep: selectedType === 'prep_items' ? itemId : null,
-          ing: selectedType === 'ingredients' ? itemId : null
-        }); // Debug log
-        return {
-          prep_item_id: selectedType === 'prep_items' ? itemId : null,
-          ingredient_id: selectedType === 'ingredients' ? itemId : null
-        };
-      });
+      const mappedItems = Array.from(selectedItems).map(itemId => ({
+        prep_item_id: selectedType === 'prep_items' ? itemId : null,
+        ingredient_id: selectedType === 'ingredients' ? itemId : null
+      }));
 
       await createGroup(
         groupName,
@@ -128,6 +133,12 @@ export default function GrouperPage() {
       });
     }
   };
+
+  useEffect(() => {
+    if (selectedType === 'ingredients' && ingredientItems.length > 0) {
+      console.log('Ingredients List:', ingredientItems);
+    }
+  }, [selectedType, ingredientItems]);
 
   return (
     <div className="container mx-auto px-4 h-screen max-h-screen py-2">
@@ -180,9 +191,9 @@ export default function GrouperPage() {
             </div>
 
             <div className="flex-1 overflow-auto">
-              {filteredItems.map((item) => (
+              {filteredItems.map((item, index) => (
                 <div
-                  key={getItemId(item)}
+                  key={index}
                   className={`p-4 mb-3 rounded-lg flex justify-between items-center cursor-pointer border ${
                     selectedItems.has(getItemId(item)) 
                       ? 'bg-blue-50 border-blue-200' 
@@ -190,7 +201,11 @@ export default function GrouperPage() {
                   }`}
                   onClick={() => handleItemSelect(item)}
                 >
-                  <span className="text-lg">{getItemName(item)}</span>
+                  <span className="text-lg">
+                    {selectedType === 'ingredients' 
+                      ? (item as Ingredient).ingredientName 
+                      : (item as PrepItem).name}
+                  </span>
                   <Button
                     label={selectedItems.has(getItemId(item)) ? "Remove" : "Add"}
                     onClick={() => handleItemSelect(item)}

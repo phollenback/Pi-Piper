@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import PrepListItem from "../../../types/models/PrepListItem";
+import { PrepListItem } from "@/app/types/models/PrepListItem";
 import DailyPrepList from "./DailyPrepList";
 
 interface KanbanProps {
@@ -18,14 +18,23 @@ const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
   useEffect(() => {
     const filteredItems = prepItems.filter(
       (item) =>
-        category === null || category === undefined || item.category === category || item.category === 6
+        category === null || category === undefined || item.category === category
     );
 
-    setTodoItems(filteredItems.filter((item) => item.status === "todo" || item.status === "in-progress"));
-    setCompleteItems(filteredItems.filter((item) => item.status === "complete"));
+    // console.log("kanban filteredItems", filteredItems);
+
+    // Update todoItems to include all items with status 'todo' or 'in-progress'
+    setTodoItems(filteredItems.filter(
+      (item) => item.status === "todo" || item.status === "in-progress"
+    ));
+
+    // Update completeItems to include only items with status 'complete'
+    setCompleteItems(filteredItems.filter(
+      (item) => item.status === "complete"
+    ));
   }, [prepItems, category]);
 
-  // Mutation for toggling item status between complete and todo
+  // Mutation for toggling item status
   const updateStatusMutation = useMutation({
     mutationFn: async (prepItem: PrepListItem) => {
       const updatedItem: PrepListItem = {
@@ -35,7 +44,7 @@ const Kanban: React.FC<KanbanProps> = ({ prepItems, category }) => {
   
       console.log("Updating:", updatedItem);
   
-      const response = await fetch(`http://localhost:3000/prepitems/daily/1`, {
+      const response = await fetch(`http://localhost:3001/prepitems/daily/1`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedItem),

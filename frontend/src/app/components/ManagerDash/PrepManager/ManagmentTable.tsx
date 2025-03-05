@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { PrepItem } from '@/app/types/models/PrepItem';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/lib/store';
-import Category, { categoryAdapter } from '@/app/types/models/Category';
+import { categoryAdapter, Category } from '@/app/types/models/Category';
 import Department, { departmentAdapter } from '@/app/types/models/Department';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCategories } from '@/app/util/actions';
@@ -16,7 +16,7 @@ import PrepItemEditModal from './Table/PrepItem/PrepItemEditModal';
 import ConfirmationModal from '@/app/components/Elements/ui/ConfirmationModal';
 import { deletePrepItem } from '@/app/actions/prepItemActions';
 import { deleteIngredient } from '@/app/actions/ingredientActions';
-import { getGroups, filterByGroup } from '@/app/actions/groupActions';
+// import { getGroups } from '@/app/actions/groupActions';
 
 interface ManagementTableProps {
   activeList: PrepItem[] | Ingredient[];
@@ -31,7 +31,7 @@ const getDepartments = () => {
 }
 
 // Dynamic table component that handles both prep items and ingredients
-const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category, activeSection, selectedGroup }) => {
+const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSection }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState<PrepItem[] | Ingredient[]>([]);
   const [selectedItem, setSelectedItem] = useState<PrepItem | Ingredient | null>(null);
@@ -49,10 +49,10 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
       queryFn: getDepartments,
   });
 
-  const { data: groups = [] } = useQuery({
-    queryKey: ['groups', 1],
-    queryFn: () => getGroups(1)
-  });
+  // const { data: groups = [] } = useQuery({
+  //   queryKey: ['groups', 1],
+  //   queryFn: () => getGroups(1)
+  // });
 
   // Transform categories and departments for select box options using adapters
   const categoryOptions = categoryAdapter.toSelectBoxOptions(categories);
@@ -78,20 +78,9 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
         const matchesSearchTerm = "name" in item
             ? item.name.toLowerCase().includes(lowercasedTerm) ||
               (item.description ? item.description.toLowerCase().includes(lowercasedTerm) : false)
-            : item.ingredient_name.toLowerCase().includes(lowercasedTerm);
+            : item.ingredientName.toLowerCase().includes(lowercasedTerm);
 
-        const matchesCategory = category === null || 
-            ('name' in item ? item.category === category : item.ingredient_category === category);
-
-        const matchesGroup = selectedGroup === null || 
-            filterByGroup(
-                activeSection === 'prepitem' ? [item as PrepItem] : [item as Ingredient],
-                selectedGroup,
-                activeSection === 'prepitem' ? 'prep_items' : 'ingredients',
-                groups
-            ).length > 0;
-
-        return matchesSearchTerm && matchesCategory && matchesGroup;
+        return matchesSearchTerm;
     });
 };
 
@@ -137,7 +126,7 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
         if ("prep_item_id" in selectedItem) {
           await deletePrepItem(selectedItem.prep_item_id, 1);
         } else if ("ingredient_id" in selectedItem) {
-          await deleteIngredient(selectedItem.ingredient_id, selectedItem.restaurant_id);
+          await deleteIngredient(selectedItem.ingredientId, selectedItem.restaurantId);
         }
         setIsDeleteModalOpen(false);
         setSelectedItem(null);
@@ -179,7 +168,7 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, category,
           />
           {selectedItem && "ingredient_id" in selectedItem && (
             <IngredientEditModal
-              item={selectedItem}
+              item={selectedItem as Ingredient}
               categoryOptions={categoryOptions}
               handleClose={handleCloseModal}
             />

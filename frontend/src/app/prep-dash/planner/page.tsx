@@ -1,7 +1,7 @@
 "use client";
 
 import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import AllPrepList from '../../components/PrepDash/PrepPlan/AllPrepList';
@@ -12,11 +12,12 @@ import ErrorMessage from '@/app/components/Elements/ErrorMessage';
 import NumberSelect from '@/app/components/Elements/ui/NumberSelect';
 import { setPrepSearchTerm } from '@/redux/features/search/searchSlice';
 import { PrepItemAdapter, PrepItem} from '@/app/types/models/PrepItem';
-import PrepListItem from '@/app/types/models/PrepListItem';
-import Category from '@/app/types/models/Category';
+import {PrepListItem} from '@/app/types/models/PrepListItem';
+import {Category} from '@/app/types/models/Category';
 import { setDailyPrepItems } from '@/redux/features/preplist/dailyPrepListSlice';
 import NewPrepList from '@/app/components/PrepDash/PrepPlan/NewPrepList';
 import { postDailyPrep } from '@/app/util/actions';
+import { getPrepItems, fetchCategories } from '@/app/actions/prepItemActions';
 
 // Formats tomorrow's date for display
 const getTomorrowDate = () => {
@@ -32,13 +33,13 @@ const getTomorrowDate = () => {
 
 // Fetch all prep items for the restaurant
 const fetchAllPrep = async () => {
-  const response = await axios.get<PrepItem[]>('http://localhost:3000/prepitems/1');
-  return response.data;
+  const response = await getPrepItems(1);
+  return response;
 };
 
 // Fetch current daily prep list
 const fetchDailyList = async () => {
-  const response = await axios.get<PrepListItem[]>('http://localhost:3000/prepitems/daily/1');
+  const response = await axios.get<PrepListItem[]>('http://localhost:3001/prepitems/daily/1');
   return response.data;
 };
 
@@ -55,6 +56,7 @@ export default function PlanPage() {
   const [verifierName, setVerifierName] = useState('');
 
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   // Fetch and cache daily prep list
   const { data: dailyPrepList = [], isError } = useQuery<PrepListItem[]>({
@@ -62,16 +64,12 @@ export default function PlanPage() {
     queryFn: fetchDailyList,
   });
 
-  // Fetch and cache categories
-  const { data: categories = [], refetch: refetchCategories } = useQuery({
-    queryKey: ['categories'],
-    queryFn: async () => {
-      const response = await fetch('http://localhost:3000/categories');
-      if (!response.ok) {
-        throw new Error('Failed to fetch categories');
-      }
-      return response.json();
-    },
+  // Standardized category fetching
+  const { data: categories = [] } = useQuery<Category[]>({
+    queryKey: ['categories', 1],
+    queryFn: () => fetchCategories(1),
+    enabled: true,
+    staleTime: 1000 * 60 * 5
   });
 
   // Initialize prep items and sync with daily list
@@ -85,6 +83,7 @@ export default function PlanPage() {
   }, [dailyPrepList]);
 
   // Submit verified prep list to backend
+
   const handleCompleteClick = async () => {
     if (isVerified && verifierName) {
         console.log('Preparing to post the following Prep List:', PrepListItems);
@@ -149,14 +148,14 @@ export default function PlanPage() {
   };
 
   const categoryOptions = categories.map((category: Category) => ({
-    label: category.category_name,
-    value: category.category_id,
+    label: category.categoryName,
+    value: category.categoryId,
   }));
 
   // Reset filters and reload categories
   const handleReset = () => {
     dispatch(setPrepSearchTerm(''));
-    refetchCategories();
+    queryClient.invalidateQueries({ queryKey: ['categories'] });
     setSelectedCategory(null);
   };
 

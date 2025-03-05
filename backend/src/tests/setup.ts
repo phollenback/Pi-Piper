@@ -1,11 +1,11 @@
 import { jest } from '@jest/globals';
-import { initializePgConnector } from '../services/pg.connector';
+import { initializeMySqlConnector } from '../services/pg.connector';
 
 // Global setup for all tests
 beforeAll(async () => {
   if (process.env.NODE_ENV !== 'test') {
     console.log('Initializing database connection...');
-    await initializePgConnector();
+    await initializeMySqlConnector();
     console.log('Database connection initialized.');
   }
 });

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import { fetchRestaurants, Restaurant } from '@/actions/restaurants';
 
 export const useRestaurants = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
@@ -8,19 +7,18 @@ export const useRestaurants = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRestaurants = async () => {
+    const getRestaurants = async () => {
       try {
-        const response = await axios.get<Restaurant[]>('/api/restaurants');
-        setRestaurants(response.data);
-      } catch (err) {
-        setError('Failed to load restaurants');
-        toast.error('Failed to load restaurants');
+        const data = await fetchRestaurants();
+        setRestaurants(data);
+      } catch (error) {
+        setError(error instanceof Error ? error.message : 'Failed to load restaurants');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchRestaurants();
+    getRestaurants();
   }, []);
 
   return { restaurants, loading, error };

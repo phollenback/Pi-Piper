@@ -33,6 +33,7 @@ const PrepDashNav: React.FC = () => {
     dispatch(setPrepSearchTerm(query));
   };
 
+
   return (
     <nav className="bg-gradient-to-r from-gray-900 to-black p-4 shadow-xl">
       <div className="container mx-auto flex items-center justify-between">
@@ -141,6 +142,8 @@ const PrepDashNav: React.FC = () => {
             }}
           />
         </div>
+
+       
       </div>
     </nav>
   );

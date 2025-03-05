@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import { logger } from '../middleware/winston.middleware';
 import { pool } from '../services/pg.connector';
 import jwt from 'jsonwebtoken';
+import { verifyJWT, AuthRequest } from '../middleware/jwt.middleware';
 
 interface User {
   user_id: number;
@@ -54,4 +55,15 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     logger.error('[auth.controller][login][ERROR]', { error });
     res.status(500).json({ message: 'Server error' });
   }
+};
+
+// Protected route handler that requires authentication
+export const protectedRoute = (req: Request, res: Response) => {
+  // For this route, verifyJWT should be applied in the router file
+  // If it reaches here, user is already authenticated
+  const authReq = req as AuthRequest;
+  res.json({ 
+    message: 'Access granted to protected route',
+    user: authReq.user 
+  });
 }; 

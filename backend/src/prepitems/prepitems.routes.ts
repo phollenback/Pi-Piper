@@ -11,35 +11,16 @@ router.use(responseTimeLogger);
 router.use(requestLogger);
 
 router
-    .get(
-        '/:restaurantId',
-        asyncHandler(PrepItemController.readPrepItems)
-    );
+    // fetch all prep items for a restaurant
+    .get('/:restaurantId', asyncHandler(PrepItemController.readPrepItems))
 
-router
-    .get(
-        '/daily/:restaurantId',
-        asyncHandler(PrepItemController.readDailyPrepItems)
-    );
+    // fetch daily prep items for a restaurant
+    .get('/daily/:restaurantId', asyncHandler(PrepItemController.readDailyPrepItems))
 
-router
-    .put(
-        '/daily/:restaurantId',
-        checkSchema(PrepListItemSchema),
-        asyncHandler(PrepItemController.updateDailyPrepItem)
-    )
+    .put('/daily/:restaurantId', checkSchema(PrepListItemSchema), asyncHandler(PrepItemController.updateDailyPrepItem))
 
-router
-    .post(
-        '/daily/:restaurantId',
-        asyncHandler(PrepItemController.createDailyPrepItems)
-    )
-
-router
-    .post(
-        '/:restaurantId',
-        checkSchema(PrepItemSchema),
-        asyncHandler(PrepItemController.createPrepItem)
-    );
+    .post('/daily/:restaurantId', asyncHandler(PrepItemController.createDailyPrepItems))
+    
+    .post('/:restaurantId', checkSchema(PrepItemSchema), asyncHandler(PrepItemController.createPrepItem));
 
 export default router;

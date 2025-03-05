@@ -1,11 +1,5 @@
 {
-  "/login/page": "app/login/page.js",
-  "/api/restaurants/route": "app/api/restaurants/route.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/_not-found/page": "app/_not-found/page.js",
-  "/manager-dash/page": "app/manager-dash/page.js",
-  "/manager-dash/market/page": "app/manager-dash/market/page.js",
-  "/manager-dash/market/cart/page": "app/manager-dash/market/cart/page.js",
-  "/prep-dash/page": "app/prep-dash/page.js",
-  "/prep-dash/planner/page": "app/prep-dash/planner/page.js"
+  "/prep-dash/grouper/page": "app/prep-dash/grouper/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js"
 }

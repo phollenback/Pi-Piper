@@ -13,53 +13,38 @@ router.use(requestLogger);
 
 // Retrieve all ingredients for a restaurant
 router
-    .get(
-        '/:restaurantId',
-        asyncHandler(IngredientController.readIngredients)
-    );
+    .get('/:restaurantId', asyncHandler(IngredientController.readIngredients));
 
 // Get inventory status for a restaurant
 router
-    .get(
-        '/inventory/:restaurantId',
-        asyncHandler(IngredientController.readInventory)
-    )
+    .get('/inventory/:restaurantId', asyncHandler(IngredientController.getInventoryStatus));
 
 // Get ingredient suggestions for a restaurant
 router
-    .get(
-        '/suggestions/:restaurantId',
-        asyncHandler(IngredientController.readSuggestions)
-    )
+    .get('/suggestions/:restaurantId', asyncHandler(IngredientController.readSuggestions));
 
 // Get pricing information for restaurant ingredients
 router
-    .get(
-        '/pricing/:restaurantId',
-        asyncHandler(IngredientController.readPricing)
-    )
+    .get('/pricing/:restaurantId', asyncHandler(IngredientController.readPricing));
 
 // Create new ingredient with validation
 router
-    .post(
-        '/:restaurantId',
-        checkSchema(IngredientSchema),
-        asyncHandler(IngredientController.createIngredient)
-    );
+    .post('/:restaurantId', checkSchema(IngredientSchema), asyncHandler(IngredientController.createIngredient));
 
 // Update existing ingredient with validation
 router
-    .put(
-        '/ingredient',
-        checkSchema(IngredientSchema),
-        asyncHandler(IngredientController.updateIngredient)
-    );
+    .put('/:restaurantId/:ingredientId', checkSchema(IngredientSchema), asyncHandler(IngredientController.updateIngredient));
 
 // Remove ingredient from restaurant
 router
-    .delete(
-        '/:restaurantId/:ingredientId',
-        asyncHandler(IngredientController.deleteIngredient)
-    );
+    .delete('/:restaurantId/:ingredientId', asyncHandler(IngredientController.deleteIngredient));
+
+// Complete a prep item
+router
+    .put('/prep-item/complete', asyncHandler(IngredientController.completePrepItem));
+
+// Update minimum stock level for an ingredient
+router
+    .put('/minstock/:ingredientId', asyncHandler(IngredientController.updateMinStock));
 
 export default router;

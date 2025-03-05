@@ -1070,11 +1070,17 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$PrepDash$2f$Recipebook$2f$RecipeListing$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/PrepDash/Recipebook/RecipeListing.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$data$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/util/data.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$search$2f$searchSlice$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/redux/features/search/searchSlice.ts [app-client] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '@/app/util/categoryAdapter'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-redux/dist/react-redux.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$QueryClientProvider$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_refresh__.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -1099,11 +1105,8 @@ function RecipeBookContainer() {
         const matchesCategory = selectedCategory ? recipe.category === (typeof selectedCategory === "string" ? parseInt(selectedCategory) : selectedCategory) : true;
         return matchesCategory;
     });
-    // Creates options for the category select box.
-    const categoryOptions = categories.map((category)=>({
-            label: category.category_name,
-            value: category.category_id
-        }));
+    // Use the category adapter to create options for the category select box
+    const categoryOptions = categoryAdapter.toSelectBoxOptions(categories);
     // Resets the selected category and search term.
     const handleReset = ()=>{
         setSelectedCategory("");
@@ -1126,7 +1129,7 @@ function RecipeBookContainer() {
                                     placeholder: "Select a category"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                                    lineNumber: 60,
+                                    lineNumber: 58,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1135,13 +1138,13 @@ function RecipeBookContainer() {
                                     children: "Reset"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                                    lineNumber: 67,
+                                    lineNumber: 65,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                            lineNumber: 58,
+                            lineNumber: 56,
                             columnNumber: 11
                         }, this),
                         selectedCategory && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1152,7 +1155,7 @@ function RecipeBookContainer() {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                            lineNumber: 74,
+                            lineNumber: 72,
                             columnNumber: 32
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1162,18 +1165,18 @@ function RecipeBookContainer() {
                                 onRecipeSelect: (recipe)=>setSelectedRecipe(recipe)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                                lineNumber: 78,
+                                lineNumber: 76,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                            lineNumber: 77,
+                            lineNumber: 75,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                    lineNumber: 57,
+                    lineNumber: 55,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1182,18 +1185,18 @@ function RecipeBookContainer() {
                         selectedRecipe: selectedRecipe
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                        lineNumber: 88,
+                        lineNumber: 86,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-                    lineNumber: 86,
+                    lineNumber: 84,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/prep-dash/recipebook/page.tsx",
-            lineNumber: 55,
+            lineNumber: 53,
             columnNumber: 7
         }, this)
     }, void 0, false);

@@ -122,6 +122,8 @@ const authConfig = {
             return true;
         },
         async jwt ({ token, user }) {
+            console.log('JWT callback - user:', user);
+            console.log('JWT callback - token:', token);
             if (user) {
                 token.role = user.role;
                 token.restaurant_id = user.restaurant_id;
@@ -129,6 +131,8 @@ const authConfig = {
             return token;
         },
         async session ({ session, token }) {
+            console.log('Session callback - token:', token);
+            console.log('Session callback - session:', session);
             if (token) {
                 session.user.role = token.role;
                 session.user.restaurant_id = token.restaurant_id;

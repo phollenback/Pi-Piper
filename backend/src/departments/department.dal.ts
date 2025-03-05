@@ -8,7 +8,7 @@ import { logger } from '../middleware/winston.middleware';
 export const getCategories = async (restaurantId: number) => {
     logger.info('[category.dao][getCategories][START]');
     try {
-        const categories = await execute<Department[]>(departmentQueries.getDepartments, [restaurantId]);
+        const categories = await execute(departmentQueries.getDepartments, [restaurantId]);
         logger.info('[category.dao][getCategories][SUCCESS]', { categories });
         return categories;
     } catch (error) {
@@ -21,7 +21,7 @@ export const getCategories = async (restaurantId: number) => {
 export const getDepProgress = async (restaurantId: number) => {
     logger.info('[department.dao][getDepProgress][START]');
     try {
-        const categories = await execute<DepartmentProg[]>(departmentQueries.getDepProgress, ["2025-01-14", restaurantId]);
+        const categories = await execute(departmentQueries.getDepProgress, ["2025-01-14", restaurantId]);
         logger.info('[category.dao][getDepProgress][SUCCESS]', { categories });
         return categories;
     } catch (error) {

@@ -139,7 +139,7 @@ describe('Ingredient API', () => {
       });
 
       const response = await request(app)
-        .put('/ingredients/ingredient')
+        .put('/ingredients/1/1')
         .send(updatedIngredient);
       
       expect(response.status).toBe(200);

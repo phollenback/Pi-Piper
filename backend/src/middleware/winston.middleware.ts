@@ -6,6 +6,11 @@
 
 import { Request, Response, NextFunction } from 'express';
 import winston from 'winston';
+import path from 'path';
+
+// Create logs directory if it doesn't exist
+const logsDir = path.join(__dirname, '../../logs');
+require('fs').existsSync(logsDir) || require('fs').mkdirSync(logsDir);
 
 // Configure the logger
 export const logger = winston.createLogger({
@@ -16,19 +21,25 @@ export const logger = winston.createLogger({
   ),
   defaultMeta: { service: 'pi-piper-backend' },
   transports: [
+    // Console transport for development
     new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),
         winston.format.simple()
       )
     }),
-    // Add file transport for production
-    ...(process.env.NODE_ENV === 'production' 
-      ? [
-          new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
-          new winston.transports.File({ filename: 'logs/combined.log' })
-        ] 
-      : [])
+    // File transports for all environments
+    new winston.transports.File({ 
+      filename: path.join(logsDir, 'error.log'), 
+      level: 'error',
+      maxsize: 5242880, // 5MB
+      maxFiles: 5
+    }),
+    new winston.transports.File({ 
+      filename: path.join(logsDir, 'combined.log'),
+      maxsize: 5242880, // 5MB
+      maxFiles: 5
+    })
   ]
 });
 
@@ -62,14 +73,5 @@ export const responseTimeLogger = (req: Request, res: Response, next: NextFuncti
   next();
 };
 
-export const errorLogger = winston.createLogger({
-  level: 'error',
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.json()
-  ),
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: 'error.log', level: 'error' })
-  ]
-});
+// Error logger (no longer needed as main logger handles errors)
+export const errorLogger = logger;

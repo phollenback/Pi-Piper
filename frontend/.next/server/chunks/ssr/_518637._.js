@@ -155,7 +155,7 @@ function GrouperPage() {
             'categories'
         ],
         queryFn: async ()=>{
-            const response = await fetch('http://localhost:3000/categories');
+            const response = await fetch(`http://localhost:3001/categories/${RESTAURANT_ID}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch categories');
             }
@@ -181,8 +181,8 @@ function GrouperPage() {
     const currentItems = selectedType === 'ingredients' ? ingredientItems : prepItems;
     const filteredItems = selectedCategory ? currentItems.filter((item)=>selectedType === 'ingredients' ? item.ingredient_category === selectedCategory : item.category === selectedCategory) : currentItems;
     const categoryOptions = categories.map((category)=>({
-            label: category.category_name,
-            value: category.category_id
+            label: category.categoryName,
+            value: category.categoryId
         }));
     const handleReset = ()=>{
         setSelectedCategory(null);

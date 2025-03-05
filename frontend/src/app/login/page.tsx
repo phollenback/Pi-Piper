@@ -6,20 +6,29 @@ import { signIn } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { setAuthInfo } from '../../redux/features/auth/authSlice';
-import { useRestaurants } from '../../hooks/useRestaurants';
+import { useRestaurants } from '@/hooks/useRestaurants';
 import LoginSteps from '../../components/LoginSteps';
+import Image from 'next/image';
+import { Restaurant } from '@/actions/restaurants';
 
-interface Restaurant {
+interface LocalRestaurant {
   restaurant_id: number;
   restaurant_name: string;
   logo: string;
+}
+
+interface LoginCredentials {
+  username: string;
+  password: string;
+  restaurant_id: number;
+  role: 'manager' | 'prep';
 }
 
 export default function LoginPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { restaurants, loading, error } = useRestaurants();
-  const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant | null>(null);
+  const [selectedRestaurant, setSelectedRestaurant] = useState<LocalRestaurant | null>(null);
   const [loginStep, setLoginStep] = useState<'select-restaurant' | 'credentials' | 'logged-in'>('select-restaurant');
   const [credentials, setCredentials] = useState({
     username: '',
@@ -30,8 +39,8 @@ export default function LoginPage() {
 
   const handleRestaurantSelect = (restaurant: Restaurant) => {
     setSelectedRestaurant({
-      restaurant_id: restaurant.restaurant_id,
-      restaurant_name: restaurant.restaurant_name,
+      restaurant_id: restaurant.restaurantId,
+      restaurant_name: restaurant.restaurantName,
       logo: restaurant.logo
     });
   };
@@ -49,10 +58,10 @@ export default function LoginPage() {
       return;
     }
 
-    const loginData = {
+    const loginData: LoginCredentials = {
       username: credentials.username,
       password: credentials.password,
-      restaurant_id: selectedRestaurant.restaurant_id.toString(),
+      restaurant_id: selectedRestaurant.restaurant_id,
       role: loginType || 'prep'
     };
 
@@ -62,9 +71,17 @@ export default function LoginPage() {
         redirect: false
       });
 
+      console.log('Login response from server:', result);
+
       if (result?.error) {
         toast.error(result.error);
       } else {
+        console.log('Successful login data:', {
+          restaurantId: selectedRestaurant.restaurant_id,
+          username: credentials.username,
+          role: loginType || 'prep'
+        });
+
         setLoginStep('logged-in');
         dispatch(setAuthInfo({
           restaurantId: selectedRestaurant.restaurant_id,
@@ -72,7 +89,6 @@ export default function LoginPage() {
           role: loginType || 'prep'
         }));
         
-        // Add a delay to show the "logged-in" step before redirecting
         setTimeout(() => {
           router.push(loginType === 'manager' ? '/manager-dash' : '/prep-dash');
         }, 1500);
@@ -82,6 +98,9 @@ export default function LoginPage() {
       toast.error(`Authentication failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   };
+
+  // Add a placeholder image
+  const placeholderImage = '/images/restaurant-placeholder.png';
 
   if (loading) {
     return (
@@ -135,9 +154,9 @@ export default function LoginPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {restaurants.map((restaurant) => (
             <div
-              key={restaurant.restaurant_id}
+              key={restaurant.restaurantId}
               className={`p-6 border rounded-lg cursor-pointer transition-all ${
-                selectedRestaurant?.restaurant_id === restaurant.restaurant_id
+                selectedRestaurant?.restaurant_id === restaurant.restaurantId
                   ? 'border-green-500 bg-green-50'
                   : 'border-gray-200 hover:border-gray-300'
               }`}
@@ -145,14 +164,16 @@ export default function LoginPage() {
             >
               <div className="flex flex-col items-center">
                 <div className="w-24 h-24 border border-gray-200 rounded-lg flex items-center justify-center mb-4">
-                  <img 
-                    src={restaurant.logo} 
-                    alt={restaurant.restaurant_name} 
+                  <Image
+                    src={restaurant.logo || placeholderImage}
+                    alt={restaurant.restaurantName}
+                    width={96}
+                    height={96}
                     className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
-                <span className="text-center font-medium">{restaurant.restaurant_name}</span>
+                <span className="text-center font-medium">{restaurant.restaurantName}</span>
               </div>
             </div>
           ))}
@@ -192,9 +213,11 @@ export default function LoginPage() {
       <div className="card w-full max-w-md bg-white shadow-lg rounded-lg p-6">
         <div className="mb-8 flex flex-col items-center">
           <div className="w-24 h-24 border border-accent-dark rounded-full flex items-center justify-center mb-4 overflow-hidden">
-            <img 
-              src={selectedRestaurant?.logo} 
-              alt={selectedRestaurant?.restaurant_name} 
+            <Image
+              src={selectedRestaurant?.logo || '/default-logo.png'}
+              alt={selectedRestaurant?.restaurant_name || 'Restaurant logo'}
+              width={96}
+              height={96}
               className="w-full h-full object-cover"
             />
           </div>

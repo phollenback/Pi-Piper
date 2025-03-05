@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import * as IngredientDal from './ingredient.dal';
 import { logger } from '../middleware/winston.middleware';
 const { validationResult } = require('express-validator');
+import { IngredientService } from  '../services/ingredient.service';
+
 
 // Retrieves all ingredients for a given restaurant.
 export const readIngredients = async (req: Request, res: Response) => {
@@ -71,9 +73,13 @@ export const updateIngredient = async (req: Request, res: Response) => {
     logger.info('[ingredient.controller][updateIngredient][START]');
 
     try {
-        const ingredientData = req.body; // Assuming ingredient ID is part of req.body
+        const ingredientId = Number(req.params.ingredientId);
+        const restaurantId = Number(req.params.restaurantId);
+        const ingredientData = req.body;
 
-        const updatedIngredient = await IngredientDal.updateIngredient(ingredientData);
+        logger.info('[ingredient.controller][updateIngredient][INFO]', { restaurantId, ingredientId, ingredientData });
+
+        const updatedIngredient = await IngredientDal.updateIngredient(ingredientId, restaurantId, ingredientData);
         logger.info('[ingredient.controller][updateIngredient][SUCCESS]', { updatedIngredient }); // Changed variable name
 
         res.status(200).json(updatedIngredient); // Changed variable name
@@ -121,3 +127,46 @@ logger.error('[ingredient.controller][readSuggestions][ERROR]', { error });
 res.status(500).json({ message: 'Failed to fetch suggestions' });
 }
 };
+
+export class IngredientController {
+    static async getInventoryStatus(req: Request, res: Response) {
+        try {
+            const { restaurantId } = req.params;
+            const inventoryData = await IngredientService.getInventoryStatus(parseInt(restaurantId));
+            res.status(200).json(inventoryData);
+        } catch (error) {
+            res.status(500).json({ message: 'Failed to fetch inventory data', error });
+        }
+    }
+
+    static async completePrepItem(req: Request, res: Response) {
+        try {
+            const { prepItemId, restaurantId } = req.body;
+            await IngredientService.completePrepItem(prepItemId, restaurantId);
+            res.status(200).json({ message: 'Prep item completed successfully' });
+        } catch (error: any) {
+            if (error?.message.includes('out of stock')) {
+                res.status(400).json({ message: error.message });
+            } else {
+                res.status(500).json({ message: 'Failed to complete prep item', error });
+            }
+        }
+    }
+
+    static async updateMinStock(req: Request, res: Response) {
+        try {
+            const ingredientId = parseInt(req.params.ingredientId);
+            const { minStock } = req.body;
+            const restaurantId = 1; // Default to restaurant ID 1 for now, could be passed in the request
+            
+            await IngredientService.updateIngredientThreshold(ingredientId, restaurantId, minStock);
+            res.status(200).json({ message: 'Minimum stock level updated successfully' });
+        } catch (error) {
+            res.status(500).json({ message: 'Failed to update minimum stock level', error });
+        }
+    }
+}
+
+export const getInventoryStatus = IngredientController.getInventoryStatus;
+export const completePrepItem = IngredientController.completePrepItem;
+export const updateMinStock = IngredientController.updateMinStock;

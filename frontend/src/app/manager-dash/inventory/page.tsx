@@ -1,13 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
-
-interface TimeVariable {
-  id: number;
-  name: string;
-  value: number;
-  unit: string;
-}
+import React, { useEffect, useState, useCallback } from 'react';
+import { Popover } from '@base-ui-components/react/popover';
+import { useDispatch } from 'react-redux';
+import { addToSyscoCart, addToUsFoodsCart } from '@/redux/features/cart/cartSlice';
+import MinStockSetting from '@/app/components/MinStockSetting';
+import Chip from '@mui/joy/Chip';
+import Alert from '@mui/joy/Alert';
+import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
+import Button from '@mui/joy/Button';
+import CircularProgress from '@mui/joy/CircularProgress';
+import Typography from '@mui/joy/Typography';
+import Box from '@mui/joy/Box';
+import { toast } from 'react-hot-toast';
 
 interface InventoryItem {
   id: number;
@@ -21,257 +26,323 @@ interface InventoryItem {
   lastUpdated: string;
 }
 
-interface Department {
-  id: number;
-  name: string;
-  progress: number;
-  tasks: {
-    completed: number;
-    total: number;
+const getStatusColor = (status: string) => {
+  const statusColors = {
+    'good': 'bg-green-100 text-green-800',
+    'low': 'bg-yellow-100 text-yellow-800',
+    'critical': 'bg-red-100 text-red-800',
   };
-  status: 'on-track' | 'behind' | 'ahead';
-  lastUpdate: string;
-}
+  return statusColors[status as keyof typeof statusColors] || 'bg-gray-100 text-gray-800';
+};
 
-export default function InventoryProgress() {
-  // Mock data for time variables
-  const timeVariables: TimeVariable[] = [
-    { id: 1, name: 'Prep Time', value: 45, unit: 'minutes' },
-    { id: 2, name: 'Cook Time', value: 30, unit: 'minutes' },
-    { id: 3, name: 'Service Time', value: 15, unit: 'minutes' },
-    { id: 4, name: 'Clean Time', value: 20, unit: 'minutes' },
-  ];
+export default function Inventory() {
+  const dispatch = useDispatch();
+  const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
+  const [showNotifications, setShowNotifications] = useState(true);
+  const [filterCategory, setFilterCategory] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  
+  const lowStockItems = inventoryItems.filter(item => item.currentStock <= item.minStock);
+  const categories = [...new Set(inventoryItems.map(item => item.category))];
 
-  // Mock data for inventory
-  const inventoryItems: InventoryItem[] = [
-    {
-      id: 1,
-      name: 'Ground Beef',
-      category: 'Meat',
-      currentStock: 25,
-      minStock: 20,
-      maxStock: 50,
-      unit: 'lbs',
-      status: 'good',
-      lastUpdated: '2024-03-20T14:30:00Z'
-    },
-    {
-      id: 2,
-      name: 'Tomatoes',
-      category: 'Produce',
-      currentStock: 15,
-      minStock: 30,
-      maxStock: 60,
-      unit: 'lbs',
-      status: 'critical',
-      lastUpdated: '2024-03-20T15:00:00Z'
-    },
-    {
-      id: 3,
-      name: 'Cheese',
-      category: 'Dairy',
-      currentStock: 40,
-      minStock: 35,
-      maxStock: 80,
-      unit: 'lbs',
-      status: 'good',
-      lastUpdated: '2024-03-20T13:45:00Z'
-    },
-    {
-      id: 4,
-      name: 'Lettuce',
-      category: 'Produce',
-      currentStock: 22,
-      minStock: 20,
-      maxStock: 45,
-      unit: 'heads',
-      status: 'low',
-      lastUpdated: '2024-03-20T12:30:00Z'
+  const fetchInventoryData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('http://localhost:3000/ingredients/inventory/1'); // Adjust the restaurant ID as needed
+      if (!response.ok) {
+        throw new Error(`Failed to fetch inventory data: ${response.statusText}`);
+      }
+      const data = await response.json();
+      
+      // Transform data to match our InventoryItem interface if needed
+      const formattedData = data.map((item: any) => ({
+        id: item.ingredient_id || item.id,
+        name: item.ingredient_name || item.name,
+        category: item.category || 'Uncategorized',
+        currentStock: item.quantity_after || item.currentStock || 0,
+        minStock: item.quantity_threshold || item.minStock || 0,
+        maxStock: item.max_stock || 100, // Default if not provided
+        unit: item.unit || 'units',
+        status: item.quantity_after <= item.quantity_threshold * 0.5 ? 'critical' : 
+                item.quantity_after <= item.quantity_threshold ? 'low' : 'good',
+        lastUpdated: item.last_updated || item.lastUpdated || new Date().toISOString(),
+      }));
+      
+      setInventoryItems(formattedData);
+    } catch (error) {
+      console.error('Error fetching inventory data:', error);
+      setError('Failed to load inventory data. Please try again later.');
+      toast.error('Failed to load inventory data');
+    } finally {
+      setLoading(false);
     }
-  ];
+  }, []);
 
-  // Mock data for departments
-  const departments: Department[] = [
-    {
-      id: 1,
-      name: 'Kitchen',
-      progress: 75,
-      tasks: { completed: 15, total: 20 },
-      status: 'on-track',
-      lastUpdate: '10 minutes ago'
-    },
-    {
-      id: 2,
-      name: 'Service',
-      progress: 90,
-      tasks: { completed: 18, total: 20 },
-      status: 'ahead',
-      lastUpdate: '5 minutes ago'
-    },
-    {
-      id: 3,
-      name: 'Bar',
-      progress: 60,
-      tasks: { completed: 12, total: 20 },
-      status: 'behind',
-      lastUpdate: '15 minutes ago'
-    },
-    {
-      id: 4,
-      name: 'Cleaning',
-      progress: 80,
-      tasks: { completed: 16, total: 20 },
-      status: 'on-track',
-      lastUpdate: '8 minutes ago'
-    }
-  ];
+  useEffect(() => {
+    fetchInventoryData();
+  }, [fetchInventoryData]);
 
-  const getStatusColor = (status: string) => {
-    const statusColors = {
-      'good': 'bg-green-100 text-green-800',
-      'low': 'bg-yellow-100 text-yellow-800',
-      'critical': 'bg-red-100 text-red-800',
-      'on-track': 'bg-blue-100 text-blue-800',
-      'behind': 'bg-red-100 text-red-800',
-      'ahead': 'bg-green-100 text-green-800'
+  const handleAddToCart = (item: InventoryItem, provider: 'Sysco' | 'USFoods') => {
+    const cartItem = {
+      ingredientId: item.id,
+      ingredientName: item.name,
+      unit: item.unit,
+      syscoPrice: provider === 'Sysco' ? 5.99 : 0,
+      usFoodsPrice: provider === 'USFoods' ? 4.99 : 0,
+      last_date_ordered: new Date(),
+      restaurantId: 1, // Set appropriate restaurant ID
+      quantity: 1
     };
-    return statusColors[status as keyof typeof statusColors] || 'bg-gray-100 text-gray-800';
+    
+    if (provider === 'Sysco') {
+      dispatch(addToSyscoCart(cartItem));
+      toast.success(`Added ${item.name} to Sysco cart`);
+    } else {
+      dispatch(addToUsFoodsCart(cartItem));
+      toast.success(`Added ${item.name} to US Foods cart`);
+    }
   };
 
-  const getProgressColor = (progress: number) => {
-    if (progress >= 80) return 'bg-green-500';
-    if (progress >= 60) return 'bg-yellow-500';
-    return 'bg-red-500';
+  const updateMinStock = async (itemId: number, newMinStock: number): Promise<boolean> => {
+    try {
+      const response = await fetch(`http://localhost:3000/ingredients/minstock/${itemId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ minStock: newMinStock }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to update min stock');
+      }
+      
+      setInventoryItems(prevItems => 
+        prevItems.map(item => 
+          item.id === itemId ? { 
+            ...item, 
+            minStock: newMinStock,
+            status: item.currentStock <= newMinStock * 0.5 ? 'critical' : 
+                   item.currentStock <= newMinStock ? 'low' : 'good',
+          } : item
+        )
+      );
+      
+      toast.success('Minimum stock level updated successfully');
+      return true;
+    } catch (error) {
+      console.error('Error updating min stock:', error);
+      toast.error('Failed to update minimum stock level');
+      return false;
+    }
   };
+
+  const filteredItems = inventoryItems.filter(item => {
+    const matchesCategory = filterCategory === 'all' || item.category === filterCategory;
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <CircularProgress size="lg" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-7xl mx-auto">
+          <Alert color="danger" sx={{ mb: 2 }}>
+            {error}
+            <Button onClick={fetchInventoryData} sx={{ ml: 2 }}>
+              Retry
+            </Button>
+          </Alert>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Left Column */}
-        <div className="space-y-6">
-          {/* Time Variables */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Time Variables</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {timeVariables.map((variable) => (
-                <div key={variable.id} className="bg-gray-50 rounded-lg p-4">
-                  <h3 className="text-sm font-medium text-gray-500">{variable.name}</h3>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {variable.value} <span className="text-sm text-gray-500">{variable.unit}</span>
-                  </p>
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Inventory Overview</h2>
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div className="p-6 border-b">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold text-gray-900">Inventory Status</h2>
+              <div className="flex space-x-4">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Search items..."
+                    className="px-3 py-2 border rounded-md"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
                 </div>
-              ))}
+                <div>
+                  <select
+                    className="px-3 py-2 border rounded-md"
+                    value={filterCategory}
+                    onChange={(e) => setFilterCategory(e.target.value)}
+                    aria-label="Filter by category"
+                  >
+                    <option value="all">All Categories</option>
+                    {categories.map(category => (
+                      <option key={category} value={category}>{category}</option>
+                    ))}
+                  </select>
+                </div>
+                <Button 
+                  variant="outlined" 
+                  color="primary" 
+                  onClick={fetchInventoryData}
+                >
+                  Refresh
+                </Button>
+              </div>
             </div>
           </div>
-
-          {/* Inventory Table */}
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div className="p-6 border-b">
-              <h2 className="text-xl font-bold text-gray-900">Inventory Status</h2>
-            </div>
+          {showNotifications && lowStockItems.length > 0 && (
+            <Alert 
+              color="warning" 
+              startDecorator={<WarningAmberRoundedIcon />}
+              endDecorator={
+                <Button size="sm" variant="soft" color="warning" onClick={() => setShowNotifications(false)}>
+                  Dismiss
+                </Button>
+              }
+              sx={{ mb: 2 }}
+            >
+              {lowStockItems.length} item(s) are below minimum stock levels
+            </Alert>
+          )}
+          
+          {filteredItems.length === 0 ? (
+            <Box sx={{ p: 4, textAlign: 'center' }}>
+              <Typography level="body-lg">
+                No inventory items found matching your criteria.
+              </Typography>
+            </Box>
+          ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="bg-gray-50">
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Item</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Stock</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Current Stock</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Min Stock</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Max Stock</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Last Updated</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {inventoryItems.map((item) => (
-                    <tr key={item.id} className="hover:bg-gray-50">
+                  {filteredItems.map((item) => (
+                    <tr 
+                      key={item.id}
+                      className="hover:bg-gray-50 cursor-pointer"
+                      onClick={() => setSelectedItem(item)}
+                    >
                       <td className="px-6 py-4">
-                        <div>
-                          <div className="font-medium text-gray-900">{item.name}</div>
-                          <div className="text-sm text-gray-500">{item.category}</div>
+                        <div className="font-medium text-gray-900">{item.name}</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-gray-900">{item.category}</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="font-medium">{item.currentStock} {item.unit}</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-gray-500 flex items-center">
+                          {item.minStock} {item.unit}
+                          <MinStockSetting 
+                            itemId={item.id}
+                            itemName={item.name}
+                            currentMinStock={item.minStock}
+                            unit={item.unit}
+                            onUpdate={updateMinStock}
+                          />
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-center">
-                          <span className="font-medium">{item.currentStock}</span>
-                          <span className="text-gray-500 ml-1">{item.unit}</span>
-                        </div>
-                        <div className="text-xs text-gray-500">
-                          Min: {item.minStock} | Max: {item.maxStock}
-                        </div>
+                        <div className="text-gray-500">{item.maxStock} {item.unit}</div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`}>
+                        <Chip
+                          color={item.status === 'good' ? 'success' : item.status === 'low' ? 'warning' : 'danger'}
+                          size="sm"
+                          variant="soft"
+                        >
                           {item.status}
-                        </span>
+                        </Chip>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">
                         {new Date(item.lastUpdated).toLocaleString()}
+                      </td>
+                      <td className="px-6 py-4 relative">
+                        <Popover.Root>
+                          <Popover.Trigger>
+                            <div className="text-blue-500 hover:text-blue-700 cursor-pointer">
+                              Details
+                            </div>
+                          </Popover.Trigger>
+                          <Popover.Portal>
+                            <Popover.Positioner>
+                              <Popover.Popup className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
+                                <div className="space-y-2">
+                                  <h3 className="font-bold text-lg">{item.name} Providers</h3>
+                                  <div className="space-y-2">
+                                    <div className="flex justify-between items-center">
+                                      <span>Sysco</span>
+                                      <span>$5.99</span>
+                                      <button 
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleAddToCart(item, 'Sysco');
+                                        }}
+                                        className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                                      >
+                                        Add
+                                      </button>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                      <span>US Foods</span>
+                                      <span>$4.99</span>
+                                      <button 
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleAddToCart(item, 'USFoods');
+                                        }}
+                                        className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                                      >
+                                        Add
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <Popover.Arrow className="fill-white" />
+                              </Popover.Popup>
+                            </Popover.Positioner>
+                          </Popover.Portal>
+                        </Popover.Root>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-
-        {/* Right Column - Department Progress */}
-        <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Department Progress</h2>
-            <div className="space-y-6">
-              {departments.map((dept) => (
-                <div key={dept.id} className="bg-gray-50 rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-medium text-gray-900">{dept.name}</h3>
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(dept.status)}`}>
-                      {dept.status}
-                    </span>
-                  </div>
-                  <div className="relative pt-1">
-                    <div className="flex mb-2 items-center justify-between">
-                      <div>
-                        <span className="text-xs font-semibold inline-block text-gray-600">
-                          {dept.tasks.completed}/{dept.tasks.total} Tasks
-                        </span>
-                      </div>
-                      <div className="text-right">
-                        <span className="text-xs font-semibold inline-block text-gray-600">
-                          {dept.progress}%
-                        </span>
-                      </div>
-                    </div>
-                    <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-                      <div
-                        style={{ width: `${dept.progress}%` }}
-                        className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${getProgressColor(dept.progress)}`}
-                      />
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      Last updated: {dept.lastUpdate}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Quick Actions */}
-          <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
-            <div className="grid grid-cols-2 gap-4">
-              <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                Update Inventory
-              </button>
-              <button className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
-                Add Task
-              </button>
-              <button className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
-                Generate Report
-              </button>
-              <button className="w-full px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
-                Settings
-              </button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

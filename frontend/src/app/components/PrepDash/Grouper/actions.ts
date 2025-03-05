@@ -7,7 +7,7 @@ export const createGroup = async (
   items: Array<{ prep_item_id: number | null; ingredient_id: number | null; }>
 ): Promise<number> => {
   try {
-    const response = await fetch(`http://localhost:3000/groups/${restaurant_id}`, {
+    const response = await fetch(`http://localhost:3001/groups/${restaurant_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,23 +42,21 @@ export const createGroup = async (
 };
 
 export const getGroups = async (restaurant_id: number) => {
-  const response = await fetch(`http://localhost:3000/groups/${restaurant_id}`);
+  const response = await fetch(`http://localhost:3001/groups/${restaurant_id}`);
   if (!response.ok) {
     throw new Error('Failed to fetch groups');
   }
   return response.json();
 };
 
-export const getIngredients = async (restaurant_id: number) => {
-    const response = await fetch(`http://localhost:3000/ingredients/${restaurant_id}`);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json() as Promise<Ingredient[]>;
-}
+export const getIngredients = async (restaurantId: number): Promise<Ingredient[]> => {
+  const response = await fetch(`http://localhost:3001/ingredients/${restaurantId}`);
+  if (!response.ok) throw new Error('Failed to fetch ingredients');
+  return response.json();
+};
 
 export const getPrepItems = async (restaurant_id: number) => {
-    const response = await fetch(`http://localhost:3000/prepitems/${restaurant_id}`);
+    const response = await fetch(`http://localhost:3001/prepitems/${restaurant_id}`);
     if (!response.ok) {
         throw new Error('Network response was not ok');
     }

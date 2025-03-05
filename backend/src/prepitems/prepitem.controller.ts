@@ -7,7 +7,9 @@ const { validationResult } = require('express-validator');
 export const readPrepItems = async (req: Request, res: Response) => {
     logger.info('[prepitems.controller][readPrepItems][START]');
     try {
+    
         let restaurantId = Number(req.params.restaurantId);
+        console.log('resturantId',restaurantId);
         const response = await PrepItemDal.getPrepItems(restaurantId);
         logger.info('[prepitems.controller][readPrepItems][SUCCESS]', { response });
 
@@ -45,8 +47,6 @@ export const updateDailyPrepItem = async (req: Request, res: Response) => {
         console.log(req.body);
         const response = await PrepItemDal.updateDailyPrepItem(restaurantId, req.body);
         logger.info('[prepitems.controller][updateDailyPrepItems][SUCCESS]', { response });
-
-        const invResponse = await 
 
         res.status(200).json(response);
     } catch (error) {

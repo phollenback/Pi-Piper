@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../Elements/Button';
-import Category from '@/app/types/models/Category';
+import { Category } from '@/app/types/models/Category';
 
 // ButtonGroup component: renders a group of buttons based on provided category data.
 interface ButtonGroupProps {
@@ -8,7 +8,7 @@ interface ButtonGroupProps {
   buttonWidth: string; // Button width (CSS size e.g., '200px')
   buttonHeight: string; // Button height (CSS size e.g., '60px')
   onButtonClick: (item: Category) => void; // Click handler, receives the entire category object.
-  selectedButton?: string | null | undefined; // Selected button's name (optional).
+  selectedButton?: number | null; // Change to number to match categoryId
   getButtonColor: (name: string) => string; // Function to determine button color based on name.
 }
 
@@ -20,6 +20,9 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   selectedButton,
   getButtonColor,
 }) => {
+  useEffect(() => {
+    console.log('items', items.map((item) => item.categoryName));
+  }, [items]);
   return (
     <div
       style={{
@@ -33,7 +36,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
       {/* Map through items to render buttons */}
       {items.map((item) => (
         <div
-          key={item.category_id}
+          key={item.categoryId}
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -41,16 +44,16 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
           }}
         >
           <Button
-            label={item.category_name}
+            label={item.categoryName} 
             onClick={() => onButtonClick(item)} 
             size="medium" 
             style={{
               width: buttonWidth, 
               height: buttonHeight, 
               backgroundColor:
-                selectedButton === item.category_name
+                selectedButton === item.categoryId
                   ? '#4CAF50' 
-                  : getButtonColor(item.category_name), 
+                  : getButtonColor(item.categoryName), 
               cursor: 'pointer',
             }}
           />

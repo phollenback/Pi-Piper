@@ -1,54 +1,57 @@
 "use client";
-import { useQueryClient } from "@tanstack/react-query";
+
 import { useState } from "react";
 import SelectBox from "../../components/Elements/ui/SelectBox";
 import RecipeDisplay from "@/app/components/PrepDash/Recipebook/RecipeDisplay";
 import RecipeListing from "@/app/components/PrepDash/Recipebook/RecipeListing"; 
-import { fetchRecipes } from "@/app/util/data";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
-import Category from "@/app/types/models/Category";
-
-// Recipe data structure.
-interface Recipe {
-  id: number;
-  name: string;
-  description: string;
-  ingredients: string[];
-  category: number;
-  procedure: string;
-}
+import { Category, categoryAdapter } from "@/app/types/models/Category";
+import { useRecipes, Recipe } from "@/app/hooks/useRecipes";
+import { RootState } from "@/redux/lib/store";
+import { useQuery } from '@tanstack/react-query';
+import { fetchCategories } from '@/app/actions/prepItemActions';
 
 // RecipeBookContainer component: allows filtering and displaying recipes.
 export default function RecipeBookContainer() {
   const [selectedCategory, setSelectedCategory] = useState<string | number>(""); 
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null); // Selected recipe state.
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const dispatch = useDispatch();
-  const recipes = fetchRecipes(); // Fetch recipes (this should likely be a useQuery)
-  const qc = useQueryClient();
-  const categories : Category[] = []; //This should probably be fetched as well.
-  
-  qc.setQueryData(["categories"], () => categories)
+  // const queryClient = useQueryClient();
 
-  // Filters recipes based on the selected category.
+  // Get restaurant ID from user state or context
+  const restaurantId = useSelector((state: RootState) => state.auth.restaurantId) || 1;
+  
+  // Unified data fetching
+  const { data: recipes = [], isLoading: recipesLoading } = useRecipes(restaurantId);
+  
+  const { data: categories = [], isLoading: categoriesLoading } = useQuery<Category[]>({
+    queryKey: ['categories', restaurantId],
+    queryFn: () => fetchCategories(restaurantId),
+    enabled: !!restaurantId,
+    staleTime: 1000 * 60 * 5
+  });
+
+  // Filter recipes based on selected category
   const filteredRecipes = recipes.filter((recipe) => {
     const matchesCategory = selectedCategory
-      ? recipe.category === (typeof selectedCategory === "string" ? parseInt(selectedCategory) : selectedCategory)
+      ? recipe.itemCategory === (typeof selectedCategory === "string" ? parseInt(selectedCategory) : selectedCategory)
       : true;
     return matchesCategory;
   });
 
-  // Creates options for the category select box.
-  const categoryOptions = categories.map((category: Category) => ({
-    label: category.category_name,
-    value: category.category_id,
-  }));
+  // Use the category adapter to create options for the category select box
+  const categoryOptions = categoryAdapter.toSelectBoxOptions(categories);
 
-  // Resets the selected category and search term.
+  // Resets the selected category and search term
   const handleReset = () => {
     setSelectedCategory(""); 
     dispatch(setPrepSearchTerm("")); 
   };
+
+  if (recipesLoading || categoriesLoading) {
+    return <div>Loading recipe data...</div>;
+  }
 
   return (
     <>
@@ -71,7 +74,11 @@ export default function RecipeBookContainer() {
               Reset
             </button>
           </div>
-          {selectedCategory && <p className="mt-4">Selected Category: {selectedCategory}</p>}
+          {selectedCategory && <p className="mt-4">Selected Category: {
+            categories.find(c => c.categoryId === (
+              typeof selectedCategory === "string" ? parseInt(selectedCategory) : selectedCategory
+            ))?.categoryName || selectedCategory
+          }</p>}
           
           {/* Full-width RecipeListing */}
           <div className="w-full mt-5">

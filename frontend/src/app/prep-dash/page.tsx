@@ -5,35 +5,56 @@ import ButtonGroup from "../components/Elements/ButtonGroup";
 import Button from "../components/Elements/Button";
 import Kanban from "../components/PrepDash/DailyPrep/Kanban";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
-import { useDispatch } from "react-redux";
-import { fetchCategories } from "../util/actions";
-import { fetchDailyList } from "../util/actions";
-import Category from "../types/models/Category";
-import PrepListItem from "../types/models/PrepListItem";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategories, fetchDailyList } from "@/app/actions/prepItemActions";
+import {Category} from "@/app/types/models/Category";
 import { getButtonColor } from "../util/data";
+import { PrepListItem } from "@/app/types/models/PrepListItem";
+import { RootState } from "@/redux/lib/store";
 
 // Container component managing prep item categories and kanban board display
 export default function PrepContainer() {
     const dispatch = useDispatch();
-    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const { prepSearchTerm } = useSelector((state: RootState) => state.search);
 
     // Fetch and cache daily prep items
-    const { data: prepItems = [], isLoading } = useQuery<PrepListItem[]>({
+    const { data: dailyPrepList = [], isLoading } = useQuery<PrepListItem[]>({
         queryKey: ["prepItems"],
-        queryFn: fetchDailyList
-    })
-   
-    // Fetch and cache categories
-    const { data: categories = []} = useQuery<Category[]>({
-        queryKey: ["categories"],
-        queryFn: fetchCategories,
+        queryFn: async () => {
+            const data = await fetchDailyList(1);
+            // console.log(" daily prep items", data);
+            return data;
+        },
+    });
+
+    const restaurantId = useSelector((state: RootState) => state.auth.restaurantId) || 1;
+    // Filter items based on search term and category
+    const filteredItems = dailyPrepList.filter(item => {
+        const name = item.name || '';
+        const description = item.description || '';
+        
+        const matchesSearch = name.toLowerCase().includes(prepSearchTerm.toLowerCase()) ||
+                             description.toLowerCase().includes(prepSearchTerm.toLowerCase());
+
+        const matchesCategory = selectedCategory === null || item.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    // Standardized category fetching
+    const { data: categories = [] } = useQuery<Category[]>({
+        queryKey: ['categories', restaurantId],
+        queryFn: () => fetchCategories(restaurantId),
+        enabled: !!restaurantId,
+        staleTime: 1000 * 60 * 5
     });
 
     // Update selected category filter
-    const handleButtonClick = (cat : Category) => {
-        if (cat) {
-            setSelectedCategory(cat);
-        }
+    const handleButtonClick = (cat: Category) => {
+        setSelectedCategory(prev => 
+            prev === cat.categoryId ? null : cat.categoryId
+        );
     };
 
     // Reset category filter and search term
@@ -56,7 +77,7 @@ export default function PrepContainer() {
                         buttonWidth="200px"
                         buttonHeight="80px"
                         onButtonClick={handleButtonClick}
-                        selectedButton={selectedCategory?.category_name}
+                        selectedButton={selectedCategory}
                         getButtonColor={getButtonColor}
                     />
                 </div>
@@ -76,8 +97,8 @@ export default function PrepContainer() {
 
             <div className="mt-4">
                 <Kanban
-                    prepItems={prepItems}
-                    category={selectedCategory?.category_id}
+                    prepItems={filteredItems}
+                    category={selectedCategory}
                 />
             </div>
         </div>

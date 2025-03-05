@@ -8,7 +8,9 @@ const router = express.Router();
 router.use(responseTimeLogger);
 router.use(requestLogger);
 
-router.post('/:restaurantId', createGroup);
-router.get('/:restaurantId', getGroups);
+router
+    .get('/:restaurantId', getGroups)
+    
+    .post('/:restaurantId', createGroup);
 
 export default router; 

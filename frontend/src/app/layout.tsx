@@ -8,6 +8,8 @@ import { ReactQueryClientProvider } from "./ReactQueryClientProvider";
 import { Toaster } from 'react-hot-toast';
 import { SessionProvider } from 'next-auth/react'
 import Footer from './components/Footer';
+import ThemeProvider from '@/components/ThemeProvider';
+import { Providers } from '@/redux/provider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,15 +41,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
-        <SessionProvider>
-          <ReactQueryClientProvider>
-            <StoreProvider>
-              {children}
-              <Toaster />
-              <Footer />
-            </StoreProvider>
-          </ReactQueryClientProvider>
-        </SessionProvider>
+        <Providers>
+          <ThemeProvider>
+            <SessionProvider>
+              <ReactQueryClientProvider>
+                <StoreProvider>
+                  {children}
+                  <Toaster />
+                  <Footer />
+                </StoreProvider>
+              </ReactQueryClientProvider>
+            </SessionProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

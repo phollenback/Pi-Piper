@@ -1,8 +1,15 @@
 export default interface Ingredient {
-    ingredient_id: number;
-    ingredient_name: string;
-    unit_of_measure: string;
-    cost_per_unit: number;
-    ingredient_category: number;
-    restaurant_id: number;
+    ingredientId: number;
+    ingredientName: string;
+    unit: string;
+    unitPrice: string;
+    currentStock: string;
+    parLevel: string;
+    reorderPoint: string;
+    ingredientCategory: number;
+    restaurantId: number;
+    supplierId: number;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
 }

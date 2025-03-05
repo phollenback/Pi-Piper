@@ -6,650 +6,509 @@
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
 __turbopack_esm__({
-    "default": (()=>InventoryProgress)
+    "default": (()=>Inventory)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_import__("[project]/node_modules/@base-ui-components/react/esm/popover/index.js [app-client] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/redux/features/cart/cartSlice.ts [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-redux/dist/react-redux.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$parts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Popover$3e$__ = __turbopack_import__("[project]/node_modules/@base-ui-components/react/esm/popover/index.parts.js [app-client] (ecmascript) <export * as Popover>");
+;
+var _s = __turbopack_refresh__.signature();
 'use client';
 ;
-function InventoryProgress() {
-    // Mock data for time variables
-    const timeVariables = [
-        {
-            id: 1,
-            name: 'Prep Time',
-            value: 45,
-            unit: 'minutes'
-        },
-        {
-            id: 2,
-            name: 'Cook Time',
-            value: 30,
-            unit: 'minutes'
-        },
-        {
-            id: 3,
-            name: 'Service Time',
-            value: 15,
-            unit: 'minutes'
-        },
-        {
-            id: 4,
-            name: 'Clean Time',
-            value: 20,
-            unit: 'minutes'
+;
+;
+;
+const getStatusColor = (status)=>{
+    const statusColors = {
+        'good': 'bg-green-100 text-green-800',
+        'low': 'bg-yellow-100 text-yellow-800',
+        'critical': 'bg-red-100 text-red-800'
+    };
+    return statusColors[status] || 'bg-gray-100 text-gray-800';
+};
+function Inventory() {
+    _s();
+    const dispatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDispatch"])();
+    const [inventoryItems, setInventoryItems] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
+    const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
+    const [selectedItem, setSelectedItem] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "Inventory.useEffect": ()=>{
+            const fetchInventoryData = {
+                "Inventory.useEffect.fetchInventoryData": async ()=>{
+                    try {
+                        const response = await fetch('http://localhost:3000/ingredients/inventory/1'); // Adjust the restaurant ID as needed
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch inventory data');
+                        }
+                        const data = await response.json();
+                        setInventoryItems(data);
+                    } catch (error) {
+                        console.error('Error fetching inventory data:', error);
+                    } finally{
+                        setLoading(false);
+                    }
+                }
+            }["Inventory.useEffect.fetchInventoryData"];
+            fetchInventoryData();
         }
-    ];
-    // Mock data for inventory
-    const inventoryItems = [
-        {
-            id: 1,
-            name: 'Ground Beef',
-            category: 'Meat',
-            currentStock: 25,
-            minStock: 20,
-            maxStock: 50,
-            unit: 'lbs',
-            status: 'good',
-            lastUpdated: '2024-03-20T14:30:00Z'
-        },
-        {
-            id: 2,
-            name: 'Tomatoes',
-            category: 'Produce',
-            currentStock: 15,
-            minStock: 30,
-            maxStock: 60,
-            unit: 'lbs',
-            status: 'critical',
-            lastUpdated: '2024-03-20T15:00:00Z'
-        },
-        {
-            id: 3,
-            name: 'Cheese',
-            category: 'Dairy',
-            currentStock: 40,
-            minStock: 35,
-            maxStock: 80,
-            unit: 'lbs',
-            status: 'good',
-            lastUpdated: '2024-03-20T13:45:00Z'
-        },
-        {
-            id: 4,
-            name: 'Lettuce',
-            category: 'Produce',
-            currentStock: 22,
-            minStock: 20,
-            maxStock: 45,
-            unit: 'heads',
-            status: 'low',
-            lastUpdated: '2024-03-20T12:30:00Z'
-        }
-    ];
-    // Mock data for departments
-    const departments = [
-        {
-            id: 1,
-            name: 'Kitchen',
-            progress: 75,
-            tasks: {
-                completed: 15,
-                total: 20
-            },
-            status: 'on-track',
-            lastUpdate: '10 minutes ago'
-        },
-        {
-            id: 2,
-            name: 'Service',
-            progress: 90,
-            tasks: {
-                completed: 18,
-                total: 20
-            },
-            status: 'ahead',
-            lastUpdate: '5 minutes ago'
-        },
-        {
-            id: 3,
-            name: 'Bar',
-            progress: 60,
-            tasks: {
-                completed: 12,
-                total: 20
-            },
-            status: 'behind',
-            lastUpdate: '15 minutes ago'
-        },
-        {
-            id: 4,
-            name: 'Cleaning',
-            progress: 80,
-            tasks: {
-                completed: 16,
-                total: 20
-            },
-            status: 'on-track',
-            lastUpdate: '8 minutes ago'
-        }
-    ];
-    const getStatusColor = (status)=>{
-        const statusColors = {
-            'good': 'bg-green-100 text-green-800',
-            'low': 'bg-yellow-100 text-yellow-800',
-            'critical': 'bg-red-100 text-red-800',
-            'on-track': 'bg-blue-100 text-blue-800',
-            'behind': 'bg-red-100 text-red-800',
-            'ahead': 'bg-green-100 text-green-800'
+    }["Inventory.useEffect"], []);
+    const handleAddToCart = (item, provider)=>{
+        const cartItem = {
+            ingredientId: item.id,
+            ingredientName: item.name,
+            unit: item.unit,
+            syscoPrice: provider === 'Sysco' ? 5.99 : 0,
+            usFoodsPrice: provider === 'USFoods' ? 4.99 : 0,
+            last_date_ordered: new Date(),
+            restaurantId: 1,
+            quantity: 1
         };
-        return statusColors[status] || 'bg-gray-100 text-gray-800';
+        if (provider === 'Sysco') {
+            dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addToSyscoCart"])(cartItem));
+        } else {
+            dispatch((0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$cart$2f$cartSlice$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["addToUsFoodsCart"])(cartItem));
+        }
     };
-    const getProgressColor = (progress)=>{
-        if (progress >= 80) return 'bg-green-500';
-        if (progress >= 60) return 'bg-yellow-500';
-        return 'bg-red-500';
-    };
+    if (loading) {
+        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            children: "Loading..."
+        }, void 0, false, {
+            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+            lineNumber: 74,
+            columnNumber: 12
+        }, this);
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen bg-gray-50 p-6",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6",
+            className: "max-w-7xl mx-auto",
             children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "space-y-6",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "bg-white rounded-lg shadow-sm p-6",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-xl font-bold text-gray-900 mb-4",
-                                    children: "Time Variables"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 154,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 gap-4",
-                                    children: timeVariables.map((variable)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "bg-gray-50 rounded-lg p-4",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                    className: "text-sm font-medium text-gray-500",
-                                                    children: variable.name
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                    lineNumber: 158,
-                                                    columnNumber: 19
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-2xl font-bold text-gray-900",
-                                                    children: [
-                                                        variable.value,
-                                                        " ",
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "text-sm text-gray-500",
-                                                            children: variable.unit
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 160,
-                                                            columnNumber: 38
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                    lineNumber: 159,
-                                                    columnNumber: 19
-                                                }, this)
-                                            ]
-                                        }, variable.id, true, {
-                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                            lineNumber: 157,
-                                            columnNumber: 17
-                                        }, this))
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 155,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                            lineNumber: 153,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "bg-white rounded-lg shadow-sm overflow-hidden",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "p-6 border-b",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                        className: "text-xl font-bold text-gray-900",
-                                        children: "Inventory Status"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                        lineNumber: 170,
-                                        columnNumber: 15
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 169,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "overflow-x-auto",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
-                                        className: "w-full",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                                                    className: "bg-gray-50",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
-                                                            children: "Item"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 176,
-                                                            columnNumber: 21
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
-                                                            children: "Stock"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 177,
-                                                            columnNumber: 21
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
-                                                            children: "Status"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 178,
-                                                            columnNumber: 21
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                                            className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
-                                                            children: "Last Updated"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 179,
-                                                            columnNumber: 21
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                    lineNumber: 175,
-                                                    columnNumber: 19
-                                                }, this)
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                lineNumber: 174,
-                                                columnNumber: 17
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
-                                                className: "divide-y divide-gray-200",
-                                                children: inventoryItems.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                                                        className: "hover:bg-gray-50",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                className: "px-6 py-4",
-                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "font-medium text-gray-900",
-                                                                            children: item.name
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                            lineNumber: 187,
-                                                                            columnNumber: 27
-                                                                        }, this),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "text-sm text-gray-500",
-                                                                            children: item.category
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                            lineNumber: 188,
-                                                                            columnNumber: 27
-                                                                        }, this)
-                                                                    ]
-                                                                }, void 0, true, {
-                                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                    lineNumber: 186,
-                                                                    columnNumber: 25
-                                                                }, this)
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                lineNumber: 185,
-                                                                columnNumber: 23
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                className: "px-6 py-4",
-                                                                children: [
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "flex items-center",
-                                                                        children: [
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                                className: "font-medium",
-                                                                                children: item.currentStock
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                                lineNumber: 193,
-                                                                                columnNumber: 27
-                                                                            }, this),
-                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                                className: "text-gray-500 ml-1",
-                                                                                children: item.unit
-                                                                            }, void 0, false, {
-                                                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                                lineNumber: 194,
-                                                                                columnNumber: 27
-                                                                            }, this)
-                                                                        ]
-                                                                    }, void 0, true, {
-                                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                        lineNumber: 192,
-                                                                        columnNumber: 25
-                                                                    }, this),
-                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                        className: "text-xs text-gray-500",
-                                                                        children: [
-                                                                            "Min: ",
-                                                                            item.minStock,
-                                                                            " | Max: ",
-                                                                            item.maxStock
-                                                                        ]
-                                                                    }, void 0, true, {
-                                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                        lineNumber: 196,
-                                                                        columnNumber: 25
-                                                                    }, this)
-                                                                ]
-                                                            }, void 0, true, {
-                                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                lineNumber: 191,
-                                                                columnNumber: 23
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                className: "px-6 py-4",
-                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                    className: `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`,
-                                                                    children: item.status
-                                                                }, void 0, false, {
-                                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                    lineNumber: 201,
-                                                                    columnNumber: 25
-                                                                }, this)
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                lineNumber: 200,
-                                                                columnNumber: 23
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                                                className: "px-6 py-4 text-sm text-gray-500",
-                                                                children: new Date(item.lastUpdated).toLocaleString()
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                lineNumber: 205,
-                                                                columnNumber: 23
-                                                            }, this)
-                                                        ]
-                                                    }, item.id, true, {
-                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                        lineNumber: 184,
-                                                        columnNumber: 21
-                                                    }, this))
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                lineNumber: 182,
-                                                columnNumber: 17
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                        lineNumber: 173,
-                                        columnNumber: 15
-                                    }, this)
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 172,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                            lineNumber: 168,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                    className: "text-2xl font-bold text-gray-900 mb-4",
+                    children: "Inventory Overview"
+                }, void 0, false, {
                     fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                    lineNumber: 151,
+                    lineNumber: 80,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "space-y-6",
+                    className: "bg-white rounded-lg shadow-sm overflow-hidden",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "bg-white rounded-lg shadow-sm p-6",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-xl font-bold text-gray-900 mb-6",
-                                    children: "Department Progress"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 219,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "space-y-6",
-                                    children: departments.map((dept)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "bg-gray-50 rounded-lg p-4",
+                            className: "p-6 border-b",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                className: "text-xl font-bold text-gray-900",
+                                children: "Inventory Status"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                lineNumber: 83,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                            lineNumber: 82,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "overflow-x-auto",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
+                                className: "w-full",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                            className: "bg-gray-50",
                                             children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex justify-between items-center mb-2",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                            className: "font-medium text-gray-900",
-                                                            children: dept.name
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 224,
-                                                            columnNumber: 21
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(dept.status)}`,
-                                                            children: dept.status
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 225,
-                                                            columnNumber: 21
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
+                                                    children: "Item"
+                                                }, void 0, false, {
                                                     fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                    lineNumber: 223,
+                                                    lineNumber: 89,
                                                     columnNumber: 19
                                                 }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "relative pt-1",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "flex mb-2 items-center justify-between",
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
+                                                    children: "Category"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                    lineNumber: 90,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
+                                                    children: "Current Stock"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                    lineNumber: 91,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
+                                                    children: "Min Stock"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                    lineNumber: 92,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
+                                                    children: "Max Stock"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                    lineNumber: 93,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
+                                                    children: "Status"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                    lineNumber: 94,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
+                                                    className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase",
+                                                    children: "Last Updated"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                    lineNumber: 95,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                            lineNumber: 88,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                        lineNumber: 87,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                                        className: "divide-y divide-gray-200",
+                                        children: inventoryItems.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
+                                                className: "hover:bg-gray-50 cursor-pointer",
+                                                onClick: ()=>setSelectedItem(item),
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "font-medium text-gray-900",
+                                                            children: item.name
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                            lineNumber: 106,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 105,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "text-gray-900",
+                                                            children: item.category
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                            lineNumber: 109,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 108,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "font-medium",
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                        className: "text-xs font-semibold inline-block text-gray-600",
-                                                                        children: [
-                                                                            dept.tasks.completed,
-                                                                            "/",
-                                                                            dept.tasks.total,
-                                                                            " Tasks"
-                                                                        ]
-                                                                    }, void 0, true, {
+                                                                item.currentStock,
+                                                                " ",
+                                                                item.unit
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                            lineNumber: 112,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 111,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "text-gray-500",
+                                                            children: [
+                                                                item.minStock,
+                                                                " ",
+                                                                item.unit
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                            lineNumber: 115,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 114,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "text-gray-500",
+                                                            children: [
+                                                                item.maxStock,
+                                                                " ",
+                                                                item.unit
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                            lineNumber: 118,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 117,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(item.status)}`,
+                                                            children: item.status
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                            lineNumber: 121,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 120,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4 text-sm text-gray-500",
+                                                        children: new Date(item.lastUpdated).toLocaleString()
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 125,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
+                                                        className: "px-6 py-4 relative",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$parts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Popover$3e$__["Popover"].Root, {
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$parts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Popover$3e$__["Popover"].Trigger, {
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        className: "text-blue-500 hover:text-blue-700 cursor-pointer",
+                                                                        children: "Details"
+                                                                    }, void 0, false, {
                                                                         fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                        lineNumber: 232,
-                                                                        columnNumber: 25
+                                                                        lineNumber: 131,
+                                                                        columnNumber: 27
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                    lineNumber: 231,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 130,
+                                                                    columnNumber: 25
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "text-right",
-                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                        className: "text-xs font-semibold inline-block text-gray-600",
-                                                                        children: [
-                                                                            dept.progress,
-                                                                            "%"
-                                                                        ]
-                                                                    }, void 0, true, {
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$parts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Popover$3e$__["Popover"].Portal, {
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$parts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Popover$3e$__["Popover"].Positioner, {
+                                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$parts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Popover$3e$__["Popover"].Popup, {
+                                                                            className: "bg-white p-4 rounded-lg shadow-lg border border-gray-200",
+                                                                            children: [
+                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                    className: "space-y-2",
+                                                                                    children: [
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                                                            className: "font-bold text-lg",
+                                                                                            children: [
+                                                                                                item.name,
+                                                                                                " Providers"
+                                                                                            ]
+                                                                                        }, void 0, true, {
+                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                            lineNumber: 139,
+                                                                                            columnNumber: 33
+                                                                                        }, this),
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                            className: "space-y-2",
+                                                                                            children: [
+                                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                                    className: "flex justify-between items-center",
+                                                                                                    children: [
+                                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                                            children: "Sysco"
+                                                                                                        }, void 0, false, {
+                                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                            lineNumber: 142,
+                                                                                                            columnNumber: 37
+                                                                                                        }, this),
+                                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                                            children: "$5.99"
+                                                                                                        }, void 0, false, {
+                                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                            lineNumber: 143,
+                                                                                                            columnNumber: 37
+                                                                                                        }, this),
+                                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                                                            onClick: (e)=>{
+                                                                                                                e.stopPropagation();
+                                                                                                                handleAddToCart(item, 'Sysco');
+                                                                                                            },
+                                                                                                            className: "bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600",
+                                                                                                            children: "Add"
+                                                                                                        }, void 0, false, {
+                                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                            lineNumber: 144,
+                                                                                                            columnNumber: 37
+                                                                                                        }, this)
+                                                                                                    ]
+                                                                                                }, void 0, true, {
+                                                                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                    lineNumber: 141,
+                                                                                                    columnNumber: 35
+                                                                                                }, this),
+                                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                                    className: "flex justify-between items-center",
+                                                                                                    children: [
+                                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                                            children: "US Foods"
+                                                                                                        }, void 0, false, {
+                                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                            lineNumber: 155,
+                                                                                                            columnNumber: 37
+                                                                                                        }, this),
+                                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                                            children: "$4.99"
+                                                                                                        }, void 0, false, {
+                                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                            lineNumber: 156,
+                                                                                                            columnNumber: 37
+                                                                                                        }, this),
+                                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                                                            onClick: (e)=>{
+                                                                                                                e.stopPropagation();
+                                                                                                                handleAddToCart(item, 'USFoods');
+                                                                                                            },
+                                                                                                            className: "bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600",
+                                                                                                            children: "Add"
+                                                                                                        }, void 0, false, {
+                                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                            lineNumber: 157,
+                                                                                                            columnNumber: 37
+                                                                                                        }, this)
+                                                                                                    ]
+                                                                                                }, void 0, true, {
+                                                                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                                    lineNumber: 154,
+                                                                                                    columnNumber: 35
+                                                                                                }, this)
+                                                                                            ]
+                                                                                        }, void 0, true, {
+                                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                            lineNumber: 140,
+                                                                                            columnNumber: 33
+                                                                                        }, this)
+                                                                                    ]
+                                                                                }, void 0, true, {
+                                                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                    lineNumber: 138,
+                                                                                    columnNumber: 31
+                                                                                }, this),
+                                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$base$2d$ui$2d$components$2f$react$2f$esm$2f$popover$2f$index$2e$parts$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__Popover$3e$__["Popover"].Arrow, {
+                                                                                    className: "fill-white"
+                                                                                }, void 0, false, {
+                                                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                                    lineNumber: 169,
+                                                                                    columnNumber: 31
+                                                                                }, this)
+                                                                            ]
+                                                                        }, void 0, true, {
+                                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                                            lineNumber: 137,
+                                                                            columnNumber: 29
+                                                                        }, this)
+                                                                    }, void 0, false, {
                                                                         fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                        lineNumber: 237,
-                                                                        columnNumber: 25
+                                                                        lineNumber: 136,
+                                                                        columnNumber: 27
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                    lineNumber: 236,
-                                                                    columnNumber: 23
+                                                                    lineNumber: 135,
+                                                                    columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 230,
-                                                            columnNumber: 21
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200",
-                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                style: {
-                                                                    width: `${dept.progress}%`
-                                                                },
-                                                                className: `shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center ${getProgressColor(dept.progress)}`
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                                lineNumber: 243,
-                                                                columnNumber: 23
-                                                            }, this)
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 242,
-                                                            columnNumber: 21
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "text-xs text-gray-500",
-                                                            children: [
-                                                                "Last updated: ",
-                                                                dept.lastUpdate
-                                                            ]
-                                                        }, void 0, true, {
-                                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                            lineNumber: 248,
-                                                            columnNumber: 21
+                                                            lineNumber: 129,
+                                                            columnNumber: 23
                                                         }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                                    lineNumber: 229,
-                                                    columnNumber: 19
-                                                }, this)
-                                            ]
-                                        }, dept.id, true, {
-                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                            lineNumber: 222,
-                                            columnNumber: 17
-                                        }, this))
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 220,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                        lineNumber: 128,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, item.id, true, {
+                                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                                lineNumber: 100,
+                                                columnNumber: 19
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                        lineNumber: 98,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
+                                lineNumber: 86,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
                             fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                            lineNumber: 218,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "bg-white rounded-lg shadow-sm p-6",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-xl font-bold text-gray-900 mb-4",
-                                    children: "Quick Actions"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 259,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "grid grid-cols-2 gap-4",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            className: "w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700",
-                                            children: "Update Inventory"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                            lineNumber: 261,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            className: "w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700",
-                                            children: "Add Task"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                            lineNumber: 264,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            className: "w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700",
-                                            children: "Generate Report"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                            lineNumber: 267,
-                                            columnNumber: 15
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                            className: "w-full px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700",
-                                            children: "Settings"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                            lineNumber: 270,
-                                            columnNumber: 15
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                                    lineNumber: 260,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                            lineNumber: 258,
+                            lineNumber: 85,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-                    lineNumber: 217,
+                    lineNumber: 81,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-            lineNumber: 149,
+            lineNumber: 79,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/manager-dash/inventory/page.tsx",
-        lineNumber: 148,
+        lineNumber: 78,
         columnNumber: 5
     }, this);
 }
-_c = InventoryProgress;
+_s(Inventory, "SkL1Hh27b+Krb88Meh1Ja59IRAw=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useDispatch"]
+    ];
+});
+_c = Inventory;
 var _c;
-__turbopack_refresh__.register(_c, "InventoryProgress");
+__turbopack_refresh__.register(_c, "Inventory");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);
 }

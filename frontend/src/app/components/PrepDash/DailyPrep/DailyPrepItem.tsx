@@ -1,5 +1,5 @@
 import Card from "@mui/material/Card";
-import PrepListItem from "../../../types/models/PrepListItem";
+import { PrepListItem } from "@/app/types/models/PrepListItem";
 import { useState } from "react"
 import CardContent from "@mui/material/CardContent";
 import InputField from "../../Elements/login/InputField";
@@ -12,7 +12,7 @@ interface DailyPrepProps {
 
 // Dynamic prep item card that changes appearance based on completion status and allows note addition
 const DailyPrepItem: React.FC<DailyPrepProps> = ({prepItem, onButtonClick} : DailyPrepProps) => {
-    const [note, setNote] = useState("");
+    const [note, setNote] = useState(prepItem.note || "");
 
     // Updates prep item status in parent component
     const handleClick = () => {

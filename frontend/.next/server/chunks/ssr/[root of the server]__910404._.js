@@ -181,9 +181,34 @@ __turbopack_esm__({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_import__("[project]/node_modules/@reduxjs/toolkit/dist/redux-toolkit.modern.mjs [app-ssr] (ecmascript) <locals>");
 ;
+// Default theme
+const defaultTheme = {
+    primary: '#3B82F6',
+    secondary: '#1F2937',
+    accent: '#10B981'
+};
+// Restaurant-specific themes
+const restaurantThemes = {
+    1: {
+        primary: '#3B82F6',
+        secondary: '#1F2937',
+        accent: '#10B981'
+    },
+    2: {
+        primary: '#10B981',
+        secondary: '#1F2937',
+        accent: '#6366F1'
+    },
+    3: {
+        primary: '#F59E0B',
+        secondary: '#1F2937',
+        accent: '#EC4899'
+    }
+};
 const initialState = {
     restaurantId: null,
-    userInfo: null
+    userInfo: null,
+    theme: defaultTheme
 };
 const authSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createSlice"])({
     name: 'auth',
@@ -195,10 +220,13 @@ const authSlice = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modul
                 username: action.payload.username,
                 role: action.payload.role
             };
+            // Set theme based on restaurant ID
+            state.theme = restaurantThemes[action.payload.restaurantId] || defaultTheme;
         },
         clearAuthInfo: (state)=>{
             state.restaurantId = null;
             state.userInfo = null;
+            state.theme = defaultTheme;
         }
     }
 });

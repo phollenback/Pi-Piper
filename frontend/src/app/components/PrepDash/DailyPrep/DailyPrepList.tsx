@@ -1,4 +1,4 @@
-import PrepListItem from "@/app/types/models/PrepListItem";
+import { PrepListItem } from "@/app/types/models/PrepListItem";
 import { RootState } from "@/redux/lib/store";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -17,14 +17,25 @@ const DailyPrepList: React.FC<DailyPrepProps> = ({list, handleCardClick}: DailyP
     // Syncs the local searchTerm with the Redux prepSearchTerm.
     useEffect(() => {
         setSearchTerm(prepSearchTerm);
+
+        console.log("DailyPrepList", list);
     }, [prepSearchTerm]);
     
-    // Filters the list of prep items based on the search term.
+    // Get today's date in YYYY-MM-DD format
+    const today = new Date().toISOString().split('T')[0];
+
+    // Filters the list of prep items based on the search term and today's date
     const filteredList = list.filter((item) => {
         const lowercasedTerm = searchTerm.toLowerCase();
+        
+        console.log('Today:', today);
+        console.log('Item Date:', item.date);
+        console.log('Item:', item);
+
         return (
-          item.name?.toLowerCase().includes(lowercasedTerm) ||
-          item.description?.toLowerCase().includes(lowercasedTerm)
+            // Temporarily remove date filter for testing
+            item.name?.toLowerCase().includes(lowercasedTerm) ||
+            item.description?.toLowerCase().includes(lowercasedTerm)
         );
     });
 

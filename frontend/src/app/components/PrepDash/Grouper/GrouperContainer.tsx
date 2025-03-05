@@ -6,7 +6,7 @@ import Ingredient from '@/app/types/models/Ingredient';
 import { PrepItem } from '@/app/types/models/PrepItem';
 import { GroupWithItems } from '@/app/types/models/Group';
 import ButtonGroup from '../../Elements/ButtonGroup';
-import Category from '@/app/types/models/Category';
+import { Category, CategoryTab } from '@/app/types/models/Category';
 import { getIngredients, getPrepItems } from './actions';
 
 interface GrouperContainerProps {
@@ -32,16 +32,31 @@ export default function GrouperContainer({ initialGroups = [] }: GrouperContaine
 
   const currentItems = activeTab === 'ingredients' ? ingredientItems : prepItems;
 
-  const tabCategories: Category[] = [
-    { category_id: 1, category_name: 'Ingredients', category_type: 'tab', description: 'Ingredient list' },
-    { category_id: 2, category_name: 'Prep Items', category_type: 'tab', description: 'Prep item list' }
+  const tabCategories: CategoryTab[] = [
+    { 
+      categoryId: 1, 
+      categoryName: 'Ingredients', 
+      categoryType: 'ingredients', 
+      description: 'Ingredient list' 
+    },
+    { 
+      categoryId: 2, 
+      categoryName: 'Prep Items', 
+      categoryType: 'prep_items', 
+      description: 'Prep item list' 
+    }
   ];
 
   const getItemName = (item: Ingredient | PrepItem): string => {
     if (activeTab === 'ingredients') {
-      return (item as Ingredient).ingredient_name;
+      return (item as Ingredient).ingredientName;
     }
     return (item as PrepItem).name;
+  };
+
+  const handleTabClick = (item: Category) => {
+    const tabItem = item as CategoryTab;
+    setActiveTab(tabItem.categoryType);
   };
 
   return (
@@ -50,8 +65,8 @@ export default function GrouperContainer({ initialGroups = [] }: GrouperContaine
         items={tabCategories}
         buttonWidth="150px"
         buttonHeight="40px"
-        onButtonClick={(item) => setActiveTab(item.category_name === 'Ingredients' ? 'ingredients' : 'prep_items')}
-        selectedButton={activeTab === 'ingredients' ? 'Ingredients' : 'Prep Items'}
+        onButtonClick={handleTabClick}
+        selectedButton={activeTab === 'ingredients' ? 1 : 2}
         getButtonColor={() => '#ffffff'}
       />
 
@@ -62,18 +77,18 @@ export default function GrouperContainer({ initialGroups = [] }: GrouperContaine
             {currentItems.map((item) => (
               <li
                 key={activeTab === 'ingredients' ? 
-                  (item as Ingredient).ingredient_id : 
+                  (item as Ingredient).ingredientId : 
                   (item as PrepItem).prep_item_id}
                 className={`p-2 border rounded cursor-pointer ${
                   selectedItems.has(activeTab === 'ingredients' ? 
-                    (item as Ingredient).ingredient_id : 
+                    (item as Ingredient).ingredientId : 
                     (item as PrepItem).prep_item_id) 
                     ? 'bg-blue-100' 
                     : ''
                 }`}
                 onClick={() => {
                   const itemId = activeTab === 'ingredients' ? 
-                    (item as Ingredient).ingredient_id : 
+                    (item as Ingredient).ingredientId : 
                     (item as PrepItem).prep_item_id;
                   const newSelected = new Set(selectedItems);
                   if (selectedItems.has(itemId)) {

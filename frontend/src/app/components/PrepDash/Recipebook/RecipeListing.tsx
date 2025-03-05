@@ -2,16 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Button from "../../Elements/Button";
 import { RootState } from "@/redux/lib/store";
-
-// Recipe data structure.
-interface Recipe {
-  id: number;
-  name: string;
-  description: string;
-  ingredients: string[];
-  category: number;
-  procedure: string;
-}
+import { Recipe } from "@/app/hooks/useRecipes";
 
 // RecipeListing component: displays a list of recipes, allowing selection.
 interface RecipeListingProps {
@@ -27,23 +18,25 @@ const RecipeListing: React.FC<RecipeListingProps> = ({ recipes, onRecipeSelect }
   const filteredRecipes = recipes.filter((recipe) => {
     const lowercasedTerm = searchTerm.toLowerCase();
     return (
-      recipe.name.toLowerCase().includes(lowercasedTerm) ||
-      recipe.description.toLowerCase().includes(lowercasedTerm)
+      recipe.prepItemName.toLowerCase().includes(lowercasedTerm) ||
+      (recipe.description && recipe.description.toLowerCase().includes(lowercasedTerm))
     );
   });
 
   // Updates the local search term when the Redux search term changes.
   useEffect(() => {
     setSearchTerm(prepSearchTerm);
-  }, [prepSearchTerm]);
+    
+    console.log('recipes listing',recipes);
+  }, [prepSearchTerm, recipes]);
 
   return (
     <div className="bg-zinc-100 pt-6 pl-8 pr-8">
       <div className="flex flex-col items-center">
         {filteredRecipes.map((recipe) => (
           <Button
-            key={recipe.id}
-            label={recipe.name}
+            key={recipe.prepItemId}
+            label={recipe.prepItemName}
             onClick={() => onRecipeSelect(recipe)} 
             size="large"
             style={{

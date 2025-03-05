@@ -1,16 +1,23 @@
-export default interface Category {
-    category_id: number;
-    category_name: string;
-    category_type: string;
-    description: string;
+export interface Category {
+    categoryId: number;
+    categoryName: string;
+    restaurantId?: number;
+    description?: string;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface CategoryTab extends Category {
+    categoryType: 'ingredients' | 'prep_items';
 }
 
 // Adapter for transforming Category data
 export const categoryAdapter = {
-    toSelectBoxOptions: (categories: Category[] = []) => {
+    toSelectBoxOptions: (categories: (Category | CategoryTab)[] = []) => {
         return categories.map((category) => ({
-            label: category.category_name,
-            value: category.category_id,
+            label: category.categoryName,
+            value: category.categoryId,
+            type: 'categoryType' in category ? category.categoryType : undefined
         }));
     }
 };

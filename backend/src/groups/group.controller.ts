@@ -6,7 +6,7 @@ import * as GroupService from './group.service';
 
 export const createGroup = async (req: Request, res: Response): Promise<void> => {
   logger.info('[group.controller][createGroup][START]', { body: req.body });
-  
+  console.log('req.body', req.body);
   try {
     const { name, restaurant_id, items } = req.body;
     
@@ -15,7 +15,7 @@ export const createGroup = async (req: Request, res: Response): Promise<void> =>
       res.status(400).json({
         message: 'Missing required fields: name, restaurant_id, or items'
       });
-      return; // Explicitly return to avoid further execution
+      return;
     }
 
     const groupId = await GroupDal.createGroup(
