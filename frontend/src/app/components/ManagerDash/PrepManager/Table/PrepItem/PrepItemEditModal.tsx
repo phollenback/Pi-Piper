@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import SelectBox from '@/app/components/Elements/ui/SelectBox';
 import Button from '@/app/components/Elements/Button';
 import { PrepItem } from '@/app/types/models/PrepItem';
-import { editPrepItem } from './actions';
+import { editPrepItem } from '../../../../../actions/prepItemActions';
+import { SelectBoxOption } from '@/app/types/models/SelectBoxOption';
 
 interface PrepItemEditModalProps {
   item: PrepItem;
-  categoryOptions: { label: string; value: number }[];
-  departmentOptions: { label: string; value: number }[];
+  tableOptions: {
+    categories: SelectBoxOption[];
+    departments: SelectBoxOption[];
+  };
   handleClose: () => void;
 }
 
-const PrepItemEditModal: React.FC<PrepItemEditModalProps> = ({ item, categoryOptions, departmentOptions, handleClose }) => {
+const PrepItemEditModal: React.FC<PrepItemEditModalProps> = ({ item, tableOptions, handleClose }) => {
   const [name, setName] = useState(item.name);
   const [description, setDescription] = useState(item.description);
   const [selectedCategory, setSelectedCategory] = useState(item.category);
@@ -25,8 +28,12 @@ const PrepItemEditModal: React.FC<PrepItemEditModalProps> = ({ item, categoryOpt
       category: selectedCategory,
       kitchen_department_id: selectedDepartment,
     };
-    await editPrepItem(updatedItem, 1);
-    handleClose();
+    try {
+      await editPrepItem(item.prep_item_id, updatedItem, 1);
+      handleClose();
+    } catch (error) {
+      console.error('Error updating prep item:', error);
+    }
   };
 
   return (
@@ -63,7 +70,7 @@ const PrepItemEditModal: React.FC<PrepItemEditModalProps> = ({ item, categoryOpt
             <SelectBox
               value={selectedCategory}
               onChange={(value) => setSelectedCategory(Number(value))}
-              options={categoryOptions}
+              options={tableOptions.categories}
               title="Category Selection"
             />
           </div>
@@ -72,7 +79,7 @@ const PrepItemEditModal: React.FC<PrepItemEditModalProps> = ({ item, categoryOpt
             <SelectBox
               value={selectedDepartment}
               onChange={(value) => setSelectedDepartment(Number(value))}
-              options={departmentOptions}
+              options={tableOptions.departments}
               title="Department Selection"
             />
           </div>

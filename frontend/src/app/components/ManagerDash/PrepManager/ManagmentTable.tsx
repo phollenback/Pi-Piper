@@ -6,7 +6,6 @@ import { RootState } from '@/redux/lib/store';
 import { categoryAdapter, Category } from '@/app/types/models/Category';
 import Department, { departmentAdapter } from '@/app/types/models/Department';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCategories } from '@/app/util/actions';
 import { fetchDepartments } from '@/app/actions/departmentActions';
 import Ingredient from '@/app/types/models/Ingredient';
 import IngredientTable from './Table/Ingredient/IngredientTable';
@@ -14,13 +13,13 @@ import PrepItemTable from './Table/PrepItem/PrepItemTable';
 import IngredientEditModal from './Table/Ingredient/IngredientEditModal';
 import PrepItemEditModal from './Table/PrepItem/PrepItemEditModal';
 import ConfirmationModal from '@/app/components/Elements/ui/ConfirmationModal';
-import { deletePrepItem } from '@/app/actions/prepItemActions';
+import { deletePrepItem, fetchCategories } from '@/app/actions/prepItemActions';
 import { deleteIngredient } from '@/app/actions/ingredientActions';
 // import { getGroups } from '@/app/actions/groupActions';
 
 interface ManagementTableProps {
   activeList: PrepItem[] | Ingredient[];
-  category: number | null;
+  selectedCategory: number | null;
   activeSection: string; // "prepitem" for prep items, "ingredients" for ingredients
   selectedGroup: number | null;
 }
@@ -30,8 +29,14 @@ const getDepartments = () => {
   return fetchDepartments(1);
 }
 
+// Create a unified options object
+const getTableOptions = (categories: Category[], departments: Department[]) => ({
+  categories: categoryAdapter.toSelectBoxOptions(categories),
+  departments: departmentAdapter.toSelectBoxOptions(departments)
+});
+
 // Dynamic table component that handles both prep items and ingredients
-const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSection }) => {
+const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSection, selectedCategory }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState<PrepItem[] | Ingredient[]>([]);
   const [selectedItem, setSelectedItem] = useState<PrepItem | Ingredient | null>(null);
@@ -41,7 +46,7 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSec
   // Fetch and cache categories and departments
   const { data: categories = [] } = useQuery<Category[]>({
       queryKey: ["categories"],
-      queryFn: fetchCategories,
+      queryFn: () => fetchCategories(1),
   });
 
   const { data: departments = [] } = useQuery<Department[]>({
@@ -49,14 +54,8 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSec
       queryFn: getDepartments,
   });
 
-  // const { data: groups = [] } = useQuery({
-  //   queryKey: ['groups', 1],
-  //   queryFn: () => getGroups(1)
-  // });
-
-  // Transform categories and departments for select box options using adapters
-  const categoryOptions = categoryAdapter.toSelectBoxOptions(categories);
-  const departmentOptions = departmentAdapter.toSelectBoxOptions(departments);
+  // Get unified options
+  const tableOptions = getTableOptions(categories, departments);
 
   // Sync component state with external changes
   useEffect(() => {
@@ -80,25 +79,27 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSec
               (item.description ? item.description.toLowerCase().includes(lowercasedTerm) : false)
             : item.ingredientName.toLowerCase().includes(lowercasedTerm);
 
-        return matchesSearchTerm;
+        const matchesCategory = selectedCategory === null || 
+          ("category" in item ? item.category === selectedCategory : 
+           "ingredientCategory" in item ? item.ingredientCategory === selectedCategory : true);
+
+        return matchesSearchTerm && matchesCategory;
     });
 };
 
   // Updates category or department selection for items in the list
-  const handleSelection = (id: number, value: number | string, field: 'category' | 'kitchen_department_id' | 'ingredient_category') => {
+  const handleSelection = (id: number, value: number | string, field: string) => {
     const newValue = Number(value);
-
     setList((prevList) => {
-        if (prevList.length === 0) return prevList;
-
-        return prevList.map((item) => {
-            if ("prep_item_id" in item && item.prep_item_id === id) {
-                return { ...item, [field]: newValue };
-            } else if ("ingredient_id" in item && item.ingredient_id === id) {
-                return { ...item, [field]: newValue };
-            }
-            return item;
-        }) as PrepItem[] | Ingredient[];
+      if (prevList.length === 0) return prevList;
+      return prevList.map((item) => {
+        if ("prep_item_id" in item && item.prep_item_id === id) {
+          return { ...item, [field]: newValue };
+        } else if ("ingredient_id" in item && item.ingredient_id === id) {
+          return { ...item, [field]: newValue };
+        }
+        return item;
+      }) as PrepItem[] | Ingredient[];
     });
   };
 
@@ -143,16 +144,14 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSec
         <>
           <PrepItemTable
             list={filteredList() as PrepItem[]}
-            categoryOptions={categoryOptions}
-            departmentOptions={departmentOptions}
+            tableOptions={tableOptions}
             onEditClick={handleEditClick}
             onDeleteClick={handleDeleteClick}
           />
           {selectedItem && "prep_item_id" in selectedItem && (
             <PrepItemEditModal
               item={selectedItem}
-              categoryOptions={categoryOptions}
-              departmentOptions={departmentOptions}
+              tableOptions={tableOptions}
               handleClose={handleCloseModal}
             />
           )}
@@ -161,7 +160,7 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSec
         <>
           <IngredientTable
             list={filteredList() as Ingredient[]}
-            categoryOptions={categoryOptions}
+            tableOptions={tableOptions}
             handleSelection={handleSelection}
             onEditClick={handleEditClick}
             onDeleteClick={handleDeleteClick}
@@ -169,7 +168,7 @@ const ManagementTable: React.FC<ManagementTableProps> = ({ activeList, activeSec
           {selectedItem && "ingredient_id" in selectedItem && (
             <IngredientEditModal
               item={selectedItem as Ingredient}
-              categoryOptions={categoryOptions}
+              tableOptions={tableOptions}
               handleClose={handleCloseModal}
             />
           )}

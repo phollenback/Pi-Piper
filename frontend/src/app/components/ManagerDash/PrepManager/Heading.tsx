@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import SelectBox from '../../../components/Elements/ui/SelectBox';
-import Category from '@/app/types/models/Category';
+import {Category} from '@/app/types/models/Category';
 import InputField from '../../Elements/login/InputField';
 import Button from '../../Elements/Button';
 import { useQuery } from '@tanstack/react-query';
 import { getGroups } from '@/app/components/PrepDash/Grouper/actions';
+import { Group } from '@/app/types/models/Group';
+import { setManagerSearchTerm } from '@/redux/features/search/searchSlice';
+import { useDispatch } from 'react-redux';
 
 interface HeadingProps {
   setSection: () => void; 
   setSelectedCategory: (category: number | null) => void; 
   selectedCategory: number | null; 
   categories: Category[]; 
-  selectedGroup?: number | null;
-  setSelectedGroup?: (group: number | null) => void;
+  selectedGroup: number | null;
+  setSelectedGroup: (group: number | null) => void;
 }
 
 const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, selectedCategory, categories, selectedGroup, setSelectedGroup }) => {
   const [searchError, setSearchError] = useState(""); 
   const [query, setQuery] = useState(""); 
   const RESTAURANT_ID = 1;
+  const dispatch = useDispatch();
   
   // Fetch groups
   const { data: groups = [] } = useQuery({
@@ -31,18 +35,19 @@ const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, sele
   };
 
   const handleGroupChange = (value: string | number) => {
-    setSelectedGroup?.(value === "" ? null : Number(value));
+    setSelectedGroup(value === "" ? null : Number(value));
   };
 
   const handleResetClick = () => {
     setQuery("");
     setSearchError("");
     setSelectedCategory(null);
-    setSelectedGroup?.(null);
+    setSelectedGroup(null);
   };
 
   const handleSearchSubmit = (query: string) => {
     if (!query.trim()) {
+      dispatch(setManagerSearchTerm(query));
       setSearchError("Please enter a search term.");
       return;
     }
@@ -109,8 +114,8 @@ const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, sele
                 value={selectedCategory !== null ? selectedCategory.toString() : ""}
                 onChange={handleCategoryChange}
                 options={categories.map((category) => ({
-                  label: category.category_name,
-                  value: category.category_id,
+                  label: category.categoryName,
+                  value: category.categoryId,
                 }))}
                 placeholder="Select Category"
               />
@@ -121,7 +126,7 @@ const Heading: React.FC<HeadingProps> = ({ setSection, setSelectedCategory, sele
                 onChange={handleGroupChange}
                 options={[
                   { label: 'All Items', value: '' },
-                  ...groups.map(group => ({
+                  ...groups.map((group: Group) => ({
                     label: group.group_name,
                     value: group.group_id
                   }))

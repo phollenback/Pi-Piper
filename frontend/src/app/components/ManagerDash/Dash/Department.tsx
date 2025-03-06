@@ -8,7 +8,7 @@ interface DepartmentProps {
 }
 
 // Department progress card displaying completion metrics with visual progress indicator
-const Department: React.FC<DepartmentProps> = ({ name, progress, total_items, completed_items }: DepartmentProps) => {
+const Department: React.FC<DepartmentProps> = ({ name, progress, total_items, completed_items }) => {
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-row items-center bg-white p-8 border-b-4 border-black w-full">

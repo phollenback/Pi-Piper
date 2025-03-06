@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import SelectBox from "@/app/components/Elements/ui/SelectBox";
-import Category, { categoryAdapter } from "@/app/types/models/Category";
+import  { Category, categoryAdapter } from "@/app/types/models/Category";
 import Department, { departmentAdapter } from "@/app/types/models/Department";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { fetchDepartments } from "@/app/util/actions";
+import { fetchDepartments } from "@/app/actions/departmentActions";
 import { createPrepItem } from "./actions";
 
 type ItemFields = {

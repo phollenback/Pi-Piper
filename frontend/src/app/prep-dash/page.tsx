@@ -42,7 +42,7 @@ export default function PrepContainer() {
         return matchesSearch && matchesCategory;
     });
 
-    // Standardized category fetching
+    // Standardized category fetchingP
     const { data: categories = [] } = useQuery<Category[]>({
         queryKey: ['categories', restaurantId],
         queryFn: () => fetchCategories(restaurantId),

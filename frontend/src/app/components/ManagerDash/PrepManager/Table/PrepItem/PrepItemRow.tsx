@@ -1,18 +1,21 @@
 import React from 'react';
 import Button from '@/app/components/Elements/Button';
 import { PrepItem } from '@/app/types/models/PrepItem';
+import { SelectBoxOption } from '@/app/types/models/SelectBoxOption';
 
 interface PrepItemRowProps {
   item: PrepItem;
-  categoryOptions: { label: string; value: number }[];
-  departmentOptions: { label: string; value: number }[];
+  tableOptions: {
+    categories: SelectBoxOption[];
+    departments: SelectBoxOption[];
+  };
   onEditClick: (item: PrepItem) => void;
   onDeleteClick: (item: PrepItem) => void;
 }
 
-const PrepItemRow: React.FC<PrepItemRowProps> = ({ item, categoryOptions, departmentOptions, onEditClick, onDeleteClick }) => {
-  const categoryName = categoryOptions.find(option => option.value === item.category)?.label || 'Unknown';
-  const departmentName = departmentOptions.find(option => option.value === item.kitchen_department_id)?.label || 'Unknown';
+const PrepItemRow: React.FC<PrepItemRowProps> = ({ item, tableOptions, onEditClick, onDeleteClick }) => {
+  const categoryName = tableOptions.categories.find(option => option.value === item.category)?.label || 'Unknown';
+  const departmentName = tableOptions.departments.find(option => option.value === item.kitchen_department_id)?.label || 'Unknown';
 
   return (
     <tr key={item.prep_item_id}>

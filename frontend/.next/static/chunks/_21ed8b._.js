@@ -111,6 +111,7 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "createPrepItem": (()=>createPrepItem),
     "deletePrepItem": (()=>deletePrepItem),
+    "editPrepItem": (()=>editPrepItem),
     "fetchAllPrepItems": (()=>fetchAllPrepItems),
     "fetchCategories": (()=>fetchCategories),
     "fetchDailyList": (()=>fetchDailyList),
@@ -168,10 +169,17 @@ const postDailyPrep = async (prepList, restaurantId)=>{
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            prepList
+            prepList: prepList.map((item)=>({
+                    ...item,
+                    quantity: Number(item.quantity),
+                    status: item.status || 'todo' // Default status if not provided
+                }))
         })
     });
-    if (!response.ok) throw new Error('Failed to post daily prep');
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to post daily prep');
+    }
     return response.json();
 };
 const fetchDailyList = async (restaurantId)=>{
@@ -204,6 +212,17 @@ const fetchPrepData = async (restaurantId)=>{
         dailyList,
         categories
     };
+};
+const editPrepItem = async (prepItemId, data, restaurantId)=>{
+    const response = await fetch(`http://localhost:3001/prepitems/${restaurantId}/${prepItemId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) throw new Error('Failed to update prep item');
+    return response.json();
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);

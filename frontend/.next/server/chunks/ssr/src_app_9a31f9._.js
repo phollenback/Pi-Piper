@@ -431,7 +431,8 @@ const categoryAdapter = {
     toSelectBoxOptions: (categories = [])=>{
         return categories.map((category)=>({
                 label: category.categoryName,
-                value: category.categoryId
+                value: category.categoryId,
+                type: 'categoryType' in category ? category.categoryType : undefined
             }));
     }
 };

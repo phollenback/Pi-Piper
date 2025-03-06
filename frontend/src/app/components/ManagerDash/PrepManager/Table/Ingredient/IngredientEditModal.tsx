@@ -6,14 +6,17 @@ import { editIngredient } from '@/app/actions/ingredientActions';
 
 interface IngredientEditModalProps {
   item: Ingredient;
-  categoryOptions: { label: string; value: number }[];
+  tableOptions: {
+    categories: { label: string; value: number }[];
+    departments: { label: string; value: number }[];
+  };
   handleClose: () => void;
 }
 
-const IngredientEditModal: React.FC<IngredientEditModalProps> = ({ item, categoryOptions, handleClose }) => {
-  const [ingredientName, setIngredientName] = useState(item.ingredient_name);
-  const [unitOfMeasure, setUnitOfMeasure] = useState(item.unit_of_measure);
-  const [selectedCategory, setSelectedCategory] = useState(item.ingredient_category);
+const IngredientEditModal: React.FC<IngredientEditModalProps> = ({ item, tableOptions, handleClose }) => {
+  const [ingredientName, setIngredientName] = useState(item.ingredientName);
+  const [unitOfMeasure, setUnitOfMeasure] = useState(item.unit);
+  const [selectedCategory, setSelectedCategory] = useState(item.ingredientCategory);
 
   const handleSaveClick = async () => {
     const updatedItem = {
@@ -58,8 +61,8 @@ const IngredientEditModal: React.FC<IngredientEditModalProps> = ({ item, categor
             <SelectBox
               value={selectedCategory}
               onChange={(value) => setSelectedCategory(Number(value))}
-              options={categoryOptions}
-              title={item.ingredient_name}
+              options={tableOptions.categories}
+              title={item.ingredientName}
             />
           </div>
           <div className="flex justify-end space-x-2">

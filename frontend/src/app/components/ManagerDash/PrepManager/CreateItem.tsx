@@ -1,6 +1,6 @@
 import React from "react";
-import Category from "@/app/types/models/Category";
-import { fetchCategories } from "@/app/util/actions";
+import {Category} from "@/app/types/models/Category";
+import { fetchCategories } from "@/app/actions/prepItemActions";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import CreatePrepItem from "./Creator/PrepItem/CreatePrepItem";
 import CreateIngredient from "./Creator/Ingredient/CreateIngredient";

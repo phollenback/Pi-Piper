@@ -1,16 +1,19 @@
 import { PrepItem } from "@/app/types/models/PrepItem";
 import PrepItemRow from "./PrepItemRow";
+import { SelectBoxOption } from "@/app/types/models/SelectBoxOption";
 
 interface PrepItemTableProps {
   list: PrepItem[];
-  categoryOptions: { label: string, value: number }[];
-  departmentOptions: { label: string, value: number }[];
+  tableOptions: {
+    categories: SelectBoxOption[];
+    departments: SelectBoxOption[];
+  };
   onEditClick: (item: PrepItem) => void;
   onDeleteClick: (item: PrepItem) => void;
 }
 
 // Table component for displaying prep items
-const PrepItemTable: React.FC<PrepItemTableProps> = ({ list, categoryOptions, departmentOptions, onEditClick, onDeleteClick }) => {
+const PrepItemTable: React.FC<PrepItemTableProps> = ({ list, tableOptions, onEditClick, onDeleteClick }) => {
   return (
     <table className="min-w-full bg-white border border-gray-200">
       <thead className='bg-gray-200'>
@@ -28,8 +31,7 @@ const PrepItemTable: React.FC<PrepItemTableProps> = ({ list, categoryOptions, de
           <PrepItemRow
             key={index}
             item={item}
-            categoryOptions={categoryOptions}
-            departmentOptions={departmentOptions}
+            tableOptions={tableOptions}
             onEditClick={onEditClick}
             onDeleteClick={onDeleteClick}
           />

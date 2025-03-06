@@ -1,22 +1,20 @@
 "use client";
 
 import Department from './Department';
-import DepartmentProg from '../../../types/models/DepartmentProg';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { fetchDepProgress } from '@/app/actions/departmentActions';
 
-// Fetches daily department progress data from the specified API endpoint.
-const fetchDepProgress = async () => {
-  const response = await axios.get<DepartmentProg[]>('http://localhost:3000/departments/daily/1');
-  return response.data;
-};
 
 // DepartmentProgress component: displays progress for each department. Uses react-query for data fetching.
 const DepartmentProgress: React.FC = () => {
-  const { data: departments = [] } = useQuery<DepartmentProg[]>({
-    queryKey: ['dep-prog'],
-    queryFn: fetchDepProgress,
+  const restaurantId = 1; // Replace with actual restaurant ID from state/context
+  const { data: departments = [], isLoading, error } = useQuery({
+    queryKey: ['dep-prog', restaurantId],
+    queryFn: () => fetchDepProgress(restaurantId),
   });
+
+  if (isLoading) return <div className="text-gray-600">Loading department progress...</div>;
+  if (error) return <div className="text-red-500">Error: {error.message}</div>;
 
   return (
     <div className="h-screen flex flex-col mt-6 overflow-y-auto">

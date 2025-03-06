@@ -21,6 +21,8 @@ router
 
     .post('/daily/:restaurantId', asyncHandler(PrepItemController.createDailyPrepItems))
     
-    .post('/:restaurantId', checkSchema(PrepItemSchema), asyncHandler(PrepItemController.createPrepItem));
+    .post('/:restaurantId', checkSchema(PrepItemSchema), asyncHandler(PrepItemController.createPrepItem))
+
+    .put('/:restaurantId/:prepItemId', checkSchema(PrepItemSchema), asyncHandler(PrepItemController.updatePrepItem));
 
 export default router;

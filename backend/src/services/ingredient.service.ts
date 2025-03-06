@@ -13,9 +13,9 @@ export class IngredientService {
 
             // Update the inventory for each ingredient
             for (const ingredient of ingredients) {
-                const updateResult = await tx.update(factInventory)
+                await tx.update(factInventory)
                     .set({
-                        quantityAfter: sql`quantity_after - ${ingredient.quantity}`
+                        quantity: sql`quantity - ${ingredient.quantity}`
                     })
                     .where(and(
                         eq(factInventory.ingredientId, ingredient.ingredientId),
@@ -23,7 +23,7 @@ export class IngredientService {
                     ));
                 
                 // Get updated quantity to check if it's below zero
-                const updatedInventory = await tx.select({ quantityAfter: factInventory.quantityAfter })
+                const updatedInventory = await tx.select({ quantity: factInventory.quantity })
                     .from(factInventory)
                     .where(and(
                         eq(factInventory.ingredientId, ingredient.ingredientId),
@@ -31,7 +31,7 @@ export class IngredientService {
                     ));
 
                 // Check if quantity goes below zero
-                if (updatedInventory[0] && Number(updatedInventory[0].quantityAfter) < 0) {
+                if (updatedInventory[0] && Number(updatedInventory[0].quantity) < 0) {
                     throw new Error(`Ingredient ${ingredient.ingredientId} is out of stock`);
                 }
             }
@@ -43,7 +43,7 @@ export class IngredientService {
             const inventoryData = await db.select({
                 ingredientId: dimIngredient.ingredientId,
                 ingredientName: dimIngredient.ingredientName,
-                quantityAfter: factInventory.quantityAfter,
+                quantity: factInventory.quantity,
                 quantityThreshold: dimIngredient.reorderPoint,
                 unit: dimIngredient.unit,
                 maxStock: dimIngredient.parLevel,
@@ -79,7 +79,7 @@ export class IngredientService {
             const lowStockItems = await db.select({
                 ingredientId: dimIngredient.ingredientId,
                 ingredientName: dimIngredient.ingredientName,
-                quantityAfter: factInventory.quantityAfter,
+                quantity: factInventory.quantity,
                 quantityThreshold: dimIngredient.reorderPoint,
                 unit: dimIngredient.unit,
                 maxStock: dimIngredient.parLevel,
@@ -89,7 +89,7 @@ export class IngredientService {
                 .leftJoin(factInventory, eq(dimIngredient.ingredientId, factInventory.ingredientId))
                 .where(and(
                     eq(dimIngredient.restaurantId, restaurantId),
-                    lte(factInventory.quantityAfter, dimIngredient.reorderPoint)
+                    lte(factInventory.quantity, dimIngredient.reorderPoint)
                 ));
 
             return lowStockItems as unknown as InventoryStatusItem[];

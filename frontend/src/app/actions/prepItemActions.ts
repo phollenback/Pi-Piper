@@ -59,13 +59,23 @@ export const postPrepItem = async (restaurantId: number, formData: PrepItem): Pr
 };
 
 // Post daily prep list
-export const postDailyPrep = async (prepList: PrepListItem[], restaurantId: number): Promise<{ success: boolean; message: string }> => {
+export const postDailyPrep = async (prepList: PrepListItem[], restaurantId: number): Promise<PrepListItem[]> => {
     const response = await fetch(`http://localhost:3001/prepitems/daily/${restaurantId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prepList }),
+        body: JSON.stringify({ 
+            prepList: prepList.map(item => ({
+                ...item,
+                quantity: Number(item.quantity), // Ensure quantity is a number
+                status: item.status || 'todo'    // Default status if not provided
+            }))
+        }),
     });
-    if (!response.ok) throw new Error('Failed to post daily prep');
+    
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to post daily prep');
+    }
     return response.json();
 };
 
@@ -100,4 +110,15 @@ export const fetchPrepData = async (restaurantId: number) => {
         fetchCategories(restaurantId)
     ]);
     return { prepItems, dailyList, categories };
+};
+
+// Add this function
+export const editPrepItem = async (prepItemId: number, data: PrepItem, restaurantId: number): Promise<PrepItem> => {
+  const response = await fetch(`http://localhost:3001/prepitems/${restaurantId}/${prepItemId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) throw new Error('Failed to update prep item');
+  return response.json();
 }; 

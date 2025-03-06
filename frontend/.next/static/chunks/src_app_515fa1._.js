@@ -279,7 +279,9 @@ const RecipeListing = ({ recipes, onRecipeSelect })=>{
     // Filters recipes based on the search term.
     const filteredRecipes = recipes.filter((recipe)=>{
         const lowercasedTerm = searchTerm.toLowerCase();
-        return recipe.prepItemName.toLowerCase().includes(lowercasedTerm) || recipe.description && recipe.description.toLowerCase().includes(lowercasedTerm);
+        const recipeName = recipe.prepItemName || '';
+        const description = recipe.description || '';
+        return recipeName.toLowerCase().includes(lowercasedTerm) || description.toLowerCase().includes(lowercasedTerm);
     });
     // Updates the local search term when the Redux search term changes.
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
@@ -296,7 +298,7 @@ const RecipeListing = ({ recipes, onRecipeSelect })=>{
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "flex flex-col items-center",
             children: filteredRecipes.map((recipe)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                    label: recipe.prepItemName,
+                    label: recipe.prepItemName || 'Unnamed Recipe',
                     onClick: ()=>onRecipeSelect(recipe),
                     size: "large",
                     style: {
@@ -307,17 +309,17 @@ const RecipeListing = ({ recipes, onRecipeSelect })=>{
                     }
                 }, recipe.prepItemId, false, {
                     fileName: "[project]/src/app/components/PrepDash/Recipebook/RecipeListing.tsx",
-                    lineNumber: 37,
+                    lineNumber: 40,
                     columnNumber: 11
                 }, this))
         }, void 0, false, {
             fileName: "[project]/src/app/components/PrepDash/Recipebook/RecipeListing.tsx",
-            lineNumber: 35,
+            lineNumber: 38,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/PrepDash/Recipebook/RecipeListing.tsx",
-        lineNumber: 34,
+        lineNumber: 37,
         columnNumber: 5
     }, this);
 };
@@ -346,7 +348,8 @@ const categoryAdapter = {
     toSelectBoxOptions: (categories = [])=>{
         return categories.map((category)=>({
                 label: category.categoryName,
-                value: category.categoryId
+                value: category.categoryId,
+                type: 'categoryType' in category ? category.categoryType : undefined
             }));
     }
 };
@@ -524,6 +527,7 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "createPrepItem": (()=>createPrepItem),
     "deletePrepItem": (()=>deletePrepItem),
+    "editPrepItem": (()=>editPrepItem),
     "fetchAllPrepItems": (()=>fetchAllPrepItems),
     "fetchCategories": (()=>fetchCategories),
     "fetchDailyList": (()=>fetchDailyList),
@@ -581,10 +585,17 @@ const postDailyPrep = async (prepList, restaurantId)=>{
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            prepList
+            prepList: prepList.map((item)=>({
+                    ...item,
+                    quantity: Number(item.quantity),
+                    status: item.status || 'todo' // Default status if not provided
+                }))
         })
     });
-    if (!response.ok) throw new Error('Failed to post daily prep');
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to post daily prep');
+    }
     return response.json();
 };
 const fetchDailyList = async (restaurantId)=>{
@@ -617,6 +628,17 @@ const fetchPrepData = async (restaurantId)=>{
         dailyList,
         categories
     };
+};
+const editPrepItem = async (prepItemId, data, restaurantId)=>{
+    const response = await fetch(`http://localhost:3001/prepitems/${restaurantId}/${prepItemId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) throw new Error('Failed to update prep item');
+    return response.json();
 };
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_refresh__.registerExports(module, globalThis.$RefreshHelpers$);

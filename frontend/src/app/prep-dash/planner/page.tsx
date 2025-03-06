@@ -16,7 +16,7 @@ import {PrepListItem} from '@/app/types/models/PrepListItem';
 import {Category} from '@/app/types/models/Category';
 import { setDailyPrepItems } from '@/redux/features/preplist/dailyPrepListSlice';
 import NewPrepList from '@/app/components/PrepDash/PrepPlan/NewPrepList';
-import { postDailyPrep } from '@/app/util/actions';
+import { postDailyPrep } from '@/app/actions/prepItemActions';
 import { getPrepItems, fetchCategories } from '@/app/actions/prepItemActions';
 
 // Formats tomorrow's date for display
@@ -105,7 +105,7 @@ export default function PlanPage() {
         console.log('plainObjects:', plainObjects)
 
         try {
-            const response = await postDailyPrep(plainObjects, 1);
+            const response = await postDailyPrep(plainObjects as PrepListItem[], 1);  
             if (!response) {
                 setErrorMessage("An error occurred internally.");
             } else {

@@ -12,7 +12,7 @@ import { sql } from 'drizzle-orm';
 // Define types for better type safety
 export interface Recipe {
   prepItemId: number;
-  prepItemName: string;
+  name: string;
   description: string | null;
   itemCategory: number | null;
   kitchenDepartmentId: number | null;
@@ -186,7 +186,7 @@ export const insertRecipe = async (
       const result = await tx
         .insert(dimPrepItem)
         .values({
-          prepItemName: recipe.prepItemName,
+          name: recipe.name,
           description: recipe.description,
           itemCategory: recipe.itemCategory,
           kitchenDepartmentId: recipe.kitchenDepartmentId,
@@ -257,7 +257,7 @@ export const modifyRecipe = async (
       await tx
         .update(dimPrepItem)
         .set({
-          prepItemName: recipe.prepItemName ?? existingRecipe.prepItemName,
+          name: recipe.name ?? existingRecipe.name,
           description: recipe.description ?? existingRecipe.description,
           itemCategory: recipe.itemCategory ?? existingRecipe.itemCategory,
           kitchenDepartmentId: recipe.kitchenDepartmentId ?? existingRecipe.kitchenDepartmentId,

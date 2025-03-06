@@ -66,13 +66,9 @@ export const dimIngredient = mysqlTable('dim_ingredient', {
 }));
 
 export const dimKitchen = mysqlTable('dim_kitchen', {
-  kitchenId: int('kitchen_id').primaryKey().autoincrement(),
-  kitchenName: varchar('kitchen_name', { length: 100 }).notNull(),
+  kitchenId: int('kitchen_department_id').primaryKey().autoincrement(),
+  departmentName: varchar('department_name', { length: 100 }).notNull(),
   restaurantId: int('restaurant_id').notNull(),
-  description: text('description'),
-  isActive: boolean('is_active').default(true),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
 }, (table) => ({
   restaurantIdIdx: index('restaurant_id_idx').on(table.restaurantId),
 }));
@@ -91,12 +87,16 @@ export const dimManager = mysqlTable('dim_manager', {
 
 export const dimPrepItem = mysqlTable('dim_prep_item', {
   prepItemId: int('prep_item_id').primaryKey().autoincrement(),
-  prepItemName: varchar('prep_item_name', { length: 150 }).notNull(),
+  name: varchar('prep_item_name', { length: 150 }).notNull(),
   description: varchar('description', { length: 255 }),
   itemCategory: int('item_category'),
-  kitchenDepartmentId: int('kitchen_department_id').unique(),
+  kitchenDepartmentId: int('kitchen_department_id'),
   restaurantId: int('restaurant_id'),
-});
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
+}, (table) => ({
+  restaurantIdIdx: index('restaurant_id_idx').on(table.restaurantId),
+}));
 
 export const dimRestaurant = mysqlTable('dim_restaurant', {
   restaurantId: int('restaurant_id').primaryKey().autoincrement(),
@@ -163,22 +163,20 @@ export const factInventory = mysqlTable('fact_inventory', {
   inventoryId: int('inventory_id').primaryKey().autoincrement(),
   ingredientId: int('ingredient_id').notNull(),
   restaurantId: int('restaurant_id').notNull(),
-  dateId: int('date_id'),
-  quantityBefore: decimal('quantity_before', { precision: 10, scale: 2 }).default('0'),
-  quantityAfter: decimal('quantity_after', { precision: 10, scale: 2 }).default('0'),
-  quantityChange: decimal('quantity_change', { precision: 10, scale: 2 }).default('0'),
-  changeReason: varchar('change_reason', { length: 50 }),
-  changeSource: varchar('change_source', { length: 50 }),
-  changeReference: varchar('change_reference', { length: 100 }),
-  userId: int('user_id'),
-  lastUpdated: timestamp('last_updated').defaultNow().onUpdateNow(),
+  dateId: int('date_id').notNull(),
+  quantity: decimal('quantity', { precision: 10, scale: 2 }).notNull(),
+  unit: varchar('unit', { length: 50 }).default('units'),
+  unitPrice: decimal('unit_price', { precision: 10, scale: 2 }),
+  totalValue: decimal('total_value', { precision: 10, scale: 2 }),
+  recordedBy: int('recorded_by'),
+  notes: text('notes'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
 }, (table) => ({
   ingredientIdIdx: index('ingredient_id_idx').on(table.ingredientId),
   restaurantIdIdx: index('restaurant_id_idx').on(table.restaurantId),
   dateIdIdx: index('date_id_idx').on(table.dateId),
-  userIdIdx: index('user_id_idx').on(table.userId),
+  recordedByIdx: index('recorded_by_idx').on(table.recordedBy),
 }));
 
 export const factOrderHistory = mysqlTable('fact_order_history', {
@@ -283,7 +281,7 @@ export const relationships = {
     user: {
       relationshipType: 'many-to-one',
       schema: dimUsers,
-      fields: [factInventory.userId],
+      fields: [factInventory.recordedBy],
       references: [dimUsers.userId],
     },
   },

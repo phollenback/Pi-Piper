@@ -111,3 +111,30 @@ export const createDailyPrepItems = async (req: Request, res: Response) => {
         });
     }
 };
+
+// Add this controller function
+export const updatePrepItem = async (req: Request, res: Response) => {
+  logger.info('[prepitem.controller][updatePrepItem][START]');
+  
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    logger.error('[prepitem.controller][updatePrepItem][VALIDATION_ERROR]', { errors: errors.array() });
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const restaurantId = Number(req.params.restaurantId);
+    const prepItemId = Number(req.params.prepItemId);
+    const itemData = req.body;
+
+    const response = await PrepItemDal.updatePrepItem(prepItemId, itemData);
+    logger.info('[prepitem.controller][updatePrepItem][SUCCESS]', { response });
+
+    res.status(200).json(response);
+  } catch (error) {
+    logger.error('[prepitem.controller][updatePrepItem][ERROR]', { error });
+    res.status(500).json({
+      message: 'There was an error when updating the prep item'
+    });
+  }
+};

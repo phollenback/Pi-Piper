@@ -1,16 +1,26 @@
 import Ingredient from "@/app/types/models/Ingredient";
 import IngredientRow from "./IngredientRow";
+import { SelectBoxOption } from "@/app/types/models/SelectBoxOption";
 
 interface IngredientTableProps {
   list: Ingredient[];
-  categoryOptions: { label: string, value: number }[];
-  handleSelection: (id: number, value: number | string, field: 'ingredient_category') => void;
+  tableOptions: {
+    categories: SelectBoxOption[];
+    departments: SelectBoxOption[];
+  };
+  handleSelection: (id: number, value: number | string, field: string) => void;
   onEditClick: (item: Ingredient) => void;
   onDeleteClick: (item: Ingredient) => void;
 }
 
 // Table component for displaying ingredients
-const IngredientTable: React.FC<IngredientTableProps> = ({ list, categoryOptions, onEditClick, onDeleteClick }) => {
+const IngredientTable: React.FC<IngredientTableProps> = ({ 
+  list, 
+  tableOptions,
+  handleSelection, 
+  onEditClick, 
+  onDeleteClick 
+}) => {
   return (
     <table className="min-w-full bg-white border border-gray-200">
       <thead className='bg-gray-200'>
@@ -28,7 +38,6 @@ const IngredientTable: React.FC<IngredientTableProps> = ({ list, categoryOptions
           <IngredientRow 
             key={index}
             item={item}
-            categoryOptions={categoryOptions}
             onEditClick={onEditClick}
             onDeleteClick={onDeleteClick}
           />

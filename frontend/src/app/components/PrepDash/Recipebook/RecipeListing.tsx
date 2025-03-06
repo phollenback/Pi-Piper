@@ -17,9 +17,12 @@ const RecipeListing: React.FC<RecipeListingProps> = ({ recipes, onRecipeSelect }
   // Filters recipes based on the search term.
   const filteredRecipes = recipes.filter((recipe) => {
     const lowercasedTerm = searchTerm.toLowerCase();
+    const recipeName = recipe.prepItemName || '';
+    const description = recipe.description || '';
+    
     return (
-      recipe.prepItemName.toLowerCase().includes(lowercasedTerm) ||
-      (recipe.description && recipe.description.toLowerCase().includes(lowercasedTerm))
+      recipeName.toLowerCase().includes(lowercasedTerm) ||
+      description.toLowerCase().includes(lowercasedTerm)
     );
   });
 
@@ -36,7 +39,7 @@ const RecipeListing: React.FC<RecipeListingProps> = ({ recipes, onRecipeSelect }
         {filteredRecipes.map((recipe) => (
           <Button
             key={recipe.prepItemId}
-            label={recipe.prepItemName}
+            label={recipe.prepItemName || 'Unnamed Recipe'}
             onClick={() => onRecipeSelect(recipe)} 
             size="large"
             style={{

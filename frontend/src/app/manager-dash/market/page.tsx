@@ -1,10 +1,10 @@
 'use client'
-import { fetchIngredientPricing } from "../../util/actions";
+// import { fetchIngredientPricing } from "../../util/actions";
 import SearchInput from "../../components/Elements/SearchInput";
 import { useEffect, useState } from "react";
 import IngredientDetails from "@/app/types/models/IngredientDetails";
 import DailySuggestions from "@/app/components/ManagerDash/Market/DailySuggestions";
-import { fetchCriticals } from '@/app/util/actions';
+// import { fetchCriticals } from '@/app/util/actions';
 import MarketList from "@/app/components/ManagerDash/Market/MarketList";
 import Link from "next/link";
 import Button from "@/app/components/Elements/Button";
@@ -16,15 +16,15 @@ interface Suggestion {
     ingredient_name: string;
 }
 
-// Fetch critical inventory items for the restaurant
-const getCriticals = async (): Promise<Suggestion[]> => {
-    return await fetchCriticals(1);
-}
+// // Fetch critical inventory items for the restaurant
+// const getCriticals = async (): Promise<Suggestion[]> => {
+//     return await fetchCriticals(1);
+// }
 
-// Fetch all ingredients with pricing information
-const getAllIngredients = async (): Promise<IngredientDetails[]> => {
-    return await fetchIngredientPricing(1);
-}
+// // Fetch all ingredients with pricing information
+// const getAllIngredients = async (): Promise<IngredientDetails[]> => {
+//     return await fetchIngredientPricing(1);
+// }
 
 // Container component managing market inventory, suggestions, and search functionality
 export default function MarketContainer() {

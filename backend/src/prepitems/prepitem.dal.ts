@@ -17,7 +17,7 @@ export const getPrepItems = async (restaurantId: number): Promise<PrepItem[]> =>
         // Map Drizzle PrepItem to the expected PrepItem format
         const formattedPrepItems = prepItems.map(item => ({
             prep_item_id: item.prepItemId,
-            name: item.prepItemName,
+            name: item.name,
             description: item.description || '',
             category: item.itemCategory || 0,
             kitchen_department_id: item.kitchenDepartmentId || 0,
@@ -46,7 +46,7 @@ export const getDailyPrepItems = async (restaurantId: number): Promise<PrepListI
 
         const dailyPrepItems = await db.select({
             prep_list_id: factDailyPrepList.prepListId,
-            name: dimPrepItem.prepItemName,
+            name: dimPrepItem.name,
             description: dimPrepItem.description || '',
             note: factDailyPrepList.notes || '',
             quantity: factDailyPrepList.quantity,
@@ -88,8 +88,8 @@ export const getDailyPrepItems = async (restaurantId: number): Promise<PrepListI
 export const createPrepItem = async (restaurantId: number, item: PrepItem): Promise<PrepItem[]> => {
     logger.info('[prepitem.dao][createPrepItem][START]', { restaurantId, item });
     try {
-        const prepItemData: PrepItemInsert = {
-            prepItemName: item.name,
+        const prepItemData = {
+            name: item.name,
             description: item.description,
             itemCategory: item.category,
             kitchenDepartmentId: item.kitchen_department_id,
@@ -98,22 +98,20 @@ export const createPrepItem = async (restaurantId: number, item: PrepItem): Prom
         
         await db.insert(dimPrepItem).values(prepItemData);
         
-        // Get the newly created prep item
         const newPrepItems = await db.select()
             .from(dimPrepItem)
             .where(
                 and(
-                    eq(dimPrepItem.prepItemName, item.name),
+                    eq(dimPrepItem.name, item.name),
                     eq(dimPrepItem.restaurantId, restaurantId)
                 )
             )
             .orderBy(sql`${dimPrepItem.prepItemId} DESC`)
             .limit(1);
         
-        // Map to expected format
         const formattedPrepItems = newPrepItems.map(item => ({
             prep_item_id: item.prepItemId,
-            name: item.prepItemName,
+            name: item.name,
             description: item.description || '',
             category: item.itemCategory || 0,
             kitchen_department_id: item.kitchenDepartmentId || 0,
@@ -141,7 +139,7 @@ export const createDailyPrepItems = async (restaurantId: number, items: PrepList
                 .from(dimPrepItem)
                 .where(
                     and(
-                        eq(dimPrepItem.prepItemName, item.name),
+                        eq(dimPrepItem.name, item.name),
                         eq(dimPrepItem.restaurantId, restaurantId)
                     )
                 )
@@ -181,23 +179,20 @@ export const updatePrepItem = async (prepItemId: number, itemData: PrepItem): Pr
     try {
         await db.update(dimPrepItem)
             .set({
-                prepItemName: itemData.name,
+                name: itemData.name,
                 description: itemData.description,
                 itemCategory: itemData.category,
                 kitchenDepartmentId: itemData.kitchen_department_id,
-                restaurantId: itemData.restaurant_id || 0,
             })
             .where(eq(dimPrepItem.prepItemId, prepItemId));
         
-        // Get the updated prep item
         const updatedPrepItems = await db.select()
             .from(dimPrepItem)
             .where(eq(dimPrepItem.prepItemId, prepItemId));
         
-        // Map to expected format
         const formattedPrepItems = updatedPrepItems.map(item => ({
             prep_item_id: item.prepItemId,
-            name: item.prepItemName,
+            name: item.name,
             description: item.description || '',
             category: item.itemCategory || 0,
             kitchen_department_id: item.kitchenDepartmentId || 0,
@@ -238,7 +233,7 @@ export const deletePrepItem = async (prepItemId: number, restaurantId: number): 
         // Map to expected format
         const formattedPrepItems = prepItemsToDelete.map(item => ({
             prep_item_id: item.prepItemId,
-            name: item.prepItemName,
+            name: item.name,
             description: item.description || '',
             category: item.itemCategory || 0,
             kitchen_department_id: item.kitchenDepartmentId || 0,
@@ -261,7 +256,7 @@ export const getPrepItemId = async (itemName: string, restaurantId: number): Pro
             .from(dimPrepItem)
             .where(
                 and(
-                    eq(dimPrepItem.prepItemName, itemName),
+                    eq(dimPrepItem.name, itemName),
                     eq(dimPrepItem.restaurantId, restaurantId)
                 )
             )
@@ -288,7 +283,7 @@ export const updateDailyPrepItem = async (restaurantId: number, item: PrepListIt
             .from(dimPrepItem)
             .where(
                 and(
-                    eq(dimPrepItem.prepItemName, item.name),
+                    eq(dimPrepItem.name, item.name),
                     eq(dimPrepItem.restaurantId, restaurantId)
                 )
             )
@@ -317,7 +312,7 @@ export const updateDailyPrepItem = async (restaurantId: number, item: PrepListIt
         // Get the updated daily prep items
         const updatedItems = await db.select({
             dailyPrepId: factDailyPrepList.prepListId,
-            name: dimPrepItem.prepItemName,
+            name: dimPrepItem.name,
             description: dimPrepItem.description,
             quantity: factDailyPrepList.quantity,
             status: factDailyPrepList.status,
@@ -333,7 +328,7 @@ export const updateDailyPrepItem = async (restaurantId: number, item: PrepListIt
         .where(
             and(
                 eq(factDailyPrepList.restaurantId, restaurantId),
-                eq(dimPrepItem.prepItemName, item.name)
+                eq(dimPrepItem.name, item.name)
             )
         );
         

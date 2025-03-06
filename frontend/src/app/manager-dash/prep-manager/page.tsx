@@ -1,47 +1,61 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Heading from "@/app/components/ManagerDash/PrepManager/Heading";
-import { fetchAllIngredients, fetchAllPrepItems, fetchCategories } from "@/app/util/actions";
+import { getPrepItems, fetchCategories } from "../../actions/prepItemActions";
+import { getIngredients } from "../../actions/ingredientActions";
 import { useQuery } from "@tanstack/react-query";
 import ManagementTable from "@/app/components/ManagerDash/PrepManager/ManagmentTable";
 import { PrepItem } from "@/app/types/models/PrepItem";
-import Category from "@/app/types/models/Category";
+import {Category} from "@/app/types/models/Category";
 import Ingredient from "@/app/types/models/Ingredient";
 import CreateItem from "@/app/components/ManagerDash/PrepManager/CreateItem";
-
-// Fetches all prep items for a given restaurant ID.
-const fetchPrepItems = () => {
-    return fetchAllPrepItems(1); 
-};
-
-// Fetches all ingredients for a given restaurant ID.
-const fetchIngredients = () => {
-    return fetchAllIngredients(1); 
-};
-
-// Fetches all categories.
-const fetchAllCategories = () => {
-    return fetchCategories(); 
-};
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/lib/store";
 
 // PrepManagerContainer component: Main container for prep item management.
 export default function PrepManagerContainer() {
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedGroup, setSelectedGroup] = useState<number | null>(null);
     const [selectedSection, setSelectedSection] = useState<string>("prepitem"); // "prepitem" for prep items, "ingredients" for ingredients.
-    const { data: prepItems = []} = useQuery<PrepItem[]>({
-        queryKey: ["prepItems"],
+    const restaurantId = useSelector((state: RootState) => state.auth.restaurantId) || 1;
+
+    // Move fetch functions inside the component and use restaurantId directly
+    const fetchPrepItems = useCallback(async () => {
+        console.log('Fetching prep items for restaurant ID:', restaurantId);
+        return getPrepItems(restaurantId);
+    }, [restaurantId]);
+
+    const fetchIngredients = useCallback(async () => {
+        console.log('Fetching ingredients for restaurant ID:', restaurantId);
+        return getIngredients(restaurantId);
+    }, [restaurantId]);
+
+    const fetchAllCategories = useCallback(async () => {
+        try {
+            console.log('Fetching categories for restaurant ID:', restaurantId);
+            return await fetchCategories(restaurantId);
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+            return []; // Return empty array instead of throwing error
+        }
+    }, [restaurantId]);
+
+    const { data: prepItems = [] } = useQuery<PrepItem[]>({
+        queryKey: ["prepItems", restaurantId],
         queryFn: fetchPrepItems,
     });
     
-    const { data: ingredients = []} = useQuery<Ingredient[]>({
-        queryKey: ["ingredients"],
+    const { data: ingredients = [] } = useQuery<Ingredient[]>({
+        queryKey: ["ingredients", restaurantId],
         queryFn: fetchIngredients,
     });
 
-    const { data: categories = []} = useQuery<Category[]>({
-        queryKey: ["categories"],
+    const { data: categories = [] } = useQuery<Category[]>({
+        queryKey: ["categories", restaurantId],
         queryFn: fetchAllCategories,
+        retry: 1, // Only retry once
+        retryDelay: 1000, // Wait 1 second between retries
+        staleTime: 1000 * 60 * 5, // 5 minutes
     });
 
     // Handles section selection (prep items or ingredients).
@@ -70,15 +84,15 @@ export default function PrepManagerContainer() {
     }, [selectedSection]);
     return (
         <main className="container mx-auto px-4">
-            {/* Header section with responsive columns */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8">
-                {/* Brand header */}
-                <header className="text-center py-4">
-                    <h1 className="font-bold text-4xl md:text-6xl text-black">Republic Pi Memory</h1>
-                </header>
+            {/* Header section */}
+            <header className="text-center py-4">
+                <h1 className="font-bold text-4xl md:text-6xl text-black">Republic Pi Memory</h1>
+            </header>
 
-                {/* Filtering section */}
-                <div className="border-l-0 md:border-l-8 md:border-r-8 border-black px-4 md:px-8">
+            {/* Top section - Filtering and creator */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 mt-8">
+                {/* Left column - Filtering */}
+                <div className="bg-white p-6 rounded-lg shadow-md">
                     <Heading 
                         setSection={handleSectionSelect} 
                         setSelectedCategory={handleCategorySelect} 
@@ -89,19 +103,19 @@ export default function PrepManagerContainer() {
                     />
                 </div>
 
-                {/* Create item section */}
-                <div className="w-full">
+                {/* Right column - Create item section */}
+                <div className="w-full max-w-md">
                     <CreateItem 
                         selectedSection={selectedSection}
                     />
                 </div>
             </div>
 
-            {/* Management Table section */}
+            {/* Management Table section - Full width */}
             <section className="mt-8">
                 <ManagementTable 
                     activeList={selectedSection === "prepitem" ? prepItems : ingredients} 
-                    category={selectedCategory} 
+                    selectedCategory={selectedCategory}
                     activeSection={selectedSection}
                     selectedGroup={selectedGroup}
                 />

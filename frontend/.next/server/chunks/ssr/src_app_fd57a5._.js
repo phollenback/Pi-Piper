@@ -506,6 +506,7 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "createPrepItem": (()=>createPrepItem),
     "deletePrepItem": (()=>deletePrepItem),
+    "editPrepItem": (()=>editPrepItem),
     "fetchAllPrepItems": (()=>fetchAllPrepItems),
     "fetchCategories": (()=>fetchCategories),
     "fetchDailyList": (()=>fetchDailyList),
@@ -563,10 +564,17 @@ const postDailyPrep = async (prepList, restaurantId)=>{
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            prepList
+            prepList: prepList.map((item)=>({
+                    ...item,
+                    quantity: Number(item.quantity),
+                    status: item.status || 'todo' // Default status if not provided
+                }))
         })
     });
-    if (!response.ok) throw new Error('Failed to post daily prep');
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to post daily prep');
+    }
     return response.json();
 };
 const fetchDailyList = async (restaurantId)=>{
@@ -599,6 +607,17 @@ const fetchPrepData = async (restaurantId)=>{
         dailyList,
         categories
     };
+};
+const editPrepItem = async (prepItemId, data, restaurantId)=>{
+    const response = await fetch(`http://localhost:3001/prepitems/${restaurantId}/${prepItemId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) throw new Error('Failed to update prep item');
+    return response.json();
 };
 }}),
 "[project]/src/app/util/data.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
@@ -1418,7 +1437,7 @@ function PrepContainer() {
         const matchesCategory = selectedCategory === null || item.category === selectedCategory;
         return matchesSearch && matchesCategory;
     });
-    // Standardized category fetching
+    // Standardized category fetchingP
     const { data: categories = [] } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$tanstack$2f$react$2d$query$2f$build$2f$modern$2f$useQuery$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useQuery"])({
         queryKey: [
             'categories',
