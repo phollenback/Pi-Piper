@@ -20,10 +20,10 @@ video
 <h2 align="center">Logical Architecture</h2>
 <table>
  <th style="color🍊">
-  Frontend
+  Backend
  </th>
  <th>
-  Backend
+  Frontend
  </th>
  <tr>
   <td><img width="917" alt="Image" src="https://github.com/user-attachments/assets/6e7c36ca-cd83-4c2e-b69e-1971cf4722cd" />
