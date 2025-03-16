@@ -1,3 +1,4 @@
+<h1 align="center">Design Guide</h1>
 <h4>The Project Proposal Outlines the following and can be found <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/451-Project-Proposal.pdf">here.</a></h4>
 <ol>
   <li>Project Scope</li>
