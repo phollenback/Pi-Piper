@@ -7,7 +7,7 @@ When I first had this idea, in the summer between my junior and senior year, I s
 
 <br />
 
-My report on how Pi Piper can help transform business practice: <a href=""><i>The Piper Report</i></a>
+My report on how Pi Piper can help transform business practice: <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/ThePiperReport.pdf"><i>The Piper Report</i></a>
 
 
 View the design artifacts designed for this project: <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/docs.md#the-project-proposal-outlines-the-following-and-can-be-found-here"><i>Design Guide</i></a>
