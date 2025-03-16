@@ -17,7 +17,10 @@ View the design artifacts designed for this project: <a href="https://github.com
 <hr/>
 
 An overview of my approach:
-video
+
+https://github.com/user-attachments/assets/eaa1a43b-5353-445d-836c-e5cef18cac94
+
+
 
 <h2 align="center">Logical Architecture</h2>
 <table>
