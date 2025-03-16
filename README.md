@@ -42,6 +42,14 @@ Look over my <a href="">Project Proposal</a> (09/22/24), <a href="">Project Requ
 
 </hr>
 
+**Hardware and Software Technologies**
+1. NEXT - frontend framework for handling dom, fetching data, managing state and authentication.
+2. Express JS - Web server framework used for serving and managing storage of application data.
+3. Python - Will be used in some fashion if scraping is allowed by providers. Otherwise, I could see myself fully taking data processing out of my express backend an into Python data processing unit for better big data handling.
+4. MySQL - Ran locally on my development machine and is always effective and easy to use.
+5. Hard Disk Drive - Holds data backups in an external drive.
+6. Wintel Computer - For running the application locally at the restaurant.
+
 **Key Tech Used in this project:** 
 
 
