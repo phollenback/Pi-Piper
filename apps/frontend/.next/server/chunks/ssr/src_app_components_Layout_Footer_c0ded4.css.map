@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/peytonhollenback/HooliDocs/Pi-Piper/apps/frontend/src/app/components/Layout/Footer.css"],"sourcesContent":[".footer {\n    display: flex;\n    justify-content: space-around; /* Change from center to space-around */\n    align-items: center;\n    position: fixed;\n    bottom: 0;\n    width: 100%;\n    background: black;\n    padding: 5px 0; /* Increase padding for more space */\n    font-family: 'Arial', sans-serif; /* Choose a better font */\n    font-size: 18px; /* Increase font size for better readability */\n    color: #FFFFFF; /* Ensure text is visible against the dark background */\n}\n\n.footer a {\n    text-decoration: none; /* Remove underline from links */\n    color: #FFFFFF; /* Link color */\n    transition: color 0.3s; /* Smooth transition for hover effect */\n}\n\n.footer a:hover {\n    color: #FFD700; /* Change link color on hover for better UX */\n}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;;AAcA;;;;;;AAMA"}},
+    {"offset": {"line": 24, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
