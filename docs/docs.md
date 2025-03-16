@@ -1,11 +1,11 @@
-<h4>The Project Proposal Outlines the following and can be found here.</h4>
+<h4>The Project Proposal Outlines the following and can be found <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/451-Project-Proposal.pdf">here.</a></h4>
 <ol>
   <li>Project Scope</li>
   <li>High-Level Solution</li>
   <li>Project Cost and Schedule</li>
 </ol>
 
-<h4>The Project Requirements outlines the following and can be found here.</h4>
+<h4>The Project Requirements outlines the following and can be found <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/451-Project-Requirements.pdf">here.</a></h4>
 <ol>
   <li>Functional Requirements</li>
   <li>A Non Functional Requirement</li>
@@ -15,7 +15,7 @@
 </ol>
 
 
-<h4>The Project Design outlines the following and can be found here.</h4>
+<h4>The Project Design outlines the following and can be found <a href=""></a>here.</h4>
 <ol>
   <li>Design Overview</li>
   <li>Detailed High Level Solution(final)</li>
