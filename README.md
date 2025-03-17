@@ -18,7 +18,7 @@ View the design artifacts designed for this project: <a href="https://github.com
 
 A comprehensive overview of my approach:
 
-
+The video is to large to be hosted here but can be downloaded in docs or from the assignment.
 
 
 <h2 align="center">Logical Architecture</h2>
