@@ -16,9 +16,8 @@ View the design artifacts designed for this project: <a href="https://github.com
 <br/>
 <hr/>
 
-An overview of my approach:
+A comprehensive overview of my approach:
 
-https://github.com/user-attachments/assets/eaa1a43b-5353-445d-836c-e5cef18cac94
 
 
 
