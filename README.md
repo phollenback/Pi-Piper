@@ -7,6 +7,12 @@ When I first had this idea, in the summer between my junior and senior year, I s
 <hr/>
 <br/>
 
+A comprehensive overview of my approach can be found <a href="https://www.youtube.com/watch?v=b8V_nrk_Flc">here<a/>
+
+
+
+<br/>
+
 My report on how Pi Piper can help transform business practice: <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/ThePiperReport.pdf"><i>The Piper Report</i></a>
 
 <br/>
@@ -15,10 +21,6 @@ View the design artifacts designed for this project: <a href="https://github.com
 
 <br/>
 <hr/>
-
-A comprehensive overview of my approach:
-
-The video is to large to be hosted here but can be downloaded in docs or from the assignment.
 
 
 <h2 align="center">Logical Architecture</h2>
