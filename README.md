@@ -7,8 +7,7 @@ When I first had this idea, in the summer between my junior and senior year, I s
 <hr/>
 <br/>
 
-A comprehensive overview of my approach can be found <a href="https://www.youtube.com/watch?v=b8V_nrk_Flc">here<a/>
-
+A video of me explaining some key features and talking about my approach to the project: <a href="https://www.youtube.com/watch?v=b8V_nrk_Flc">On Youtube</a>
 
 
 <br/>
