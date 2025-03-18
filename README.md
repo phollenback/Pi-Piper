@@ -41,7 +41,7 @@ View the design artifacts designed for this project: <a href="https://github.com
 
 <h3 align="center">Agile Methodology</h3>
 
- It should be noted that agile methodology to keep me on track with development. I found that even using this personally for smaller or side projects still has the same kinds of productivity improvements. Here are some actual user story examples and some pictures of my jira managed backlog.<br/><br/>
+ It should be noted that agile methodology to help keep me on track with development. I found that even using this personally for smaller or side projects still has the same kinds of productivity improvements. Here are some actual user story examples and some pictures of my jira managed backlog.<br/><br/>
 **story 1**
 >
 >As a user I would like to be able to login to my specific restaurant once a day so that it doesn't require a login on every entry
