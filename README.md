@@ -37,6 +37,27 @@ View the design artifacts designed for this project: <a href="https://github.com
 </td>
  </tr>
 </table>
+<hr />
+
+<h3 align="center">Agile Methodology</h3>
+
+ It should be noted that agile methodology to keep me on track with development. I found that even using this personally for smaller or side projects still has the same kinds of productivity improvements. Here are some actual user story examples and some pictures of my jira managed backlog.<br/><br/>
+**story 1**
+>
+>As a user I would like to be able to login to my specific restaurant once a day so that it doesn't require a login on every entry
+>
+
+<br/>
+
+**story 2**
+>
+>As a owner I would like one restaurant overview screen with access to all restaurant mangager dashboards so that I don't need three seperate accounts for each restaurant
+>
+<br />
+
+**How the sprints came out over the first month of development:**
+<img width="776" alt="Screenshot 2025-03-18 at 12 09 35 PM" src="https://github.com/user-attachments/assets/afc89d52-5f81-48c1-9ade-c9820ae243f7" />
+
 
 <hr/>
 
@@ -54,4 +75,5 @@ Look over my <a href="">Project Proposal</a> (09/22/24), <a href="">Project Requ
 4. MySQL - Ran locally on my development machine and is always effective and easy to use.
 5. Hard Disk Drive - Holds data backups in an external drive.
 6. Wintel Computer - For running the application locally at the restaurant.
-
+7. 
+<hr />
