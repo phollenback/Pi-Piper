@@ -56,12 +56,14 @@ async function generateInventoryHistory() {
             ingredientId: ingredient.ingredientId,
             restaurantId: ingredient.restaurantId,
             dateId: dateId,
-            quantityChange: roundedUsage,
+            quantityChange: String(roundedUsage),
             transactionType: 'usage',
-            previousQuantity: previousQuantity,
-            newQuantity: currentQuantity,
+            referenceId: null,
+            previousQuantity: String(previousQuantity),
+            newQuantity: String(currentQuantity),
             notes: 'Daily usage',
-            createdAt: new Date(date)
+            createdBy: null,
+            createdAt: new Date()
           });
           
           console.log(`Created usage transaction: ${roundedUsage} on ${format(date, 'yyyy-MM-dd')}`);
@@ -81,11 +83,13 @@ async function generateInventoryHistory() {
               ingredientId: ingredient.ingredientId,
               restaurantId: ingredient.restaurantId,
               dateId: dateId,
-              quantityChange: roundedReplenishment,
+              quantityChange: String(roundedReplenishment),
               transactionType: 'order',
-              previousQuantity: previousQuantityAfterUsage,
-              newQuantity: currentQuantity,
+              referenceId: null,
+              previousQuantity: String(previousQuantityAfterUsage),
+              newQuantity: String(currentQuantity),
               notes: 'Inventory replenishment',
+              createdBy: null,
               createdAt: new Date(date.setHours(date.getHours() + 2)) // 2 hours after usage
             });
             

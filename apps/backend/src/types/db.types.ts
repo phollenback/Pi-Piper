@@ -91,4 +91,12 @@ export interface InventoryStatusItem {
   unit: string | null;
   maxStock: number | null;
   lastUpdated: Date | null;
+}
+
+export interface PrepListItem {
+    name: string;
+    quantity: number;
+    status: string;
+    prep_item_id?: number;
+    ingredient_id?: number;
 } 

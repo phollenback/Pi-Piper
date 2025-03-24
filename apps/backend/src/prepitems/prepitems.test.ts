@@ -78,14 +78,13 @@ describe('PrepItem API', () => {
       
       // Mock the readDailyPrepItems function
       jest.mocked(PrepItemController.readDailyPrepItems).mockImplementation((req, res) => {
-        res.status(200).json(mockDailyPrepItems);
-        return Promise.resolve();
+        return Promise.resolve(res.status(200).json([]));
       });
 
       const response = await request(app).get('/prepitems/daily/1');
       
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(mockDailyPrepItems);
+      expect(response.body).toEqual([]);
       expect(PrepItemController.readDailyPrepItems).toHaveBeenCalled();
     });
   });
@@ -102,8 +101,7 @@ describe('PrepItem API', () => {
       
       // Mock the updateDailyPrepItem function
       jest.mocked(PrepItemController.updateDailyPrepItem).mockImplementation((req, res) => {
-        res.status(200).json(updatedPrepItem);
-        return Promise.resolve();
+        return Promise.resolve(res.status(200).json({ success: true }));
       });
 
       const response = await request(app)
@@ -111,7 +109,7 @@ describe('PrepItem API', () => {
         .send(updatedPrepItem);
       
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(updatedPrepItem);
+      expect(response.body).toEqual({ success: true });
       expect(PrepItemController.updateDailyPrepItem).toHaveBeenCalled();
     });
   });
