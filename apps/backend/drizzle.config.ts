@@ -8,10 +8,13 @@ export default defineConfig({
   out: './src/db/migrations',
   dialect: 'mysql',
   dbCredentials: {
-    host: process.env.MY_SQL_DB_HOST || 'localhost',
-    user: process.env.MY_SQL_DB_USER || 'root',
-    password: process.env.MY_SQL_DB_PASSWORD || 'root',
-    database: process.env.MY_SQL_DB_DATABASE || 'Piper_Net',
-    port: Number(process.env.MY_SQL_DB_PORT || 3306),
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'root',
+    database: process.env.DB_NAME || 'piper_net',
+    port: Number(process.env.DB_PORT || 3306),
+    ssl: {
+      rejectUnauthorized: true
+    }
   },
 }); 

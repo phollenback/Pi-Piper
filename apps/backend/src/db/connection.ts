@@ -10,22 +10,28 @@ import mysql from 'mysql2/promise';
 import * as schema from './schema';
 import { logger } from '../middleware/winston.middleware';
 
+
+
 // Create MySQL connection pool
 const dbConfig = {
-  host: process.env.MY_SQL_DB_HOST || '127.0.0.1',
-  user: process.env.MY_SQL_DB_USER || 'root',
-  password: process.env.MY_SQL_DB_PASSWORD || 'new_password',
-  database: process.env.MY_SQL_DB_DATABASE || 'Piper_Net',
-  port: Number(process.env.MY_SQL_DB_PORT || 3306),
-  connectionLimit: Number(process.env.MY_SQL_DB_CONNECTION_LIMIT || 10),
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: Number(process.env.DB_PORT),
+  connectionLimit: 10,
+  ssl: {
+    rejectUnauthorized: false // Allow self-signed certificates
+  }
 };
 
-// Log the database configuration
+// Log the database configuration (without sensitive data)
 console.log('Database Configuration:', {
   host: dbConfig.host,
   user: dbConfig.user,
   database: dbConfig.database,
   port: dbConfig.port,
+  ssl: dbConfig.ssl
 });
 
 const pool = mysql.createPool(dbConfig);
