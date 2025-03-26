@@ -1,0 +1,1186 @@
+openapi: 3.0.1
+info:
+  title: Pi Piper API
+  description:
+          Pi Piper the app
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: peyholle@gmail.com
+  license:
+    name: apache
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://PiPiper.io/api
+tags:
+  - name: Manager
+    description: Operations related to restaurant managers, including creating, updating, retrieving, and deleting managers.
+  - name: Ingredient
+    description: Operations related to ingredients (e.g., CRUD operations)
+  - name: PrepItem
+    description: Operations related to prep items in the restaurant
+  - name: PrepTransaction
+    description: API endpoints for managing prep transactions, including tracking the status and details of prep items within a restaurant.
+  - name: Restaurant
+    description: Operations related to restaurants, including details and management
+  - name: DailyPrepItem
+    description: Endpoints for managing daily prep items for a specific restaurant.
+  - name: IngredientDetails
+    description: Operations for managing detailed information on ingredients for each restaurant.
+  - name: Category
+    description: Operations related to the categories used in the system (e.g., ingredient categories, prep list categories, etc.)
+  - name: Order
+    description: Endpoints related to order history and cart items.
+paths:
+  /restaurants:
+    get:
+      tags:
+        - Restaurant
+      summary: Get a list of all restaurants
+      description: Retrieve a list of all restaurants with their details.
+      operationId: getRestaurants
+      responses:
+        '200':
+          description: Successfully retrieved the list of restaurants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Restaurant'
+        '400':
+          description: Bad request
+        '404':
+          description: No restaurants found
+        '422':
+          description: Validation error
+
+  /manager/{restaurantId}:
+    get:
+      tags:
+        - Manager
+      summary: Get a list of managers for a specific restaurant
+      description: Retrieves all the managers for the given restaurant ID.
+      operationId: getManagers
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: ID of the restaurant to fetch managers for
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of managers for the specified restaurant
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Manager'
+        '400':
+          description: Invalid restaurant ID supplied
+        '404':
+          description: No managers found for the given restaurant
+        '422':
+          description: Validation exception
+
+
+  /manager:
+    post:
+      tags:
+        - Manager
+      summary: Add a new manager to a restaurant
+      description: Create a new manager for a restaurant.
+      operationId: addManager
+      requestBody:
+        description: Manager data to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Manager'
+        required: true
+      responses:
+        '200':
+          description: Manager successfully added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manager'
+        '400':
+          description: Invalid input data
+        '422':
+          description: Validation exception
+
+            
+
+  /manager/{managerId}:
+    put:
+      tags:
+        - Manager
+      summary: Update an existing manager
+      description: Update manager details by manager ID.
+      operationId: updateManager
+      parameters:
+        - name: managerId
+          in: path
+          required: true
+          description: ID of the manager to be updated
+          schema:
+            type: integer
+      requestBody:
+        description: Manager data to be updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Manager'
+        required: true
+      responses:
+        '200':
+          description: Manager successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Manager'
+        '400':
+          description: Invalid manager ID or input data
+        '404':
+          description: Manager not found
+        '422':
+          description: Validation exception
+
+
+    delete:
+      tags:
+        - Manager
+      summary: Delete a manager
+      description: Remove a manager from the system by manager ID.
+      operationId: deleteManager
+      parameters:
+        - name: managerId
+          in: path
+          required: true
+          description: ID of the manager to be deleted
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Manager successfully deleted
+        '400':
+          description: Invalid manager ID supplied
+        '404':
+          description: Manager not found
+        '422':
+          description: Validation exception
+
+  /ingredient/{restaurantId}:
+    get:
+      tags:
+        - Ingredient
+      summary: Get ingredients for a specific restaurant
+      description: Fetch a list of ingredients for a specified restaurant.
+      operationId: getIngredientsForRestaurant
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: ID of the restaurant to get ingredients for
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully fetched ingredients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ingredient'
+        '400':
+          description: Invalid restaurant ID supplied
+        '404':
+          description: Restaurant not found
+        '422':
+          description: Validation exception
+
+
+    post:
+      tags:
+        - Ingredient
+      summary: Add a new ingredient to a specific restaurant
+      description: Add a new ingredient to the specified restaurant.
+      operationId: addIngredientToRestaurant
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: ID of the restaurant to add the ingredient to
+          schema:
+            type: integer
+      requestBody:
+        description: The ingredient to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+        required: true
+      responses:
+        '200':
+          description: Ingredient successfully added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+
+  /ingredient/{ingredientId}:
+    put:
+      tags:
+        - Ingredient
+      summary: Update an existing ingredient
+      description: Update details for a specific ingredient in the system.
+      operationId: updateIngredient
+      parameters:
+        - name: ingredientId
+          in: path
+          required: true
+          description: ID of the ingredient to update
+          schema:
+            type: integer
+      requestBody:
+        description: Ingredient data to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+        required: true
+      responses:
+        '200':
+          description: Ingredient successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ingredient'
+        '400':
+          description: Invalid input
+        '404':
+          description: Ingredient not found
+        '422':
+          description: Validation exception
+
+  /ingredient/{restaurantId}/{ingredientId}:
+    delete:
+      tags:
+        - Ingredient
+      summary: Delete an ingredient from a specific restaurant
+      description: Delete a specific ingredient from a restaurant.
+      operationId: deleteIngredient
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: ID of the restaurant to delete the ingredient from
+          schema:
+            type: integer
+        - name: ingredientId
+          in: path
+          required: true
+          description: ID of the ingredient to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ingredient successfully deleted
+        '400':
+          description: Invalid input
+        '404':
+          description: Ingredient or restaurant not found
+        '422':
+          description: Validation exception
+
+  /prep-items/{restaurantId}:
+    get:
+      tags:
+        - PrepItem
+      summary: Get a list of prep items for a specific restaurant
+      description: Retrieves all prep items for a given restaurant.
+      operationId: getPrepItemsByRestaurant
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: The ID of the restaurant to retrieve prep items for
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation, list of prep items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrepItem'
+        '400':
+          description: Invalid restaurant ID
+        '404':
+          description: No prep items found for the specified restaurant
+        '422':
+          description: Validation exception
+
+    post:
+      tags:
+        - PrepItem
+      summary: Add a new prep item to a restaurant
+      description: Adds a new prep item to a specific restaurant.
+      operationId: addPrepItem
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: The ID of the restaurant to add the prep item to
+          schema:
+            type: integer
+      requestBody:
+        description: The prep item to be added to the restaurant
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepItem'
+        required: true
+      responses:
+        '200':
+          description: Successful operation, prep item added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepItem'
+        '400':
+          description: Invalid input data
+        '422':
+          description: Validation exception
+
+    put:
+      tags:
+        - PrepItem
+      summary: Update an existing prep item for a restaurant
+      description: Updates the details of an existing prep item for a specific restaurant.
+      operationId: updatePrepItem
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: The ID of the restaurant that the prep item belongs to
+          schema:
+            type: integer
+      requestBody:
+        description: The updated prep item details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepItem'
+        required: true
+      responses:
+        '200':
+          description: Successful operation, prep item updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepItem'
+        '400':
+          description: Invalid input data
+        '404':
+          description: Prep item not found
+        '422':
+          description: Validation exception
+
+  /prep-items/{restaurantId}/{prepItemId}:
+    delete:
+      tags:
+        - PrepItem
+      summary: Delete a specific prep item from a restaurant
+      description: Deletes a prep item from a specific restaurant.
+      operationId: deletePrepItem
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: The ID of the restaurant from which the prep item will be deleted
+          schema:
+            type: integer
+        - name: prepItemId
+          in: path
+          required: true
+          description: The ID of the prep item to be deleted
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation, prep item deleted
+        '400':
+          description: Invalid restaurant ID or prep item ID
+        '404':
+          description: Prep item not found
+        '422':
+          description: Validation exception
+  /prep-completions/{restaurantId}/{date}:
+    get:
+      tags:
+        - PrepTransaction
+      summary: Get prep completions for a specific restaurant on a specific date
+      description: Retrieves the list of prep completions for a restaurant on a given date
+      operationId: getPrepCompletions
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: ID of the restaurant
+          schema:
+            type: integer
+        - name: date
+          in: path
+          required: true
+          description: Date for the prep completion data
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PrepTransaction'
+        '400':
+          description: Invalid input
+        '404':
+          description: Prep completions not found for the given date
+        '422':
+          description: Validation exception
+
+  /prep-completions/{restaurantId}:
+    post:
+      tags:
+        - PrepTransaction
+      summary: Add a new prep completion record
+      description: Adds a new prep completion record for a restaurant
+      operationId: addPrepCompletion
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          description: ID of the restaurant
+          schema:
+            type: integer
+      requestBody:
+        description: Create a new prep completion for a restaurant
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepTransaction'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepTransaction'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+  /prep-completions/{prep_item_id}:
+    put:
+      tags:
+        - PrepTransaction
+      summary: Update a prep completion record for a specific prep item
+      description: Updates the completion status for a specific prep item
+      operationId: updatePrepCompletion
+      parameters:
+        - name: prep_item_id
+          in: path
+          required: true
+          description: ID of the prep item to update
+          schema:
+            type: integer
+      requestBody:
+        description: Update details for a specific prep completion
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrepTransaction'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrepTransaction'
+        '400':
+          description: Invalid input
+        '404':
+          description: Prep completion not found
+        '422':
+          description: Validation exception
+
+    delete:
+      tags:
+        - PrepTransaction
+      summary: Delete a prep completion record for a specific prep item
+      description: Deletes a prep completion record for a given prep item
+      operationId: deletePrepCompletion
+      parameters:
+        - name: prep_item_id
+          in: path
+          required: true
+          description: ID of the prep item to delete
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '404':
+          description: Prep completion not found
+        '422':
+          description: Validation exception
+  /daily-prep-list/{restaurantId}:
+    get:
+      tags:
+        - DailyPrepItem
+      summary: Retrieve the daily prep list for a specific restaurant
+      description: Fetches all daily prep items for the specified restaurant.
+      operationId: getDailyPrepList
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the restaurant to retrieve the daily prep list for.
+      responses:
+        '200':
+          description: Successful retrieval of daily prep items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DailyPrepItem'
+        '400':
+          description: Invalid restaurant ID supplied
+        '404':
+          description: Daily prep list not found for the restaurant
+        '422':
+          description: Validation exception
+
+    post:
+      tags:
+        - DailyPrepItem
+      summary: Add a new item to the daily prep list for a restaurant
+      description: Creates a new daily prep item for the specified restaurant.
+      operationId: createDailyPrepItem
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the restaurant to add the daily prep item for.
+      requestBody:
+        description: Daily prep item data to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DailyPrepItem'
+      responses:
+        '201':
+          description: Daily prep item created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyPrepItem'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+
+    put:
+      tags:
+        - DailyPrepItem
+      summary: Update items in the daily prep list for a restaurant
+      description: Updates details for one or more daily prep items in the specified restaurant's list.
+      operationId: updateDailyPrepList
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the restaurant to update the daily prep items for.
+      requestBody:
+        description: Updated data for daily prep items
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DailyPrepItem'
+      responses:
+        '200':
+          description: Daily prep list updated successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DailyPrepItem'
+        '400':
+          description: Invalid input
+        '404':
+          description: Daily prep list not found
+        '422':
+          description: Validation exception
+
+  /daily-prep-list/{restaurantId}/{prepListId}:
+    delete:
+      tags:
+        - DailyPrepItem
+      summary: Remove an item from the daily prep list
+      description: Deletes a specific daily prep item from the restaurant’s daily prep list.
+      operationId: deleteDailyPrepItem
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the restaurant to delete the item from.
+        - name: prepListId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the prep item to be removed from the daily prep list.
+      responses:
+        '200':
+          description: Daily prep item deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DailyPrepItem'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Daily prep item not found
+        '422':
+          description: Validation exception
+  /ingredient-details/{restaurantId}:
+    get:
+      tags:
+        - IngredientDetails
+      summary: Retrieve ingredient details for a specific restaurant
+      description: Fetches all ingredient details for the specified restaurant.
+      operationId: getIngredientDetails
+      parameters:
+        - name: restaurantId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID of the restaurant to retrieve ingredient details for.
+      responses:
+        '200':
+          description: Successful retrieval of ingredient details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IngredientDetails'
+        '400':
+          description: Invalid restaurant ID supplied
+        '404':
+          description: Ingredient details not found for the restaurant
+
+  /category/{type}:
+    get:
+      tags:
+        - Category
+      summary: Retrieve a list of categories by type
+      description: Retrieve a list of categories that belong to a specific type (e.g., ingredients, prep list)
+      operationId: getCategoriesByType
+      parameters:
+        - name: type
+          in: path
+          required: true
+          description: The type of categories to retrieve (e.g., ingredients, prep list)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of categories for the given type
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+        '400':
+          description: Invalid type supplied
+        '404':
+          description: No categories found for the given type
+
+          
+  /inventory/turnover:
+    get:
+      tags:
+       - Inventory Turnover
+      summary: Get Inventory Turnover Data
+      description: Retrieves inventory turnover metrics for a given time period, restaurant, or ingredient.
+      operationId: getInventoryTurnover
+      parameters:
+        - name: startDate
+          in: query
+          description: The start date for the inventory turnover period (YYYY-MM-DD).
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: The end date for the inventory turnover period (YYYY-MM-DD).
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: restaurantId
+          in: query
+          description: The ID of the restaurant for which to calculate turnover.
+          required: false
+          schema:
+            type: integer
+        - name: ingredientId
+          in: query
+          description: The ID of the ingredient for which to calculate turnover.
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Inventory turnover data retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  turnoverRate:
+                    type: number
+                    description: The calculated inventory turnover rate for the specified parameters.
+                  averageInventory:
+                    type: number
+                    description: The average inventory during the period.
+                  totalCostOfGoodsSold:
+                    type: number
+                    description: The total cost of goods sold during the period.
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        ingredientId:
+                          type: integer
+                          description: The ID of the ingredient.
+                        turnoverRate:
+                          type: number
+                          description: The turnover rate for this ingredient.
+                        averageInventory:
+                          type: number
+                          description: The average inventory for this ingredient.
+                        totalCostOfGoodsSold:
+                          type: number
+                          description: The total cost of goods sold for this ingredient.
+        '400':
+          description: Invalid request parameters.
+        '404':
+          description: No data found for the given parameters.
+        '500':
+          description: Internal server error. 
+  /order-history/{order_history_id}:
+    get:
+      tags:
+        - OrderHistory
+      summary: Get details of an order history cart item
+      description: Retrieves a specific order history item using its unique identifier.
+      operationId: getOrderHistoryItem
+      parameters:
+        - name: order_history_id
+          in: path
+          required: true
+          description: Unique identifier for the order history item.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Details of the requested order history item.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_history_id:
+                    type: integer
+                    description: Unique identifier for the order history item.
+                  ingredient_id:
+                    type: integer
+                    description: Identifier linking to the ingredient context.
+                  supplier_id:
+                    type: integer
+                    description: Identifier linking to the supplier context.
+                  quantity_ordered:
+                    type: integer
+                    description: The amount ordered (non-decimal value).
+                  order_date_id:
+                    type: integer
+                    description: Date ID when the order was placed.
+                  status:
+                    type: string
+                    description: Status of the cart item (e.g., pending, completed).
+        '400':
+          description: Invalid request, such as missing or non-numeric `order_history_id`.
+        '404':
+          description: No order history item found with the given ID.
+        '500':
+          description: Internal server error.
+
+        
+components:
+  schemas:
+    Manager:
+      type: object
+      properties:
+        manager_id:
+          type: integer
+          description: Unique Identifier for the manager
+          example: 1
+        manager_name:
+          type: string
+          description: Name of the manager
+          example: "John Doe"
+        email:
+          type: string
+          description: Email associated with the manager
+          example: "john.doe@example.com"
+        phone_number:
+          type: string
+          description: Number associated with the manager
+          example: "+1234567890"
+        role:
+          type: string
+          description: Role the manager holds (e.g., Admin, Manager)
+          example: "Admin"
+        restaurant_id:
+          type: integer
+          description: Links to the restaurant context (ID of the restaurant)
+          example: 101
+        status:
+          type: string
+          description: Status of the manager (Active or Inactive)
+          enum:
+            - Active
+            - Inactive
+          example: "Active"
+      required:
+        - manager_id
+        - manager_name
+        - email
+        - phone_number
+        - role
+        - restaurant_id
+        - status
+    Ingredient:
+      type: object
+      properties:
+        ingredient_id:
+          type: integer
+          description: Unique identifier for each ingredient
+        ingredient_name:
+          type: string
+          description: Name of the ingredient
+        unit_of_measure:
+          type: string
+          description: Unit in which the ingredient is ordered and stored
+        cost_per_unit:
+          type: number
+          format: decimal
+          description: Average cost per unit of the ingredient
+        ingredient_category:
+          type: integer
+          description: Category of the ingredient (foreign key reference)
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the ingredient was added
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp when the ingredient was last updated
+      required:
+        - ingredient_id
+        - ingredient_name
+        - unit_of_measure
+        - cost_per_unit
+        - ingredient_category
+        - created_at
+        - updated_at
+    PrepItem:
+      type: object
+      properties:
+        prep_item_id:
+          type: integer
+          description: Primary Key for the prep list item
+        prep_item_name:
+          type: string
+          description: Name of the prep list item
+        description:
+          type: string
+          description: Description of the prep list item
+        item_category:
+          type: string
+          description: Category of the prep list item
+        kitchen_department_id:
+          type: integer
+          description: ID of the kitchen department responsible for completing the prep item
+        restaurant_id:
+          type: integer
+          description: ID of the restaurant to which the prep item belongs
+      required:
+        - prep_item_id
+        - prep_item_name
+        - item_category
+        - kitchen_department_id
+        - restaurant_id
+    DailyPrepItem:
+      type: object
+      properties:
+        prep_list_id:
+          type: integer
+          description: Unique identifier for the daily prep item.
+        restaurant_id:
+          type: integer
+          description: Links to the specific restaurant the prep item belongs to.
+        prep_item_id:
+          type: integer
+          description: Links to the context of the specific prep item.
+        quantity:
+          type: number
+          format: decimal
+          description: The quantity of the prep item that needs to be completed.
+        unit:
+          type: string
+          description: The unit of measure for the prep item.
+        status:
+          type: string
+          enum: [Completed, Not Completed]
+          description: Indicates whether the item has been completed.
+        date:
+          type: string
+          format: date
+          description: The date the item is scheduled for on the daily prep list.
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp for when this item was added to the daily prep list.
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp for the last update to the item.
+      required:
+        - prep_list_id
+        - restaurant_id
+        - prep_item_id
+        - quantity
+        - unit
+        - status
+        - date
+    PrepTransaction:
+      type: object
+      properties:
+        prep_log_id:
+          type: integer
+          description: Unique identifier for the prep log entry
+        prep_item_id:
+          type: integer
+          description: Links to the Prep Item context (e.g., specific prep list item)
+        quantity_prepped:
+          type: number
+          description: The number of units prepped for this entry
+        prep_status:
+          type: string
+          enum:
+            - completed
+            - uncomplete
+            - partial complete
+          description: The status of the prep item (completed, uncompleted, or partially completed)
+        date_id:
+          type: integer
+          description: Links to the Date context (to indicate the date of prep completion)
+        restaurant_id:
+          type: integer
+          description: Links to the restaurant where the prep was completed
+        manager_id:
+          type: integer
+          description: (Optional) The ID of the manager overseeing the prep task
+        notes:
+          type: string
+          description: (Optional) Notes regarding the prep status or specific issues encountered
+        timestamp:
+          type: string
+          format: date-time
+          description: The timestamp when the prep log entry was created or updated
+        prep_duration:
+          type: number
+          description: (Optional) The time spent prepping the item (in minutes or hours)
+      required:
+        - prep_log_id
+        - prep_item_id
+        - quantity_prepped
+        - prep_status
+        - date_id
+        - restaurant_id
+    Restaurant:
+      type: object
+      properties:
+        restaurant_id:
+          type: integer
+          description: Unique identifier for the restaurant
+        restaurant_name:
+          type: string
+          description: Name of the restaurant
+        location:
+          type: string
+          description: Location where the restaurant is located
+        logo:
+          type: string
+          description: The picture of the restaurant logo (URL or path)
+      required:
+        - restaurant_id
+        - restaurant_name
+        - location
+    IngredientDetails:
+      type: object
+      properties:
+        ingredient_id:
+          type: integer
+          description: Unique identifier for each ingredient.
+        restaurant_id:
+          type: integer
+          description: Unique identifier for the restaurant to which this ingredient detail applies.
+        ingredient_name:
+          type: string
+          description: Name of the ingredient.
+        last_date_ordered:
+          type: string
+          format: date
+          description: Date when the ingredient was last ordered.
+        sysco_price:
+          type: number
+          format: float
+          description: Price of the ingredient from Sysco.
+        us_foods_price:
+          type: number
+          format: float
+          description: Price of the ingredient from US Foods.
+      required:
+        - ingredient_id
+        - restaurant_id
+        - ingredient_name
+        - last_date_ordered
+    Category:
+      type: object
+      properties:
+        category_id:
+          type: integer
+          description: Unique identifier for the category
+        category_name:
+          type: string
+          description: Name of the category (e.g., "Vegetables", "Prep List", etc.)
+        category_type:
+          type: string
+          description: The type of the category (e.g., "ingredients", "prep list", etc.)
+        description:
+          type: string
+          description: Further definition or clarification of the category
+      required:
+        - category_id
+        - category_name
+        - category_type
+    CartItem:
+      type: object
+      properties:
+        order_history_id:
+          type: integer
+          description: Unique identifier for the order history cart item.
+          example: 12345
+        ingredient_id:
+          type: integer
+          description: Identifier linking to the ingredient context.
+          example: 567
+        supplier_id:
+          type: integer
+          description: Identifier linking to the supplier context.
+          example: 789
+        quantity_ordered:
+          type: integer
+          description: How much of the ingredient was ordered.
+          example: 10
+        order_date_id:
+          type: integer
+          description: Date ID when the order was placed.
+          example: 20231117
+        status:
+          type: string
+          description: Status of the cart item.
+          example: "pending"
+          
+    
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
