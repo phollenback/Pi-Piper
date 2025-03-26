@@ -24,6 +24,11 @@
   <li>Issue and Risk Log</li>
 </ol>
 
+<h4>I documented my API with Swagger. Find that .yaml file <a>here</a></h4>
+<ol>
+  <li></li>
+</ol>
+
 <hr/>
 
 **If you don't want to look through the ENTIRE design process, here are a few key writeups.**
