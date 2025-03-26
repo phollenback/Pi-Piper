@@ -25,9 +25,7 @@
 </ol>
 
 <h4>I documented my API with Swagger. Find that .yaml file <a>here</a></h4>
-<ol>
-  <li></li>
-</ol>
+
 
 <hr/>
 
