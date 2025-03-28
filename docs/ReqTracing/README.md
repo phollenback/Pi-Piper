@@ -54,9 +54,7 @@
  <li><a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/ReleaseNotes/Pi-Piper%20Code%20Release%202.pdf">Release 2</li>
  <li><a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/ReleaseNotes/Pi-Piper%20Code%20Release%203.pdf">Release 3</li>
 </ul>
-
-<hr/>
-
+  
 <h2 align="center">Each Requirement is mapped using the tracability matrix.</h2>
 <p align="center"><u>The matrix maps how requirements were designed, implemented and tested. Follow the matrix path to view how all artifacts are tied in.</u></p>
 
