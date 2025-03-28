@@ -43,16 +43,16 @@ _View the design artifacts designed for this project: <a href="https://github.co
 _In order to effectively browse the docs, view the overview below_
 
 <br/>
-<h1 align="left">The Design Process - the <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/docs.md#the-project-proposal-outlines-the-following-and-can-be-found-here">docs</a> is the home of most design artifacts</h1>
+<h1 align="left">The Design Process - the <a href="https://github.com/phollenback/Pi-Piper/tree/main/docs#design-guide">docs</a> is the home of most design artifacts</h1>
 
 <ul>
 <li><i>View a breakdown of how I made sure I filled all designed <a href="https://github.com/phollenback/Pi-Piper/tree/main/docs/ReqTracing#how-were-requirements-implemented">requirements</a>.</i></li><br />
  
- <lI><i>Starting with the project proposal, this was completed back in September, as a first model of the idea and tech stack: <br><a href="">Project Proposal</a>(09/22/24)</i></lI><br />
+ <lI><i>Starting with the project proposal, this was completed back in September, as a first model of the idea and tech stack: <br><a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/451-Project-Proposal.pdf">Project Proposal</a>(09/22/24)</i></lI><br />
  
- <lI><i>Next is the project requirements artifact which outlined the libraries and first GUI drawings: <a href="">Project Requirements </a>(10/10/24)</i></lI><br />
+ <lI><i>Next is the project requirements artifact which outlined the libraries and first GUI drawings: <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/451-Project-Requirements.pdf">Project Requirements </a>(10/10/24)</i></lI><br />
 
- <li><i>Finally is the Project Design artifact. This is the most up to date and complete description of the application: <a href="">Project Design </a> (current)</i></li><br />
+ <li><i>Finally is the Project Design artifact. This is the most up to date and complete description of the application: <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/452-Project-Design.pdf">Project Design </a> (current)</i></li><br />
 
 </ul>
 
@@ -73,7 +73,7 @@ _In order to effectively browse the docs, view the overview below_
 
 
 
-**A quick summary of the roles that all Hardware and Software Technologies play in the stacka**
+**A quick summary of the roles that all Hardware and Software Technologies play in the stack**
 1. NEXT - frontend framework for handling dom, fetching data, managing state and authentication.
 2. Express JS - Web server framework used for serving and managing storage of application data.
 3. Python - Will be used in some fashion if scraping is allowed by providers. Otherwise, I could see myself fully taking data processing out of my express backend an into Python data processing unit for better big data handling.
