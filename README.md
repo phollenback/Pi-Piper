@@ -45,15 +45,16 @@ _In order to effectively browse the docs, view the overview below_
 <br/>
 <h1 align="left">The Design Process - the <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/docs.md#the-project-proposal-outlines-the-following-and-can-be-found-here">docs</a> is the home of most design artifacts</h1>
 
-_Starting with the project proposal, this was completed back in September, as a first model of the idea and tech stack: <br><a href="">Project Proposal</a>(09/22/24)_
+<ul>
+<li><i>View a breakdown of how I made sure I filled all designed <a href="https://github.com/phollenback/Pi-Piper/tree/main/docs/ReqTracing#how-were-requirements-implemented">requirements</a>.</i></li><br />
+ 
+ <lI><i>Starting with the project proposal, this was completed back in September, as a first model of the idea and tech stack: <br><a href="">Project Proposal</a>(09/22/24)</i></lI><br />
+ 
+ <lI><i>Next is the project requirements artifact which outlined the libraries and first GUI drawings: <a href="">Project Requirements </a>(10/10/24)</i></lI><br />
 
+ <li><i>Finally is the Project Design artifact. This is the most up to date and complete description of the application: <a href="">Project Design </a> (current)</i></li><br />
 
-_Next is the project requirements artifact which outlined the libraries and first GUI drawings: <a href="">Project Requirements </a>(10/10/24)_
-
-
-_Finally is the Project Design artifact. This is the most up to date and complete description of the application: <a href="">Project Design </a> (current)_
-<br/><br/>
-
+</ul>
 
 
 <h3>My Express Rest API was documented with Swagger.io editor. Its .yaml file can be found in docs.</h3>
@@ -72,17 +73,12 @@ _Finally is the Project Design artifact. This is the most up to date and complet
 
 
 
-
-</hr>
-
-**Hardware and Software Technologies**
+**A quick summary of the roles that all Hardware and Software Technologies play in the stacka**
 1. NEXT - frontend framework for handling dom, fetching data, managing state and authentication.
 2. Express JS - Web server framework used for serving and managing storage of application data.
 3. Python - Will be used in some fashion if scraping is allowed by providers. Otherwise, I could see myself fully taking data processing out of my express backend an into Python data processing unit for better big data handling.
 4. MySQL - Ran locally on my development machine and is always effective and easy to use.
 5. Hard Disk Drive - Holds data backups in an external drive.
 6. Wintel Computer - For running the application locally at the restaurant.
-7. 
-<hr />
 
 
