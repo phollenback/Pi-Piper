@@ -19,17 +19,27 @@ My report on how Pi Piper can help transform business practice: <a href="https:/
 View the design artifacts designed for this project: <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/docs.md#the-project-proposal-outlines-the-following-and-can-be-found-here"><i>Design Guide</i></a>
 
 <br/>
-<hr/>
+<h1 align="left">The Design Process - the <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/docs.md#the-project-proposal-outlines-the-following-and-can-be-found-here">docs</a> is the home of most design artifacts</h1>
+
+_Starting with the project proposal, this was completed back in September, as a first model of the idea and tech stack: <br><a href="">Project Proposal</a>(09/22/24)_
 
 
-<h2 align="center">Logical Architecture</h2>
+_Next is the project requirements artifact which outlined the libraries and first GUI drawings: <a href="">Project Requirements </a>(10/10/24)_
+
+
+_Finally is the Project Design artifact. This is the most up to date and complete description of the application: <a href="">Project Design </a> (current)_
+<br/>
+
+<span><b>Logical Architecture</b></p>
 <table>
- <th style="color🍊">
-  Backend
- </th>
- <th>
-  Frontend
- </th>
+ <tr>
+     <td style="color🍊">
+      Backend
+     </td>
+     <td>
+      Frontend
+     </td>
+ </tr>
  <tr>
   <td><img width="917" alt="Image" src="https://github.com/user-attachments/assets/6e7c36ca-cd83-4c2e-b69e-1971cf4722cd" />
 </td>
@@ -37,34 +47,84 @@ View the design artifacts designed for this project: <a href="https://github.com
 </td>
  </tr>
 </table>
-<hr />
 
-<h3 align="center">Agile Methodology</h3>
 
- It should be noted that agile methodology to help keep me on track with development. I found that even using this personally for smaller or side projects still has the same kinds of productivity improvements. Here are some actual user story examples and some pictures of my jira managed backlog.<br/><br/>
+<h3>How were requirements implemented?</h3>
+<ol>
+ <li>User stories were developed to outlined beforehand how the application should work</li>
+ <li>Stories were planned into sprints(Sprints managed in Jira)</li>
+ <li>Sprint delivery described and outlined in code releases as well as tracability matrix<b>*</b></li>
+</ol>
+
+
+<table>
+ <tr>
+  <th><b>Stories were broken down by page and actor role</b></th>
+  <th><b>2 week sprints were planned for the first few months of development in jira</b></th>
+  <th><b>The tracability matrix maps requirements to there design artifacts and corresponding test cases</b></th>
+ </tr>
+</table>
+
+
+<h1>Here are a few user story examples!</h1>
+
 **story 1**
 >
->As a user I would like to be able to login to my specific restaurant once a day so that it doesn't require a login on every entry
+>As a restaurant manager or staff member<br/>
+>I would like to log in once per day to the restaurant management system<br/>
+>So that I can access my restaurant's dashboard without repeated authentication, saving time and reducing login friction
 >
 
 <br/>
 
 **story 2**
 >
->As a owner I would like one restaurant overview screen with access to all restaurant mangager dashboards so that I don't need three seperate accounts for each restaurant
+>As a restaurant owner<br/>
+>I would like a centralized overview screen that provides access to all my restaurant manager dashboards<br/>
+>So that I can efficiently manage multiple restaurants from a single account without needing separate logins
 >
 <br />
-
-**How the sprints came out over the first month of development:**
-<img width="776" alt="Screenshot 2025-03-18 at 12 09 35 PM" src="https://github.com/user-attachments/assets/afc89d52-5f81-48c1-9ade-c9820ae243f7" />
-
+<table>
+ <tr>
+   <th><b>User stories guided me through the product you see currently</b></th>
+ </tr>
+ <tr>
+    <td>
+     <img width="1421" alt="Screenshot 2025-03-26 at 1 40 08 PM" src="https://github.com/user-attachments/assets/6f87b390-6f79-490b-94b6-e363d2ad3e3c" />
+    </td>
+ </tr>
+</table>
 
 <hr/>
 
-**Want to view more from the planning stages of this project?**
+**Each Code Release has a document outlining all met requirements**
+There are three releases as of now. Find them in the docs to see summaries of what is done or the number of user stories that had been filled at that point. <br/>
+
+<ul>
+ <li><a href="/">Release 1</a></li>
+ <li href="/">Release 2</li>
+ <li href="/">Release 3</li>
+</ul>
+
+<hr/>
+
+<table>
+  <tr>
+     <th>tracability matrix</th>
+     <th><b><i>></i></b></th>
+     <th>test cases</th>
+  </tr>
+</table>
 
 
-Look over my <a href="">Project Proposal</a> (09/22/24), <a href="">Project Requirements </a>(10/10/24), and my <a href="">Project Design </a> (current).
+
+**My REST API was designed using Swagger.io -- It's .yaml file can be found in docs**
+<img width="556" alt="Screenshot 2025-03-26 at 1 47 07 PM" src="https://github.com/user-attachments/assets/42489a65-d8d0-46c2-a713-74bb55eec6db" />
+
+
+
+
+
 
 </hr>
 
@@ -77,3 +137,5 @@ Look over my <a href="">Project Proposal</a> (09/22/24), <a href="">Project Requ
 6. Wintel Computer - For running the application locally at the restaurant.
 7. 
 <hr />
+
+
