@@ -1,7 +1,7 @@
 <h3>How were requirements implemented?</h3>
 <br/>
 <ol>
- <li>User stories were developed to outlined beforehand how the application should work</li>
+ <li>User stories were outlined beforehand how the application should work</li>
  <li>Stories were planned into sprints(Sprints managed in Jira)</li>
  <li>Sprint delivery described and outlined in code releases as well as tracability matrix<b>*</b></li>
 </ol>
