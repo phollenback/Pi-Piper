@@ -16,7 +16,7 @@
 </ol>
 
 
-<h4>The Project Design outlines the following and can be found <a href=""></a>here.</h4>
+<h4>The Project Design outlines the following and can be found <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/452-Project-Design.pdf">here.</a></h4>
 <ol>
   <li>Design Overview</li>
   <li>Detailed High Level Solution(final)</li>
@@ -24,12 +24,12 @@
   <li>Issue and Risk Log</li>
 </ol>
 
-<h4>I documented my API with Swagger. Find that .yaml file <a>here</a></h4>
+<h4>I documented my API with Swagger. Find that .yaml file here</h4>
 
 
 <hr/>
 
-**If you don't want to look through the ENTIRE design process, here are a few key writeups.**
+**If you don't want to look through the ENTIRE design process, here are a few key writeups about a Non-Functional Requirement I want to implement and how the PWA is an important technology to include for this project.**
 
 
 
