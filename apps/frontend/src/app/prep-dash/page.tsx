@@ -22,7 +22,6 @@ export default function PrepContainer() {
     const { prepSearchTerm } = useSelector((state: RootState) => state.search);
     // selects the restaurant id from the auth slice (to be used in the fetch)
     const restaurantId = useSelector((state: RootState) => state.auth.restaurantId) || 1;
-
     // Fetch and cache daily prep items
     const { data: dailyPrepList = [], 
         isLoading, 

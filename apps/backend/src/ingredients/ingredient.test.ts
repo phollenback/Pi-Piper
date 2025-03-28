@@ -7,12 +7,17 @@ import { Request, Response, NextFunction } from 'express';
 // Mock the ingredient controller
 jest.mock('./ingredient.controller', () => ({
   readIngredients: jest.fn<Promise<void>, [Request, Response]>(),
-  readInventory: jest.fn<Promise<void>, [Request, Response]>(),
+  getInventoryStatus: jest.fn<Promise<void>, [Request, Response]>(),
   readSuggestions: jest.fn<Promise<void>, [Request, Response]>(),
   readPricing: jest.fn<Promise<void>, [Request, Response]>(),
   createIngredient: jest.fn<Promise<void>, [Request, Response]>(),
   updateIngredient: jest.fn<Promise<void>, [Request, Response]>(),
-  deleteIngredient: jest.fn<Promise<void>, [Request, Response]>()
+  deleteIngredient: jest.fn<Promise<void>, [Request, Response]>(),
+  completePrepItem: jest.fn<Promise<void>, [Request, Response]>(),
+  updateMinStock: jest.fn<Promise<void>, [Request, Response]>(),
+  getOutOfStockItems: jest.fn<Promise<void>, [Request, Response]>(),
+  updateNotificationThreshold: jest.fn<Promise<void>, [Request, Response]>(),
+  getInventoryTransactions: jest.fn<Promise<void>, [Request, Response]>()
 }));
 
 // Mock express-validator
@@ -78,8 +83,8 @@ describe('Ingredient API', () => {
         { ingredient_id: 2, ingredient_name: 'Beef', current_stock: 5, par_level: 10 }
       ];
       
-      // Mock the readInventory function
-      jest.mocked(IngredientController.readInventory).mockImplementation((req, res) => {
+      // Mock the getInventoryStatus function
+      jest.mocked(IngredientController.getInventoryStatus).mockImplementation((req, res) => {
         res.status(200).json(mockInventory);
         return Promise.resolve();
       });
@@ -88,7 +93,7 @@ describe('Ingredient API', () => {
       
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockInventory);
-      expect(IngredientController.readInventory).toHaveBeenCalled();
+      expect(IngredientController.getInventoryStatus).toHaveBeenCalled();
     });
   });
 

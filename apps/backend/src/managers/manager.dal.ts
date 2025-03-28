@@ -1,46 +1,60 @@
-import { execute } from "../services/pg.connector";
-import { userQueries } from "./manager.queries";
+import { db } from '../db/connection';
+import { dimUsers, dimManager } from '../db/schema';
 import { logger } from '../middleware/winston.middleware';
+import { eq, and } from 'drizzle-orm';
 
 // User interface definition
 export interface User {
   user_id: number;
   username: string;
-  email: string;
-  phone_number: string;
-  role: string;
-  restaurant_id: number;
-  status: string;
-  created_at: string;
-  updated_at: string;
+  email: string | null;
+  role: string | null;
+  restaurant_id: number | null;
+  status: boolean | null;
+  created_at: Date | null;
+  updated_at: Date | null;
 }
 
-// Retrieves all managers for a specific restaurant
+// Retrieves all users for a specific restaurant
 export const getUsers = async (restaurantId: number): Promise<User[]> => {
     logger.info('[user.dal][getUsers][START]', { restaurantId });
     try {
-        const users = await execute(userQueries.getUsers, [restaurantId]);
+        const users = await db.select({
+            user_id: dimUsers.userId,
+            username: dimUsers.username,
+            email: dimUsers.email,
+            role: dimUsers.role,
+            restaurant_id: dimUsers.restaurantId,
+            status: dimUsers.isActive,
+            created_at: dimUsers.createdAt,
+            updated_at: dimUsers.updatedAt
+        })
+        .from(dimUsers)
+        .where(eq(dimUsers.restaurantId, restaurantId));
+
         logger.info('[user.dal][getUsers][SUCCESS]', { users });
-        return users as User[];
+        return users;
     } catch (error) {
         logger.error('[user.dal][getUsers][ERROR]', { error });
         throw error;
     }
 };
 
-// Creates a new manager with provided manager data
+// Creates a new user with provided user data
 export const createUser = async (userData: any): Promise<any> => {
     logger.info('[user.dal][createUser][START]', { userData });
     try {
-        const result = await execute(userQueries.createUser, [
-            userData.username,
-            userData.password,
-            userData.email,
-            userData.phone_number,
-            userData.role,
-            userData.restaurant_id,
-            userData.status
-        ]);
+        const result = await db.insert(dimUsers).values({
+            username: userData.username,
+            password: userData.password,
+            email: userData.email,
+            role: userData.role,
+            restaurantId: userData.restaurant_id,
+            isActive: true,
+            firstName: userData.first_name,
+            lastName: userData.last_name
+        });
+
         logger.info('[user.dal][createUser][SUCCESS]', { result });
         return result;
     } catch (error) {
@@ -49,19 +63,22 @@ export const createUser = async (userData: any): Promise<any> => {
     }
 };
 
-// Updates existing manager information by ID
+// Updates existing user information by ID
 export const updateUser = async (userId: number, userData: any): Promise<any> => {
     logger.info('[user.dal][updateUser][START]', { userId, userData });
     try {
-        const result = await execute(userQueries.updateUser, [
-            userData.username,
-            userData.email,
-            userData.phone_number,
-            userData.role,
-            userData.restaurant_id,
-            userData.status,
-            userId
-        ]);
+        const result = await db.update(dimUsers)
+            .set({
+                username: userData.username,
+                email: userData.email,
+                role: userData.role,
+                restaurantId: userData.restaurant_id,
+                isActive: userData.status === 'active',
+                firstName: userData.first_name,
+                lastName: userData.last_name
+            })
+            .where(eq(dimUsers.userId, userId));
+
         logger.info('[user.dal][updateUser][SUCCESS]', { result });
         return result;
     } catch (error) {
@@ -70,11 +87,27 @@ export const updateUser = async (userId: number, userData: any): Promise<any> =>
     }
 };
 
-// Removes a manager from the system by ID
+// Removes a user from the system by ID
 export const deleteUser = async (userId: number): Promise<any> => {
     logger.info('[user.dal][deleteUser][START]', { userId });
     try {
-        const result = await execute(userQueries.deleteUser, [userId]);
+        // First, check if user is a manager
+        const managerResult = await db.select()
+            .from(dimManager)
+            .where(eq(dimManager.userId, userId));
+
+        if (managerResult && managerResult.length > 0) {
+            // If user is a manager, deactivate the manager record
+            await db.update(dimManager)
+                .set({ isActive: false })
+                .where(eq(dimManager.userId, userId));
+        }
+
+        // Then deactivate the user
+        const result = await db.update(dimUsers)
+            .set({ isActive: false })
+            .where(eq(dimUsers.userId, userId));
+
         logger.info('[user.dal][deleteUser][SUCCESS]', { result });
         return result;
     } catch (error) {

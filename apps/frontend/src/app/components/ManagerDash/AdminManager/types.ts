@@ -3,11 +3,11 @@ export interface Admin {
   username: string;
   email: string | null;
   phone_number: string | null;
-  role: 'owner' | 'manager' | 'prep';
-  restaurant_id: number;
+  role: 'admin' | 'user' | 'owner';
+  restaurant_id: number | null;
   status: 'active' | 'inactive';
-  created_at: string;
-  updated_at: string;
+  created_at: Date | null;
+  updated_at: Date | null;
 }
 
 export interface EditModalProps {

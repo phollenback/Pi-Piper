@@ -197,7 +197,7 @@ const fetchDailyList = async (restaurantId)=>{
         return [];
     }
 };
-const fetchCategories = async (restaurantId = 1)=>{
+const fetchCategories = async (restaurantId = 0)=>{
     const response = await fetch(`http://localhost:3001/categories/${restaurantId}`);
     if (!response.ok) throw new Error('Failed to fetch categories');
     return response.json();

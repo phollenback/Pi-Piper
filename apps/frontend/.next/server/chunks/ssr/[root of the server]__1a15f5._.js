@@ -171,13 +171,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 ;
 ;
-const CreateUserModal = ({ isOpen, onClose, onSuccess, restaurantId })=>{
+const CreateUserModal = ({ isOpen, onClose, onSuccess, restaurantId, userType })=>{
     const [newUser, setNewUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         username: '',
         password: '',
         email: '',
-        phone_number: '',
-        role: 'prep',
+        role: userType === 'prep' ? 'prep' : 'admin',
         restaurant_id: restaurantId,
         status: 'active'
     });
@@ -202,8 +201,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess, restaurantId })=>{
                     username: '',
                     password: '',
                     email: '',
-                    phone_number: '',
-                    role: 'prep',
+                    role: userType === 'prep' ? 'prep' : 'admin',
                     restaurant_id: restaurantId,
                     status: 'active'
                 });
@@ -234,7 +232,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess, restaurantId })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
         isOpen: isOpen,
         onClose: onClose,
-        title: "Create New User",
+        title: `Create New ${userType === 'prep' ? 'Prep User' : 'Manager'}`,
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "p-4",
             children: [
@@ -343,36 +341,6 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess, restaurantId })=>{
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    htmlFor: "phone_number",
-                                    className: "block text-sm font-medium mb-1",
-                                    children: "Phone"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/Elements/CreateUserModal.tsx",
-                                    lineNumber: 150,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    id: "phone_number",
-                                    name: "phone_number",
-                                    type: "tel",
-                                    value: newUser.phone_number,
-                                    onChange: handleInputChange,
-                                    className: "w-full p-2 border rounded",
-                                    placeholder: "Enter phone number"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/Elements/CreateUserModal.tsx",
-                                    lineNumber: 151,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/components/Elements/CreateUserModal.tsx",
-                            lineNumber: 149,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex justify-end gap-2",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -382,7 +350,7 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess, restaurantId })=>{
                                     children: loading ? 'Creating...' : 'CREATE'
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/Elements/CreateUserModal.tsx",
-                                    lineNumber: 162,
+                                    lineNumber: 150,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -395,13 +363,13 @@ const CreateUserModal = ({ isOpen, onClose, onSuccess, restaurantId })=>{
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/Elements/CreateUserModal.tsx",
-                                    lineNumber: 169,
+                                    lineNumber: 157,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/Elements/CreateUserModal.tsx",
-                            lineNumber: 161,
+                            lineNumber: 149,
                             columnNumber: 11
                         }, this)
                     ]
@@ -1154,15 +1122,15 @@ function AdminTable({ admins, onEdit, onDelete }) {
                 className: "bg-gray-100 p-4 border-b",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                     className: "text-xl font-semibold",
-                    children: "Current Admins"
+                    children: "Current Managers"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                    lineNumber: 14,
+                    lineNumber: 15,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                lineNumber: 13,
+                lineNumber: 14,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("table", {
@@ -1177,7 +1145,7 @@ function AdminTable({ admins, onEdit, onDelete }) {
                                     children: "ID"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                    lineNumber: 19,
+                                    lineNumber: 20,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -1185,20 +1153,12 @@ function AdminTable({ admins, onEdit, onDelete }) {
                                     children: "Username"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                    lineNumber: 20,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
-                                    className: "p-4 text-left",
-                                    children: "Email"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
                                     lineNumber: 21,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                     className: "p-4 text-left",
-                                    children: "Phone"
+                                    children: "Email"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
                                     lineNumber: 22,
@@ -1231,12 +1191,12 @@ function AdminTable({ admins, onEdit, onDelete }) {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                            lineNumber: 18,
+                            lineNumber: 19,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                        lineNumber: 17,
+                        lineNumber: 18,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
@@ -1269,18 +1229,10 @@ function AdminTable({ admins, onEdit, onDelete }) {
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
                                         className: "p-4",
-                                        children: admin.phone_number || '-'
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                        lineNumber: 34,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
-                                        className: "p-4",
                                         children: admin.role
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                        lineNumber: 35,
+                                        lineNumber: 34,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1290,12 +1242,12 @@ function AdminTable({ admins, onEdit, onDelete }) {
                                             children: admin.status
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                            lineNumber: 37,
+                                            lineNumber: 36,
                                             columnNumber: 17
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                        lineNumber: 36,
+                                        lineNumber: 35,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -1311,7 +1263,7 @@ function AdminTable({ admins, onEdit, onDelete }) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                                lineNumber: 44,
+                                                lineNumber: 43,
                                                 columnNumber: 17
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1324,13 +1276,13 @@ function AdminTable({ admins, onEdit, onDelete }) {
                                                 }
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                                lineNumber: 53,
+                                                lineNumber: 52,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                                        lineNumber: 43,
+                                        lineNumber: 42,
                                         columnNumber: 15
                                     }, this)
                                 ]
@@ -1347,13 +1299,13 @@ function AdminTable({ admins, onEdit, onDelete }) {
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-                lineNumber: 16,
+                lineNumber: 17,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx",
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 5
     }, this);
 }
@@ -1369,185 +1321,246 @@ __turbopack_esm__({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Modal.tsx [app-ssr] (ecmascript)");
 'use client';
 ;
 ;
 ;
+;
 function EditModal({ admin, isOpen, onClose, onSave }) {
-    const [editedAdmin, setEditedAdmin] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(admin || {
-        user_id: 0,
-        username: '',
-        email: null,
-        phone_number: null,
-        role: 'manager',
-        restaurant_id: 1,
-        status: 'active',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-    });
-    if (!isOpen || !admin) return null;
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center",
+    const [editedAdmin, setEditedAdmin] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (admin) {
+            setEditedAdmin({
+                ...admin
+            });
+        }
+    }, [
+        admin
+    ]);
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        if (editedAdmin) {
+            onSave(editedAdmin);
+        }
+    };
+    if (!isOpen || !editedAdmin) return null;
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+        isOpen: isOpen,
+        onClose: onClose,
+        title: "Edit Admin",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "bg-white p-6 rounded-lg shadow-lg max-w-md w-full",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                    className: "text-xl font-bold mb-4",
-                    children: "Edit Admin"
-                }, void 0, false, {
-                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                    lineNumber: 25,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "space-y-4",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    htmlFor: "username",
-                                    className: "block text-sm font-medium mb-1",
-                                    children: "Username"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 28,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    id: "username",
-                                    type: "text",
-                                    value: editedAdmin.username,
-                                    onChange: (e)=>setEditedAdmin({
-                                            ...editedAdmin,
-                                            username: e.target.value
-                                        }),
-                                    className: "w-full p-2 border rounded",
-                                    placeholder: "Enter username"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 29,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                            lineNumber: 27,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    htmlFor: "email",
-                                    className: "block text-sm font-medium mb-1",
-                                    children: "Email"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 39,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    id: "email",
-                                    type: "email",
-                                    value: editedAdmin.email || '',
-                                    onChange: (e)=>setEditedAdmin({
-                                            ...editedAdmin,
-                                            email: e.target.value
-                                        }),
-                                    className: "w-full p-2 border rounded",
-                                    placeholder: "Enter email address"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 40,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                            lineNumber: 38,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                    htmlFor: "phone",
-                                    className: "block text-sm font-medium mb-1",
-                                    children: "Phone"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 50,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                    id: "phone",
-                                    type: "tel",
-                                    value: editedAdmin.phone_number || '',
-                                    onChange: (e)=>setEditedAdmin({
-                                            ...editedAdmin,
-                                            phone_number: e.target.value
-                                        }),
-                                    className: "w-full p-2 border rounded",
-                                    placeholder: "Enter phone number"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 51,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                            lineNumber: 49,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex justify-end gap-2",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                    label: "SAVE",
-                                    onClick: ()=>onSave(editedAdmin),
-                                    style: {
-                                        backgroundColor: 'white',
-                                        color: 'black',
-                                        border: '1px solid black'
-                                    }
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 61,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                    label: "CANCEL",
-                                    onClick: onClose,
-                                    style: {
-                                        backgroundColor: 'white',
-                                        color: 'black',
-                                        border: '1px solid black'
-                                    }
-                                }, void 0, false, {
-                                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                                    lineNumber: 70,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                            lineNumber: 60,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-                    lineNumber: 26,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
+            className: "p-4",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                onSubmit: handleSubmit,
+                className: "space-y-4",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                htmlFor: "username",
+                                className: "block text-sm font-medium mb-1",
+                                children: "Username*"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 31,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                id: "username",
+                                type: "text",
+                                value: editedAdmin.username,
+                                onChange: (e)=>setEditedAdmin({
+                                        ...editedAdmin,
+                                        username: e.target.value
+                                    }),
+                                className: "w-full p-2 border rounded",
+                                required: true
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 32,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                        lineNumber: 30,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                htmlFor: "email",
+                                className: "block text-sm font-medium mb-1",
+                                children: "Email"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 42,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                id: "email",
+                                type: "email",
+                                value: editedAdmin.email || '',
+                                onChange: (e)=>setEditedAdmin({
+                                        ...editedAdmin,
+                                        email: e.target.value
+                                    }),
+                                className: "w-full p-2 border rounded"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 43,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                        lineNumber: 41,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                htmlFor: "role",
+                                className: "block text-sm font-medium mb-1",
+                                children: "Role*"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 52,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                id: "role",
+                                value: editedAdmin.role,
+                                onChange: (e)=>setEditedAdmin({
+                                        ...editedAdmin,
+                                        role: e.target.value
+                                    }),
+                                className: "w-full p-2 border rounded",
+                                required: true,
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "admin",
+                                        children: "Admin"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                        lineNumber: 60,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "user",
+                                        children: "User"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                        lineNumber: 61,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 53,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                        lineNumber: 51,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                htmlFor: "status",
+                                className: "block text-sm font-medium mb-1",
+                                children: "Status*"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 65,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
+                                id: "status",
+                                value: editedAdmin.status,
+                                onChange: (e)=>setEditedAdmin({
+                                        ...editedAdmin,
+                                        status: e.target.value
+                                    }),
+                                className: "w-full p-2 border rounded",
+                                required: true,
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "active",
+                                        children: "Active"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                        lineNumber: 73,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                        value: "inactive",
+                                        children: "Inactive"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                        lineNumber: 74,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 66,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                        lineNumber: 64,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex justify-end gap-2",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "submit",
+                                className: "px-4 py-2 rounded border border-black text-black bg-white hover:bg-gray-100",
+                                children: "SAVE"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 78,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                label: "CANCEL",
+                                onClick: onClose,
+                                style: {
+                                    backgroundColor: 'white',
+                                    color: 'black',
+                                    border: '1px solid black'
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                                lineNumber: 84,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                        lineNumber: 77,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
+                lineNumber: 29,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
             fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-            lineNumber: 24,
+            lineNumber: 28,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx",
-        lineNumber: 23,
+        lineNumber: 27,
         columnNumber: 5
     }, this);
 }
@@ -1562,12 +1575,11 @@ __turbopack_esm__({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+//import { useRouter } from 'next/navigation';
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Button.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$AdminManager$2f$AdminTable$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/ManagerDash/AdminManager/AdminTable.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$AdminManager$2f$EditModal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/ManagerDash/AdminManager/EditModal.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/app/components/Elements/Modal.tsx [app-ssr] (ecmascript)");
-//import { useRouter } from 'next/navigation';
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/axios/lib/axios.js [app-ssr] (ecmascript)");
 'use client';
 ;
 ;
@@ -1575,9 +1587,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 ;
 ;
-;
-// API endpoint for managers
-const API_URL = 'http://localhost:3001/managers';
 function AdminManager({ hideHeading = false }) {
     // const router = useRouter();
     const RESTAURANT_ID = 1;
@@ -1594,35 +1603,26 @@ function AdminManager({ hideHeading = false }) {
         username: '',
         password: '',
         email: '',
-        phone_number: '',
-        role: 'manager',
+        role: 'admin',
         restaurant_id: RESTAURANT_ID,
         status: 'active'
     });
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        fetchManagers();
+        loadManagers();
     }, []);
-    const fetchManagers = async ()=>{
+    const loadManagers = async ()=>{
         setLoading(true);
         setError(null);
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].get(`${API_URL}?restaurantId=${RESTAURANT_ID}`);
-            // Check if the response is successful
-            if (response.status >= 200 && response.status < 300) {
-                setAdmins(response.data);
-            } else {
-                setError(`Failed to load managers. Server returned status: ${response.status}`);
+            const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch managers');
             }
+            const data = await response.json();
+            setAdmins(data.filter((user)=>user.role === 'admin'));
         } catch (error) {
             console.error('Failed to fetch managers:', error);
-            const axiosError = error;
-            if (axiosError.response) {
-                setError(`Failed to load managers: ${axiosError.response.status} - ${axiosError.response.statusText}`);
-            } else if (axiosError.request) {
-                setError('Failed to load managers. No response received from server.');
-            } else {
-                setError(`Failed to load managers: ${axiosError.message}`);
-            }
+            setError(error instanceof Error ? error.message : 'Failed to load managers');
         } finally{
             setLoading(false);
         }
@@ -1630,46 +1630,31 @@ function AdminManager({ hideHeading = false }) {
     const handleEdit = async (updatedAdmin)=>{
         setLoading(true);
         setError(null);
-        console.log('Sending update request with data:', updatedAdmin);
-        // Create a copy of the admin object without read-only properties
-        const adminToUpdate = {
-            username: updatedAdmin.username,
-            email: updatedAdmin.email,
-            phone_number: updatedAdmin.phone_number,
-            role: updatedAdmin.role,
-            restaurant_id: updatedAdmin.restaurant_id,
-            status: updatedAdmin.status
-        };
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].put(`${API_URL}/${updatedAdmin.user_id}`, adminToUpdate);
-            console.log('Response from update request:', response);
-            // Check if the response is successful
-            if (response.status >= 200 && response.status < 300) {
-                // Refresh the manager list to get the latest data
-                await fetchManagers();
-                setEditModal(false);
-                setSuccessMessage('Manager updated successfully!');
-                setSuccessModal(true);
-            } else {
-                setError(`Failed to update manager. Server returned status: ${response.status}`);
+            const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users/${updatedAdmin.user_id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: updatedAdmin.username,
+                    email: updatedAdmin.email || undefined,
+                    role: updatedAdmin.role || 'admin',
+                    status: updatedAdmin.status,
+                    first_name: updatedAdmin.first_name,
+                    last_name: updatedAdmin.last_name
+                })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to update manager');
             }
+            await loadManagers();
+            setEditModal(false);
+            setSuccessMessage('Manager updated successfully!');
+            setSuccessModal(true);
         } catch (error) {
             console.error('Failed to update manager:', error);
-            const axiosError = error;
-            if (axiosError.response) {
-                if (axiosError.response.data?.errors) {
-                    const errorMessages = axiosError.response.data.errors.map((err)=>err.msg).join(', ');
-                    setError(`Failed to update manager: ${errorMessages}`);
-                } else if (axiosError.response.data?.message) {
-                    setError(`Failed to update manager: ${axiosError.response.data.message}`);
-                } else {
-                    setError(`Failed to update manager: ${axiosError.response.status} - ${axiosError.response.statusText}`);
-                }
-            } else if (axiosError.request) {
-                setError('Failed to update manager. No response received from server.');
-            } else {
-                setError(`Failed to update manager: ${axiosError.message}`);
-            }
+            setError(error instanceof Error ? error.message : 'Failed to update manager');
         } finally{
             setLoading(false);
         }
@@ -1679,43 +1664,31 @@ function AdminManager({ hideHeading = false }) {
         setLoading(true);
         setError(null);
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(API_URL, newUser);
-            // Check if the response is successful
-            if (response.status >= 200 && response.status < 300) {
-                // Refresh the manager list to include the new manager
-                await fetchManagers();
-                setCreateModal(false);
-                setNewUser({
-                    username: '',
-                    password: '',
-                    email: '',
-                    phone_number: '',
-                    role: 'manager',
-                    restaurant_id: RESTAURANT_ID,
-                    status: 'active'
-                });
-                setSuccessMessage('New manager created successfully!');
-                setSuccessModal(true);
-            } else {
-                setError(`Failed to create manager. Server returned status: ${response.status}`);
+            const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            });
+            if (!response.ok) {
+                throw new Error('Failed to create manager');
             }
+            await loadManagers();
+            setCreateModal(false);
+            setNewUser({
+                username: '',
+                password: '',
+                email: '',
+                role: 'admin',
+                restaurant_id: RESTAURANT_ID,
+                status: 'active'
+            });
+            setSuccessMessage('New manager created successfully!');
+            setSuccessModal(true);
         } catch (error) {
             console.error('Failed to create manager:', error);
-            const axiosError = error;
-            if (axiosError.response) {
-                if (axiosError.response.data?.errors) {
-                    const errorMessages = axiosError.response.data.errors.map((err)=>err.msg).join(', ');
-                    setError(`Failed to create manager: ${errorMessages}`);
-                } else if (axiosError.response.data?.message) {
-                    setError(`Failed to create manager: ${axiosError.response.data.message}`);
-                } else {
-                    setError(`Failed to create manager: ${axiosError.response.status} - ${axiosError.response.statusText}`);
-                }
-            } else if (axiosError.request) {
-                setError('Failed to create manager. No response received from server.');
-            } else {
-                setError(`Failed to create manager: ${axiosError.message}`);
-            }
+            setError(error instanceof Error ? error.message : 'Failed to create manager');
         } finally{
             setLoading(false);
         }
@@ -1724,30 +1697,19 @@ function AdminManager({ hideHeading = false }) {
         setLoading(true);
         setError(null);
         try {
-            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].delete(`${API_URL}/${managerId}`);
-            // Check if the response is successful
-            if (response.status >= 200 && response.status < 300) {
-                setAdmins(admins.filter((admin)=>admin.user_id !== managerId));
-                setDeleteModal(false);
-                setSuccessMessage('Manager deleted successfully!');
-                setSuccessModal(true);
-            } else {
-                setError(`Failed to delete manager. Server returned status: ${response.status}`);
+            const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users/${managerId}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error('Failed to delete manager');
             }
+            setAdmins(admins.filter((admin)=>admin.user_id !== managerId));
+            setDeleteModal(false);
+            setSuccessMessage('Manager deleted successfully!');
+            setSuccessModal(true);
         } catch (error) {
             console.error('Failed to delete manager:', error);
-            const axiosError = error;
-            if (axiosError.response) {
-                if (axiosError.response.data?.message) {
-                    setError(`Failed to delete manager: ${axiosError.response.data.message}`);
-                } else {
-                    setError(`Failed to delete manager: ${axiosError.response.status} - ${axiosError.response.statusText}`);
-                }
-            } else if (axiosError.request) {
-                setError('Failed to delete manager. No response received from server.');
-            } else {
-                setError(`Failed to delete manager: ${axiosError.message}`);
-            }
+            setError(error instanceof Error ? error.message : 'Failed to delete manager');
         } finally{
             setLoading(false);
         }
@@ -1770,7 +1732,7 @@ function AdminManager({ hideHeading = false }) {
                         children: "MANAGE ADMINS"
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                        lineNumber: 227,
+                        lineNumber: 160,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1783,13 +1745,13 @@ function AdminManager({ hideHeading = false }) {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                        lineNumber: 228,
+                        lineNumber: 161,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 226,
+                lineNumber: 159,
                 columnNumber: 9
             }, this),
             hideHeading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1804,12 +1766,12 @@ function AdminManager({ hideHeading = false }) {
                     }
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                    lineNumber: 242,
+                    lineNumber: 175,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 241,
+                lineNumber: 174,
                 columnNumber: 9
             }, this),
             error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1817,7 +1779,7 @@ function AdminManager({ hideHeading = false }) {
                 children: error
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 255,
+                lineNumber: 188,
                 columnNumber: 9
             }, this),
             loading && !error ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1826,12 +1788,12 @@ function AdminManager({ hideHeading = false }) {
                     className: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                    lineNumber: 262,
+                    lineNumber: 195,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 261,
+                lineNumber: 194,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$AdminManager$2f$AdminTable$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 admins: admins,
@@ -1845,17 +1807,17 @@ function AdminManager({ hideHeading = false }) {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 265,
+                lineNumber: 198,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$ManagerDash$2f$AdminManager$2f$EditModal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                 admin: selectedAdmin,
                 isOpen: editModal,
                 onClose: ()=>setEditModal(false),
-                onSave: handleEdit
+                onSave: (updatedAdmin)=>handleEdit(updatedAdmin)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 279,
+                lineNumber: 212,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1870,7 +1832,7 @@ function AdminManager({ hideHeading = false }) {
                             children: "Are you sure you want to delete this admin? This action cannot be undone."
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                            lineNumber: 293,
+                            lineNumber: 226,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1886,7 +1848,7 @@ function AdminManager({ hideHeading = false }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                    lineNumber: 295,
+                                    lineNumber: 228,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1899,24 +1861,24 @@ function AdminManager({ hideHeading = false }) {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                    lineNumber: 304,
+                                    lineNumber: 237,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                            lineNumber: 294,
+                            lineNumber: 227,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                    lineNumber: 292,
+                    lineNumber: 225,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 287,
+                lineNumber: 220,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1931,7 +1893,7 @@ function AdminManager({ hideHeading = false }) {
                             children: successMessage
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                            lineNumber: 324,
+                            lineNumber: 257,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1946,23 +1908,23 @@ function AdminManager({ hideHeading = false }) {
                                 }
                             }, void 0, false, {
                                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                lineNumber: 326,
+                                lineNumber: 259,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                            lineNumber: 325,
+                            lineNumber: 258,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                    lineNumber: 323,
+                    lineNumber: 256,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 318,
+                lineNumber: 251,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Modal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1983,7 +1945,7 @@ function AdminManager({ hideHeading = false }) {
                                         children: "Username*"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 348,
+                                        lineNumber: 281,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1997,13 +1959,13 @@ function AdminManager({ hideHeading = false }) {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 349,
+                                        lineNumber: 282,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                lineNumber: 347,
+                                lineNumber: 280,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2014,7 +1976,7 @@ function AdminManager({ hideHeading = false }) {
                                         children: "Password*"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 361,
+                                        lineNumber: 294,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2028,13 +1990,13 @@ function AdminManager({ hideHeading = false }) {
                                         required: true
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 362,
+                                        lineNumber: 295,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                lineNumber: 360,
+                                lineNumber: 293,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2045,7 +2007,7 @@ function AdminManager({ hideHeading = false }) {
                                         children: "Email"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 374,
+                                        lineNumber: 307,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2058,43 +2020,13 @@ function AdminManager({ hideHeading = false }) {
                                         placeholder: "Enter email address"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 375,
+                                        lineNumber: 308,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                lineNumber: 373,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        htmlFor: "phone_number",
-                                        className: "block text-sm font-medium mb-1",
-                                        children: "Phone"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 386,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                        id: "phone_number",
-                                        name: "phone_number",
-                                        type: "tel",
-                                        value: newUser.phone_number,
-                                        onChange: handleInputChange,
-                                        className: "w-full p-2 border rounded",
-                                        placeholder: "Enter phone number"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 387,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                lineNumber: 385,
+                                lineNumber: 306,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2106,7 +2038,7 @@ function AdminManager({ hideHeading = false }) {
                                         children: "CREATE"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 398,
+                                        lineNumber: 319,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$components$2f$Elements$2f$Button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2119,35 +2051,35 @@ function AdminManager({ hideHeading = false }) {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                        lineNumber: 404,
+                                        lineNumber: 325,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                                lineNumber: 397,
+                                lineNumber: 318,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                        lineNumber: 346,
+                        lineNumber: 279,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                    lineNumber: 345,
+                    lineNumber: 278,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-                lineNumber: 340,
+                lineNumber: 273,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx",
-        lineNumber: 224,
+        lineNumber: 157,
         columnNumber: 5
     }, this);
 }

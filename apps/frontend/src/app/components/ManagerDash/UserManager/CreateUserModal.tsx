@@ -18,12 +18,15 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleCreate = async () => {
+    setLoading(true);
+    setError('');
+    
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch(`http://localhost:3001/users/${restaurantId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,30 +35,36 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
           username,
           password,
           email,
-          phone_number: phoneNumber,
-          role: 'prep', // Hardcoded to 'prep'
-          restaurant_id: restaurantId
+          role: 'prep',
+          restaurant_id: restaurantId,
+          status: 'active'
         }),
       });
 
-      if (response.ok) {
-        onSuccess();
-        onClose();
-      } else {
+      if (!response.ok) {
         const errorData = await response.json();
-        setError(errorData.message || 'Failed to create user');
+        throw new Error(errorData.message || 'Failed to create user');
       }
+
+      // Reset form
+      setUsername('');
+      setPassword('');
+      setEmail('');
+      onSuccess();
+      onClose();
     } catch (err) {
-      setError('An error occurred while creating the user');
+      setError(err instanceof Error ? err.message : 'Failed to create user');
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Create New User">
+    <Modal isOpen={isOpen} onClose={onClose} title="Create New Prep User">
       <div className="p-4 space-y-4">
         <div className="space-y-2">
-          <label className="block text-sm font-medium">Username</label>
+          <label className="block text-sm font-medium">Username*</label>
           <input
             type="text"
             value={username}
@@ -66,8 +75,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
           />
         </div>
         <div className="space-y-2">
-          <label className="block text-sm font-medium">Password</label>
-          
+          <label className="block text-sm font-medium">Password*</label>
           <input
             type="password"
             value={password}
@@ -87,17 +95,11 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
             placeholder="Enter email"
           />
         </div>
-        <div className="space-y-2">
-          <label className="block text-sm font-medium">Phone Number</label>
-          <input
-            type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            className="w-full p-2 border rounded"
-            placeholder="Enter phone number"
-          />
-        </div>
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            {error}
+          </div>
+        )}
         <div className="flex justify-end space-x-2">
           <Button
             label="Cancel"
@@ -109,11 +111,12 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
             }}
           />
           <Button
-            label="Create"
+            label={loading ? "Creating..." : "Create"}
             onClick={handleCreate}
             style={{
               backgroundColor: 'black',
-              color: 'white'
+              color: 'white',
+              opacity: loading ? 0.5 : 1
             }}
           />
         </div>

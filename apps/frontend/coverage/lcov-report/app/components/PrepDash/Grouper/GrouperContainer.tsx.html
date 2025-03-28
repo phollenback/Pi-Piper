@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.24% </span>
+                <span class="strong">90.83% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>107/116</span>
+                <span class='fraction'>119/131</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.24% </span>
+                <span class="strong">90.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>107/116</span>
+                <span class='fraction'>119/131</span>
             </div>
         
             
@@ -178,7 +178,22 @@
 <a name='L113'></a><a href='#L113'>113</a>
 <a name='L114'></a><a href='#L114'>114</a>
 <a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -194,6 +209,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -220,6 +245,11 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -301,7 +331,7 @@ import Ingredient from '@/app/types/models/Ingredient';
 import { PrepItem } from '@/app/types/models/PrepItem';
 import { GroupWithItems } from '@/app/types/models/Group';
 import ButtonGroup from '../../Elements/ButtonGroup';
-import Category from '@/app/types/models/Category';
+import { Category, CategoryTab } from '@/app/types/models/Category';
 import { getIngredients, getPrepItems } from './actions';
 &nbsp;
 interface GrouperContainerProps {
@@ -327,16 +357,31 @@ export default function GrouperContainer({ initialGroups = [] }: GrouperContaine
 &nbsp;
   const currentItems = activeTab === 'ingredients' ? <span class="branch-0 cbranch-no" title="branch not covered" >ingredientItems : prepItems;</span>
 &nbsp;
-  const tabCategories: Category[] = [
-    { category_id: 1, category_name: 'Ingredients', category_type: 'tab', description: 'Ingredient list' },
-    { category_id: 2, category_name: 'Prep Items', category_type: 'tab', description: 'Prep item list' }
+  const tabCategories: CategoryTab[] = [
+    { 
+      categoryId: 1, 
+      categoryName: 'Ingredients', 
+      categoryType: 'ingredients', 
+      description: 'Ingredient list' 
+    },
+    { 
+      categoryId: 2, 
+      categoryName: 'Prep Items', 
+      categoryType: 'prep_items', 
+      description: 'Prep item list' 
+    }
   ];
 &nbsp;
   const getItemName = <span class="fstat-no" title="function not covered" >(item: Ingredient | PrepItem): string =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    if (activeTab === 'ingredients') {</span>
-<span class="cstat-no" title="statement not covered" >      return (item as Ingredient).ingredient_name;</span>
+<span class="cstat-no" title="statement not covered" >      return (item as Ingredient).ingredientName;</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    return (item as PrepItem).name;</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
+&nbsp;
+  const handleTabClick = <span class="fstat-no" title="function not covered" >(item: Category) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const tabItem = item as CategoryTab;</span>
+<span class="cstat-no" title="statement not covered" >    setActiveTab(tabItem.categoryType);</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 &nbsp;
   return (
@@ -345,8 +390,8 @@ export default function GrouperContainer({ initialGroups = [] }: GrouperContaine
         items={tabCategories}
         buttonWidth="150px"
         buttonHeight="40px"
-        onButtonClick={<span class="fstat-no" title="function not covered" >(item) =&gt; setActiveTab(item.category_name === 'Ingredients' ? 'ingredients' : 'prep_items')}</span>
-        selectedButton={activeTab === 'ingredients' ? <span class="branch-0 cbranch-no" title="branch not covered" >'Ingredients' : 'Prep Items'}</span>
+        onButtonClick={handleTabClick}
+        selectedButton={activeTab === 'ingredients' ? <span class="branch-0 cbranch-no" title="branch not covered" >1 : 2}</span>
         getButtonColor={() =&gt; '#ffffff'}
       /&gt;
 &nbsp;
@@ -357,18 +402,18 @@ export default function GrouperContainer({ initialGroups = [] }: GrouperContaine
             {currentItems.map((item) =&gt; (
 <span class="cstat-no" title="statement not covered" >              &lt;li</span>
 <span class="cstat-no" title="statement not covered" >                key={activeTab === 'ingredients' ? </span>
-<span class="cstat-no" title="statement not covered" >                  (item as Ingredient).ingredient_id : </span>
+<span class="cstat-no" title="statement not covered" >                  (item as Ingredient).ingredientId : </span>
 <span class="cstat-no" title="statement not covered" >                  (item as PrepItem).prep_item_id}</span>
                 className={`p-2 border rounded cursor-pointer ${
                   selectedItems.has(activeTab === 'ingredients' ? 
-                    (item as Ingredient).ingredient_id : 
+                    (item as Ingredient).ingredientId : 
                     (item as PrepItem).prep_item_id) 
                     ? 'bg-blue-100' 
                     : ''
                 }`}
                 onClick={() =&gt; {
                   const itemId = activeTab === 'ingredients' ? 
-                    (item as Ingredient).ingredient_id : 
+                    (item as Ingredient).ingredientId : 
                     (item as PrepItem).prep_item_id;
                   const newSelected = new Set(selectedItems);
                   if (selectedItems.has(itemId)) {
@@ -415,7 +460,7 @@ export default function GrouperContainer({ initialGroups = [] }: GrouperContaine
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-27T22:19:39.924Z
+                at 2025-03-28T16:57:11.868Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

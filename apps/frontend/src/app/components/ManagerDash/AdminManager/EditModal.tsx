@@ -1,38 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../../Elements/Button';
 import { Admin, EditModalProps } from './types';
+import Modal from '../../Elements/Modal';
 
 export default function EditModal({ admin, isOpen, onClose, onSave }: EditModalProps) {
-  const [editedAdmin, setEditedAdmin] = useState<Admin>(admin || {
-    user_id: 0,
-    username: '',
-    email: null,
-    phone_number: null,
-    role: 'manager',
-    restaurant_id: 1,
-    status: 'active',
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString()
-  });
+  const [editedAdmin, setEditedAdmin] = useState<Admin | null>(null);
 
-  if (!isOpen || !admin) return null;
+  useEffect(() => {
+    if (admin) {
+      setEditedAdmin({ ...admin });
+    }
+  }, [admin]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editedAdmin) {
+      onSave(editedAdmin);
+    }
+  };
+
+  if (!isOpen || !editedAdmin) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-xl font-bold mb-4">Edit Admin</h2>
-        <div className="space-y-4">
+    <Modal isOpen={isOpen} onClose={onClose} title="Edit Admin">
+      <div className="p-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium mb-1">Username</label>
+            <label htmlFor="username" className="block text-sm font-medium mb-1">Username*</label>
             <input
               id="username"
               type="text"
               value={editedAdmin.username}
               onChange={(e) => setEditedAdmin({ ...editedAdmin, username: e.target.value })}
               className="w-full p-2 border rounded"
-              placeholder="Enter username"
+              required
             />
           </div>
           <div>
@@ -43,30 +46,41 @@ export default function EditModal({ admin, isOpen, onClose, onSave }: EditModalP
               value={editedAdmin.email || ''}
               onChange={(e) => setEditedAdmin({ ...editedAdmin, email: e.target.value })}
               className="w-full p-2 border rounded"
-              placeholder="Enter email address"
             />
           </div>
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium mb-1">Phone</label>
-            <input
-              id="phone"
-              type="tel"
-              value={editedAdmin.phone_number || ''}
-              onChange={(e) => setEditedAdmin({ ...editedAdmin, phone_number: e.target.value })}
+            <label htmlFor="role" className="block text-sm font-medium mb-1">Role*</label>
+            <select
+              id="role"
+              value={editedAdmin.role}
+              onChange={(e) => setEditedAdmin({ ...editedAdmin, role: e.target.value as 'admin' | 'user' })}
               className="w-full p-2 border rounded"
-              placeholder="Enter phone number"
-            />
+              required
+            >
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="status" className="block text-sm font-medium mb-1">Status*</label>
+            <select
+              id="status"
+              value={editedAdmin.status}
+              onChange={(e) => setEditedAdmin({ ...editedAdmin, status: e.target.value as 'active' | 'inactive' })}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
           </div>
           <div className="flex justify-end gap-2">
-            <Button
-              label="SAVE"
-              onClick={() => onSave(editedAdmin)}
-              style={{
-                backgroundColor: 'white',
-                color: 'black',
-                border: '1px solid black'
-              }}
-            />
+            <button
+              type="submit"
+              className="px-4 py-2 rounded border border-black text-black bg-white hover:bg-gray-100"
+            >
+              SAVE
+            </button>
             <Button
               label="CANCEL"
               onClick={onClose}
@@ -77,8 +91,8 @@ export default function EditModal({ admin, isOpen, onClose, onSave }: EditModalP
               }}
             />
           </div>
-        </div>
+        </form>
       </div>
-    </div>
+    </Modal>
   );
 } 

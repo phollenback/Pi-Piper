@@ -104,6 +104,7 @@ export const deleteCategory = async (categoryId: number): Promise<boolean> => {
 // Add this new function to your DAL
 export const getUniqueCategories = async (restaurantId: number): Promise<Category[]> => {
     logger.info('[category.dao][getUniqueCategories][START]', { restaurantId });
+
     try {
         const subquery = db
             .select({
@@ -111,7 +112,7 @@ export const getUniqueCategories = async (restaurantId: number): Promise<Categor
                 min_id: sql<number>`MIN(${dimCategory.categoryId})`.as('min_id')
             })
             .from(dimCategory)
-            .where(eq(dimCategory.restaurantId, restaurantId))
+            .where(eq(dimCategory.restaurantId, 0))
             .groupBy(dimCategory.categoryName)
             .as('sub');
 

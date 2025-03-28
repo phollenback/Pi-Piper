@@ -4,13 +4,9 @@ export const userQueries = {
             user_id,
             username,
             email,
-            phone_number,
             role,
             restaurant_id,
-            CASE 
-                WHEN is_active = 1 THEN 'active'
-                ELSE 'inactive'
-            END as status,
+            is_active,
             created_at,
             updated_at
         FROM dim_users
@@ -24,11 +20,10 @@ export const userQueries = {
             username,
             password,
             email,
-            phone_number,
             role,
             restaurant_id,
             is_active
-        ) VALUES (?, ?, ?, ?, ?, ?, CASE WHEN ? = 'active' THEN 1 ELSE 0 END)
+        ) VALUES (?, ?, ?, ?, ?, ?)
     `,
 
     updateUser: `
@@ -36,19 +31,16 @@ export const userQueries = {
         SET 
             username = COALESCE(?, username),
             email = COALESCE(?, email),
-            phone_number = COALESCE(?, phone_number),
             role = COALESCE(?, role),
             restaurant_id = COALESCE(?, restaurant_id),
-            is_active = CASE 
-                WHEN ? = 'active' THEN 1
-                ELSE 0
-            END,
+            is_active = COALESCE(?, is_active),
             updated_at = CURRENT_TIMESTAMP
         WHERE user_id = ?
     `,
 
     deleteUser: `
-        DELETE FROM dim_users
+        UPDATE dim_users
+        SET is_active = 0
         WHERE user_id = ?
     `,
 
@@ -57,13 +49,9 @@ export const userQueries = {
             user_id,
             username,
             email,
-            phone_number,
             role,
             restaurant_id,
-            CASE 
-                WHEN is_active = 1 THEN 'active'
-                ELSE 'inactive'
-            END as status,
+            is_active,
             created_at,
             updated_at
         FROM dim_users

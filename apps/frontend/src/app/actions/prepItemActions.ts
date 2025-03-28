@@ -96,7 +96,7 @@ export const fetchDailyList = async (restaurantId: number): Promise<PrepListItem
 };
 
 // Centralized fetch function for categories
-export const fetchCategories = async (restaurantId: number = 1): Promise<Category[]> => {
+export const fetchCategories = async (restaurantId: number = 0): Promise<Category[]> => {
     const response = await fetch(`http://localhost:3001/categories/${restaurantId}`);
     if (!response.ok) throw new Error('Failed to fetch categories');
     return response.json();

@@ -1560,45 +1560,76 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "createManager": (()=>createManager),
     "deleteManager": (()=>deleteManager),
-    "getManagers": (()=>getManagers),
+    "fetchManagers": (()=>fetchManagers),
+    "getManagerById": (()=>getManagerById),
     "updateManager": (()=>updateManager)
 });
-const getManagers = async (restaurantId)=>{
-    const response = await fetch(`http://localhost:3001/managers/${restaurantId}`);
-    if (!response.ok) throw new Error('Failed to fetch managers');
-    return response.json();
+const API_BASE_URL = 'http://localhost:3001';
+const fetchManagers = async (restaurantId = 1)=>{
+    try {
+        const response = await fetch(`${API_BASE_URL}/users?restaurantId=${restaurantId}&role=admin`);
+        if (!response.ok) throw new Error('Failed to fetch managers');
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching managers:', error);
+        throw error;
+    }
 };
-const createManager = async (userData)=>{
-    const response = await fetch(`http://localhost:3001/managers`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData)
-    });
-    if (!response.ok) throw new Error('Failed to create manager');
-    return response.json();
+const createManager = async (managerData)=>{
+    try {
+        const response = await fetch(`${API_BASE_URL}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ...managerData,
+                role: 'admin'
+            })
+        });
+        if (!response.ok) throw new Error('Failed to create manager');
+        return response.json();
+    } catch (error) {
+        console.error('Error creating manager:', error);
+        throw error;
+    }
 };
-const updateManager = async (userId, userData)=>{
-    const response = await fetch(`http://localhost:3001/managers/${userId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(userData)
-    });
-    if (!response.ok) throw new Error('Failed to update manager');
-    return response.json();
+const updateManager = async (userId, managerData)=>{
+    try {
+        const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(managerData)
+        });
+        if (!response.ok) throw new Error('Failed to update manager');
+        return response.json();
+    } catch (error) {
+        console.error('Error updating manager:', error);
+        throw error;
+    }
 };
 const deleteManager = async (userId)=>{
-    const response = await fetch(`http://localhost:3001/managers/${userId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    if (!response.ok) throw new Error('Failed to delete manager');
-    return response.json();
+    try {
+        const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) throw new Error('Failed to delete manager');
+    } catch (error) {
+        console.error('Error deleting manager:', error);
+        throw error;
+    }
+};
+const getManagerById = async (userId)=>{
+    try {
+        const response = await fetch(`${API_BASE_URL}/users/${userId}`);
+        if (!response.ok) throw new Error('Failed to fetch manager');
+        return response.json();
+    } catch (error) {
+        console.error('Error fetching manager:', error);
+        throw error;
+    }
 };
 }}),
 "[project]/src/app/components/ManagerDash/AdminManager/AdminManager.tsx [app-ssr] (ecmascript)": ((__turbopack_context__) => {
@@ -1653,7 +1684,7 @@ function AdminManager({ hideHeading = false }) {
         setLoading(true);
         setError(null);
         try {
-            const data = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$actions$2f$managerActions$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getManagers"])(RESTAURANT_ID);
+            const data = await fetchManagers(RESTAURANT_ID);
             setAdmins(data);
         } catch (error) {
             console.error('Failed to fetch managers:', error);

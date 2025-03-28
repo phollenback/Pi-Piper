@@ -77,6 +77,34 @@ const startServer = async () => {
     app.use('/metrics', metricsRoutes);
     app.use('/restaurant-settings', restaurantSettingsRoutes);
 
+    // Health Check Route
+    app.get('/health', async (req: Request, res: Response) => {
+      try {
+        const dbStatus = await testConnection();
+        const status = {
+          status: 'healthy',
+          timestamp: new Date().toISOString(),
+          services: {
+            server: 'up',
+            database: dbStatus ? 'up' : 'down'
+          },
+          uptime: process.uptime()
+        };
+
+        res.status(dbStatus ? 200 : 503).json(status);
+      } catch (error) {
+        res.status(503).json({
+          status: 'unhealthy',
+          timestamp: new Date().toISOString(),
+          services: {
+            server: 'up',
+            database: 'error'
+          },
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+    });
+
     // Error Logging Middleware
     app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
       logger.error(`${req.method} ${req.url} ${res.statusCode} - ${err.message}`);

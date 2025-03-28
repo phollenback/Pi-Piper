@@ -17,7 +17,7 @@ router.get(
     asyncHandler(UserController.getUsers)
 );
 
-// Create new user
+// Create new user (prep or manager)
 router.post(
     '/',
     checkSchema(UserSchema),

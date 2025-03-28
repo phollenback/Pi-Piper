@@ -10,7 +10,7 @@ import { useRestaurants } from '@/hooks/useRestaurants';
 import LoginSteps from '../../components/LoginSteps';
 import Image from 'next/image';
 import { Restaurant } from '@/actions/restaurants';
-
+import { LoginForm } from '../components/InitialLogin/LoginForm';
 interface LocalRestaurant {
   restaurant_id: number;
   restaurant_name: string;
@@ -30,7 +30,7 @@ export default function LoginPage() {
   const { restaurants, loading, error } = useRestaurants();
   const [selectedRestaurant, setSelectedRestaurant] = useState<LocalRestaurant | null>(null);
   const [loginStep, setLoginStep] = useState<'select-restaurant' | 'credentials' | 'logged-in'>('select-restaurant');
-  const [credentials, setCredentials] = useState({
+  const [credentials,] = useState({
     username: '',
     password: '',
     rememberMe: false,
@@ -226,46 +226,7 @@ export default function LoginPage() {
             {loginType === 'manager' ? 'Manager Login' : 'Prep Login'}
           </span>
         </div>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Username"
-            className="input border border-gray-300 rounded-md p-2 w-full"
-            value={credentials.username}
-            onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="input border border-gray-300 rounded-md p-2 w-full"
-            value={credentials.password}
-            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-          />
-          <div className="flex items-center justify-between">
-            <label className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                checked={credentials.rememberMe}
-                onChange={(e) => setCredentials({ ...credentials, rememberMe: e.target.checked })}
-                className="form-checkbox h-4 w-4 text-blue-600"
-              />
-              <span className="text-sm text-gray-600">Remember me</span>
-            </label>
-            <button
-              type="button"
-              onClick={() => setLoginStep('select-restaurant')}
-              className="text-sm text-blue-600 hover:text-blue-800"
-            >
-              Change Restaurant
-            </button>
-          </div>
-          <button
-            type="submit"
-            className="btn-primary w-full bg-blue-600 text-white rounded-md p-2 hover:bg-blue-700 transition"
-          >
-            Login
-          </button>
-        </form>
+        <LoginForm onLogin={handleLogin} />
       </div>
     </div>
   );

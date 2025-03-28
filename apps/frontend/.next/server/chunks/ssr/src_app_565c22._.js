@@ -468,7 +468,7 @@ const fetchDailyList = async (restaurantId)=>{
         return [];
     }
 };
-const fetchCategories = async (restaurantId = 1)=>{
+const fetchCategories = async (restaurantId = 0)=>{
     const response = await fetch(`http://localhost:3001/categories/${restaurantId}`);
     if (!response.ok) throw new Error('Failed to fetch categories');
     return response.json();
@@ -1609,7 +1609,7 @@ function PrepContainer() {
             children: "loading lists..."
         }, void 0, false, {
             fileName: "[project]/src/app/prep-dash/page.tsx",
-            lineNumber: 74,
+            lineNumber: 73,
             columnNumber: 13
         }, this);
     }
@@ -1630,12 +1630,12 @@ function PrepContainer() {
                             getButtonColor: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$util$2f$data$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getButtonColor"]
                         }, void 0, false, {
                             fileName: "[project]/src/app/prep-dash/page.tsx",
-                            lineNumber: 81,
+                            lineNumber: 80,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/page.tsx",
-                        lineNumber: 80,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1651,18 +1651,18 @@ function PrepContainer() {
                             }
                         }, void 0, false, {
                             fileName: "[project]/src/app/prep-dash/page.tsx",
-                            lineNumber: 91,
+                            lineNumber: 90,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/prep-dash/page.tsx",
-                        lineNumber: 90,
+                        lineNumber: 89,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/prep-dash/page.tsx",
-                lineNumber: 79,
+                lineNumber: 78,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1672,18 +1672,18 @@ function PrepContainer() {
                     category: selectedCategory
                 }, void 0, false, {
                     fileName: "[project]/src/app/prep-dash/page.tsx",
-                    lineNumber: 105,
+                    lineNumber: 104,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/prep-dash/page.tsx",
-                lineNumber: 104,
+                lineNumber: 103,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/prep-dash/page.tsx",
-        lineNumber: 78,
+        lineNumber: 77,
         columnNumber: 9
     }, this);
 }

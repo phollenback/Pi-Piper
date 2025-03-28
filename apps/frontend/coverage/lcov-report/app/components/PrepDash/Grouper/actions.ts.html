@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">17.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/66</span>
+                <span class='fraction'>11/64</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">17.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/66</span>
+                <span class='fraction'>11/64</span>
             </div>
         
             
@@ -126,9 +126,7 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -180,9 +178,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -202,7 +198,7 @@ export const createGroup = <span class="fstat-no" title="function not covered" >
 <span class="cstat-no" title="statement not covered" >  items: Array&lt;{ prep_item_id: number | null; ingredient_id: number | null; }&gt;</span>
 <span class="cstat-no" title="statement not covered" >): Promise&lt;number&gt; =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    const response = await fetch(`http://localhost:3000/groups/${restaurant_id}`, {</span>
+<span class="cstat-no" title="statement not covered" >    const response = await fetch(`http://localhost:3001/groups/${restaurant_id}`, {</span>
 <span class="cstat-no" title="statement not covered" >      method: 'POST',</span>
 <span class="cstat-no" title="statement not covered" >      headers: {</span>
 <span class="cstat-no" title="statement not covered" >        'Content-Type': 'application/json',</span>
@@ -237,23 +233,21 @@ export const createGroup = <span class="fstat-no" title="function not covered" >
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 export const getGroups = <span class="fstat-no" title="function not covered" >async (restaurant_id: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const response = await fetch(`http://localhost:3000/groups/${restaurant_id}`);</span>
+<span class="cstat-no" title="statement not covered" >  const response = await fetch(`http://localhost:3001/groups/${restaurant_id}`);</span>
 <span class="cstat-no" title="statement not covered" >  if (!response.ok) {</span>
 <span class="cstat-no" title="statement not covered" >    throw new Error('Failed to fetch groups');</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >  return response.json();</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export const getIngredients = async (restaurant_id: number) =&gt; {
-    const response = await fetch(`http://localhost:3000/ingredients/${restaurant_id}`<span class="branch-0 cbranch-no" title="branch not covered" >);</span>
-<span class="cstat-no" title="statement not covered" >    if (!response.ok) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error('Network response was not ok');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    return response.json() as Promise&lt;Ingredient[]&gt;;</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+export const getIngredients = async (restaurantId: number): Promise&lt;Ingredient[]&gt; =&gt; {
+  const response = await fetch(`http://localhost:3001/ingredients/${restaurantId}`<span class="branch-0 cbranch-no" title="branch not covered" >);</span>
+<span class="cstat-no" title="statement not covered" >  if (!response.ok) throw new Error('Failed to fetch ingredients');</span>
+<span class="cstat-no" title="statement not covered" >  return response.json();</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 export const getPrepItems = <span class="fstat-no" title="function not covered" >async (restaurant_id: number) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const response = await fetch(`http://localhost:3000/prepitems/${restaurant_id}`);</span>
+<span class="cstat-no" title="statement not covered" >    const response = await fetch(`http://localhost:3001/prepitems/${restaurant_id}`);</span>
 <span class="cstat-no" title="statement not covered" >    if (!response.ok) {</span>
 <span class="cstat-no" title="statement not covered" >        throw new Error('Network response was not ok');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -265,7 +259,7 @@ export const getPrepItems = <span class="fstat-no" title="function not covered" 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-27T22:19:39.924Z
+                at 2025-03-28T16:57:11.868Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

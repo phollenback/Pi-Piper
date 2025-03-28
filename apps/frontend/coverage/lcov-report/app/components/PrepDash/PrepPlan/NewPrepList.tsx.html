@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.25% </span>
+                <span class="strong">31.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/48</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>15/48</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.25% </span>
+                <span class="strong">0% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/1</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">31.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/48</span>
+                <span class='fraction'>15/48</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -123,39 +123,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import PrepListItem from "@/app/types/models/PrepListItem";
 import { RootState } from "@/redux/lib/store";
@@ -169,40 +169,40 @@ interface NewPrepProps {
   handleCardClick: (item: PrepListItem) =&gt; void; // Callback for item clicks.
 }
 &nbsp;
-const NewPrepList: React.FC&lt;NewPrepProps&gt; = ({ list, handleCardClick }: NewPrepProps) =&gt; {
-  const [searchTerm, setSearchTerm] = useState(""); // Local search term state.
-  const prepSearchTerm = useSelector((state: RootState) =&gt; state.search.prepSearchTerm); // Redux search term.
-&nbsp;
-  // Syncs local search state with Redux store.
-  useEffect(() =&gt; {
-    setSearchTerm(prepSearchTerm);
-  }, [prepSearchTerm]);
-&nbsp;
-  // Filters the list of prep items based on the search term.
-  const filteredList = list.filter((item) =&gt; {
+const NewPrepList: React.FC&lt;NewPrepProps&gt; = <span class="fstat-no" title="function not covered" >({ list, handleCardClick }: NewPrepProps) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const [searchTerm, setSearchTerm] = useState(""); // Local search term state.</span>
+<span class="cstat-no" title="statement not covered" >  const prepSearchTerm = useSelector((state: RootState) =&gt; state.search.prepSearchTerm); // Redux search term.</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  // Syncs local search state with Redux store.</span>
+<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    setSearchTerm(prepSearchTerm);</span>
+<span class="cstat-no" title="statement not covered" >  }, [prepSearchTerm]);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  // Filters the list of prep items based on the search term.</span>
+<span class="cstat-no" title="statement not covered" >  const filteredList = list.filter((item) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const lowercasedTerm = searchTerm.toLowerCase();</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
 <span class="cstat-no" title="statement not covered" >      item.name?.toLowerCase().includes(lowercasedTerm) ||</span>
 <span class="cstat-no" title="statement not covered" >      item.description?.toLowerCase().includes(lowercasedTerm)</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >  });</span>
-&nbsp;
-  return (
-    &lt;div className="p-3"&gt;
-      {filteredList.length &gt; <span class="branch-0 cbranch-no" title="branch not covered" >0 ? (</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  return (</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div className="p-3"&gt;</span>
+<span class="cstat-no" title="statement not covered" >      {filteredList.length &gt; 0 ? (</span>
 <span class="cstat-no" title="statement not covered" >        filteredList.map((item) =&gt; ( </span>
 <span class="cstat-no" title="statement not covered" >          &lt;NewPrepItem</span>
 <span class="cstat-no" title="statement not covered" >            key={item.prep_list_id} </span>
-            prepItem={item}
-            onButtonClick={() =&gt; handleCardClick(item)}
-          /&gt;
-        ))
-      ) : (
-        &lt;p&gt;No items to display.&lt;/p&gt;
-      )}
-    &lt;/div&gt;
-  );
-};
+<span class="cstat-no" title="statement not covered" >            prepItem={item}</span>
+<span class="cstat-no" title="statement not covered" >            onButtonClick={() =&gt; handleCardClick(item)}</span>
+<span class="cstat-no" title="statement not covered" >          /&gt;</span>
+<span class="cstat-no" title="statement not covered" >        ))</span>
+<span class="cstat-no" title="statement not covered" >      ) : (</span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;No items to display.&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >      )}</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >  );</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 export default NewPrepList;</pre></td></tr></table></pre>
 
@@ -211,7 +211,7 @@ export default NewPrepList;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-27T22:19:39.924Z
+                at 2025-03-28T16:57:11.868Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

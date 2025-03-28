@@ -6,17 +6,17 @@ import Button from '../../Elements/Button';
 import AdminTable from './AdminTable';
 import EditModal from './EditModal';
 import Modal from '../../Elements/Modal';
+import { User } from '../../../types/models/User';
 import { Admin } from './types';
-import { getManagers, createManager, updateManager, deleteManager } from '../../../actions/managerActions';
 
 export default function AdminManager({ hideHeading = false }) {
   // const router = useRouter();
   const RESTAURANT_ID = 1;
-  const [admins, setAdmins] = useState<Admin[]>([]);
+  const [admins, setAdmins] = useState<User[]>([]);
   const [deleteModal, setDeleteModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [createModal, setCreateModal] = useState(false);
-  const [selectedAdmin, setSelectedAdmin] = useState<Admin | null>(null);
+  const [selectedAdmin, setSelectedAdmin] = useState<User | null>(null);
   const [successModal, setSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,22 +25,25 @@ export default function AdminManager({ hideHeading = false }) {
     username: '',
     password: '',
     email: '',
-    phone_number: '',
-    role: 'manager' as const,
+    role: 'admin' as const,
     restaurant_id: RESTAURANT_ID,
     status: 'active' as const
   });
 
   useEffect(() => {
-    fetchManagers();
+    loadManagers();
   }, []);
 
-  const fetchManagers = async () => {
+  const loadManagers = async () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await getManagers(RESTAURANT_ID);
-      setAdmins(data);
+      const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch managers');
+      }
+      const data = await response.json();
+      setAdmins(data.filter((user: User) => user.role === 'admin'));
     } catch (error) {
       console.error('Failed to fetch managers:', error);
       setError(error instanceof Error ? error.message : 'Failed to load managers');
@@ -49,26 +52,30 @@ export default function AdminManager({ hideHeading = false }) {
     }
   };
 
-  const handleEdit = async (updatedAdmin: Admin) => {
+  const handleEdit = async (updatedAdmin: User) => {
     setLoading(true);
     setError(null);
-    console.log('Sending update request with data:', updatedAdmin);
-    
-    // Create a copy of the admin object without read-only properties
-    const adminToUpdate = {
-      username: updatedAdmin.username,
-      email: updatedAdmin.email,
-      phone_number: updatedAdmin.phone_number,
-      role: updatedAdmin.role,
-      restaurant_id: updatedAdmin.restaurant_id,
-      status: updatedAdmin.status
-    };
-
     try {
-      await updateManager(updatedAdmin.user_id, adminToUpdate);
+      const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users/${updatedAdmin.user_id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: updatedAdmin.username,
+          email: updatedAdmin.email || undefined,
+          role: updatedAdmin.role || 'admin',
+          status: updatedAdmin.status,
+          first_name: updatedAdmin.first_name,
+          last_name: updatedAdmin.last_name
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update manager');
+      }
       
-      // Refresh the manager list to get the latest data
-      await fetchManagers();
+      await loadManagers();
       setEditModal(false);
       setSuccessMessage('Manager updated successfully!');
       setSuccessModal(true);
@@ -85,17 +92,25 @@ export default function AdminManager({ hideHeading = false }) {
     setLoading(true);
     setError(null);
     try {
-      await createManager(newUser);
-      
-      // Refresh the manager list to include the new manager
-      await fetchManagers();
+      const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create manager');
+      }
+
+      await loadManagers();
       setCreateModal(false);
       setNewUser({
         username: '',
         password: '',
         email: '',
-        phone_number: '',
-        role: 'manager',
+        role: 'admin',
         restaurant_id: RESTAURANT_ID,
         status: 'active'
       });
@@ -113,8 +128,14 @@ export default function AdminManager({ hideHeading = false }) {
     setLoading(true);
     setError(null);
     try {
-      await deleteManager(managerId);
-      
+      const response = await fetch(`http://localhost:3001/restaurants/${RESTAURANT_ID}/users/${managerId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete manager');
+      }
+
       setAdmins(admins.filter(admin => admin.user_id !== managerId));
       setDeleteModal(false);
       setSuccessMessage('Manager deleted successfully!');
@@ -175,7 +196,7 @@ export default function AdminManager({ hideHeading = false }) {
         </div>
       ) : (
         <AdminTable 
-          admins={admins}
+          admins={admins as Admin[]} // Type assertion to ensure admins is treated as Admin[]
           onEdit={(admin) => {
             setSelectedAdmin(admin);
             setEditModal(true);
@@ -189,10 +210,10 @@ export default function AdminManager({ hideHeading = false }) {
 
       {/* Edit Modal */}
       <EditModal
-        admin={selectedAdmin}
+        admin={selectedAdmin} // Use null if selectedAdmin is null to avoid type assertion issues
         isOpen={editModal}
         onClose={() => setEditModal(false)}
-        onSave={handleEdit}
+        onSave={(updatedAdmin: Admin) => handleEdit(updatedAdmin)} // Ensure the parameter type matches
       />
 
       {/* Delete Confirmation Modal */}
@@ -292,18 +313,6 @@ export default function AdminManager({ hideHeading = false }) {
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded"
                 placeholder="Enter email address"
-              />
-            </div>
-            <div>
-              <label htmlFor="phone_number" className="block text-sm font-medium mb-1">Phone</label>
-              <input
-                id="phone_number"
-                name="phone_number"
-                type="tel"
-                value={newUser.phone_number}
-                onChange={handleInputChange}
-                className="w-full p-2 border rounded"
-                placeholder="Enter phone number"
               />
             </div>
             <div className="flex justify-end gap-2">

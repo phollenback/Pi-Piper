@@ -1,5 +1,6 @@
-import { Admin } from './types';
+import React from 'react';
 import Button from '../../Elements/Button';
+import { Admin } from './types';
 
 interface AdminTableProps {
   admins: Admin[];
@@ -11,7 +12,7 @@ export default function AdminTable({ admins, onEdit, onDelete }: AdminTableProps
   return (
     <div className="border rounded-lg overflow-hidden">
       <div className="bg-gray-100 p-4 border-b">
-        <h2 className="text-xl font-semibold">Current Admins</h2>
+        <h2 className="text-xl font-semibold">Current Managers</h2>
       </div>
       <table className="w-full">
         <thead>
@@ -19,7 +20,6 @@ export default function AdminTable({ admins, onEdit, onDelete }: AdminTableProps
             <th className="p-4 text-left w-16">ID</th>
             <th className="p-4 text-left">Username</th>
             <th className="p-4 text-left">Email</th>
-            <th className="p-4 text-left">Phone</th>
             <th className="p-4 text-left">Role</th>
             <th className="p-4 text-left">Status</th>
             <th className="p-4 text-right">Actions</th>
@@ -31,7 +31,6 @@ export default function AdminTable({ admins, onEdit, onDelete }: AdminTableProps
               <td className="p-4">{admin.user_id}</td>
               <td className="p-4">{admin.username}</td>
               <td className="p-4">{admin.email || '-'}</td>
-              <td className="p-4">{admin.phone_number || '-'}</td>
               <td className="p-4">{admin.role}</td>
               <td className="p-4">
                 <span className={`px-2 py-1 rounded-full text-sm ${

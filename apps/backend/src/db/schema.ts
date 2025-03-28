@@ -138,7 +138,6 @@ export const dimUsers = mysqlTable('dim_users', {
   firstName: varchar('first_name', { length: 50 }),
   lastName: varchar('last_name', { length: 50 }),
   email: varchar('email', { length: 100 }),
-  phoneNumber: varchar('phone_number', { length: 15 }),
   role: varchar('role', { length: 20 }).default('user'),
   restaurantId: int('restaurant_id'),
   isActive: boolean('is_active').default(true),

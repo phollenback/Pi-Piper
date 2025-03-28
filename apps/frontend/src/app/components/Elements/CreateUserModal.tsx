@@ -8,20 +8,21 @@ interface CreateUserModalProps {
   onClose: () => void;
   onSuccess: () => void;
   restaurantId: number;
+  userType: 'prep' | 'manager';
 }
 
 const CreateUserModal: React.FC<CreateUserModalProps> = ({ 
   isOpen, 
   onClose, 
   onSuccess,
-  restaurantId 
+  restaurantId,
+  userType
 }) => {
   const [newUser, setNewUser] = useState({
     username: '',
     password: '',
     email: '',
-    phone_number: '',
-    role: 'prep' as const,
+    role: userType === 'prep' ? 'prep' : 'admin' as const,
     restaurant_id: restaurantId,
     status: 'active' as const
   });
@@ -48,8 +49,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
           username: '',
           password: '',
           email: '',
-          phone_number: '',
-          role: 'prep',
+          role: userType === 'prep' ? 'prep' : 'admin',
           restaurant_id: restaurantId,
           status: 'active'
         });
@@ -98,7 +98,7 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Create New User"
+      title={`Create New ${userType === 'prep' ? 'Prep User' : 'Manager'}`}
     >
       <div className="p-4">
         {error && (
@@ -144,18 +144,6 @@ const CreateUserModal: React.FC<CreateUserModalProps> = ({
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
               placeholder="Enter email address"
-            />
-          </div>
-          <div>
-            <label htmlFor="phone_number" className="block text-sm font-medium mb-1">Phone</label>
-            <input
-              id="phone_number"
-              name="phone_number"
-              type="tel"
-              value={newUser.phone_number}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-              placeholder="Enter phone number"
             />
           </div>
           <div className="flex justify-end gap-2">
