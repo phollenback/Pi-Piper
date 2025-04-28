@@ -1,13 +1,13 @@
 {
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/prep-dash/page": "app/prep-dash/page.js",
-  "/page": "app/page.js",
-  "/login/page": "app/login/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
+  "/manager-dash/inventory/page": "app/manager-dash/inventory/page.js",
+  "/api/auth/session/route": "app/api/auth/session/route.js",
+  "/manager-dash/market/page": "app/manager-dash/market/page.js",
+  "/manager-dash/market/cart/page": "app/manager-dash/market/cart/page.js",
   "/manager-dash/page": "app/manager-dash/page.js",
-  "/prep-dash/recipebook/page": "app/prep-dash/recipebook/page.js",
-  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
-  "/prep-dash/grouper/page": "app/prep-dash/grouper/page.js",
   "/manager-dash/admin/page": "app/manager-dash/admin/page.js",
-  "/api/users/route": "app/api/users/route.js"
+  "/manager-dash/prep-manager/page": "app/manager-dash/prep-manager/page.js",
+  "/manager-dash/compare/page": "app/manager-dash/compare/page.js",
+  "/prep-dash/page": "app/prep-dash/page.js",
+  "/prep-dash/planner/page": "app/prep-dash/planner/page.js",
+  "/prep-dash/grouper/page": "app/prep-dash/grouper/page.js"
 }

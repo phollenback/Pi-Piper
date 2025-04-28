@@ -37,15 +37,14 @@ describe('Manager API', () => {
 
   describe('GET /managers/:restaurantId', () => {
     it('should return managers for a restaurant', async () => {
-      const mockUsers: User[] = [
+      const mockUsers = [
         {
           user_id: 1,
           username: 'testadmin',
           email: 'test@example.com',
-          phone_number: '+1234567890',
           role: 'manager',
           restaurant_id: 1,
-          status: 'active',
+          status: true,
           created_at: '2023-01-01T00:00:00.000Z',
           updated_at: '2023-01-01T00:00:00.000Z'
         }

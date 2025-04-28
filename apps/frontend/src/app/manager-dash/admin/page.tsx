@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faUserShield } from '@fortawesome/free-solid-svg-icons';
-import UserManager from '../../components/ManagerDash/UserManager/UserManager';
-import AdminManager from '@/app/components/ManagerDash/AdminManager/AdminManager';
+import UserManager from '@/components/ManagerDash/UserManager/UserManager';
+import AdminManager from '@/components/ManagerDash/AdminManager/AdminManager';
 
 export default function AdminPage() {
     const [isUserManagement, setIsUserManagement] = useState(false);

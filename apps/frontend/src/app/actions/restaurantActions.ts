@@ -14,6 +14,7 @@ export interface Restaurant {
   phone?: string;
   email?: string;
   isActive: boolean;
+  logo?: string;
 }
 
 export interface RestaurantDetails {

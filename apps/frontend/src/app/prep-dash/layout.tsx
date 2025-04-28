@@ -1,4 +1,4 @@
-import PrepDashNav from "../components/PrepDash/PrepDashNav";
+import PrepDashNav from "@/components/PrepDash/PrepDashNav";
 
 const PrepDashLayout = ({ children }: { children: React.ReactNode }) => {
   return (

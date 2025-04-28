@@ -1,4 +1,4 @@
-import ManagerNav from "../components/ManagerDash/ManagerNav";
+import ManagerNav from "@/components/ManagerDash/ManagerNav";
 
 
 const PrepDashLayout = ({ children }: { children: React.ReactNode }) => {

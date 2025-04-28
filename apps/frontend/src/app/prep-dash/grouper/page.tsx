@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { TableCellsIcon, Squares2X2Icon } from '@heroicons/react/24/outline';
-import SelectBox from '@/app/components/Elements/ui/SelectBox';
-import Button from '@/app/components/Elements/Button';
+import SelectBox from '@/components/Elements/ui/SelectBox';
+import Button from '@/components/Elements/Button';
 import { PrepItem } from '@/app/types/models/PrepItem';
 import Ingredient from '@/app/types/models/Ingredient';
 import { createGroup } from '../../actions/groupActions';
@@ -11,9 +11,9 @@ import {Category} from '@/app/types/models/Category';
 import { toast } from 'react-hot-toast';
 import { fetchCategories, getPrepItems } from '@/app/actions/prepItemActions';
 import { getIngredients } from '@/app/actions/ingredientActions';
-import { RootState } from "@/redux/lib/store";
+import { RootState } from "@/features/redux/lib/store";
 import { useDispatch, useSelector } from "react-redux";
-import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
+import { setPrepSearchTerm } from "@/features/redux/features/search/searchSlice";
 
 
 

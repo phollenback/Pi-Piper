@@ -319,8 +319,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$features$2f$
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useRestaurants$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/hooks/useRestaurants.ts [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$LoginSteps$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/src/components/LoginSteps.tsx [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '../components/InitialLogin/LoginForm'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$redux$2f$dist$2f$react$2d$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-redux/dist/react-redux.mjs [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 ;
@@ -337,7 +343,7 @@ function LoginPage() {
     const { restaurants, loading, error } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$hooks$2f$useRestaurants$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRestaurants"])();
     const [selectedRestaurant, setSelectedRestaurant] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [loginStep, setLoginStep] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])('select-restaurant');
-    const [credentials, setCredentials] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
+    const [credentials] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         username: '',
         password: '',
         rememberMe: false
@@ -697,98 +703,9 @@ function LoginPage() {
                         lineNumber: 214,
                         columnNumber: 9
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                        onSubmit: handleLogin,
-                        className: "space-y-4",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                type: "text",
-                                placeholder: "Username",
-                                className: "input border border-gray-300 rounded-md p-2 w-full",
-                                value: credentials.username,
-                                onChange: (e)=>setCredentials({
-                                        ...credentials,
-                                        username: e.target.value
-                                    })
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/login/page.tsx",
-                                lineNumber: 230,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                type: "password",
-                                placeholder: "Password",
-                                className: "input border border-gray-300 rounded-md p-2 w-full",
-                                value: credentials.password,
-                                onChange: (e)=>setCredentials({
-                                        ...credentials,
-                                        password: e.target.value
-                                    })
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/login/page.tsx",
-                                lineNumber: 237,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex items-center justify-between",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                        className: "flex items-center space-x-2",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                type: "checkbox",
-                                                checked: credentials.rememberMe,
-                                                onChange: (e)=>setCredentials({
-                                                        ...credentials,
-                                                        rememberMe: e.target.checked
-                                                    }),
-                                                className: "form-checkbox h-4 w-4 text-blue-600"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/login/page.tsx",
-                                                lineNumber: 246,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-sm text-gray-600",
-                                                children: "Remember me"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/app/login/page.tsx",
-                                                lineNumber: 252,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/app/login/page.tsx",
-                                        lineNumber: 245,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                        type: "button",
-                                        onClick: ()=>setLoginStep('select-restaurant'),
-                                        className: "text-sm text-blue-600 hover:text-blue-800",
-                                        children: "Change Restaurant"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/login/page.tsx",
-                                        lineNumber: 254,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/login/page.tsx",
-                                lineNumber: 244,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                type: "submit",
-                                className: "btn-primary w-full bg-blue-600 text-white rounded-md p-2 hover:bg-blue-700 transition",
-                                children: "Login"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/login/page.tsx",
-                                lineNumber: 262,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(LoginForm, {
+                        onLogin: handleLogin
+                    }, void 0, false, {
                         fileName: "[project]/src/app/login/page.tsx",
                         lineNumber: 229,
                         columnNumber: 9

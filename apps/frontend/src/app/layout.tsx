@@ -7,9 +7,9 @@ import StoreProvider from "./StoreProvider";
 import { ReactQueryClientProvider } from "./ReactQueryClientProvider";
 import { Toaster } from 'react-hot-toast';
 import { SessionProvider } from 'next-auth/react'
-import Footer from './components/Footer';
+import Footer from '@/components/Footer';
 import ThemeProvider from '@/components/ThemeProvider';
-import { Providers } from '@/redux/provider';
+import { Providers } from '@/features/redux/provider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

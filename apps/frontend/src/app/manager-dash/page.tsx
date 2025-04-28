@@ -1,6 +1,6 @@
 import Link from "@mui/material/Link";
-import DepartmentProgress from "../components/ManagerDash/Dash/DepartmentProgress";
-import InventoryTable from "../components/ManagerDash/Dash/InventoryTable";
+import DepartmentProgress from "@/components/ManagerDash/Dash/DepartmentProgress";
+import InventoryTable from "@/components/ManagerDash/Dash/InventoryTable";
 
 // Manager dashboard container with time tracking, inventory management, and department progress monitoring
 export default async function ManagerContainer() {

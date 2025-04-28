@@ -321,6 +321,19 @@ export const factInventoryTransaction = mysqlTable('fact_inventory_transaction',
   transactionTypeIdx: index('transaction_type_idx').on(table.transactionType),
 }));
 
+export const factIngredientPricing = mysqlTable('fact_ingredient_pricing', {
+    pricingId: int('pricing_id').primaryKey().autoincrement(),
+    ingredientId: int('ingredient_id').notNull(),
+    syscoPrice: decimal('sysco_price', { precision: 10, scale: 2 }).notNull(),
+    usfoodsPrice: decimal('usfoods_price', { precision: 10, scale: 2 }).notNull(),
+    dateId: int('date_id').notNull(),
+    createdAt: timestamp('created_at').defaultNow(),
+    updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
+}, (table) => ({
+    ingredientIdIdx: index('pricing_ingredient_id_idx').on(table.ingredientId),
+    dateIdIdx: index('pricing_date_id_idx').on(table.dateId),
+}));
+
 // Define relationships
 // These are not physical constraints in the database but help Drizzle understand relationships
 

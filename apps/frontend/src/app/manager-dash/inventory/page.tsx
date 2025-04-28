@@ -3,8 +3,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Popover } from '@base-ui-components/react/popover';
 import { useDispatch } from 'react-redux';
-import { addToSyscoCart, addToUsFoodsCart } from '@/redux/features/cart/cartSlice';
-import MinStockSetting from '@/app/components/MinStockSetting';
+import { addToSyscoCart, addToUsFoodsCart } from '@/features/redux/features/cart/cartSlice';
+import MinStockSetting from '@/components/MinStockSetting';
 import Chip from '@mui/joy/Chip';
 import Alert from '@mui/joy/Alert';
 import WarningAmberRoundedIcon from '@mui/icons-material/WarningAmberRounded';
@@ -146,7 +146,7 @@ export default function Inventory() {
       unit: item.unit,
       syscoPrice: provider === 'Sysco' ? 5.99 : 0,
       usFoodsPrice: provider === 'USFoods' ? 4.99 : 0,
-      last_date_ordered: new Date(),
+      last_date_ordered: new Date().toISOString(),
       restaurantId: 1,
       quantity: 1
     };

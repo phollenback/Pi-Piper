@@ -1,109 +1,175 @@
 'use client'
-// import { fetchIngredientPricing } from "../../util/actions";
-import SearchInput from "../../components/Elements/SearchInput";
+import SearchInput from "@/components/Elements/SearchInput";
 import { useEffect, useState } from "react";
-import IngredientDetails from "@/app/types/models/IngredientDetails";
-import DailySuggestions from "@/app/components/ManagerDash/Market/DailySuggestions";
-// import { fetchCriticals } from '@/app/util/actions';
-import MarketList from "@/app/components/ManagerDash/Market/MarketList";
-import Link from "next/link";
-import Button from "@/app/components/Elements/Button";
+import Button from "@/components/Elements/Button";
 import { useDispatch } from "react-redux";
-import { logCarts } from "@/redux/features/cart/cartSlice"
+import { addToSyscoCart, addToUsFoodsCart } from "@/features/redux/features/cart/cartSlice"
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { MarketItem, marketItems, criticalItems } from "@/data/marketData";
 
-interface Suggestion {
-    ingredient_id: number;
-    ingredient_name: string;
-}
-
-// // Fetch critical inventory items for the restaurant
-// const getCriticals = async (): Promise<Suggestion[]> => {
-//     return await fetchCriticals(1);
-// }
-
-// // Fetch all ingredients with pricing information
-// const getAllIngredients = async (): Promise<IngredientDetails[]> => {
-//     return await fetchIngredientPricing(1);
-// }
-
-// Container component managing market inventory, suggestions, and search functionality
 export default function MarketContainer() {
     const dispatch = useDispatch();
-    const [suggItems, setSuggItems] = useState<IngredientDetails[]>([]);
-    const [ingredients, setIngredients] = useState<IngredientDetails[]>([]);
+    const router = useRouter();
+    const { data: session, status } = useSession();
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [filteredItems, setFilteredItems] = useState<MarketItem[]>(marketItems);
 
-    // Load all ingredients on component mount
     useEffect(() => {
-        const fetchIngredients = async () => {
-            const ing = await getAllIngredients();
-            setIngredients(ing);
-        };
-        fetchIngredients();
-    }, []);
-
-    // Match critical items with full ingredient details
-    useEffect(() => {
-        const fetchSuggestions = async () => {
-            const suggestions = await getCriticals();
-            const matchedItems = ingredients.filter(ingredient => 
-                suggestions.some(suggestion => 
-                    suggestion.ingredient_name.toLowerCase() === ingredient.ingredientName.toLowerCase()
-                )
-            );
-            setSuggItems(matchedItems);
-        };
-
-        if (ingredients.length > 0) {
-            fetchSuggestions();
+        if (status === 'loading') return;
+        
+        if (status === 'unauthenticated') {
+            setError('Please sign in to view ingredients');
+            setIsLoading(false);
+            return;
         }
-    }, [ingredients]);
+
+        if (!session?.user?.restaurant_id) {
+            setError('Restaurant ID not found in session. Please log in again.');
+            setIsLoading(false);
+            return;
+        }
+
+        setIsLoading(false);
+    }, [status, session]);
+
+    useEffect(() => {
+        if (status === "unauthenticated") {
+            router.push("/login");
+        }
+    }, [status, router]);
 
     const handleSearch = (query: string) => {
         setSearchTerm(query);
+        const filtered = marketItems.filter(item =>
+            item.ingredientName.toLowerCase().includes(query.toLowerCase())
+        );
+        setFilteredItems(filtered);
+    };
+
+    const handleAddToCart = (item: MarketItem, provider: 'Sysco' | 'USFoods') => {
+        const cartItem = {
+            ingredientId: item.ingredientId,
+            ingredientName: item.ingredientName,
+            unit: item.unit,
+            syscoPrice: item.syscoPrice,
+            usFoodsPrice: item.usFoodsPrice,
+            last_date_ordered: new Date().toISOString(),
+            restaurantId: 1,
+            quantity: 1
+        };
+
+        if (provider === 'Sysco') {
+            dispatch(addToSyscoCart(cartItem));
+        } else {
+            dispatch(addToUsFoodsCart(cartItem));
+        }
+    };
+
+    const handleViewCart = (provider: 'Sysco' | 'USFoods') => {
+        router.push(`/manager-dash/market/cart?provider=${provider}`);
+    };
+
+    if (status === 'loading' || isLoading) {
+        return <div className="flex justify-center items-center h-screen">Loading...</div>;
     }
 
-    const handleCartClick = () => {
-        dispatch(logCarts());
-    }
-
-    // Filter ingredients excluding suggested items
-    const filteredIngredients = ingredients.filter(ingredient => 
-        ingredient.ingredientName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        !suggItems.some(suggestion => suggestion.ingredientId === ingredient.ingredientId)
-    );
-
-    return (
-        <div className="flex flex-col items-center p-6">
-            <div className="flex items-center mb-4 w-full justify-between">
-                <h1 className="text-3xl font-bold pl-12"><i>Provider Market</i></h1>
+    if (error) {
+        return (
+            <div className="flex flex-col items-center justify-center h-screen">
+                <div className="text-red-500 text-xl mb-4">{error}</div>
                 <Button
-                    label="view cart."
-                    onClick={handleCartClick}
+                    label="Try Again"
+                    onClick={() => window.location.reload()}
                     style={{
                         backgroundColor: "black",
                         color: "white",
                     }}
                 />
-                <Link href="/manager-dash/market/cart"><i>View Cart</i></Link>
-                <SearchInput 
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search..."
-                    onSearch={handleSearch}
-                    error={searchTerm ? "" : "Please enter a search term."}
-                />
             </div>
-            <div className="mt-4 w-full flex justify-center border-2 border-black bg-zinc-100">
-                    <DailySuggestions 
-                        list={suggItems}
+        );
+    }
+
+    return (
+        <div className="container mx-auto p-4">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold">Market</h1>
+                <div className="flex gap-4">
+                    <Button
+                        label="View Sysco Cart"
+                        onClick={() => handleViewCart('Sysco')}
+                        style={{ backgroundColor: "blue", color: "white" }}
                     />
+                    <Button
+                        label="View US Foods Cart"
+                        onClick={() => handleViewCart('USFoods')}
+                        style={{ backgroundColor: "green", color: "white" }}
+                    />
+                </div>
             </div>
-            <div className="mt-4 w-full flex justify-center border-2 border-black bg-zinc-100">
-                <MarketList 
-                    list={filteredIngredients}
+
+            <SearchInput 
+                onSearch={handleSearch} 
+                placeholder="Search ingredients..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
             />
-</div>
-</div>
-);
+
+            {/* Critical Items Section */}
+            <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4">Critical Items</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {criticalItems.map((item) => (
+                        <div key={item.ingredientId} className="border p-4 rounded-lg shadow">
+                            <h3 className="font-semibold">{item.ingredientName}</h3>
+                            <p className="text-red-500">Current Stock: {item.currentStock} {item.unit}</p>
+                            <p>Min Stock: {item.minStock} {item.unit}</p>
+                            <div className="flex gap-2 mt-2">
+                                <Button
+                                    label={`Add to Sysco ($${item.syscoPrice})`}
+                                    onClick={() => handleAddToCart(item as MarketItem, 'Sysco')}
+                                    style={{ backgroundColor: "blue", color: "white" }}
+                                />
+                                <Button
+                                    label={`Add to US Foods ($${item.usFoodsPrice})`}
+                                    onClick={() => handleAddToCart(item as MarketItem, 'USFoods')}
+                                    style={{ backgroundColor: "green", color: "white" }}
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* All Items Section */}
+            <div className="mt-8">
+                <h2 className="text-xl font-semibold mb-4">All Items</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {filteredItems.map((item) => (
+                        <div key={item.ingredientId} className="border p-4 rounded-lg shadow">
+                            <h3 className="font-semibold">{item.ingredientName}</h3>
+                            <p>Current Stock: {item.currentStock} {item.unit}</p>
+                            <p>Min Stock: {item.minStock} {item.unit}</p>
+                            <p>Max Stock: {item.maxStock} {item.unit}</p>
+                            <p>Category: {item.category}</p>
+                            <div className="flex gap-2 mt-2">
+                                <Button
+                                    label={`Add to Sysco ($${item.syscoPrice})`}
+                                    onClick={() => handleAddToCart(item, 'Sysco')}
+                                    style={{ backgroundColor: "blue", color: "white" }}
+                                />
+                                <Button
+                                    label={`Add to US Foods ($${item.usFoodsPrice})`}
+                                    onClick={() => handleAddToCart(item, 'USFoods')}
+                                    style={{ backgroundColor: "green", color: "white" }}
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
 }

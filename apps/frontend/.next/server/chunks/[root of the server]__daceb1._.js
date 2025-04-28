@@ -110,7 +110,9 @@ const authConfig = {
     pages: {
         signIn: '/login'
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    session: {
+        strategy: 'jwt'
+    },
     callbacks: {
         authorized ({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user;
@@ -122,20 +124,25 @@ const authConfig = {
             return true;
         },
         async jwt ({ token, user }) {
-            console.log('JWT callback - user:', user);
-            console.log('JWT callback - token:', token);
             if (user) {
+                // Ensure all required fields are present
                 token.role = user.role;
                 token.restaurant_id = user.restaurant_id;
+                token.username = user.username;
+                token.emailVerified = user.emailVerified;
             }
             return token;
         },
         async session ({ session, token }) {
-            console.log('Session callback - token:', token);
-            console.log('Session callback - session:', session);
             if (token) {
-                session.user.role = token.role;
-                session.user.restaurant_id = token.restaurant_id;
+                // Ensure all required fields are present
+                session.user = {
+                    ...session.user,
+                    role: token.role,
+                    restaurant_id: token.restaurant_id,
+                    username: token.username,
+                    emailVerified: token.emailVerified
+                };
             }
             return session;
         }
@@ -169,7 +176,7 @@ const { auth, handlers, signIn, signOut } = (0, __TURBOPACK__imported__module__$
             async authorize (credentials) {
                 const { username, password, restaurant_id, role } = credentials;
                 try {
-                    const response = await fetch('http://localhost:3000/auth/login', {
+                    const response = await fetch('http://localhost:3000/api/auth/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -183,16 +190,21 @@ const { auth, handlers, signIn, signOut } = (0, __TURBOPACK__imported__module__$
                     });
                     const data = await response.json();
                     if (!response.ok) {
-                        return {
-                            error: data.message || 'Invalid credentials'
-                        };
+                        return null;
                     }
-                    return data;
+                    // Ensure all required fields are present
+                    return {
+                        id: data.id || username,
+                        name: data.name || username,
+                        email: data.email || `${username}@example.com`,
+                        emailVerified: data.emailVerified ? new Date(data.emailVerified) : null,
+                        role,
+                        restaurant_id: Number(restaurant_id),
+                        username
+                    };
                 } catch (error) {
                     console.error('Auth error:', error);
-                    return {
-                        error: 'Failed to connect to authentication service'
-                    };
+                    return null;
                 }
             }
         })

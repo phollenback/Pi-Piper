@@ -1,9 +1,14 @@
-export default interface IngredientDetails {
+export interface IngredientDetails {
     ingredientId: number;
     ingredientName: string;
-    syscoPrice: number;
-    usFoodsPrice: number;
-    last_date_ordered: Date;
-    quantity? : number;
-    restaurantId: number;
+    syscoPrice: number | null;
+    usFoodsPrice: number | null;
+    lastUpdated: Date | null;
+}
+
+export interface CriticalIngredient {
+    ingredientId: number;
+    ingredientName: string;
+    currentStock: number | null;
+    minStock: number | null;
 }

@@ -1,8 +1,8 @@
 "use client"
 import React, { useState } from "react";
-import ButtonGroup from "../components/Elements/ButtonGroup";
-import Button from "../components/Elements/Button";
-import Kanban from "../components/PrepDash/DailyPrep/Kanban";
+import ButtonGroup from "@/components/Elements/ButtonGroup";
+import Button from "@/components/Elements/Button";
+import Kanban from "@/components/PrepDash/DailyPrep/Kanban";
 import { fetchCategories, fetchDailyList } from "@/app/actions/prepItemActions";
 import {Category} from "@/app/types/models/Category";
 import { getButtonColor } from "../util/data";
@@ -11,8 +11,8 @@ import { PrepListItem } from "@/app/types/models/PrepListItem";
 import { useQuery } from "@tanstack/react-query";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
-import { RootState } from "@/redux/lib/store";
+import { setPrepSearchTerm } from "@/features/redux/features/search/searchSlice";
+import { RootState } from "@/features/redux/lib/store";
 
 // Container component managing prep item categories and kanban board display
 export default function PrepContainer() {
@@ -21,7 +21,7 @@ export default function PrepContainer() {
     // selects the search term from the search slice (if it exists)
     const { prepSearchTerm } = useSelector((state: RootState) => state.search);
     // selects the restaurant id from the auth slice (to be used in the fetch)
-    const restaurantId = useSelector((state: RootState) => state.auth.restaurantId) || 1;
+    const restaurantId = useSelector((state: RootState) => state.auth.restaurantId) || 3;
     // Fetch and cache daily prep items
     const { data: dailyPrepList = [], 
         isLoading, 
@@ -46,15 +46,19 @@ export default function PrepContainer() {
     });
 
     // Standardized category fetching
-    const { data: categories = [] } = useQuery<Category[]>({
+    const { data: categories = [], isLoading: categoriesLoading, error: categoriesError } = useQuery<Category[]>({
         queryKey: ['categories', restaurantId],
         queryFn: () => fetchCategories(restaurantId),
         enabled: !!restaurantId,
         staleTime: 1000 * 60 * 5
     });
 
+    console.log('Categories:', categories); // Debug log
+    console.log('Categories Error:', categoriesError); // Debug log
+
     // Update selected category filter
     const handleButtonClick = (cat: Category) => {
+        console.log('Category clicked:', cat); // Debug log
         setSelectedCategory(prev => 
             prev === cat.categoryId ? null : cat.categoryId
         );
@@ -64,27 +68,37 @@ export default function PrepContainer() {
     const handleResetClick = () => {
         setSelectedCategory(null);
         dispatch(setPrepSearchTerm(""));
-        // Refetch the data to ensure we have the latest
         refetch();
     };
 
-    if(isLoading) {
+    if(isLoading || categoriesLoading) {
         return(
             <div>loading lists...</div>
         )
     }
+
+    if(categoriesError) {
+        return(
+            <div className="text-red-500">Error loading categories: {categoriesError.message}</div>
+        )
+    }
+
     return (
         <div className="pt-4">
             <div className="flex items-center justify-between">
                 <div className="flex-1">
-                    <ButtonGroup
-                        items={categories}
-                        buttonWidth="200px"
-                        buttonHeight="80px"
-                        onButtonClick={handleButtonClick}
-                        selectedButton={selectedCategory}
-                        getButtonColor={getButtonColor}
-                    />
+                    {categories.length > 0 ? (
+                        <ButtonGroup
+                            items={categories}
+                            buttonWidth="150px"
+                            buttonHeight="40px"
+                            onButtonClick={handleButtonClick}
+                            selectedButton={selectedCategory}
+                            getButtonColor={getButtonColor}
+                        />
+                    ) : (
+                        <div className="text-center text-gray-500">No categories available</div>
+                    )}
                 </div>
                 <div className="mr-10">
                     <Button

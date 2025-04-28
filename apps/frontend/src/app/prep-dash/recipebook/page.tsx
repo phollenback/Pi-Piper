@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import SelectBox from "../../components/Elements/ui/SelectBox";
-import RecipeDisplay from "@/app/components/PrepDash/Recipebook/RecipeDisplay";
-import RecipeListing from "@/app/components/PrepDash/Recipebook/RecipeListing"; 
+import SelectBox from "@/components/Elements/ui/SelectBox";
+import RecipeDisplay from "@/components/PrepDash/Recipebook/RecipeDisplay";
+import RecipeListing from "@/components/PrepDash/Recipebook/RecipeListing"; 
 import { useDispatch, useSelector } from "react-redux";
 import { setPrepSearchTerm } from "@/redux/features/search/searchSlice";
 import { Category, categoryAdapter } from "@/app/types/models/Category";

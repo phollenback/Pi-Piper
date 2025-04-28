@@ -18,6 +18,10 @@ const dbConfig = {
   database: process.env.MY_SQL_DB_DATABASE || 'Piper_Net',
   port: Number(process.env.MY_SQL_DB_PORT || 3306),
   connectionLimit: Number(process.env.MY_SQL_DB_CONNECTION_LIMIT || 10),
+  charset: 'utf8mb4',
+  supportBigNumbers: true,
+  bigNumberStrings: true,
+  decimalNumbers: true
 };
 
 // Log the database configuration

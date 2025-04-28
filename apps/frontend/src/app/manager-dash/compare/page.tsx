@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Tabs, TabList, Tab, TabPanel } from '@mui/joy';
-import InventoryView from '@/app/components/Compare/InventoryView';
-import PrepProcessView from '@/app/components/Compare/PrepProcessView';
-import PerformanceView from '@/app/components/Compare/PerformanceView';
+import InventoryView from '@/components/Compare/InventoryView';
+import PrepProcessView from '@/components/Compare/PrepProcessView';
+import PerformanceView from '@/components/Compare/PerformanceView';
 import { fetchAllRestaurants, fetchRestaurantDetails, Restaurant, RestaurantDetails } from '@/app/actions/restaurantActions';
 
 export default function RestaurantViewPage() {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1743202353445" clover="3.2.0">
-  <project timestamp="1743202353445" name="All files">
+<coverage generated="1743207040579" clover="3.2.0">
+  <project timestamp="1743207040579" name="All files">
     <metrics statements="103" coveredstatements="103" conditionals="21" coveredconditionals="21" methods="3" coveredmethods="3" elements="127" coveredelements="127" complexity="0" loc="103" ncloc="103" packages="1" files="1" classes="1"/>
     <file name="LoginForm.tsx" path="/Users/peytonhollenback/HooliDocs/Pi-Piper/apps/frontend/src/app/components/InitialLogin/LoginForm.tsx">
       <metrics statements="103" coveredstatements="103" conditionals="21" coveredconditionals="21" methods="3" coveredmethods="3"/>

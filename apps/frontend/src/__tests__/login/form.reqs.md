@@ -120,7 +120,7 @@
 - [x] Multiple validation error tests
 
 
-### 7.1 Planned Improvements
+### 7.1 Plandned Improvements
 - Implement rate limiting
 - Add password visibility toggle
 - Implement password strength indicator

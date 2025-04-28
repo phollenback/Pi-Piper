@@ -1,14 +1,14 @@
 'use client'
 import { useEffect, useState, useCallback } from "react";
-import Heading from "@/app/components/ManagerDash/PrepManager/Heading";
+import Heading from "@/components/ManagerDash/PrepManager/Heading";
 import { getPrepItems, fetchCategories } from "../../actions/prepItemActions";
 import { getIngredients } from "../../actions/ingredientActions";
 import { useQuery } from "@tanstack/react-query";
-import ManagementTable from "@/app/components/ManagerDash/PrepManager/ManagmentTable";
+import ManagementTable from "@/components/ManagerDash/PrepManager/ManagmentTable";
 import { PrepItem } from "@/app/types/models/PrepItem";
 import {Category} from "@/app/types/models/Category";
 import Ingredient from "@/app/types/models/Ingredient";
-import CreateItem from "@/app/components/ManagerDash/PrepManager/CreateItem";
+import CreateItem from "@/components/ManagerDash/PrepManager/CreateItem";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/lib/store";
 

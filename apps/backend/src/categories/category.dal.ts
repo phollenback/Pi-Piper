@@ -106,16 +106,6 @@ export const getUniqueCategories = async (restaurantId: number): Promise<Categor
     logger.info('[category.dao][getUniqueCategories][START]', { restaurantId });
 
     try {
-        const subquery = db
-            .select({
-                categoryName: dimCategory.categoryName,
-                min_id: sql<number>`MIN(${dimCategory.categoryId})`.as('min_id')
-            })
-            .from(dimCategory)
-            .where(eq(dimCategory.restaurantId, 0))
-            .groupBy(dimCategory.categoryName)
-            .as('sub');
-
         const categories = await db
             .select({
                 categoryId: dimCategory.categoryId,
@@ -126,7 +116,7 @@ export const getUniqueCategories = async (restaurantId: number): Promise<Categor
                 updatedAt: dimCategory.updatedAt
             })
             .from(dimCategory)
-            .innerJoin(subquery, eq(dimCategory.categoryId, subquery.min_id))
+            .where(eq(dimCategory.restaurantId, restaurantId))
             .orderBy(dimCategory.categoryName);
 
         logger.info('[category.dao][getUniqueCategories][SUCCESS]', { categories });

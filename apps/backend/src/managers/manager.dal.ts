@@ -11,8 +11,8 @@ export interface User {
   role: string | null;
   restaurant_id: number | null;
   status: boolean | null;
-  created_at: Date | null;
-  updated_at: Date | null;
+  created_at: Date | string | null;
+  updated_at: Date | string | null;
 }
 
 // Retrieves all users for a specific restaurant

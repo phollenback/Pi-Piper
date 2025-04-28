@@ -96,10 +96,18 @@ export const fetchDailyList = async (restaurantId: number): Promise<PrepListItem
 };
 
 // Centralized fetch function for categories
-export const fetchCategories = async (restaurantId: number = 0): Promise<Category[]> => {
+export const fetchCategories = async (restaurantId: number): Promise<Category[]> => {
+    console.log('Fetching categories for restaurantId:', restaurantId);
     const response = await fetch(`http://localhost:3001/categories/${restaurantId}`);
-    if (!response.ok) throw new Error('Failed to fetch categories');
-    return response.json();
+    console.log('Categories response status:', response.status);
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Categories fetch error:', errorText);
+        throw new Error('Failed to fetch categories');
+    }
+    const data = await response.json();
+    console.log('Fetched categories:', data);
+    return data;
 };
 
 // Unified fetch function for all prep-related data
