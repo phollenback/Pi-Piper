@@ -36,7 +36,7 @@ _My report on how Pi Piper can help transform business practice: <a href="https:
 
 <br/>
 
-_View the design artifacts designed for this project: <a href="https://github.com/phollenback/Pi-Piper/blob/main/docs/docs.md#the-project-proposal-outlines-the-following-and-can-be-found-here"><i>Design Guide</i></a>_
+_View the design artifacts designed for this project: <a href="https://github.com/phollenback/Pi-Piper/tree/main/docs#design-guide"><i>Design Guide</i></a>_
 
 <br/>
 
